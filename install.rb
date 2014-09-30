@@ -1,16 +1,18 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
 
-# Given a source file of the form 'om/nomrc.dotfile', creates a
-# file '~/.nomrc' that is a symbolic link to the source file.
+# Given a source file of the form 'foo/bar/bazrc.dotfile', creates a
+# file '~/.bazrc' that is a symbolic link to the source file.
 #
-# @param source [String] the path to the source file
-def create_dotfile( source )
-  link_name = File.join( ENV['HOME'], ".#{File.basename( source ).sub( /\.dotfile$/, '' )}" )
+# Gracefully handles the case where the symlink already exists.
+#
+# @param dotfile_path [String] the path to the source file
+def symlink_dotfile( dotfile_path )
+  link_name = File.join( ENV['HOME'], ".#{File.basename( dotfile_path ).sub( /\.dotfile$/, '' )}" )
   skip = false
 
   if File.exists?( link_name )
-    if File.ftype( link_name ) == 'link' && File.readlink( link_name ) == source
+    if File.ftype( link_name ) == 'link' && File.readlink( link_name ) == dotfile_path
       skip = true
     else
       puts "File already exists (~/#{File.basename link_name}), what do you want to do? [s]kip, [o]verwrite, [b]ackup?"
@@ -30,14 +32,14 @@ def create_dotfile( source )
   if skip
     puts "Skipped #{link_name}"
   else
-    File.symlink( source, link_name )
-    puts "Linked #{link_name} to #{source}"
+    File.symlink dotfile_path, link_name
+    puts "Linked #{link_name} to #{dotfile_path}"
   end
 end
 
 # Create symlinks for all .dotfile files under the current directory
-Dir.glob( '**/*.dotfile' ).each do |source|
-  create_dotfile source
+Dir.glob( '**/*.dotfile' ).each do |file_path|
+  symlink_dotfile file_path
 end
 
-puts 'All dotfiles have been linked!'
+puts 'All dotfiles have been symlinked!'
