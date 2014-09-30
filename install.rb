@@ -6,7 +6,7 @@
 #
 # @param source [String] the path to the source file
 def create_dotfile( source )
-  link_name = File.join( ENV['HOME'], ".#{File.basename( source ).sub( /\.symlink$/, '' )}" )
+  link_name = File.join( ENV['HOME'], ".#{File.basename( source ).sub( /\.dotfile$/, '' )}" )
   skip = false
 
   if File.exists?( link_name )
