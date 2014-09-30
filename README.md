@@ -8,7 +8,7 @@ cd ~/dotfiles
 Then run
 
 ```sh
-ruby install.sh
+ruby install.rb
 ```
 
 This will create symlinks in your `$HOME` directory to all files in the project that have a `.dotfile` extension.
