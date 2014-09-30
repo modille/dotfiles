@@ -1,0 +1,39 @@
+[user]
+  email = matt.odille@gmail.com
+  name = Matt Odille
+
+[github]
+  user = modille
+
+[alias]
+  a = add
+  br = branch
+  ci = commit
+  co = checkout
+  dc = diff --cached
+  f = fetch
+  l = log --name-status
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  reset-hard = reset --hard HEAD^
+  reset-soft = reset --soft HEAD^
+  rpo = remote prune origin
+  s = status
+  unstage = reset HEAD --
+
+[color]
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
+
+[core]
+  autocrlf = input
+  excludesfile = ~/.gitignore
+
+[diff]
+  external = git-meld
+
+[mergetool]
+  keepBackup = false
