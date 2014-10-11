@@ -11,8 +11,8 @@ def symlink_dotfile( dotfile_path )
   link_name = File.join( ENV['HOME'], ".#{File.basename( dotfile_path ).sub( /\.dotfile$/, '' )}" )
   skip = false
 
-  if File.exists?( link_name )
-    if File.ftype( link_name ) == 'link' && File.readlink( link_name ) == dotfile_path
+  if File.exists?( link_name ) || File.symlink?( link_name )
+    if File.symlink?( link_name ) && File.readlink( link_name ) == dotfile_path
       skip = true
     else
       puts "File already exists (~/#{File.basename link_name}), what do you want to do? [s]kip, [o]verwrite, [b]ackup?"
