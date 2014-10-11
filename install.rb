@@ -39,7 +39,7 @@ end
 
 # Create symlinks for all .dotfile files under the current directory
 Dir.glob( '**/*.dotfile' ).each do |file_path|
-  symlink_dotfile file_path
+  symlink_dotfile File.expand_path( file_path )
 end
 
 puts 'All dotfiles have been symlinked!'
