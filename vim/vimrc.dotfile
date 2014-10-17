@@ -1,0 +1,171 @@
+if has('vim_starting')
+  set runtimepath+=~/dotfiles/vim/
+endif
+
+"" Auto-install Plug
+if empty(glob('~/dotfiles/vim/autoload/plug.vim'))
+  silent !mkdir -p ~/dotfiles/vim/autoload
+  silent !curl -fLo ~/dotfiles/vim/autoload/plug.vim
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
+endif
+
+call plug#begin('~/dotfiles/vim/plugged')
+
+Plug 'airblade/vim-gitgutter'
+Plug 'bling/vim-airline'
+Plug 'h1mesuke/unite-outline'
+Plug 'heavenshell/vim-jsdoc'
+Plug 'honza/vim-snippets'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'parkr/vim-jekyll'
+Plug 'rking/ag.vim'
+Plug 'rstacruz/sparkup'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/syntastic'
+Plug 'shougo/unite.vim'
+Plug 'shougo/vimproc.vim', { 'do': 'make -f make_unix.mak' }
+Plug 'sirver/ultisnips'
+Plug 'sjl/badwolf'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'valloric/YouCompleteMe', { 'do': './install.sh' }
+Plug 'wting/rust.vim'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
+Plug 'xolox/vim-session'
+
+call plug#end()
+
+filetype plugin indent on
+
+"" Fonts
+if has('gui_running')
+  if has('gui_win32')
+    set guifont=Bitstream_Vera_Sans_Mono:h16:cANSI
+  else
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
+  endif
+endif
+
+"" General
+colorscheme badwolf
+let mapleader = ','
+set colorcolumn=120
+set foldmethod=syntax
+set nofoldenable
+set number
+set tabstop=2 shiftwidth=2 expandtab
+syntax enable
+"Don't use swap files
+set nobackup
+set noswapfile
+set nowb
+"Hide abandoned buffers instead of unloading (preserves undo history)
+set hidden
+
+"" Airline
+let g:airline_powerline_fonts = 1 "Add powerline fonts to the dictionary
+let g:airline_section_y = 'BN: %{bufnr("%")}' "Replace file encoding info with buffer number
+let g:bufferline_echo = 0
+set laststatus=2 "Have airline show up without having to split
+set noshowmode   "Hide default mode display
+
+"" Gradle
+au BufNewFile,BufRead *.gradle set filetype=groovy
+
+"" Highlight trailing whitespace
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter *.rb match ExtraWhitespace /\s\+$/
+autocmd InsertEnter *.rb match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave *.rb match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave *.rb call clearmatches()
+
+"" Indent Guides
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+
+"" Markdown
+au BufRead,BufNewFile *.md set syntax=markdown
+
+"" Nerdtree
+nmap <silent> <Leader>nt :NERDTreeToggle<CR>
+nmap <silent> <Leader>nc :NERDTreeCWD<CR>
+
+"" Session
+let g:session_autosave = 'yes'
+let g:session_autosave_periodic = 1
+let g:session_default_to_last = 1
+let g:session_autoload = 'yes'
+
+"" Syntastic
+let g:syntastic_javascript_closure_compiler_path = '~/bin/compiler.jar'
+
+"" Unite
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+"Allow yank history searching
+let g:unite_source_history_yank_enable = 1
+let g:unite_data_directory = '~/.vim/.cache/unite'
+let g:unite_enable_start_insert = 1
+"Use Silver Searcher for grepping
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+"Ignore patterns
+call unite#custom_source('file_rec,file_rec/async,grep',
+      \ 'ignore_pattern', join([
+      \ '\.git/',
+      \ '\.svn/',
+      \ '\.yardoc/',
+      \ 'doc/.*/.*\.html',
+      \ '.*\.log',
+      \ 'tags/',
+      \ 'tmp/',
+      \ '.*/translations.js',
+      \ ], '\|'))
+call unite#custom_source('file_rec,file_rec/async', 'max_candidates', 0)
+"r = Find file by name
+nnoremap <silent> <Leader>r :Unite file_rec/async<CR>
+"b = List buffers
+nnoremap <silent> <Leader>b :Unite buffer bookmark<CR>
+"g = Grep
+nnoremap <silent> <Leader>g :Unite grep:.<CR>
+"o = Outline
+nnoremap <silent> <Leader>o :Unite -start-insert -vertical -auto-preview outline<CR>
+"y = Yank history
+nnoremap <silent> <Leader>y :Unite history/yank<CR>
+
+"" Wildmenu
+"Make auto-complete behave more *nix-like
+set wildmode=longest:full
+set wildmenu
+
+"" XML
+let g:xml_syntax_folding=1
+au FileType xml setlocal foldmethod=syntax
+map <Leader>fx !%xmllint --format --recover -
+
+"" Miscellaneous shortcuts
+"Ctrl-C for Copy, etc.
+source $VIMRUNTIME/mswin.vim
+behave mswin
+"Change cwd to current file
+map <Leader>cd :cd %:p:h<CR>
+"F7 to toggle spellcheck
+imap <F7> <C-o>:setlocal spell! spelllang=en_us<CR>
+nn <F7> :setlocal spell! spell? spelllang=en_us<CR>
+
+"" Disable toolbar and menu
+set guioptions-=mcheme
+set guioptions-=T
+set guioptions-=m
+set guioptions-=M
