@@ -15,6 +15,7 @@ call plug#begin('~/dotfiles/vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
 Plug 'h1mesuke/unite-outline'
+Plug 'haya14busa/incsearch.vim'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'honza/vim-snippets'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -86,6 +87,26 @@ autocmd BufWinEnter *.rb match ExtraWhitespace /\s\+$/
 autocmd InsertEnter *.rb match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave *.rb match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave *.rb call clearmatches()
+
+"" Incremental search
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+"n and N directions are always forward and backward respectively even after performing backward search
+let g:incsearch#consistent_n_direction = 1
+"Auto-nohlsearch
+set hlsearch
+let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
+"Searches are case insensitive
+set ignorecase
+"Unless they contain at least one capital letter
+set smartcase
 
 "" Indent Guides
 let g:indent_guides_start_level = 2
