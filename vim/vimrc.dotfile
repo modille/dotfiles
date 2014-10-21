@@ -69,6 +69,9 @@ set noswapfile
 set nowb
 "Hide abandoned buffers instead of unloading (preserves undo history)
 set hidden
+"Map the arrow keys to be based on display lines, not physical lines
+map <Down> gj
+map <Up> gk
 
 "" Airline
 let g:airline_powerline_fonts = 1 "Add powerline fonts to the dictionary
@@ -181,9 +184,15 @@ source $VIMRUNTIME/mswin.vim
 behave mswin
 "Change cwd to current file
 map <Leader>cd :cd %:p:h<CR>
+"Format entire file
+nnoremap <leader>fef :normal! gg=G``<CR>
 "F7 to toggle spellcheck
 imap <F7> <C-o>:setlocal spell! spelllang=en_us<CR>
 nn <F7> :setlocal spell! spell? spelllang=en_us<CR>
+"Toggle hlsearch
+nmap <leader>hs :set hlsearch! hlsearch?<CR>
+"Toggle text wrap
+nmap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
 
 "" Disable toolbar and menu
 set guioptions-=mcheme
