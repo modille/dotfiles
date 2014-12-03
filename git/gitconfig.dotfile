@@ -12,6 +12,7 @@
   co = checkout
   dc = diff --cached
   f = fetch
+  fp = fetch --prune
   l = log --name-status
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
