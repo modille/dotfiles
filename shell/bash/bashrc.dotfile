@@ -1,0 +1,159 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+  . /etc/bashrc
+fi
+
+# Git prompt completions
+if [ -f $HOME/.git-prompt.sh ]; then
+  source $HOME/.git-prompt.sh
+fi
+
+KERN_DIR=/usr/src/kernels/`uname -r`
+export KERN_DIR
+
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+# Don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# Append to the history file, don't overwrite it
+shopt -s histappend
+
+# For setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=3000
+HISTFILESIZE=6000
+
+# Set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+  xterm-color) color_prompt=yes;;
+esac
+
+# Uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+  if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
+  else
+    color_prompt=
+  fi
+fi
+
+# Prompt and prompt colors
+function prompt {
+  local BLACK="\[\033[0;30m\]"
+  local BLACKBOLD="\[\033[1;30m\]"
+  local RED="\[\033[0;31m\]"
+  local REDBOLD="\[\033[1;31m\]"
+  local GREEN="\[\033[0;32m\]"
+  local GREENBOLD="\[\033[1;32m\]"
+  local YELLOW="\[\033[0;33m\]"
+  local YELLOWBOLD="\[\033[1;33m\]"
+  local BLUE="\[\033[0;34m\]"
+  local BLUEBOLD="\[\033[1;34m\]"
+  local PURPLE="\[\033[0;35m\]"
+  local PURPLEBOLD="\[\033[1;35m\]"
+  local CYAN="\[\033[0;36m\]"
+  local CYANBOLD="\[\033[1;36m\]"
+  local WHITE="\[\033[0;37m\]"
+  local WHITEBOLD="\[\033[1;37m\]"
+  PS1="\n$BLUEBOLD\u:$YELLOWBOLD\w$WHITE\$(__git_ps1 \" (%s)\") $BLUEBOLD\$$WHITEBOLD "
+}
+prompt
+
+# Enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias ls='ls --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
+fi
+
+# More ls aliases
+alias ll='ls -alhF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Xfce
+alias eo='exo-open'
+
+# Gnome
+alias go='gnome-open'
+
+# Jumps
+alias cdb='cd $HOME/bin'
+alias cdd='cd $HOME/Downloads'
+alias cdg='cd $HOME/git'
+
+# Misc.
+alias gits='git status'
+alias k9='kill -9 $1'
+alias less='less -R'
+alias mountv='sudo mount.vboxsf share /mnt/share'
+alias open3000='sudo iptables -I INPUT -p tcp --dport 3000 --syn -j ACCEPT'
+alias pgrep='pgrep -af'
+alias pkill='pkill -f'
+alias pwd='pwd -P'
+alias rails='bundle exec rails'
+alias rake='bundle exec rake'
+
+# Feeds file and directory filtered listers:
+function lister {
+  ls -l `if [ "$1" == '' ]; then echo '.'; else echo "$1"; fi`
+}
+
+# List only directories
+function lsd {
+  lister $1 | egrep '^d'
+}
+alias lsdirs=lsd
+
+# List only files
+function lsf {
+  lister $1 | egrep -v '^d'
+}
+alias lsfiles=lsf
+
+# Convert epoch to datetime
+function fromunixtime {
+  date -d @${1}
+}
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+if [ -f ~/.bash_aliases ]; then
+  . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+  . /etc/bash_completion
+fi
+
+# Environment vars
+export EDITOR=vim
+export PAGER=most
+export PGDATA=/var/lib/pgsql/data/
+
+# Office Communicator fix for Pidgin
+#export NSS_SSL_CBC_RANDOM_IV=0
+
+# Rails, rake, etc. completion
+if [ -f $HOME/completion-ruby/completion-ruby-all ]; then
+  . $HOME/completion-ruby/completion-ruby-all
+fi
+
