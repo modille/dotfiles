@@ -14,11 +14,15 @@ call plug#begin('~/dotfiles/vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
+Plug 'drmikehenry/vim-fontsize'
 Plug 'h1mesuke/unite-outline'
 Plug 'haya14busa/incsearch.vim'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'honza/vim-snippets'
+Plug 'Lokaltog/vim-easymotion'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'nicwest/QQ.vim'
+Plug 'osyo-manga/vim-brightest'
 Plug 'parkr/vim-jekyll'
 Plug 'rking/ag.vim'
 Plug 'rstacruz/sparkup'
@@ -40,6 +44,7 @@ Plug 'wting/rust.vim'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 Plug 'xolox/vim-session'
+Plug 'xuyuanp/nerdtree-git-plugin'
 
 call plug#end()
 
@@ -70,8 +75,10 @@ set nowb
 "Hide abandoned buffers instead of unloading (preserves undo history)
 set hidden
 "Map the arrow keys to be based on display lines, not physical lines
-map <Down> gj
-map <Up> gk
+" map <Down> gj
+" map <Up> gk
+"Enable mouse scrolling in tmux
+set mouse=a
 
 "" Airline
 let g:airline_powerline_fonts = 1 "Add powerline fonts to the dictionary
@@ -79,6 +86,12 @@ let g:airline_section_y = 'BN: %{bufnr("%")}' "Replace file encoding info with b
 let g:bufferline_echo = 0
 set laststatus=2 "Have airline show up without having to split
 set noshowmode   "Hide default mode display
+
+"" EasyMotion
+nmap f <Plug>(easymotion-t2)
+nmap s <Plug>(easymotion-s2)
+nmap t <Plug>(easymotion-t2)
+let g:EasyMotion_smartcase = 1
 
 "" Gradle
 au BufNewFile,BufRead *.gradle set filetype=groovy
@@ -131,6 +144,12 @@ let g:session_autoload = 'yes'
 "" Syntastic
 let g:syntastic_javascript_closure_compiler_path = '~/bin/compiler.jar'
 
+"" Ultisnips
+let g:ycm_key_list_previous_completion=['<Up>']
+let g:UltiSnipsExpandTrigger='<s-tab>'
+let g:UltiSnipsJumpForwardTrigger='<c-n>'
+let g:UltiSnipsJumpBackwardTrigger='<c-z>'
+
 "" Unite
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
@@ -150,11 +169,15 @@ call unite#custom_source('file_rec,file_rec/async,grep',
       \ '\.git/',
       \ '\.svn/',
       \ '\.yardoc/',
-      \ 'doc/.*/.*\.html',
       \ '.*\.log',
+      \ '.*/translations.js',
+      \ 'bower_components/',
+      \ 'coverage/',
+      \ 'dist/',
+      \ 'doc/.*/.*\.html',
+      \ 'node_modules/',
       \ 'tags/',
       \ 'tmp/',
-      \ '.*/translations.js',
       \ ], '\|'))
 call unite#custom_source('file_rec,file_rec/async', 'max_candidates', 0)
 "r = Find file by name
@@ -179,9 +202,6 @@ au FileType xml setlocal foldmethod=syntax
 map <Leader>fx !%xmllint --format --recover -
 
 "" Miscellaneous shortcuts
-"Ctrl-C for Copy, etc.
-source $VIMRUNTIME/mswin.vim
-behave mswin
 "Change cwd to current file
 map <Leader>cd :cd %:p:h<CR>
 "Format entire file
