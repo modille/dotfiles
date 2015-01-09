@@ -1,0 +1,22 @@
+setw -g mode-mouse on
+set-option -g mouse-select-pane on
+set-option -g mouse-select-window on
+
+set-option -g set-titles on
+set-option -g set-titles-string '#S #I.#P #W'
+
+set -g base-index 1
+set -g pane-base-index 1
+
+set -g history-limit 100000
+
+# List of plugins
+set -g @tpm_plugins '              \
+  tmux-plugins/tmux-resurrect      \
+  tmux-plugins/tmux-sensible       \
+  tmux-plugins/tpm                 \
+'
+
+# Initializes TMUX plugin manager.
+# Keep this line at the very bottom of tmux.conf.
+run-shell '~/.tmux/plugins/tpm/tpm'
