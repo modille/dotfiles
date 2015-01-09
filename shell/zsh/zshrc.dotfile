@@ -1,13 +1,24 @@
 #
 # Executes commands at the start of an interactive session.
 #
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/prezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/prezto/init.zsh"
 fi
 
-# Customize to your needs...
+# Exports
+export EDITOR='vim'
+
+# vi-mode bindings
+bindkey -v
+
+# History search
+bindkey '^R' history-incremental-search-backward
+bindkey '^S' history-incremental-search-forward
+bindkey '^P' history-search-backward
+bindkey '^N' history-search-forward
+
+# Movements
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
