@@ -32,6 +32,7 @@ Plug 'shougo/unite.vim'
 Plug 'shougo/vimproc.vim', { 'do': 'make -f make_unix.mak' }
 Plug 'sirver/ultisnips'
 Plug 'sjl/badwolf'
+Plug 'tmux-plugins/vim-tmux'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
@@ -79,6 +80,7 @@ set hidden
 " map <Up> gk
 "Enable mouse scrolling in tmux
 set mouse=a
+vmap <C-c> "+y
 
 "" Airline
 let g:airline_powerline_fonts = 1 "Add powerline fonts to the dictionary
@@ -143,6 +145,7 @@ let g:session_autoload = 'yes'
 
 "" Syntastic
 let g:syntastic_javascript_closure_compiler_path = '~/bin/compiler.jar'
+let g:syntastic_javascript_checkers = ['gjslint']
 
 "" Ultisnips
 let g:ycm_key_list_previous_completion=['<Up>']
@@ -213,6 +216,11 @@ nn <F7> :setlocal spell! spell? spelllang=en_us<CR>
 nmap <leader>hs :set hlsearch! hlsearch?<CR>
 "Toggle text wrap
 nmap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
+" Yank text to the system clipboard
+noremap <leader>y "+y
+noremap <leader>yy "+Y
+" Preserve indentation while pasting text from the system clipboard
+noremap <leader>p :set paste<CR>:put  +<CR>:set nopaste<CR>
 
 "" Disable toolbar and menu
 set guioptions-=mcheme
