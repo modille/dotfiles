@@ -32,6 +32,7 @@
 [core]
   autocrlf = input
   excludesfile = ~/.gitignore
+  editor = vim
 
 [diff]
   external = git-meld
