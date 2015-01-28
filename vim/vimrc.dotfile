@@ -19,6 +19,7 @@ Plug 'h1mesuke/unite-outline'
 Plug 'haya14busa/incsearch.vim'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'honza/vim-snippets'
+Plug 'kshenoy/vim-signature'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'nicwest/QQ.vim'
@@ -83,6 +84,7 @@ set mouse=a
 vmap <C-c> "+y
 
 "" Airline
+let g:airline#extensions#hunks#enabled=0
 let g:airline_powerline_fonts = 1 "Add powerline fonts to the dictionary
 let g:airline_section_y = 'BN: %{bufnr("%")}' "Replace file encoding info with buffer number
 let g:bufferline_echo = 0
@@ -133,6 +135,9 @@ let g:indent_guides_guide_size = 1
 "" Markdown
 au BufRead,BufNewFile *.md set syntax=markdown
 
+"" Marks
+nmap <silent> <Leader>sm :SignatureToggle<CR>
+
 "" Nerdtree
 nmap <silent> <Leader>nt :NERDTreeToggle<CR>
 nmap <silent> <Leader>nc :NERDTreeCWD<CR>
@@ -146,6 +151,7 @@ let g:session_autoload = 'yes'
 "" Syntastic
 let g:syntastic_javascript_closure_compiler_path = '~/bin/compiler.jar'
 let g:syntastic_javascript_checkers = ['gjslint']
+let g:syntastic_javascript_gjslint_args = '--strict'
 
 "" Ultisnips
 let g:ycm_key_list_previous_completion=['<Up>']
@@ -217,10 +223,7 @@ nmap <leader>hs :set hlsearch! hlsearch?<CR>
 "Toggle text wrap
 nmap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
 " Yank text to the system clipboard
-noremap <leader>y "+y
-noremap <leader>yy "+Y
-" Preserve indentation while pasting text from the system clipboard
-noremap <leader>p :set paste<CR>:put  +<CR>:set nopaste<CR>
+vmap <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
 
 "" Disable toolbar and menu
 set guioptions-=mcheme
