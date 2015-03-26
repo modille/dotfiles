@@ -32,3 +32,9 @@ bindkey '^N' history-search-forward
 # Movements
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+
+# Disable C-s
+stty -ixon
+
+# STOP YELLING
+setxkbmap -option ctrl:nocaps
