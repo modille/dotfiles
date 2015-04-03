@@ -183,6 +183,7 @@ let g:session_default_to_last = 1
 let g:session_autoload = 'yes'
 
 "" Syntastic
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_javascript_closure_compiler_path = '~/bin/compiler.jar'
 let g:syntastic_javascript_checkers = ['gjslint']
 let g:syntastic_javascript_gjslint_args = '--strict'
@@ -264,6 +265,9 @@ vmap <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
 noremap <silent> <C-s> :update<CR>
 vnoremap <silent> <C-s> <C-C>:update<CR>
 inoremap <silent> <C-s> <C-O>:update<CR>
+" Use +/- in normal mode to increment/decrement number
+nmap <silent> + <C-a>
+nmap <silent> - <C-x>
 
 "" Disable toolbar and menu
 set guioptions-=mcheme
