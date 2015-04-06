@@ -10,7 +10,12 @@
   br = branch
   ci = commit
   co = checkout
+  cod = checkout develop
+  com = checkout master
+  d = diff
   dc = diff --cached
+  dcg = difftool --cached --gui --no-prompt
+  dg = difftool --gui --no-prompt
   f = fetch
   fp = fetch --prune
   l = log --name-status
@@ -35,7 +40,7 @@
   editor = vim
 
 [diff]
-  external = git-meld
+  guitool = meld
 
 [mergetool]
   keepBackup = false
