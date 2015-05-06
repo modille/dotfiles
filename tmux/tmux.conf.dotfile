@@ -21,6 +21,10 @@ bind -t vi-copy y copy-pipe 'xclip -in -selection clipboard'
 bind -n S-Right next-window
 bind -n S-Left previous-window
 
+# Control+Shift+Arrow to switch sessions
+bind -n C-S-Right switch-client -n
+bind -n C-S-Left switch-client -p
+
 # Prefix+r to reload config
 bind r source-file ~/.tmux.conf
 
