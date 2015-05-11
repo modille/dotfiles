@@ -15,7 +15,6 @@ call plug#begin('~/dotfiles/vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
 Plug 'drmikehenry/vim-fontsize'
-Plug 'h1mesuke/unite-outline'
 Plug 'haya14busa/incsearch.vim'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'honza/vim-snippets'
@@ -26,10 +25,11 @@ Plug 'nicwest/QQ.vim'
 Plug 'osyo-manga/vim-brightest'
 Plug 'rking/ag.vim'
 Plug 'rstacruz/sparkup'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
 Plug 'scrooloose/syntastic'
 Plug 'shougo/unite.vim'
-Plug 'shougo/vimproc.vim', { 'do': 'make -f make_unix.mak' }
+Plug 'shougo/unite-outline'
+Plug 'shougo/vimproc.vim', { 'do': 'make' }
 Plug 'sirver/ultisnips'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-commentary'
@@ -45,6 +45,7 @@ Plug 'xolox/vim-session'
 Plug 'xuyuanp/nerdtree-git-plugin'
 
 " Language support
+Plug 'elixir-lang/vim-elixir'
 Plug 'parkr/vim-jekyll'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'tpope/vim-rails'
@@ -115,6 +116,11 @@ set mouse=a
 vmap <C-c> "+y
 "Safely alias :W to :w
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
+set backspace=2
+"Auto-read file on cursor hold
+set autoread
+au CursorHold,CursorHoldI * silent! checktime
+nmap <leader>ct :checktime<CR>
 
 "" Airline
 let g:airline#extensions#hunks#enabled=0
@@ -129,6 +135,10 @@ nmap f <Plug>(easymotion-t2)
 nmap s <Plug>(easymotion-s2)
 nmap t <Plug>(easymotion-t2)
 let g:EasyMotion_smartcase = 1
+
+"" Fugitive
+nmap <silent> <Leader>Gb :Gblame<CR>
+nmap <silent> <Leader>Gs :Gstatus<CR>
 
 "" Gradle
 au BufNewFile,BufRead *.gradle set filetype=groovy
@@ -204,36 +214,31 @@ let g:unite_enable_start_insert = 1
 "Use Silver Searcher for grepping
 if executable('ag')
   let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts =
-        \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
-        \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+  let g:unite_source_grep_default_opts = '-i --line-numbers --nocolor --nogroup --hidden --follow'
   let g:unite_source_grep_recursive_opt = ''
 endif
-"Ignore patterns
-call unite#custom_source('file_rec,file_rec/async,grep',
-      \ 'ignore_pattern', join([
-      \ '\.git/',
-      \ '\.svn/',
-      \ '\.yardoc/',
-      \ '.*\.log',
-      \ '.*/translations.js',
-      \ 'bower_components/',
-      \ 'coverage/',
-      \ 'dist/',
-      \ 'doc/.*/.*\.html',
-      \ 'node_modules/',
-      \ 'tags/',
-      \ 'tmp/',
-      \ ], '\|'))
+let g:unite_source_file_rec_max_cache_files = 0
 call unite#custom_source('file_rec,file_rec/async', 'max_candidates', 0)
+"Custom menu
+if !exists('g:unite_source_menu_menus')
+    let g:unite_source_menu_menus = {}
+endif
+let g:unite_source_menu_menus.my_commands = {
+\    'description': 'My Commands'
+\ }
+let g:unite_source_menu_menus.my_commands.command_candidates = [
+\   ['Toggle spell check (z= for suggestions)', 'setlocal spell! spelllang=en_us']
+\ ]
+"m = Open custom menu
+nnoremap <silent> <Leader>m :Unite menu:my_commands<CR>
 "r = Find file by name
-nnoremap <silent> <Leader>r :Unite file_rec/async<CR>
+nnoremap <silent> <Leader>r :Unite -buffer-name=files -start-insert file_rec:!<CR>
 "b = List buffers
 nnoremap <silent> <Leader>b :Unite buffer bookmark<CR>
 "g = Grep
-nnoremap <silent> <Leader>g :Unite grep:.<CR>
+nnoremap <silent> <Leader>g :Unite -buffer-name=search -start-insert grep:!<CR>
 "o = Outline
-nnoremap <silent> <Leader>o :Unite -start-insert -vertical -auto-preview outline<CR>
+nnoremap <silent> <Leader>o :Unite -start-insert -vertical outline<CR>
 "y = Yank history
 nnoremap <silent> <Leader>y :Unite history/yank<CR>
 
@@ -255,6 +260,7 @@ nnoremap <leader>fef :normal! gg=G``<CR>
 "F7 to toggle spellcheck
 imap <F7> <C-o>:setlocal spell! spelllang=en_us<CR>
 nn <F7> :setlocal spell! spell? spelllang=en_us<CR>
+autocmd FileType gitcommit setlocal spell spelllang=en_us
 "Toggle hlsearch
 nmap <leader>hs :set hlsearch! hlsearch?<CR>
 "Toggle text wrap
