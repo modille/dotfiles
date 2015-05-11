@@ -18,6 +18,7 @@ LC_ALL='en_US.UTF-8'
 
 # Exports
 export EDITOR='vim'
+export JRUBY_OPTS='--dev'
 export LESS='-nR'
 export PATH=$HOME/local/bin:$PATH
 export VISUAL='vim'
