@@ -13,18 +13,20 @@ endif
 call plug#begin('~/dotfiles/vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
+Plug 'ap/vim-css-color'
 Plug 'bling/vim-airline'
-Plug 'drmikehenry/vim-fontsize'
+" Plug 'drmikehenry/vim-fontsize'
 Plug 'haya14busa/incsearch.vim'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'honza/vim-snippets'
-Plug 'kshenoy/vim-signature'
+Plug 'kshenoy/vim-signature' " Show bookmarks in gutter
 Plug 'Lokaltog/vim-easymotion'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'nicwest/QQ.vim'
-Plug 'osyo-manga/vim-brightest'
+Plug 'nathanaelkane/vim-indent-guides', { 'on': 'IndentGuidesToggle' }
+" Plug 'nicwest/QQ.vim'
+Plug 'osyo-manga/vim-brightest' " Highlight word under cursor
 Plug 'rking/ag.vim'
-Plug 'rstacruz/sparkup'
+Plug 'rstacruz/sparkup', { 'for': 'html' }
+Plug 'schickling/vim-bufonly'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
 Plug 'scrooloose/syntastic'
 Plug 'shougo/unite.vim'
@@ -40,35 +42,35 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'valloric/YouCompleteMe', { 'do': './install.sh' }
 Plug 'xolox/vim-misc'
-Plug 'xolox/vim-notes'
+" Plug 'xolox/vim-notes'
 Plug 'xolox/vim-session'
 Plug 'xuyuanp/nerdtree-git-plugin'
 
 " Language support
-Plug 'elixir-lang/vim-elixir'
-Plug 'parkr/vim-jekyll'
-Plug 'tmux-plugins/vim-tmux'
+Plug 'elixir-lang/vim-elixir', { 'for': ['eelixer', 'elixer'] }
+" Plug 'parkr/vim-jekyll'
+Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
 Plug 'tpope/vim-rails'
-Plug 'wavded/vim-stylus'
-Plug 'wting/rust.vim'
+Plug 'wavded/vim-stylus', { 'for': 'stylus' }
+Plug 'wting/rust.vim', { 'for': 'rust' }
 
 " Themes
-Plug '29decibel/codeschool-vim-theme'
-Plug 'ajh17/Spacegray.vim'
-Plug 'altercation/vim-colors-solarized'
-Plug 'fmoralesc/molokayo'
-Plug 'gosukiwi/vim-atom-dark'
-Plug 'morhetz/gruvbox'
-Plug 'nanotech/jellybeans.vim'
-Plug 'sickill/vim-monokai'
+" Plug '29decibel/codeschool-vim-theme'
+" Plug 'ajh17/Spacegray.vim'
+" Plug 'altercation/vim-colors-solarized'
+" Plug 'fmoralesc/molokayo'
+" Plug 'gosukiwi/vim-atom-dark'
+" Plug 'morhetz/gruvbox'
+" Plug 'nanotech/jellybeans.vim'
+" Plug 'sickill/vim-monokai'
 Plug 'sjl/badwolf'
-Plug 'tomasr/molokai'
-Plug 'tpope/vim-vividchalk'
-Plug 'w0ng/vim-hybrid'
-Plug 'whatyouhide/vim-gotham'
-Plug 'yearofmoo/Vim-Darkmate'
-Plug 'zeis/vim-kolor'
-Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
+" Plug 'tomasr/molokai'
+" Plug 'tpope/vim-vividchalk'
+" Plug 'w0ng/vim-hybrid'
+" Plug 'whatyouhide/vim-gotham'
+" Plug 'yearofmoo/Vim-Darkmate'
+" Plug 'zeis/vim-kolor'
+" Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 
 call plug#end()
 
@@ -89,7 +91,8 @@ if !has('gui_running')
 endif
 syntax enable
 set background=dark
-colorscheme kolor
+colorscheme badwolf
+" colorscheme kolor
 " colorscheme monokai
 " colorscheme gruvbox
 let mapleader = ','
@@ -116,11 +119,6 @@ set mouse=a
 vmap <C-c> "+y
 "Safely alias :W to :w
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
-set backspace=2
-"Auto-read file on cursor hold
-set autoread
-au CursorHold,CursorHoldI * silent! checktime
-nmap <leader>ct :checktime<CR>
 
 "" Airline
 let g:airline#extensions#hunks#enabled=0
@@ -193,7 +191,7 @@ let g:session_default_to_last = 1
 let g:session_autoload = 'yes'
 
 "" Syntastic
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+let g:syntastic_html_tidy_ignore_errors=["<ion-", "discarding unexpected </ion-", " proprietary attribute \"ng-"]
 let g:syntastic_javascript_closure_compiler_path = '~/bin/compiler.jar'
 let g:syntastic_javascript_checkers = ['gjslint']
 let g:syntastic_javascript_gjslint_args = '--strict'
@@ -229,23 +227,32 @@ let g:unite_source_menu_menus.my_commands = {
 let g:unite_source_menu_menus.my_commands.command_candidates = [
 \   ['Toggle spell check (z= for suggestions)', 'setlocal spell! spelllang=en_us']
 \ ]
+"Ignore patterns
+call unite#custom_source('file_rec,file_rec/async', 'ignore_pattern', join([
+     \ '\.git/',
+     \ '\.yardoc/',
+     \ '.*\.log',
+     \ '.*/translations.js',
+     \ 'bower_components/',
+     \ 'coverage/',
+     \ 'dist/',
+     \ 'doc/.*/.*\.html',
+     \ 'node_modules/',
+     \ 'tags/',
+     \ 'tmp/',
+     \ ], '\|'))
 "m = Open custom menu
 nnoremap <silent> <Leader>m :Unite menu:my_commands<CR>
 "r = Find file by name
-nnoremap <silent> <Leader>r :Unite -buffer-name=files -start-insert file_rec:!<CR>
+nnoremap <silent> <Leader>r :Unite -buffer-name=files file_rec:!<CR>
 "b = List buffers
-nnoremap <silent> <Leader>b :Unite buffer bookmark<CR>
+nnoremap <silent> <Leader>b :Unite buffer<CR>
 "g = Grep
-nnoremap <silent> <Leader>g :Unite -buffer-name=search -start-insert grep:!<CR>
+nnoremap <silent> <Leader>g :Unite -buffer-name=search grep:!<CR>
 "o = Outline
 nnoremap <silent> <Leader>o :Unite -start-insert -vertical outline<CR>
 "y = Yank history
 nnoremap <silent> <Leader>y :Unite history/yank<CR>
-
-"" Wildmenu
-"Make auto-complete behave more *nix-like
-set wildmode=longest:full
-set wildmenu
 
 "" XML
 let g:xml_syntax_folding=1
@@ -274,6 +281,14 @@ inoremap <silent> <C-s> <C-O>:update<CR>
 " Use +/- in normal mode to increment/decrement number
 nmap <silent> + <C-a>
 nmap <silent> - <C-x>
+function! DeleteEmptyBuffers()
+  let buffers = filter(range(1, bufnr('$')), 'buflisted(v:val) && empty(bufname(v:val)) && bufwinnr(v:val)<0')
+  if !empty(buffers)
+    exe 'bw '.join(buffers, ' ')
+  endif
+endfunction
+nnoremap <silent> <Leader>db :call DeleteEmptyBuffers()<CR>
+nnoremap <silent> <Leader>bo :Bonly<CR>
 
 "" Disable toolbar and menu
 set guioptions-=mcheme
