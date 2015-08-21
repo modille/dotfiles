@@ -10,6 +10,9 @@ set -g pane-base-index 1
 
 set -g history-limit 100000
 
+# Fix ESC delay
+set -s escape-time 0
+
 # Vim-like copy mode
 setw -g mode-keys vi
 bind -t vi-copy v begin-selection
@@ -17,20 +20,15 @@ bind -t vi-copy v begin-selection
 # Copy to system clipboard, too
 bind -t vi-copy y copy-pipe 'xclip -in -selection clipboard'
 
-# Shift+Arrow to switch windows
-bind -n S-Right next-window
-bind -n S-Left previous-window
-
-# Control+Shift+Arrow to switch sessions
-bind -n C-S-Right switch-client -n
-bind -n C-S-Left switch-client -p
+# Shift+Up/Down to switch sessions
+bind -n S-Down switch-client -n
+bind -n S-Up switch-client -p
 
 # Prefix+r to reload config
 bind r source-file ~/.tmux.conf
 
 # Powerline status bar
 run-shell 'powerline-daemon -q'
-source /usr/share/tmux/powerline.conf
 set -g default-terminal 'screen-256color'
 set -g status on
 set -g status-utf8 on
@@ -46,17 +44,15 @@ set -g status-left-length 36
 set -g status-right-length 36
 set -g status-interval 5
 set -g status-left '#[fg=colour16,bg=colour254,bold] tmux #[fg=colour254,bg=colour238,nobold]#[fg=colour15,bg=colour238,bold] session: #S #[fg=colour238,bg=colour234,nobold] windows:'
-set -g status-right '#[fg=colour245] %l:%M %P ❬ %a %b %d #[fg=colour254,bg=colour234,nobold]#[fg=colour16,bg=colour254,bold] #h '
+set -g status-right '#[fg=colour245] %l:%M %P ❬ %a %b %d #[fg=colour254,bg=colour234,nobold]#[fg=colour16,bg=colour254,bold] #h  '
 set -g window-status-format "#[fg=white,bg=colour234] #I #W "
 set -g window-status-current-format "#[fg=colour234,bg=colour39]#[fg=colour16,bg=colour39,noreverse,bold] #I #W* #[fg=colour39,bg=colour234,nobold]"
 
 # List of plugins
-set -g @tpm_plugins '              \
-  tmux-plugins/tmux-pain-control   \
-  tmux-plugins/tmux-resurrect      \
-  tmux-plugins/tmux-sensible       \
-  tmux-plugins/tpm                 \
-'
+set -g @plugin 'tmux-plugins/tmux-pain-control'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tpm'
 
 # Initializes TMUX plugin manager.
 # Keep this line at the very bottom of tmux.conf.
