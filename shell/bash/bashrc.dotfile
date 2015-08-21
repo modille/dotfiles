@@ -157,3 +157,5 @@ if [ -f $HOME/completion-ruby/completion-ruby-all ]; then
   . $HOME/completion-ruby/completion-ruby-all
 fi
 
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
