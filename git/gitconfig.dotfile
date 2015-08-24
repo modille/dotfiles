@@ -44,7 +44,7 @@
   editor = vim
 
 [diff]
-  guitool = meld
+  guitool = diffmerge
 
 [mergetool]
   keepBackup = false
