@@ -41,7 +41,7 @@
 [core]
   autocrlf = input
   excludesfile = ~/.gitignore
-  editor = vim
+  editor = nvim
 
 [diff]
   guitool = diffmerge
