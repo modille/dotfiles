@@ -40,7 +40,7 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'valloric/YouCompleteMe', { 'do': './install.sh' }
+Plug 'valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'xolox/vim-misc'
 " Plug 'xolox/vim-notes'
 Plug 'xolox/vim-session'
@@ -48,6 +48,7 @@ Plug 'xuyuanp/nerdtree-git-plugin'
 
 " Language support
 Plug 'elixir-lang/vim-elixir', { 'for': ['eelixer', 'elixer'] }
+Plug 'nginx/nginx', { 'rtp': 'contrib/vim' }
 " Plug 'parkr/vim-jekyll'
 Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
 Plug 'tpope/vim-rails'
