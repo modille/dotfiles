@@ -1,2 +1,4 @@
 *.swp
+.ruby-gemset
+.ruby-version
 tags
