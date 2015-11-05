@@ -16,10 +16,12 @@ Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color'
 Plug 'bling/vim-airline'
 " Plug 'drmikehenry/vim-fontsize'
+Plug 'godlygeek/tabular'
 Plug 'haya14busa/incsearch.vim'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'honza/vim-snippets'
 Plug 'kshenoy/vim-signature' " Show bookmarks in gutter
+Plug 'lambdalisue/unite-grep-vcs'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'nathanaelkane/vim-indent-guides', { 'on': 'IndentGuidesToggle' }
 " Plug 'nicwest/QQ.vim'
@@ -98,7 +100,7 @@ colorscheme badwolf
 " colorscheme monokai
 " colorscheme gruvbox
 let mapleader = ','
-set colorcolumn=80
+set colorcolumn=120
 augroup vimrc_autocmds
   autocmd BufEnter * highlight OverLength ctermbg=red ctermfg=white guibg=#FFD9D9
   autocmd BufEnter * match OverLength /\%121v.\+/
@@ -189,14 +191,23 @@ nmap <silent> <Leader>nf :NERDTreeFind<CR>
 "" Session
 let g:session_autosave = 'yes'
 let g:session_autosave_periodic = 1
+let g:session_autosave_silent = 1
 let g:session_default_to_last = 1
-let g:session_autoload = 'yes'
+let g:session_autoload = 'no'
 
 "" Syntastic
 let g:syntastic_html_tidy_ignore_errors=["<ion-", "discarding unexpected </ion-", " proprietary attribute \"ng-"]
 let g:syntastic_javascript_closure_compiler_path = '~/bin/compiler.jar'
 let g:syntastic_javascript_checkers = ['gjslint']
 let g:syntastic_javascript_gjslint_args = '--strict'
+
+"" Tabular
+if exists(':Tabularize')
+  nmap <Leader>a= :Tabularize /=<CR>
+  vmap <Leader>a= :Tabularize /=<CR>
+  nmap <Leader>a: :Tabularize /:\zs/l0l1<CR>
+  vmap <Leader>a: :Tabularize /:\zs/l0l1<CR>
+endif
 
 "" Ultisnips
 let g:ycm_key_list_previous_completion=['<Up>']
@@ -230,7 +241,7 @@ let g:unite_source_menu_menus.my_commands.command_candidates = [
 \   ['Toggle spell check (z= for suggestions)', 'setlocal spell! spelllang=en_us']
 \ ]
 "Ignore patterns
-call unite#custom_source('file_rec,file_rec/async', 'ignore_pattern', join([
+call unite#custom_source('file_rec,file_rec/async,grep', 'ignore_pattern', join([
      \ '\.git/',
      \ '\.yardoc/',
      \ '.*\.log',
@@ -250,7 +261,7 @@ nnoremap <silent> <Leader>r :Unite -buffer-name=files file_rec:!<CR>
 "b = List buffers
 nnoremap <silent> <Leader>b :Unite buffer<CR>
 "g = Grep
-nnoremap <silent> <Leader>g :Unite -buffer-name=search grep:!<CR>
+nnoremap <silent> <Leader>g :Unite -buffer-name=search grep/git:.<CR>
 "o = Outline
 nnoremap <silent> <Leader>o :Unite -start-insert -vertical outline<CR>
 "y = Yank history
@@ -267,20 +278,20 @@ map <Leader>cd :cd %:p:h<CR>
 "Format entire file
 nnoremap <leader>fef :normal! gg=G``<CR>
 "F7 to toggle spellcheck
-imap <F7> <C-o>:setlocal spell! spelllang=en_us<CR>
-nn <F7> :setlocal spell! spell? spelllang=en_us<CR>
+" imap <F7> <C-o>:setlocal spell! spelllang=en_us<CR>
+" nn <F7> :setlocal spell! spell? spelllang=en_us<CR>
 autocmd FileType gitcommit setlocal spell spelllang=en_us
 "Toggle hlsearch
 nmap <leader>hs :set hlsearch! hlsearch?<CR>
 "Toggle text wrap
 nmap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
-" Yank text to the system clipboard
-vmap <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
-" C-s to save; See also http://vim.wikia.com/wiki/Map_Ctrl-S_to_save_current_or_new_files
-noremap <silent> <C-s> :update<CR>
-vnoremap <silent> <C-s> <C-C>:update<CR>
-inoremap <silent> <C-s> <C-O>:update<CR>
-" Use +/- in normal mode to increment/decrement number
+"Yank text to the system clipboard
+" vmap <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
+"C-s to save; See also http://vim.wikia.com/wiki/Map_Ctrl-S_to_save_current_or_new_files
+" noremap <silent> <C-s> :update<CR>
+" vnoremap <silent> <C-s> <C-C>:update<CR>
+" inoremap <silent> <C-s> <C-O>:update<CR>
+"Use +/- in normal mode to increment/decrement number
 nmap <silent> + <C-a>
 nmap <silent> - <C-x>
 function! DeleteEmptyBuffers()
@@ -291,6 +302,8 @@ function! DeleteEmptyBuffers()
 endfunction
 nnoremap <silent> <Leader>db :call DeleteEmptyBuffers()<CR>
 nnoremap <silent> <Leader>bo :Bonly<CR>
+"In visual mode, use Y to copy to system clipboard
+vnoremap Y "*y
 
 "" Disable toolbar and menu
 set guioptions-=mcheme
