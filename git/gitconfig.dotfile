@@ -25,6 +25,7 @@
   push-up = push --set-upstream origin
   reset-hard = reset --hard HEAD^
   reset-soft = reset --soft HEAD^
+  ri = rebase -i
   rpo = remote prune origin
   s = status
   unstage = reset HEAD --
