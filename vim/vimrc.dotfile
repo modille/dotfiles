@@ -196,10 +196,9 @@ let g:session_default_to_last = 1
 let g:session_autoload = 'no'
 
 "" Syntastic
-let g:syntastic_html_tidy_ignore_errors=["<ion-", "discarding unexpected </ion-", " proprietary attribute \"ng-"]
-let g:syntastic_javascript_closure_compiler_path = '~/bin/compiler.jar'
-let g:syntastic_javascript_checkers = ['gjslint']
-let g:syntastic_javascript_gjslint_args = '--strict'
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['jscs', 'jshint']
 
 "" Tabular
 if exists(':Tabularize')
