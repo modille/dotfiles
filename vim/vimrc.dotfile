@@ -262,7 +262,7 @@ nnoremap <silent> <Leader>r :Unite -buffer-name=files file_rec:!<CR>
 "b = List buffers
 nnoremap <silent> <Leader>b :Unite buffer<CR>
 "g = Grep
-nnoremap <silent> <Leader>g :Unite -buffer-name=search grep/git:.<CR>
+nnoremap <silent> <Leader>g :Unite -buffer-name=search grep/git<CR>
 "o = Outline
 nnoremap <silent> <Leader>o :Unite -start-insert -vertical outline<CR>
 "y = Yank history
