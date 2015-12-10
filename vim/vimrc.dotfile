@@ -209,10 +209,12 @@ if exists(':Tabularize')
 endif
 
 "" Ultisnips
-let g:ycm_key_list_previous_completion=['<Up>']
-let g:UltiSnipsExpandTrigger='<s-tab>'
-let g:UltiSnipsJumpForwardTrigger='<c-n>'
-let g:UltiSnipsJumpBackwardTrigger='<c-z>'
+let g:ycm_key_list_previous_completion = ['<Up>']
+let g:ycm_key_list_select_completion = ['<Down>']
+let g:UltiSnipsSnippetDirectories=['Ultisnips', 'custom_snippets']
+let g:UltiSnipsExpandTrigger='<tab>'
+let g:UltiSnipsJumpForwardTrigger='<tab>'
+let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 
 "" Unite
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
