@@ -233,20 +233,3 @@ augroup vimrc_autocmds
   autocmd BufEnter * highlight OverLength ctermbg=red ctermfg=white guibg=#FFD9D9
   autocmd BufEnter * match OverLength /\%121v.\+/
 augroup END
-
-" Highlight trailing whitespace
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter *.rb match ExtraWhitespace /\s\+$/
-autocmd InsertEnter *.rb match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave *.rb match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave *.rb call clearmatches()
-
-" Enable mouse scrolling in tmux
-" set mouse=a
-
-" Safely alias :W to :w
-" cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
-
-" let g:python_host_skip_check = 1
-" let g:python3_host_skip_check = 1
