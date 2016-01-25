@@ -132,8 +132,6 @@ nmap <Leader>a: :Tabularize /:\zs/l0l1<CR>
 vmap <Leader>a: :Tabularize /:\zs/l0l1<CR>
 
 " Ultisnips {{{2
-let g:ycm_key_list_previous_completion = ['<Up>']
-let g:ycm_key_list_select_completion = ['<Down>']
 let g:UltiSnipsSnippetDirectories=['Ultisnips', 'custom_snippets']
 let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger='<tab>'
@@ -167,6 +165,14 @@ call unite#custom_source('file_rec,file_rec/async,grep', 'ignore_pattern', join(
 nnoremap <silent> <Leader>r :Unite -buffer-name=files file_rec:!<CR>
 nnoremap <silent> <Leader>b :Unite -buffer-name=buffers buffer<CR>
 nnoremap <silent> <Leader>g :Unite -buffer-name=search grep/git<CR>
+
+
+" YouCompleteMe
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_key_list_previous_completion = ['<Up>']
+let g:ycm_key_list_select_completion = ['<Down>']
+let g:ycm_semantic_triggers = { 'groovy': ['.'] }
+let g:EclimCompletionMethod = 'omnifunc'
 
 " ----------------------------------------------------------------------------
 "  Moving around, searching and patterns {{{1
