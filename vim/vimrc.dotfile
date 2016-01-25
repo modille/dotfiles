@@ -20,6 +20,7 @@ endif
 call plug#begin('~/dotfiles/vim/plugged')
 
 " Colorschemes {{{2
+Plug 'chriskempson/base16-vim'
 Plug 'sjl/badwolf'
 
 " Language support {{{2
@@ -183,8 +184,9 @@ set number " Show line numbers
 " ----------------------------------------------------------------------------
 au BufNewFile,BufRead *.gradle set filetype=groovy
 au BufNewFile,BufRead *.md set syntax=markdown
+let base16colorspace=256
 set background=dark
-colorscheme badwolf
+colorscheme base16-monokai
 if exists('+colorcolumn')
   set colorcolumn=120
 endif
