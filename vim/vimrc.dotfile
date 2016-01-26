@@ -24,12 +24,13 @@ Plug 'chriskempson/base16-vim'
 Plug 'sjl/badwolf'
 
 " Language support {{{2
-Plug 'elixir-lang/vim-elixir', { 'for': ['eelixer', 'elixer'] }
-Plug 'nginx/nginx', { 'rtp': 'contrib/vim' }
-Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
+Plug 'elixir-lang/vim-elixir',   { 'for': ['eelixer', 'elixer'] }
+Plug 'modille/groovy.vim',       { 'for': 'groovy' }
+Plug 'nginx/nginx',              { 'rtp': 'contrib/vim' }
+Plug 'tmux-plugins/vim-tmux',    { 'for': 'tmux' }
 Plug 'tpope/vim-rails'
-Plug 'wavded/vim-stylus', { 'for': 'stylus' }
-Plug 'wting/rust.vim', { 'for': 'rust' }
+Plug 'wavded/vim-stylus',        { 'for': 'stylus' }
+Plug 'wting/rust.vim',           { 'for': 'rust' }
 
 " Other plugins {{{2
 Plug 'airblade/vim-gitgutter'
