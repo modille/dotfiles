@@ -42,6 +42,7 @@ Plug 'heavenshell/vim-jsdoc'
 Plug 'kshenoy/vim-signature' " Show bookmarks in gutter
 Plug 'lambdalisue/unite-grep-vcs'
 Plug 'nathanaelkane/vim-indent-guides', { 'on': 'IndentGuidesToggle' }
+Plug 'rizzatti/dash.vim'
 Plug 'schickling/vim-bufonly'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
 Plug 'scrooloose/syntastic'
@@ -101,6 +102,10 @@ let g:airline#extensions#hunks#enabled=0
 let g:airline_powerline_fonts = 1 "Add powerline fonts to the dictionary
 let g:airline_section_y = 'BN: %{bufnr("%")}' "Replace file encoding info with buffer number
 let g:bufferline_echo = 0
+
+" Dash
+nmap <silent> <Leader>d <Plug>DashSearch
+let g:dash_map = { 'groovy' : ['groovy', 'grails', 'spring', 'java', 'javafx', 'javadoc'] }
 
 " Indent Guides {{{2
 let g:indent_guides_start_level = 2
