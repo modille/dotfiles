@@ -35,8 +35,6 @@ Plug 'wting/rust.vim',           { 'for': 'rust' }
 " Other plugins {{{2
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color' " Highlight colors in CSS files
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'godlygeek/tabular'
 Plug 'heavenshell/vim-jsdoc'
@@ -47,8 +45,9 @@ Plug 'rizzatti/dash.vim'
 Plug 'schickling/vim-bufonly'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
 Plug 'scrooloose/syntastic'
-Plug 'shougo/unite.vim'
+Plug 'shougo/neoyank.vim'
 Plug 'shougo/unite-outline'
+Plug 'shougo/unite.vim'
 Plug 'shougo/vimproc.vim', { 'do': 'make' }
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-commentary'
@@ -58,6 +57,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'xolox/vim-misc' " Required for vim-session
 Plug 'xolox/vim-session'
 Plug 'xuyuanp/nerdtree-git-plugin'
@@ -94,7 +95,7 @@ nmap <silent> + <C-a>
 nmap <silent> - <C-x>
 
 " In visual mode, use Y to copy to system clipboard
-vnoremap Y "*y 
+vnoremap Y "*y
 
 " ----------------------------------------------------------------------------
 "  Plugin settings {{{1
@@ -106,7 +107,7 @@ let g:airline_section_z = '%3c'
 let g:airline_theme = 'badwolf'
 let g:bufferline_echo = 0
 
-" Dash
+" Dash {{{2
 nmap <silent> <Leader>d <Plug>DashSearch
 let g:dash_map = { 'groovy' : ['groovy', 'grails', 'spring', 'java', 'javafx', 'javadoc'] }
 
@@ -174,9 +175,10 @@ call unite#custom_source('file_rec,file_rec/async,grep', 'ignore_pattern', join(
 nnoremap <silent> <Leader>r :Unite -buffer-name=files file_rec:!<CR>
 nnoremap <silent> <Leader>b :Unite -buffer-name=buffers buffer<CR>
 nnoremap <silent> <Leader>g :Unite -buffer-name=search grep/git<CR>
+nnoremap <silent> <Leader>y :Unite -buffer-name=yank history/yank<CR>
 
 
-" YouCompleteMe
+" YouCompleteMe {{{2
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_key_list_select_completion = ['<Down>']
