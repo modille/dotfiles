@@ -35,7 +35,8 @@ Plug 'wting/rust.vim',           { 'for': 'rust' }
 " Other plugins {{{2
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color' " Highlight colors in CSS files
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'godlygeek/tabular'
 Plug 'heavenshell/vim-jsdoc'
@@ -100,7 +101,8 @@ vnoremap Y "*y
 " Airline {{{2
 let g:airline#extensions#hunks#enabled=0
 let g:airline_powerline_fonts = 1 "Add powerline fonts to the dictionary
-let g:airline_section_y = 'BN: %{bufnr("%")}' "Replace file encoding info with buffer number
+let g:airline_section_z = '%3c'
+let g:airline_theme = 'badwolf'
 let g:bufferline_echo = 0
 
 " Dash
