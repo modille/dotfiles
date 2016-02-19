@@ -32,9 +32,30 @@ bindkey '^S' history-incremental-search-forward
 bindkey '^P' history-search-backward
 bindkey '^N' history-search-forward
 
+# Bind UP and DOWN arrow keys (compatibility fallback
+# for Ubuntu 12.04, Fedora 21, and MacOSX 10.9 users)
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+
 # Movements
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+bindkey '^w' backward-kill-word
+
+# Show insert/normal mode indicator in RPS1
+function zle-line-init zle-keymap-select {
+  VIM_PROMPT_I="%F{green} [% INSERT]%  %{$reset_color%}"
+  VIM_PROMPT_N="%F{blue} [% NORMAL]%  %{$reset_color%}"
+  RPS1="${${KEYMAP/vicmd/$VIM_PROMPT_N}/(main|viins)/$VIM_PROMPT_I}"
+  RPS2=$RPS1
+  zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+# Reduce delay when hitting ESC
+export KEYTIMEOUT=1
 
 # Disable C-s
 stty -ixon
