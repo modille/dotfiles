@@ -196,7 +196,7 @@ set number " Show line numbers
 " ----------------------------------------------------------------------------
 "  Syntax, highlighting and spelling {{{1
 " ----------------------------------------------------------------------------
-au BufNewFile,BufRead *.gradle set filetype=groovy
+au BufNewFile,BufRead *.gradle,*.tpl set filetype=groovy
 au BufNewFile,BufRead *.md set syntax=markdown
 let base16colorspace=256
 set background=dark
