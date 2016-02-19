@@ -157,5 +157,8 @@ if [ -f $HOME/completion-ruby/completion-ruby-all ]; then
   . $HOME/completion-ruby/completion-ruby-all
 fi
 
-
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# SDKMAN!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
