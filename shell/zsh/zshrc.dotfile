@@ -18,13 +18,21 @@ LC_ALL='en_US.UTF-8'
 export EDITOR='vim'
 export JRUBY_OPTS='--dev'
 export KEYTIMEOUT=1 # Reduce delay when hitting ESC
-export LESS='-nR'
 export PATH="$HOME/local/bin:$PATH"
 export PATH="$PATH:$HOME/bin"
 export VISUAL='vim'
 
 # Aliases
 alias ctags="`brew --prefix`/bin/ctags" # Use ctags from homebrew
+
+# Pipe less to highlight
+export LESSOPEN="| $(which highlight) %s --out-format xterm256 --quiet --force --style molokai"
+export LESS=" -R"
+alias less='less -m -g -i -J --underline-special'
+alias more='less'
+
+# Replace cat with highlight
+alias cat="highlight $1 --out-format xterm256 --quiet --force --style molokai"
 
 # vi-mode bindings
 bindkey -v
