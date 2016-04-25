@@ -55,8 +55,8 @@ bindkey '^w' backward-kill-word
 
 # Show insert/normal mode indicator in RPS1
 function zle-line-init zle-keymap-select {
-  VIM_PROMPT_I="%F{green} [% INSERT]%  %{$reset_color%}"
-  VIM_PROMPT_N="%F{blue} [% NORMAL]%  %{$reset_color%}"
+  VIM_PROMPT_I="%F{039} [% INSERT]%  %{$reset_color%}"
+  VIM_PROMPT_N="%F{154} [% NORMAL]%  %{$reset_color%}"
   RPS1="${${KEYMAP/vicmd/$VIM_PROMPT_N}/(main|viins)/$VIM_PROMPT_I}"
   RPS2=$RPS1
   zle reset-prompt
