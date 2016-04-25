@@ -21,12 +21,17 @@ call plug#begin('~/dotfiles/vim/plugged')
 
 " Colorschemes {{{2
 Plug 'chriskempson/base16-vim'
+Plug 'marciomazza/vim-brogrammer-theme'
+Plug 'sickill/vim-monokai'
 Plug 'sjl/badwolf'
+Plug 'tomasr/molokai'
+Plug 'nanotech/jellybeans.vim'
 
 " Language support {{{2
 Plug 'elixir-lang/vim-elixir',   { 'for': ['eelixer', 'elixer'] }
 Plug 'modille/groovy.vim',       { 'for': 'groovy' }
 Plug 'nginx/nginx',              { 'rtp': 'contrib/vim' }
+Plug 'nikolavp/vim-jape',        { 'for': 'jape' }
 Plug 'tmux-plugins/vim-tmux',    { 'for': 'tmux' }
 Plug 'tpope/vim-rails'
 Plug 'wavded/vim-stylus',        { 'for': 'stylus' }
@@ -36,15 +41,18 @@ Plug 'wting/rust.vim',           { 'for': 'rust' }
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color' " Highlight colors in CSS files
 Plug 'bronson/vim-trailing-whitespace'
+Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
 Plug 'heavenshell/vim-jsdoc'
+Plug 'jpalardy/spacehi.vim'
 Plug 'kshenoy/vim-signature' " Show bookmarks in gutter
 Plug 'lambdalisue/unite-grep-vcs'
+Plug 'mhinz/vim-startify'
 Plug 'nathanaelkane/vim-indent-guides', { 'on': 'IndentGuidesToggle' }
 Plug 'rizzatti/dash.vim'
 Plug 'schickling/vim-bufonly'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic' " Using neomake instead
 Plug 'shougo/neoyank.vim'
 Plug 'shougo/unite-outline'
 Plug 'shougo/unite.vim'
@@ -65,9 +73,10 @@ Plug 'xuyuanp/nerdtree-git-plugin'
 
 " Neovim-only plugins {{{2
 if has('nvim')
- Plug 'osyo-manga/vim-brightest' " Highlight word under cursor
- Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets'
- Plug 'valloric/YouCompleteMe', { 'do': './install.py' }
+  Plug 'benekastah/neomake'
+  Plug 'osyo-manga/vim-brightest' " Highlight word under cursor
+  Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets'
+  Plug 'valloric/YouCompleteMe', { 'do': './install.py' }
 endif
 
 call plug#end()
@@ -104,12 +113,21 @@ vnoremap Y "*y
 let g:airline#extensions#hunks#enabled=0
 let g:airline_powerline_fonts = 1 "Add powerline fonts to the dictionary
 let g:airline_section_z = '%3c'
-let g:airline_theme = 'badwolf'
+let g:airline_theme = 'badwolf' "jellybeans, lucius, raven, term
 let g:bufferline_echo = 0
 
 " Dash {{{2
 nmap <silent> <Leader>d <Plug>DashSearch
 let g:dash_map = { 'groovy' : ['groovy', 'grails', 'spring', 'java', 'javafx', 'javadoc'] }
+
+" Eclim {{{2
+let g:EclimJavascriptValidate = 0
+
+" EasyMotion {{{2
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+let g:EasyMotion_smartcase = 1
+nmap s <Plug>(easymotion-overwin-f)
+" nmap s <Plug>(easymotion-overwin-f2)
 
 " Indent Guides {{{2
 let g:indent_guides_start_level = 2
@@ -117,6 +135,10 @@ let g:indent_guides_guide_size = 1
 
 " Marks {{{2
 nmap <silent> <Leader>st :SignatureToggle<CR>
+
+" NeoMake
+let g:neomake_javascript_enabled_makers = ['jscs', 'jshint']
+let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
 
 " Nerdtree {{{2
 nmap <silent> <Leader>nt :NERDTreeToggle<CR>
@@ -130,10 +152,14 @@ let g:session_autosave_silent = 1
 let g:session_default_to_last = 1
 let g:session_autoload = 'no'
 
+" Startify {{{2
+let g:startify_change_to_vcs_root = 1
+let g:startify_session_dir = '~/.vim/sessions'
+
 " Syntastic {{{2
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['jscs', 'jshint']
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_javascript_checkers = ['jscs', 'jshint']
 
 " Tabular {{{2
 nmap <Leader>a= :Tabularize /=<CR>
@@ -142,7 +168,7 @@ nmap <Leader>a: :Tabularize /:\zs/l0l1<CR>
 vmap <Leader>a: :Tabularize /:\zs/l0l1<CR>
 
 " Ultisnips {{{2
-let g:UltiSnipsSnippetDirectories=['Ultisnips', 'custom_snippets']
+" let g:UltiSnipsSnippetDirectories=['Ultisnips', 'custom_snippets']
 let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
@@ -181,11 +207,13 @@ nnoremap <silent> <Leader>y :Unite -buffer-name=yank history/yank<CR>
 
 
 " YouCompleteMe {{{2
-let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_semantic_triggers = { 'groovy': ['.'] }
 let g:EclimCompletionMethod = 'omnifunc'
+" Preview window seems broken at the moment, so...
+set completeopt-=preview
+let g:ycm_add_preview_to_completeopt = 0
 
 " ----------------------------------------------------------------------------
 "  Moving around, searching and patterns {{{1
@@ -203,9 +231,10 @@ set number " Show line numbers
 " ----------------------------------------------------------------------------
 au BufNewFile,BufRead *.gradle,*.tpl set filetype=groovy
 au BufNewFile,BufRead *.md set syntax=markdown
-let base16colorspace=256
+" let base16colorspace=256
 set background=dark
-colorscheme base16-monokai
+" colorscheme base16-monokai
+colorscheme badwolf
 if exists('+colorcolumn')
   set colorcolumn=120
 endif
@@ -225,9 +254,9 @@ set noshowmode " Hide default mode display, since Airline displays it
 " ----------------------------------------------------------------------------
 "  Tabs and indenting {{{1
 " ----------------------------------------------------------------------------
-set expandtab    " Replace tabs with spaces
 set tabstop=2    " Tab = 2 spaces
 set shiftwidth=2 " Autoindent indents 2 spaces
+set expandtab    " Replace tabs with spaces
 
 " ----------------------------------------------------------------------------
 "  Folding {{{1
@@ -249,8 +278,11 @@ set nowritebackup " No backup files while editing
 " ----------------------------------------------------------------------------
 autocmd FileType gitcommit setlocal spell spelllang=en_us " Spellcheck commit messages
 
-" Highlight in red after 120 chars
-augroup vimrc_autocmds
-  autocmd BufEnter * highlight OverLength ctermbg=red ctermfg=white guibg=#FFD9D9
-  autocmd BufEnter * match OverLength /\%121v.\+/
+" Highlight tabs and trailing whitespaces
+autocmd syntax * SpaceHi
+
+" Run Neomake on open and after write
+augroup neomake
+  autocmd BufReadPost * Neomake
+  autocmd BufWritePost * Neomake
 augroup END
