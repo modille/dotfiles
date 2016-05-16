@@ -14,8 +14,6 @@
   com = checkout master
   d = diff
   dc = diff --cached
-  dcg = difftool --cached --gui --no-prompt
-  dg = difftool --gui --no-prompt
   f = fetch
   fp = fetch --prune
   l = log --name-status
@@ -31,10 +29,23 @@
   unstage = reset HEAD --
 
 [color]
-  branch = auto
-  diff = auto
-  interactive = auto
-  status = auto
+  ui = always
+[color "diff"]
+  meta = yellow
+  commit = green
+  frag = magenta
+  old = red
+  new = green
+  whitespace = red reverse
+[color "diff-highlight"]
+  oldNormal = red
+  oldHighlight = "red 52"
+  newNormal = "green"
+  newHighlight = "green 22"
+[color "status"]
+  added = green
+  changed = red
+  untracked = magenta
 
 [commit]
   template = ~/.gitmessage
@@ -43,6 +54,7 @@
   autocrlf = input
   excludesfile = ~/.gitignore
   editor = nvim
+  pager = diff-so-fancy | less --tabs=4 -RFX
 
 [diff]
   guitool = diffmerge
