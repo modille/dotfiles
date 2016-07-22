@@ -6,12 +6,9 @@
   user = modille
 
 [alias]
-  a = add
   br = branch
-  ci = commit
+  branches = branch -a
   co = checkout
-  cod = checkout develop
-  com = checkout master
   d = diff
   dc = diff --cached
   f = fetch
@@ -26,26 +23,33 @@
   ri = rebase -i
   rpo = remote prune origin
   s = status
+
+  # http://gggritso.com/human-git-aliases
+  branches = branch -a
+  discard = checkout --
+  remotes = remote -v
+  stashes = stash list
+  tags = tag
   unstage = reset HEAD --
 
 [color]
   ui = always
 [color "diff"]
-  meta = yellow
   commit = green
-  frag = magenta
-  old = red
+  frag = blue
+  meta = blue bold
   new = green
+  old = red
   whitespace = red reverse
 [color "diff-highlight"]
-  oldNormal = red
-  oldHighlight = "red 52"
-  newNormal = "green"
   newHighlight = "green 22"
+  newNormal = green
+  oldHighlight = "red 52"
+  oldNormal = red
 [color "status"]
   added = green
-  changed = red
-  untracked = magenta
+  changed = yellow
+  untracked = red
 
 [commit]
   template = ~/.gitmessage
@@ -54,7 +58,7 @@
   autocrlf = input
   excludesfile = ~/.gitignore
   editor = nvim
-  pager = diff-so-fancy | less --tabs=4 -RFX
+  pager = diff-so-fancy | less --tabs=4 -RX
 
 [diff]
   guitool = diffmerge
