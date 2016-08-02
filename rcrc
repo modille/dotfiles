@@ -1,0 +1,3 @@
+DOTFILES_DIRS="$HOME/dotfiles"
+EXCLUDES="README.md *autoload* *plugged* *prompt_modille_setup*"
+TAGS="git ruby tmux vim zsh"

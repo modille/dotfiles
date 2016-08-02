@@ -6,18 +6,18 @@
 " ----------------------------------------------------------------------------
 " Setup {{{2
 if has('vim_starting')
-  set runtimepath+=~/dotfiles/vim/
+  set runtimepath+=~/dotfiles/tag-vim/
 endif
 
 " Auto-install vim-plug
-if empty(glob('~/dotfiles/vim/autoload/plug.vim'))
-  silent !mkdir -p ~/dotfiles/vim/autoload
-  silent !curl -fLo ~/dotfiles/vim/autoload/plug.vim
+if empty(glob('~/dotfiles/tag-vim/autoload/plug.vim'))
+  silent !mkdir -p ~/dotfiles/tag-vim/autoload
+  silent !curl -fLo ~/dotfiles/tag-vim/autoload/plug.vim
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall
 endif
 
-call plug#begin('~/dotfiles/vim/plugged')
+call plug#begin('~/dotfiles/tag-vim/plugged')
 
 " Colorschemes {{{2
 Plug 'chriskempson/base16-vim'
