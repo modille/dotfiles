@@ -1,8 +1,0 @@
-LineLength:
-  Max: 120
-
-MethodLength:
-  Max: 25
-
-SpaceInsideParens:
-  Enabled: false
