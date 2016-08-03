@@ -1,0 +1,13 @@
+# ~/.tmuxinator/sample_frontend.yml
+
+name: sample_frontend
+root: ~/git/sample_frontend
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+post: tmux -CC attach -t sample_frontend
+
+windows:
+  - editor: nvim -c "OpenSession! sample_frontend"
+  - zsh: git status
+  - grunt_serve: grunt serve
+  - docker: docker ps -a

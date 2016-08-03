@@ -1,0 +1,13 @@
+# ~/.tmuxinator/sample_rails.yml
+
+name: sample_rails
+root: ~/git/sample_rails
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+post: tmux -CC attach -t sample_rails
+
+windows:
+  - editor: nvim -c "OpenSession! sample_rails"
+  - zsh: git status
+  - rails_console: bundle exec rails c
+  - docker: docker ps -a

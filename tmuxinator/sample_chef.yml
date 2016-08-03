@@ -1,0 +1,16 @@
+# ~/.tmuxinator/sample_chef.yml
+
+name: sample_chef
+root: ~/git/sample_chef
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+pre_window: eval "$(chef shell-init `basename $SHELL`)"
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+post: tmux -CC attach -t sample_chef
+
+windows:
+  - editor: nvim -c "OpenSession! sample_chef"
+  - zsh: git status
+  - guard: guard
+  - kitchen: kitchen list
