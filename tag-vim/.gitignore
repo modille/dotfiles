@@ -1,1 +1,6 @@
-plugged/
+# Ignore everything...
+*
+
+# ...except the plug.vim files
+autoload/plug.vim
+autoload/plug.vim.old
