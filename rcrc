@@ -1,4 +1,4 @@
 DOTFILES_DIRS="$HOME/dotfiles"
 EXCLUDES="README.md *autoload* *plugged* *prompt_modille_setup*"
-SYMLINK_DIRS="tmuxinator"
+SYMLINK_DIRS="config tmuxinator"
 TAGS="git ruby tmux vim zsh"
