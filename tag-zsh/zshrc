@@ -15,12 +15,12 @@ LC_TIME='en_US.UTF-8'
 LC_ALL='en_US.UTF-8'
 
 # Exports
-export EDITOR='vim'
+export EDITOR='nvim'
 export JRUBY_OPTS='--dev'
 export KEYTIMEOUT=1 # Reduce delay when hitting ESC
 export PATH="$HOME/local/bin:$PATH"
 export PATH="$PATH:$HOME/bin"
-export VISUAL='vim'
+export VISUAL='nvim'
 
 # Aliases
 alias brew-refill='brew update && brew upgrade && brew cleanup && brew doctor'
