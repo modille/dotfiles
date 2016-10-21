@@ -121,9 +121,9 @@ let g:bufferline_echo = 0
 " Dash {{{2
 nmap <silent> <Leader>d <Plug>DashSearch
 let g:dash_map = {
-      \ 'groovy': ['groovy', 'grails', 'spring', 'java', 'javafx', 'javadoc'],
-      \ 'ruby':   ['chef', 'ruby', 'rubygems', 'rails']
-      \ }
+  \ 'groovy': ['groovy', 'grails', 'spring', 'java', 'javafx', 'javadoc'],
+  \ 'ruby':   ['chef', 'ruby', 'rubygems', 'rails']
+  \ }
 
 " Eclim {{{2
 let g:EclimJavascriptValidate = 0
@@ -134,9 +134,20 @@ let g:EasyMotion_smartcase = 1
 nmap s <Plug>(easymotion-overwin-f)
 " nmap s <Plug>(easymotion-overwin-f2)
 
+" Fugitive {{{2
+let g:fugitive_gitlab_domains = ['https://gitlab.com']
+
 " FZF {{{2
+let g:fzf_action = {
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit'
+  \ }
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
+" Enable per-command history.
+" CTRL-N and CTRL-P will be automatically bound to next-history and
+" previous-history instead of down and up.
+let g:fzf_history_dir = '~/.fzf-history'
 nnoremap <silent> <Leader>b :Buffers<CR>
 nnoremap <silent> <Leader>f :Files<CR>
 nnoremap <silent> <Leader>g :Ag<CR>
@@ -154,8 +165,8 @@ let g:neomake_error_sign = { 'texthl': 'ErrorMsg' }
 let g:neomake_warning_sign = { 'texthl': 'WarningMsg' }
 let g:neomake_javascript_enabled_makers = ['jscs', 'jshint']
 let g:neomake_ruby_rubocop_maker = {
-    \ 'args': ['--require', 'cookstyle']
-    \ }
+  \ 'args': ['--require', 'cookstyle']
+  \ }
 let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
 
 " Nerdtree {{{2
