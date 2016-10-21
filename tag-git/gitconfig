@@ -23,6 +23,8 @@
   ri = rebase -i
   rpo = remote prune origin
   s = status
+  si = submodule init
+  su = submodule update
 
   # http://gggritso.com/human-git-aliases
   branches = branch -a
