@@ -73,6 +73,7 @@ Plug 'xuyuanp/nerdtree-git-plugin'
 if has('nvim')
   Plug 'benekastah/neomake'
   Plug 'bfredl/nvim-miniyank'
+  Plug 'kassio/neoterm'
   Plug 'osyo-manga/vim-brightest' " Highlight word under cursor
   Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets'
   Plug 'valloric/YouCompleteMe', { 'do': './install.py' }
@@ -97,6 +98,9 @@ map <Leader>cd :cd %:p:h<CR>
 
 " Format XML files
 map <Leader>fx !%xmllint --format --recover -
+
+" Hide other windows (:only, :on)
+map <Leader>o :only<CR>
 
 " Use +/- in normal mode to increment/decrement number
 nmap <silent> + <C-a>
@@ -160,7 +164,7 @@ let g:indent_guides_guide_size = 1
 " Marks {{{2
 nmap <silent> <Leader>st :SignatureToggle<CR>
 
-" NeoMake
+" NeoMake {{{2
 let g:neomake_error_sign = { 'texthl': 'ErrorMsg' }
 let g:neomake_warning_sign = { 'texthl': 'WarningMsg' }
 let g:neomake_javascript_enabled_makers = ['jscs', 'jshint']
@@ -169,12 +173,24 @@ let g:neomake_ruby_rubocop_maker = {
   \ }
 let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
 
+" Neoterm {{{2
+let g:neoterm_rspec_lib_cmd = 'rspec --color --format doc'
+nnoremap <silent> <Leader>ta :call neoterm#test#run('all')<cr>
+nnoremap <silent> <Leader>tf :call neoterm#test#run('file')<cr>
+nnoremap <silent> <Leader>tc :call neoterm#test#run('current')<cr>
+nnoremap <silent> <Leader>tr :call neoterm#test#rerun()<cr>
+nnoremap <silent> <Leader>to :call neoterm#open()<cr>
+nnoremap <silent> <Leader>tq :call neoterm#close()<cr>
+nnoremap <silent> <Leader>tl :call neoterm#clear()<cr>
+" kills the current job (send a <c-c>)
+nnoremap <silent> <Leader>tx :call neoterm#kill()<cr>
+
 " Nerdtree {{{2
 nmap <silent> <Leader>nt :NERDTreeToggle<CR>
 nmap <silent> <Leader>nc :NERDTreeCWD<CR>
 nmap <silent> <Leader>nf :NERDTreeFind<CR>
 
-" Nvim-miniyank
+" Nvim-miniyank {{{2
 map p <Plug>(miniyank-autoput)
 map P <Plug>(miniyank-autoPut)
 map <leader>n <Plug>(miniyank-cycle)
