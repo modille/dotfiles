@@ -88,6 +88,10 @@ filetype plugin indent on
 " ----------------------------------------------------------------------------
 let mapleader = ',' " Use comma as leader key
 
+" Use ; to enter command mode instead of :
+nnoremap ; :
+vnoremap ; :
+
 " Re-center as you go through search results
 map n  nzz
 map N  Nzz
