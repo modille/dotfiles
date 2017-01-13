@@ -1,6 +1,6 @@
 [user]
-  email = "(none)"
   name = Matt Odille
+  useConfigOnly = true
 
 [github]
   user = modille
