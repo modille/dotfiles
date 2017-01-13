@@ -25,6 +25,7 @@ export VISUAL='nvim'
 # Aliases
 alias brew-refill='brew update && brew upgrade && brew cleanup && brew doctor'
 alias ctags="`brew --prefix`/bin/ctags" # Use ctags from homebrew
+alias gw="./gradlew"
 
 # Pipe less to highlight
 export LESSOPEN="| $(which highlight) %s --out-format xterm256 --quiet --force --style molokai"
