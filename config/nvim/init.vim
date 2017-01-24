@@ -269,7 +269,6 @@ set hlsearch " Highlight matches of most recent search
 "  Multiple windows {{{1
 " ----------------------------------------------------------------------------
 set hidden       " Hide abandoned buffers instead of unloading (preserves undo history)
-set laststatus=2 " Allows airline to show up without having to split
 
 " ----------------------------------------------------------------------------
 "  Messages and info {{{1
