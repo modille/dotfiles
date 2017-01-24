@@ -102,6 +102,11 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 setopt noclobber
 
+# direnv
+if hash direnv 2>/dev/null; then
+  eval "$(direnv hook `basename $SHELL`)"
+fi
+
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [[ -x $(command -v rg) ]] && export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
