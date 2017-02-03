@@ -77,8 +77,9 @@ if has('nvim')
   Plug 'bfredl/nvim-miniyank'
   Plug 'kassio/neoterm'
   Plug 'osyo-manga/vim-brightest' " Highlight word under cursor
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets'
-  Plug 'valloric/YouCompleteMe', { 'do': './install.py' }
+  " Plug 'valloric/YouCompleteMe', { 'do': './install.py' }
 endif
 
 call plug#end()
@@ -135,8 +136,15 @@ let g:dash_map = {
   \ 'ruby':   ['chef', 'ruby', 'rubygems', 'rails']
   \ }
 
+" Deoplete {{{2
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#omni_patterns = {}
+let g:deoplete#omni_patterns.java = '\k\.\k*'
+
 " Eclim {{{2
 let g:EclimJavascriptValidate = 0
+let g:EclimCompletionMethod = 'omnifunc'
+let g:EclimLoggingDisabled = 1
 
 " EasyMotion {{{2
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
@@ -173,6 +181,7 @@ nmap <silent> <Leader>st :SignatureToggle<CR>
 " NeoMake {{{2
 let g:neomake_error_sign = { 'texthl': 'ErrorMsg' }
 let g:neomake_warning_sign = { 'texthl': 'WarningMsg' }
+let g:neomake_java_enabled_makers = []
 let g:neomake_javascript_enabled_makers = ['jscs', 'jshint']
 let g:neomake_ruby_rubocop_maker = {
   \ 'args': ['--require', 'cookstyle']
@@ -230,13 +239,19 @@ let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 
 " YouCompleteMe {{{2
-let g:ycm_key_list_previous_completion = ['<Up>']
-let g:ycm_key_list_select_completion = ['<Down>']
-let g:ycm_semantic_triggers = { 'groovy': ['.'] }
-let g:EclimCompletionMethod = 'omnifunc'
-" Preview window seems broken at the moment, so...
-set completeopt-=preview
-let g:ycm_add_preview_to_completeopt = 0
+" let g:ycm_key_list_previous_completion = ['<Up>']
+" let g:ycm_key_list_select_completion = ['<Down>']
+" let g:ycm_collect_identifiers_from_tags_files = 0
+" let g:ycm_seed_identifiers_with_syntax = 1
+" let g:ycm_semantic_triggers = { 'groovy': ['.'] }
+" let g:EclimCompletionMethod = 'omnifunc'
+" " Completion in comments and strings
+" let g:ycm_collect_identifiers_from_comments_and_strings = 1
+" let g:ycm_complete_in_comments = 1
+" let g:ycm_complete_in_strings = 1
+" " Preview window seems broken at the moment, so...
+" set completeopt-=preview
+" let g:ycm_add_preview_to_completeopt = 0
 
 " ----------------------------------------------------------------------------
 "  Important
@@ -306,9 +321,11 @@ autocmd FileType gitcommit setlocal spell spelllang=en_us " Spellcheck commit me
 
 " Highlight tabs and trailing whitespaces
 autocmd syntax * SpaceHi
+au FileType go,help NoSpaceHi
 
 " Run Neomake on open and after write
-augroup neomake
-  autocmd! BufReadPost * Neomake
-  autocmd! BufWritePost * Neomake
-augroup END
+autocmd! BufReadPost * Neomake
+autocmd! BufWritePost * Neomake
+
+" Close the preview window after completion is done
+autocmd CompleteDone * pclose!
