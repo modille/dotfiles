@@ -28,15 +28,17 @@ Plug 'tomasr/molokai'
 Plug 'nanotech/jellybeans.vim'
 
 " Language support {{{2
-Plug 'elixir-lang/vim-elixir',   { 'for': ['eelixer', 'elixer'] }
-Plug 'modille/groovy.vim',       { 'for': 'groovy' }
-Plug 'nginx/nginx',              { 'rtp': 'contrib/vim' }
-Plug 'nikolavp/vim-jape',        { 'for': 'jape' }
-Plug 'PProvost/vim-ps1',         { 'for': 'ps1' }
-Plug 'tmux-plugins/vim-tmux',    { 'for': 'tmux' }
+Plug 'PProvost/vim-ps1',              { 'for': 'ps1' }
+Plug 'cespare/vim-toml',              { 'for': 'toml' }
+Plug 'elixir-lang/vim-elixir',        { 'for': ['eelixer', 'elixer'] }
+Plug 'fatih/vim-go',                  { 'for': ['asm', 'go', 'gohtmltmpl'] }
+Plug 'modille/groovy.vim',            { 'for': 'groovy' }
+Plug 'nginx/nginx',                   { 'rtp': 'contrib/vim' }
+Plug 'nikolavp/vim-jape',             { 'for': 'jape' }
+Plug 'tmux-plugins/vim-tmux',         { 'for': 'tmux' }
 Plug 'tpope/vim-rails'
-Plug 'wavded/vim-stylus',        { 'for': 'stylus' }
-Plug 'wting/rust.vim',           { 'for': 'rust' }
+Plug 'wavded/vim-stylus',             { 'for': 'stylus' }
+Plug 'wting/rust.vim',                { 'for': 'rust' }
 
 " Other plugins {{{2
 Plug 'airblade/vim-gitgutter'
