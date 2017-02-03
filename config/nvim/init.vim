@@ -156,6 +156,12 @@ nmap s <Plug>(easymotion-overwin-f)
 let g:fugitive_gitlab_domains = ['https://gitlab.com']
 
 " FZF {{{2
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
 let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit'
@@ -168,7 +174,7 @@ let g:fzf_buffers_jump = 1
 let g:fzf_history_dir = '~/.fzf-history'
 nnoremap <silent> <Leader>b :Buffers<CR>
 nnoremap <silent> <Leader>f :Files<CR>
-nnoremap <silent> <Leader>g :Ag<CR>
+nnoremap <silent> <Leader>g :Rg<CR>
 nnoremap <silent> <Leader>r :Files<CR>
 
 " Indent Guides {{{2
