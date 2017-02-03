@@ -35,6 +35,7 @@ Plug 'fatih/vim-go',                  { 'for': ['asm', 'go', 'gohtmltmpl'] }
 Plug 'modille/groovy.vim',            { 'for': 'groovy' }
 Plug 'nginx/nginx',                   { 'rtp': 'contrib/vim' }
 Plug 'nikolavp/vim-jape',             { 'for': 'jape' }
+Plug 'tetsuo13/Vim-log4j'
 Plug 'tmux-plugins/vim-tmux',         { 'for': 'tmux' }
 Plug 'tpope/vim-rails'
 Plug 'wavded/vim-stylus',             { 'for': 'stylus' }
