@@ -33,6 +33,7 @@ Plug 'cespare/vim-toml',              { 'for': 'toml' }
 Plug 'elixir-lang/vim-elixir',        { 'for': ['eelixer', 'elixer'] }
 Plug 'fatih/vim-go',                  { 'for': ['asm', 'go', 'gohtmltmpl'] }
 Plug 'modille/groovy.vim',            { 'for': 'groovy' }
+Plug 'mzlogin/vim-markdown-toc',      { 'for': 'markdown' }
 Plug 'nginx/nginx',                   { 'rtp': 'contrib/vim' }
 Plug 'nikolavp/vim-jape',             { 'for': 'jape' }
 Plug 'tetsuo13/Vim-log4j'
@@ -180,6 +181,9 @@ nnoremap <silent> <Leader>r :Files<CR>
 " Indent Guides {{{2
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
+
+" Markdown
+let g:vmt_auto_update_on_save = 0
 
 " Marks {{{2
 nmap <silent> <Leader>st :SignatureToggle<CR>
