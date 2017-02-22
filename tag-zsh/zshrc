@@ -92,10 +92,6 @@ AWS_COMPLETER="/usr/local/bin/aws_zsh_completer"
 export NVM_DIR="/Users/odillem2/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
 
-# Private configs
-PRIVATE_RC="$HOME/.zshrc-private"
-[[ -s $PRIVATE_RC ]] && source $PRIVATE_RC
-
 # SDKMAN!
 setopt clobber
 export SDKMAN_DIR="$HOME/.sdkman"
@@ -109,4 +105,8 @@ fi
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[[ -x $(command -v rg) ]] && export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*;!*.class"'
+[[ -x $(command -v rg) ]] && export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!*.class"'
+
+# Private configs
+PRIVATE_RC="$HOME/.zshrc-private"
+[[ -s $PRIVATE_RC ]] && source $PRIVATE_RC
