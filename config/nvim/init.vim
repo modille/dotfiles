@@ -106,9 +106,6 @@ map *  *zz
 " Change cwd to current file
 map <Leader>cd :cd %:p:h<CR>
 
-" Format XML files
-map <Leader>fx !%xmllint --format --recover -
-
 " Hide other windows (:only, :on)
 map <Leader>o :only<CR>
 
@@ -338,3 +335,8 @@ autocmd! BufWritePost * Neomake
 
 " Close the preview window after completion is done
 autocmd CompleteDone * pclose!
+
+" External programs to use for = command
+augroup equalConfiguration
+  autocmd FileType xml setlocal equalprg=xmllint\ --format\ -
+augroup END
