@@ -107,6 +107,13 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [[ -x $(command -v rg) ]] && export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!*.class"'
 
+# k8s
+source <(kubectl completion `basename $SHELL`)
+
+# Completions
+MODILLE_COMPLETIONS="$HOME/git/github.com/modille/completions/`basename $SHELL`"
+[[ -d $MODILLE_COMPLETIONS ]] && fpath=($MODILLE_COMPLETIONS $fpath)
+
 # Private configs
 PRIVATE_RC="$HOME/.zshrc-private"
 [[ -s $PRIVATE_RC ]] && source $PRIVATE_RC
