@@ -69,8 +69,8 @@ function prompt_modille_setup {
   #   %a - action (e.g. rebase-i)
   #   %R - repository path
   #   %S - path in the repository
-  local branch_format="${_prompt_steeef_colors[7]}aon ${_prompt_steeef_colors[1]}%b%f%u%c "
-  local action_format="${_prompt_steeef_colors[7]}bon ${_prompt_steeef_colors[5]}%a%f "
+  local branch_format="${_prompt_steeef_colors[7]}on ${_prompt_steeef_colors[1]}%b%f%u%c "
+  local action_format="${_prompt_steeef_colors[7]}on ${_prompt_steeef_colors[5]}%a%f "
   local unstaged_format="${_prompt_steeef_colors[2]}●%f"
   local staged_format="${_prompt_steeef_colors[5]}●%f"
 
