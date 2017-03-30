@@ -88,6 +88,8 @@ zstyle ':prezto:module:editor' key-bindings 'vi'
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
+MODILLE_FUNCTIONS="$HOME/git/github.com/modille/dotfiles/tag-zsh/functions"
+[[ -d $MODILLE_FUNCTIONS ]] && fpath=($MODILLE_FUNCTIONS $fpath)
 zstyle ':prezto:module:prompt' theme 'modille'
 
 #
