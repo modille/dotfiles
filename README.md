@@ -14,10 +14,10 @@ chsh -s $(which zsh)
 
 ## Install
 
-Clone into `~/dotfiles`:
+Clone this repo:
 
 ```sh
-git clone git://github.com/modille/dotfiles.git ~/dotfiles
+git clone git://github.com/modille/dotfiles.git $HOME/git/github.com/modille/dotfiles
 ```
 
 Install [rcm](https://github.com/thoughtbot/rcm):
