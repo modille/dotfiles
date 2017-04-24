@@ -13,6 +13,11 @@
   dc = diff --cached
   f = fetch
   fp = fetch --prune
+  get = "!f() { \
+           repo_host=`echo $1 | cut -d '/' -f1`; \
+           repo_path=`echo $1 | cut -d '/' -f2-`; \
+           git clone git@$repo_host:$repo_path ~/git/$repo_host/$repo_path; \
+         }; f"
   l = log --name-status
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
