@@ -1,0 +1,5 @@
+--exclude=.git
+--exclude=log
+
+--extra=+q+f
+--fields=+i+a+S+n
