@@ -6,8 +6,8 @@
   user = modille
 
 [alias]
+  b = "!f() { nvim -c 'Gblame' $1; }; f"
   br = branch
-  branches = branch -a
   co = checkout
   d = diff
   dc = diff --cached
@@ -18,10 +18,10 @@
            repo_path=`echo $1 | cut -d '/' -f2-`; \
            git clone git@$repo_host:$repo_path ~/git/$repo_host/$repo_path; \
          }; f"
-  l = log --name-status
-  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-  lol = log --graph --decorate --pretty=oneline --abbrev-commit
-  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  l = log --abbrev-commit --decorate
+  lg = log --abbrev-commit --decorate --graph --stat
+  lgp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  pick = cherry-pick
   push-up = push --set-upstream origin
   reset-hard = reset --hard HEAD^
   reset-soft = reset --soft HEAD^
@@ -30,6 +30,17 @@
   s = status
   si = submodule init
   su = submodule update
+
+  # Alias praise to blame, and use vim for colorized blame
+  praise = "!f() { nvim -c 'Gblame' $1; }; f"
+
+  # https://csswizardry.com/2017/05/little-things-i-like-to-do-with-git/
+  recent-branches = for-each-ref --count=10 --sort=-committerdate refs/heads/ --format="%(refname:short)"
+  all-since = "!f() { git log --all --oneline --no-merges --since=\"$1\" --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'; }; f"
+  me-since = "!f() {  git log --all --oneline --no-merges --since=\"$1\" --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --author=$GIT_AUTHOR_EMAIL; }; f"
+  word-diff = diff --word-diff
+  char-diff = diff --word-diff-regex="."
+  upstream = log --abbrev-commit --decorate HEAD..origin/
 
   # http://gggritso.com/human-git-aliases
   branches = branch -a
