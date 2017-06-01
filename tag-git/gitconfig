@@ -81,8 +81,14 @@
 [diff]
   guitool = diffmerge
 
+[gitsh]
+  noGreeting = true
+
 [mergetool]
   keepBackup = false
 
 [push]
-  default = tracking
+  default = current
+
+[status]
+  submoduleSummary = true
