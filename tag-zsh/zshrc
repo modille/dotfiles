@@ -75,8 +75,8 @@ AWS_COMPLETER="/usr/local/bin/aws_zsh_completer"
 [[ -s $AWS_COMPLETER ]] && source $AWS_COMPLETER
 
 # Base16 Shell
-# BASE16_SHELL="$HOME/.config/base16-shell/base16-monokai.dark.sh"
-# [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-oceanicnext.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # iTerm2 shell integration
 # ITERM_SHELL="$HOME/.iterm2_shell_integration.zsh"
