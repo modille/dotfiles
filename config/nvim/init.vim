@@ -6,18 +6,18 @@
 " ----------------------------------------------------------------------------
 " Setup {{{2
 if has('vim_starting')
-  set runtimepath+=~/dotfiles/tag-vim/
+  set runtimepath+=~/git/github.com/modille/dotfiles/tag-vim/
 endif
 
 " Auto-install vim-plug
-if empty(glob('~/dotfiles/tag-vim/autoload/plug.vim'))
-  silent !mkdir -p ~/dotfiles/tag-vim/autoload
-  silent !curl -fLo ~/dotfiles/tag-vim/autoload/plug.vim
+if empty(glob('~/git/github.com/modille/dotfiles/tag-vim/autoload/plug.vim'))
+  silent !mkdir -p ~/git/github.com/modille/dotfiles/tag-vim/autoload
+  silent !curl -fLo ~/git/github.com/modille/dotfiles/tag-vim/autoload/plug.vim
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall
 endif
 
-call plug#begin('~/dotfiles/tag-vim/plugged')
+call plug#begin('~/git/github.com/modille/dotfiles/tag-vim/plugged')
 
 " Colorschemes {{{2
 Plug 'chriskempson/base16-vim'
@@ -26,38 +26,49 @@ Plug 'sickill/vim-monokai'
 Plug 'sjl/badwolf'
 Plug 'tomasr/molokai'
 Plug 'nanotech/jellybeans.vim'
+Plug 'morhetz/gruvbox'
 
 " Language support {{{2
-Plug 'PProvost/vim-ps1',              { 'for': 'ps1' }
-Plug 'cespare/vim-toml',              { 'for': 'toml' }
-Plug 'elixir-lang/vim-elixir',        { 'for': ['eelixer', 'elixer'] }
-Plug 'fatih/vim-go',                  { 'for': ['asm', 'go', 'gohtmltmpl'] }
-Plug 'modille/groovy.vim',            { 'for': 'groovy' }
-Plug 'mzlogin/vim-markdown-toc',      { 'for': 'markdown' }
-Plug 'nginx/nginx',                   { 'rtp': 'contrib/vim' }
-Plug 'nikolavp/vim-jape',             { 'for': 'jape' }
+Plug 'PProvost/vim-ps1',         { 'for': 'ps1' }
+Plug 'cespare/vim-toml',         { 'for': 'toml' }
+Plug 'elixir-lang/vim-elixir',   { 'for': ['eelixer', 'elixer'] }
+Plug 'elzr/vim-json'
+Plug 'fatih/vim-go',             { 'for': ['asm', 'go', 'gohtmltmpl'] }
+Plug 'modille/groovy.vim',       { 'for': 'groovy' }
+Plug 'mzlogin/vim-markdown-toc', { 'for': 'markdown' }
+Plug 'nginx/nginx',              { 'rtp': 'contrib/vim' }
+Plug 'nikolavp/vim-jape',        { 'for': 'jape' }
+Plug 'notriddle/vim-gitcommit-markdown'
 Plug 'tetsuo13/Vim-log4j'
-Plug 'tmux-plugins/vim-tmux',         { 'for': 'tmux' }
+Plug 'tmux-plugins/vim-tmux',    { 'for': 'tmux' }
+Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-rails'
-Plug 'wavded/vim-stylus',             { 'for': 'stylus' }
-Plug 'wting/rust.vim',                { 'for': 'rust' }
+Plug 'wavded/vim-stylus',        { 'for': 'stylus' }
+Plug 'wting/rust.vim',           { 'for': 'rust' }
+
+" Text objects {{{2
+Plug 'kana/vim-textobj-user' | Plug 'glts/vim-textobj-comment'
+Plug 'vim-scripts/argtextobj.vim'
 
 " Other plugins {{{2
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color' " Highlight colors in CSS files
 Plug 'bronson/vim-trailing-whitespace'
+" Plug 'dodie/vim-disapprove-deep-indentation'
 Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
 Plug 'heavenshell/vim-jsdoc'
+Plug 'hwartig/vim-seeing-is-believing'
 Plug 'jpalardy/spacehi.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'kshenoy/vim-signature' " Show bookmarks in gutter
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
+Plug 'junegunn/rainbow_parentheses.vim', { 'on': ['RainbowParentheses'] }
+Plug 'kshenoy/vim-signature' " Show marks in gutter
+Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-startify'
-Plug 'nathanaelkane/vim-indent-guides', { 'on': 'IndentGuidesToggle' }
+Plug 'nathanaelkane/vim-indent-guides'
 Plug 'rizzatti/dash.vim'
 Plug 'schickling/vim-bufonly'
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] } | Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'shougo/vimproc.vim', { 'do': 'make' }
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-bundler'
@@ -69,31 +80,31 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'xolox/vim-misc' " Required for vim-session
-Plug 'xolox/vim-session'
-Plug 'xuyuanp/nerdtree-git-plugin'
+Plug 'tweekmonster/startuptime.vim'
+Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
+Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
 
 " Neovim-only plugins {{{2
 if has('nvim')
-  Plug 'benekastah/neomake'
+  " Plug 'benekastah/neomake'
   Plug 'bfredl/nvim-miniyank'
   Plug 'kassio/neoterm'
   Plug 'osyo-manga/vim-brightest' " Highlight word under cursor
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets'
   " Plug 'valloric/YouCompleteMe', { 'do': './install.py' }
+  Plug 'w0rp/ale'
 endif
 
 call plug#end()
 
-filetype plugin indent on
+filetype indent on
+filetype plugin on
 
 " ----------------------------------------------------------------------------
 "  General settings {{{1
 " ----------------------------------------------------------------------------
-let mapleader = ',' " Use comma as leader key
+let mapleader = "\<space>" " Use space as leader key
 
 " Use ; to enter command mode instead of :
 nnoremap ; :
@@ -105,7 +116,7 @@ map N  Nzz
 map *  *zz
 
 " Change cwd to current file
-map <Leader>cd :cd %:p:h<CR>
+map <Leader>cd :cd %:p:h<CR>:pwd<CR>
 
 " Hide other windows (:only, :on)
 map <Leader>o :only<CR>
@@ -114,188 +125,125 @@ map <Leader>o :only<CR>
 nmap <silent> + <C-a>
 nmap <silent> - <C-x>
 
-" In visual mode, use Y to copy to system clipboard
-vnoremap Y "*y
+" Yank, delete, and paste
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
 
 " In terminal mode, use Esc to exit back to normal mode
-tnoremap <Esc> <C-\><C-n>
+" Disabled so that Esc closes FZF window
+" tnoremap <Esc> <C-\><C-n>
+
+" Re-select blocks after indenting
+xnoremap < <gv
+xnoremap > >gv|
+
+" Use tab for indenting in visual mode
+xnoremap <Tab> >gv|
+xnoremap <S-Tab> <gv
+nnoremap > >>_
+nnoremap < <<_
+
+" Smart up and down
+nnoremap <silent><Down> gj
+nnoremap <silent><Up> gk
+
+" WIP: Folding
+" close all open folds apart from the one that the cursor is on
+nnoremap <Leader>zz zMzv
+" Better folding mnemonics: [o]pen, [c]lose, etc.
+" open all folds
+nnoremap <Leader>zo zR
+" close all folds
+nnoremap <Leader>zc zM
+" move down to top of next fold
+nnoremap <Leader>z<Down> zj
+" move up to bottom of previous fold
+nnoremap <Leader>z<Up> zk
+
+" spf13 and SpaceVim-like bindings
+nnoremap <silent> <Leader>q :q<CR>
+nnoremap <silent> <Leader>w :w<CR>
+nnoremap <silent> <Leader>fed :e $MYVIMRC<CR>
+nnoremap <silent> <Leader>feR :source $MYVIMRC<CR>
+nnoremap <silent> <Leader>s- :split<CR>
+nnoremap <silent> <Leader>s<bar> :vsplit<CR>
+nnoremap <silent> <Leader>tn :set invnumber<CR>
+
+" Disable Ex mode
+nnoremap Q <nop>
+
+" Clear current search highlight by double tapping //
+nmap <silent> // :nohlsearch<CR>
 
 " ----------------------------------------------------------------------------
 "  Plugin settings {{{1
 " ----------------------------------------------------------------------------
-" Airline {{{2
-let g:airline#extensions#hunks#enabled=0
-let g:airline_powerline_fonts = 1 "Add powerline fonts to the dictionary
-let g:airline_section_z = '%3c'
-let g:airline_theme = 'badwolf' "jellybeans, lucius, raven, term
-let g:bufferline_echo = 0
-
-" Dash {{{2
-nmap <silent> <Leader>d <Plug>DashSearch
-let g:dash_map = {
-  \ 'groovy': ['groovy', 'grails', 'spring', 'java', 'javafx', 'javadoc'],
-  \ 'ruby':   ['chef', 'ruby', 'rubygems', 'rails']
-  \ }
-
 " Deoplete {{{2
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#omni_patterns = {}
-let g:deoplete#omni_patterns.java = '\k\.\k*'
 
 " Eclim {{{2
 let g:EclimJavascriptValidate = 0
 let g:EclimCompletionMethod = 'omnifunc'
 let g:EclimLoggingDisabled = 1
 
-" EasyMotion {{{2
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-let g:EasyMotion_smartcase = 1
-nmap s <Plug>(easymotion-overwin-f)
-" nmap s <Plug>(easymotion-overwin-f2)
-
-" Fugitive {{{2
-let g:fugitive_gitlab_domains = ['https://gitlab.com']
-
-" FZF {{{2
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-let g:fzf_action = {
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit'
-  \ }
-" [Buffers] Jump to the existing window if possible
-let g:fzf_buffers_jump = 1
-" Enable per-command history.
-" CTRL-N and CTRL-P will be automatically bound to next-history and
-" previous-history instead of down and up.
-let g:fzf_history_dir = '~/.fzf-history'
-nnoremap <silent> <Leader>b :Buffers<CR>
-nnoremap <silent> <Leader>f :Files<CR>
-nnoremap <silent> <Leader>g :Rg<CR>
-nnoremap <silent> <Leader>r :Files<CR>
-
-" Indent Guides {{{2
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
-
-" Markdown
+" Markdown {{{2
 let g:vmt_auto_update_on_save = 0
-
-" Marks {{{2
-nmap <silent> <Leader>st :SignatureToggle<CR>
-
-" NeoMake {{{2
-let g:neomake_error_sign = { 'texthl': 'ErrorMsg' }
-let g:neomake_warning_sign = { 'texthl': 'WarningMsg' }
-let g:neomake_java_enabled_makers = []
-let g:neomake_javascript_enabled_makers = ['jscs', 'jshint']
-let g:neomake_ruby_rubocop_maker = {
-  \ 'args': ['--require', 'cookstyle']
-  \ }
-let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
-
-" Neoterm {{{2
-let g:neoterm_rspec_lib_cmd = 'rspec --color --format doc'
-nnoremap <silent> <Leader>ta :call neoterm#test#run('all')<cr>
-nnoremap <silent> <Leader>tf :call neoterm#test#run('file')<cr>
-nnoremap <silent> <Leader>tc :call neoterm#test#run('current')<cr>
-nnoremap <silent> <Leader>tr :call neoterm#test#rerun()<cr>
-nnoremap <silent> <Leader>to :call neoterm#open()<cr>
-nnoremap <silent> <Leader>tq :call neoterm#close()<cr>
-nnoremap <silent> <Leader>tl :call neoterm#clear()<cr>
-" kills the current job (send a <c-c>)
-nnoremap <silent> <Leader>tx :call neoterm#kill()<cr>
-
-" Nerdtree {{{2
-nmap <silent> <Leader>nt :NERDTreeToggle<CR>
-nmap <silent> <Leader>nc :NERDTreeCWD<CR>
-nmap <silent> <Leader>nf :NERDTreeFind<CR>
+let g:markdown_fenced_languages = ['bash=sh', 'html', 'ruby']
 
 " Nvim-miniyank {{{2
 map p <Plug>(miniyank-autoput)
 map P <Plug>(miniyank-autoPut)
-map <leader>n <Plug>(miniyank-cycle)
+map <Leader>n <Plug>(miniyank-cycle)
 
-" Session {{{2
-let g:session_autosave = 'yes'
-let g:session_autosave_periodic = 1
-let g:session_autosave_silent = 1
-let g:session_default_to_last = 1
-let g:session_autoload = 'no'
-
-" Startify {{{2
-let g:startify_change_to_vcs_root = 1
-let g:startify_session_dir = '~/.vim/sessions'
-
-" Syntastic {{{2
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-" let g:syntastic_javascript_checkers = ['jscs', 'jshint']
-
-" Tabular {{{2
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:\zs/l0l1<CR>
-vmap <Leader>a: :Tabularize /:\zs/l0l1<CR>
-
-" Ultisnips {{{2
-" let g:UltiSnipsSnippetDirectories=['Ultisnips', 'custom_snippets']
-let g:UltiSnipsExpandTrigger='<tab>'
-let g:UltiSnipsJumpForwardTrigger='<tab>'
-let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
-
-" YouCompleteMe {{{2
-" let g:ycm_key_list_previous_completion = ['<Up>']
-" let g:ycm_key_list_select_completion = ['<Down>']
-" let g:ycm_collect_identifiers_from_tags_files = 0
-" let g:ycm_seed_identifiers_with_syntax = 1
-" let g:ycm_semantic_triggers = { 'groovy': ['.'] }
-" let g:EclimCompletionMethod = 'omnifunc'
-" " Completion in comments and strings
-" let g:ycm_collect_identifiers_from_comments_and_strings = 1
-" let g:ycm_complete_in_comments = 1
-" let g:ycm_complete_in_strings = 1
-" " Preview window seems broken at the moment, so...
-" set completeopt-=preview
-" let g:ycm_add_preview_to_completeopt = 0
+" Powerline {{{2
+" Add powerline fonts to the dictionary
+let g:airline_powerline_fonts = 1
 
 " ----------------------------------------------------------------------------
 "  Important
 " ----------------------------------------------------------------------------
-set nopaste " TODO: instead try: set clipboard+=unnamedplus (help nvim_clipboard)
+" See :help clipboard
 
 " ----------------------------------------------------------------------------
 "  Moving around, searching and patterns {{{1
 " ----------------------------------------------------------------------------
 set ignorecase " Searches are case insensitive
 set smartcase  " Unless they contain at least one capital letter
+set mouse=a
 
 " ----------------------------------------------------------------------------
 "  Displaying text {{{1
 " ----------------------------------------------------------------------------
-set number " Show line numbers
+set relativenumber " Show relative line numbers on other lines
+set number         " Show absolute line number on current line
 
 " ----------------------------------------------------------------------------
 "  Syntax, highlighting and spelling {{{1
 " ----------------------------------------------------------------------------
 au BufNewFile,BufRead *.gradle,*.tpl set filetype=groovy
-au BufNewFile,BufRead *.md set syntax=markdown
 au BufNewFile,BufRead Berksfile,Guardfile,Vagrantfile set syntax=ruby
 set background=dark
-colorscheme badwolf
+colorscheme base16-oceanicnext
 if exists('+colorcolumn')
   set colorcolumn=120
 endif
 set hlsearch " Highlight matches of most recent search
+set conceallevel=2
+
+if exists('+termguicolors')
+  set termguicolors
+elseif exists('+guicolors')
+  set guicolors
+endif
 
 " ----------------------------------------------------------------------------
 "  Multiple windows {{{1
 " ----------------------------------------------------------------------------
-set hidden       " Hide abandoned buffers instead of unloading (preserves undo history)
+set hidden " Hide abandoned buffers instead of unloading (preserves undo history)
 
 " ----------------------------------------------------------------------------
 "  Messages and info {{{1
@@ -323,24 +271,3 @@ endif
 set nobackup      " No backup files
 set noswapfile    " No swap files
 set nowritebackup " No backup files while editing
-
-" ----------------------------------------------------------------------------
-"  Autocmds {{{1
-" ----------------------------------------------------------------------------
-autocmd FileType gitcommit setlocal spell spelllang=en_us " Spellcheck commit messages
-
-" Highlight tabs and trailing whitespaces
-autocmd syntax * SpaceHi
-au FileType go,help NoSpaceHi
-
-" Run Neomake on open and after write
-autocmd! BufReadPost * Neomake
-autocmd! BufWritePost * Neomake
-
-" Close the preview window after completion is done
-autocmd CompleteDone * pclose!
-
-" External programs to use for = command
-augroup equalConfiguration
-  autocmd FileType xml setlocal equalprg=xmllint\ --format\ -
-augroup END

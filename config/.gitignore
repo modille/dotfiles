@@ -1,6 +1,27 @@
 # Ignore everything...
-*
+/*
 
-# ...except the gitignore and init.vim files
+# ...except the gitignore and nvim config files
 !.gitignore
+
+# allow nvim/init.vim
+!/nvim
+/nvim/*
 !nvim/init.vim
+
+# allow nvim/after/plugin/*.vim
+!/nvim/after
+/nvim/after/*
+!/nvim/after/plugin
+/nvim/after/plugin/*
+!/nvim/after/plugin/*.vim
+
+# allow nvim/after/ftplugin/*.vim
+!/nvim/after/ftplugin
+/nvim/after/ftplugin/*
+!/nvim/after/ftplugin/*.vim
+
+# allow nvim/plugin/autocmds.vim
+!/nvim/plugin
+/nvim/plugin/*
+!/nvim/plugin/autocmds.vim
