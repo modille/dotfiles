@@ -1,0 +1,16 @@
+# .zshenv
+
+export EDITOR='nvim'
+export JRUBY_OPTS='--dev'
+export KEYTIMEOUT=1 # Reduce delay when hitting ESC
+export VISUAL='nvim'
+
+# Additions to PATH
+export PATH="$HOME/local/bin:$PATH"
+export PATH="$PATH:$HOME/bin"
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+# Pipe less to highlight
+export LESSOPEN="| $(which highlight) %s --out-format xterm256 --quiet --force --style molokai"
+export LESS=" -R"
