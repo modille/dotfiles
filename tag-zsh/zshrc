@@ -108,6 +108,9 @@ source <(kubectl completion `basename $SHELL`)
 MODILLE_COMPLETIONS="$HOME/git/github.com/modille/completions/`basename $SHELL`"
 [[ -d $MODILLE_COMPLETIONS ]] && fpath=($MODILLE_COMPLETIONS $fpath)
 
+# RVM
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
 # Private configs
 PRIVATE_RC="$HOME/.zshrc-private"
 [[ -s $PRIVATE_RC ]] && source $PRIVATE_RC
