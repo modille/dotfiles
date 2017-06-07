@@ -11,10 +11,9 @@ endif
 
 " Auto-install vim-plug
 if empty(glob('~/git/github.com/modille/dotfiles/tag-vim/autoload/plug.vim'))
-  silent !mkdir -p ~/git/github.com/modille/dotfiles/tag-vim/autoload
-  silent !curl -fLo ~/git/github.com/modille/dotfiles/tag-vim/autoload/plug.vim
+  silent !curl -fLo ~/git/github.com/modille/dotfiles/tag-vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/git/github.com/modille/dotfiles/tag-vim/plugged')
