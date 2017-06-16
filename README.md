@@ -30,7 +30,7 @@ brew install rcm
 Install the dotfiles:
 
 ```sh
-env RCRC=$HOME/dotfiles/rcrc rcup
+env RCRC=$HOME/git/github.com/modille/dotfiles/rcrc rcup
 ```
 
 After the initial installation, you can run `rcup` without the one-time variable `RCRC` being set.
