@@ -1,0 +1,2 @@
+IndentGuidesEnable
+UltiSnipsAddFiletypes javascript-jasmine-arrow

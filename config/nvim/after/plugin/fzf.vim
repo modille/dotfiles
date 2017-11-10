@@ -8,6 +8,12 @@ command! -bang -nargs=* Rg
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
+command! -bang -nargs=* Rgi
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always -i '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
 
 let g:fzf_action = {
   \ 'ctrl-x': 'split',
@@ -22,9 +28,12 @@ let g:fzf_buffers_jump = 1
 " previous-history instead of down and up.
 let g:fzf_history_dir = '~/.fzf-history'
 
-nnoremap <silent> <Leader>b :Buffers<CR>
-nnoremap <silent> <Leader>c :Commands<CR>
+" mnemonic 'Buffer Search'
+nnoremap <silent> <Leader>bs :Buffers<CR>
+" mnemonic 'File Grep'
 nnoremap <silent> <Leader>fg :Rg<space>
+" mnemonic 'File History'
 nnoremap <silent> <Leader>fh :History<CR>
-nnoremap <silent> <Leader>fs :Files<CR>
-nnoremap <silent> <Leader>m :Maps<CR>
+" mnemonic 'File Search'
+nnoremap <silent> <Leader>fs :GFiles<CR>
+" nnoremap <silent> <Leader>m :Maps<CR>

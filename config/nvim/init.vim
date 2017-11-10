@@ -19,34 +19,36 @@ endif
 call plug#begin('~/git/github.com/modille/dotfiles/tag-vim/plugged')
 
 " Colorschemes {{{2
+Plug 'bluz71/vim-moonfly-colors'
 Plug 'chriskempson/base16-vim'
 Plug 'marciomazza/vim-brogrammer-theme'
+Plug 'morhetz/gruvbox'
+Plug 'nanotech/jellybeans.vim'
 Plug 'sickill/vim-monokai'
 Plug 'sjl/badwolf'
 Plug 'tomasr/molokai'
-Plug 'nanotech/jellybeans.vim'
-Plug 'morhetz/gruvbox'
 
 " Language support {{{2
-Plug 'PProvost/vim-ps1',         { 'for': 'ps1' }
-Plug 'cespare/vim-toml',         { 'for': 'toml' }
-Plug 'elixir-lang/vim-elixir',   { 'for': ['eelixer', 'elixer'] }
+Plug 'PProvost/vim-ps1',            { 'for': 'ps1' }
+Plug 'cespare/vim-toml',            { 'for': 'toml' }
+Plug 'craigdallimore/vim-jest-cli', { 'for': 'javascript' }
 Plug 'elzr/vim-json'
-Plug 'fatih/vim-go',             { 'for': ['asm', 'go', 'gohtmltmpl'] }
-Plug 'modille/groovy.vim',       { 'for': 'groovy' }
-Plug 'mzlogin/vim-markdown-toc', { 'for': 'markdown' }
-Plug 'nginx/nginx',              { 'rtp': 'contrib/vim' }
-Plug 'nikolavp/vim-jape',        { 'for': 'jape' }
+Plug 'fatih/vim-go',                { 'for': ['asm', 'go', 'gohtmltmpl'] }
+Plug 'modille/groovy.vim',          { 'for': 'groovy' }
+Plug 'mzlogin/vim-markdown-toc',    { 'for': 'markdown' }
+Plug 'nginx/nginx',                 { 'rtp': 'contrib/vim' }
 Plug 'notriddle/vim-gitcommit-markdown'
+Plug 'pangloss/vim-javascript',     { 'for': 'javascript' }
 Plug 'tetsuo13/Vim-log4j'
-Plug 'tmux-plugins/vim-tmux',    { 'for': 'tmux' }
+Plug 'tmux-plugins/vim-tmux',       { 'for': 'tmux' }
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-rails'
-Plug 'wavded/vim-stylus',        { 'for': 'stylus' }
-Plug 'wting/rust.vim',           { 'for': 'rust' }
+Plug 'wavded/vim-stylus',           { 'for': 'stylus' }
+Plug 'wting/rust.vim',              { 'for': 'rust' }
 
 " Text objects {{{2
 Plug 'kana/vim-textobj-user' | Plug 'glts/vim-textobj-comment'
+Plug 'michaeljsmith/vim-indent-object'
 Plug 'vim-scripts/argtextobj.vim'
 
 " Other plugins {{{2
@@ -55,32 +57,43 @@ Plug 'ap/vim-css-color' " Highlight colors in CSS files
 Plug 'bronson/vim-trailing-whitespace'
 " Plug 'dodie/vim-disapprove-deep-indentation'
 Plug 'easymotion/vim-easymotion'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'godlygeek/tabular'
+Plug 'haya14busa/is.vim'
+Plug 'haya14busa/vim-asterisk'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'hwartig/vim-seeing-is-believing'
+Plug 'johngrib/vim-game-code-break'
 Plug 'jpalardy/spacehi.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
-Plug 'junegunn/rainbow_parentheses.vim', { 'on': ['RainbowParentheses'] }
+Plug 'kien/rainbow_parentheses.vim', { 'on': ['RainbowParenthesesToggle'] }
 Plug 'kshenoy/vim-signature' " Show marks in gutter
-Plug 'majutsushi/tagbar'
+" Plug 'majutsushi/tagbar'
+Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-startify'
+Plug 'modille/vim-search-maven', { 'branch': 'gradle' }
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'peterrincker/vim-argumentative'
 Plug 'rizzatti/dash.vim'
 Plug 'schickling/vim-bufonly'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] } | Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'shougo/vimproc.vim', { 'do': 'make' }
+Plug 'shumphrey/fugitive-gitlab.vim'
+Plug 'tfnico/vim-gradle'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-dispatch' " | Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'tweekmonster/startuptime.vim'
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/YankRing.vim'
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
 
 " Neovim-only plugins {{{2
@@ -103,7 +116,7 @@ filetype plugin on
 " ----------------------------------------------------------------------------
 "  General settings {{{1
 " ----------------------------------------------------------------------------
-let mapleader = "\<space>" " Use space as leader key
+let g:mapleader = "\<space>"
 
 " Use ; to enter command mode instead of :
 nnoremap ; :
@@ -121,8 +134,8 @@ map <Leader>cd :cd %:p:h<CR>:pwd<CR>
 map <Leader>o :only<CR>
 
 " Use +/- in normal mode to increment/decrement number
-nmap <silent> + <C-a>
-nmap <silent> - <C-x>
+" nmap <silent> + <C-a>
+" nmap <silent> - <C-x>
 
 " Yank, delete, and paste
 vmap <Leader>y "+y
@@ -164,6 +177,8 @@ nnoremap <Leader>z<Down> zj
 nnoremap <Leader>z<Up> zk
 
 " spf13 and SpaceVim-like bindings
+nnoremap <silent> <Leader>cc :cclose<CR>
+nnoremap <silent> <Leader>co :copen<CR>
 nnoremap <silent> <Leader>q :q<CR>
 nnoremap <silent> <Leader>w :w<CR>
 nnoremap <silent> <Leader>fed :e $MYVIMRC<CR>
@@ -178,20 +193,43 @@ nnoremap Q <nop>
 " Clear current search highlight by double tapping //
 nmap <silent> // :nohlsearch<CR>
 
+" Easier split navigations
+nnoremap <C-Down> <C-W><C-J>
+nnoremap <C-Up> <C-W><C-K>
+nnoremap <C-Right> <C-W><C-L>
+nnoremap <C-Left> <C-W><C-H>
+" Rotate
+nnoremap <C-R> <C-W><C-R>
+" Xchange
+nnoremap <C-X> <C-W><C-X>
+
+" Avoid accidental S-Up and S-Down when in V-LINE mode
+nmap <S-Up> <Up>
+nmap <S-Down> <Down>
+vmap <S-Up> <Up>
+vmap <S-Down> <Down>
+
 " ----------------------------------------------------------------------------
 "  Plugin settings {{{1
 " ----------------------------------------------------------------------------
-" Deoplete {{{2
-let g:deoplete#enable_at_startup = 1
-
 " Eclim {{{2
 let g:EclimJavascriptValidate = 0
 let g:EclimCompletionMethod = 'omnifunc'
 let g:EclimLoggingDisabled = 1
 
+" Deoplete {{{2
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#omni_patterns = {}
+" let g:deoplete#omni_patterns.java = '\k\.\k*'
+let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
+call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
+
 " Markdown {{{2
 let g:vmt_auto_update_on_save = 0
 let g:markdown_fenced_languages = ['bash=sh', 'html', 'ruby']
+
+" NERDTree {{{2
+let NERDTreeIgnore=['node_modules$', '\~$']
 
 " Nvim-miniyank {{{2
 map p <Plug>(miniyank-autoput)
@@ -210,8 +248,9 @@ let g:airline_powerline_fonts = 1
 " ----------------------------------------------------------------------------
 "  Moving around, searching and patterns {{{1
 " ----------------------------------------------------------------------------
-set ignorecase " Searches are case insensitive
-set smartcase  " Unless they contain at least one capital letter
+set ignorecase " Searches are case insensitive...
+set smartcase  " ...unless they contain at least one capital letter
+
 set mouse=a
 
 " ----------------------------------------------------------------------------
@@ -223,7 +262,6 @@ set number         " Show absolute line number on current line
 " ----------------------------------------------------------------------------
 "  Syntax, highlighting and spelling {{{1
 " ----------------------------------------------------------------------------
-au BufNewFile,BufRead *.gradle,*.tpl set filetype=groovy
 au BufNewFile,BufRead Berksfile,Guardfile,Vagrantfile set syntax=ruby
 set background=dark
 colorscheme base16-oceanicnext
@@ -231,7 +269,6 @@ if exists('+colorcolumn')
   set colorcolumn=120
 endif
 set hlsearch " Highlight matches of most recent search
-set conceallevel=2
 
 if exists('+termguicolors')
   set termguicolors
@@ -243,6 +280,9 @@ endif
 "  Multiple windows {{{1
 " ----------------------------------------------------------------------------
 set hidden " Hide abandoned buffers instead of unloading (preserves undo history)
+
+set splitright " Put new vsplit windows to the right of the current
+set splitbelow " Put new split windows to the bottom of the current
 
 " ----------------------------------------------------------------------------
 "  Messages and info {{{1
@@ -270,3 +310,11 @@ endif
 set nobackup      " No backup files
 set noswapfile    " No swap files
 set nowritebackup " No backup files while editing
+
+" ----------------------------------------------------------------------------
+"  Undo and Redo {{{1
+" ----------------------------------------------------------------------------
+" TODO: Auto-create undodir
+set undofile " Persistent undo
+
+set autoread "Reload files changed outside vim
