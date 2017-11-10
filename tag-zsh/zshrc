@@ -1,9 +1,28 @@
 # .zshrc
 
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
+# Source Antigen
+source /usr/local/share/antigen/antigen.zsh
+
+# Configure Antigen
+antigen use prezto
+antigen bundles <<EOBUNDLES
+  sorin-ionescu/prezto modules/helper
+  sorin-ionescu/prezto modules/environment
+  sorin-ionescu/prezto modules/terminal
+  sorin-ionescu/prezto modules/editor
+  sorin-ionescu/prezto modules/history
+  sorin-ionescu/prezto modules/directory
+  sorin-ionescu/prezto modules/spectrum
+  sorin-ionescu/prezto modules/utility
+  sorin-ionescu/prezto modules/ssh
+  sorin-ionescu/prezto modules/completion
+  sorin-ionescu/prezto modules/fasd
+  sorin-ionescu/prezto modules/git
+  sorin-ionescu/prezto modules/syntax-highlighting
+  sorin-ionescu/prezto modules/history-substring-search
+  sorin-ionescu/prezto modules/prompt
+EOBUNDLES
+antigen apply
 
 LANG='en_US.UTF-8'
 LC_COLLATE='en_US.UTF-8'
@@ -18,6 +37,9 @@ LC_ALL='en_US.UTF-8'
 alias brew-refill='brew update && brew upgrade && brew cleanup && brew doctor'
 alias ctags="`brew --prefix`/bin/ctags" # Use ctags from homebrew
 alias gw="./gradlew"
+
+# common typos...
+alias gits="git s"
 
 # highlight options for less
 alias less='less -m -g -i -J --underline-special'
@@ -70,6 +92,9 @@ stty -ixon
 # https://github.com/rvm/rvm/issues/3091
 unsetopt AUTO_NAME_DIRS
 
+# # https://www.gitignore.io/docs#-install-command-line
+function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
 # AWS CLI completion
 AWS_COMPLETER="/usr/local/bin/aws_zsh_completer"
 [[ -s $AWS_COMPLETER ]] && source $AWS_COMPLETER
@@ -108,9 +133,13 @@ source <(kubectl completion `basename $SHELL`)
 MODILLE_COMPLETIONS="$HOME/git/github.com/modille/completions/`basename $SHELL`"
 [[ -d $MODILLE_COMPLETIONS ]] && fpath=($MODILLE_COMPLETIONS $fpath)
 
-# RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+# Gradle completion
+GRADLE_COMPLETION="$HOME/git/github.com/gradle/gradle-completion"
+[[ -d $GRADLE_COMPLETION ]] && fpath=($GRADLE_COMPLETION $fpath)
 
 # Private configs
 PRIVATE_RC="$HOME/.zshrc-private"
 [[ -s $PRIVATE_RC ]] && source $PRIVATE_RC
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
