@@ -15,9 +15,9 @@
 function prompt_modille_precmd {
   # Check for untracked files or updated submodules since vcs_info does not.
   if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-    branch_format="${_prompt_steeef_colors[7]}on ${_prompt_steeef_colors[8]}%b%f%u%c${_prompt_steeef_colors[4]}●%f "
+    branch_format="%fon ${_branch_color}%b%f%u%c%F{0}●%f "
   else
-    branch_format="${_prompt_steeef_colors[7]}on ${_prompt_steeef_colors[8]}%b%f%u%c "
+    branch_format="%fon ${_branch_color}%b%f%u%c "
   fi
 
   zstyle ':vcs_info:*:prompt:*' formats "${branch_format}"
@@ -37,30 +37,42 @@ function prompt_modille_setup {
   # Add hook for calling vcs_info before each command.
   add-zsh-hook precmd prompt_modille_precmd
 
-  # Use extended color pallete if available.
-  if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
-    _prompt_steeef_colors=(
-      "%F{81}"  # 1 Turquoise
-      "%F{166}" # 2 Orange
-      "%F{135}" # 3 Purple
-      "%F{161}" # 4 Hotpink
-      "%F{118}" # 5 Limegreen
-      "%F{154}" # 6 lime
-      "%F{015}" # 7 snow
-      "%F{205}" # 8 pink
-    )
-  else
-    _prompt_steeef_colors=(
-      "%F{cyan}"
-      "%F{yellow}"
-      "%F{magenta}"
-      "%F{red}"
-      "%F{green}"
-    )
-  fi
+  # Base16 colors
+  # Use ./colortest in github.com/chriskempson/base16-shell to view them
+  # Note that some themes (e.g. dracula) swap yellow and green
+  _color00_black="%F{0}"
+  _color01_red="%F{1}"
+  _color02_green="%F{2}"
+  _color03_yellow="%F{3}"
+  _color04_blue="%F{4}"
+  _color05_magenta="%F{5}"
+  _color06_cyan="%F{6}"
+  _color07_white="%F{7}"
+  _color08_bright_black="%F{8}"
+  _color09_bright_red="%F{9}"
+  _color10_bright_green="%F{10}"
+  _color11_bright_yellow="%F{11}"
+  _color12_bright_blue="%F{12}"
+  _color13_bright_magenta="%F{13}"
+  _color14_bright_cyan="%F{14}"
+  _color15_bright_white="%F{15}"
+  _color16_alt1="%F{16}"
+  _color17_alt2="%F{17}"
+  _color18_alt3="%F{18}"
+  _color19_alt4="%F{19}"
+  _color20_alt5="%F{20}"
+  _color21_alt6="%F{21}"
+
+  # Configure different prompt pieces
+  _branch_color="${_color16_alt1}"
+  _dot_unstaged_color="${_color03_yellow}"
+  _dot_staged_color="${_color02_green}"
+  _pwd_color="${_color16_alt1}"
+  _return_status_ok_color="${_color02_green}"
+  _return_status_error_color="${_color01_red}"
 
   # Return status
-  local ret_status="%(?:${_prompt_steeef_colors[6]}✔:%F{red}×%s)"
+  local ret_status="%(?:${_return_status_ok_color}✔:${_return_status_error_color}×%s)"
 
   # Formats:
   #   %b - branchname
@@ -69,10 +81,10 @@ function prompt_modille_setup {
   #   %a - action (e.g. rebase-i)
   #   %R - repository path
   #   %S - path in the repository
-  local branch_format="${_prompt_steeef_colors[7]}on ${_prompt_steeef_colors[1]}%b%f%u%c "
-  local action_format="${_prompt_steeef_colors[7]}on ${_prompt_steeef_colors[5]}%a%f "
-  local unstaged_format="${_prompt_steeef_colors[2]}●%f"
-  local staged_format="${_prompt_steeef_colors[5]}●%f"
+  local branch_format="%fon ${_branch_color}%b%f%u%c "
+  local action_format="%fon ${_branch_color}%a%f "
+  local unstaged_format="${_dot_unstaged_color}●%f"
+  local staged_format="${_dot_staged_color}●%f"
 
   # Set vcs_info parameters.
   zstyle ':vcs_info:*' enable git
@@ -84,7 +96,7 @@ function prompt_modille_setup {
   zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
   # Define prompts.
-  PROMPT="%B${ret_status} "'${vcs_info_msg_0_}'"${_prompt_steeef_colors[7]}in ${_prompt_steeef_colors[8]}%~%f $ %b"
+  PROMPT="%B${ret_status} "'${vcs_info_msg_0_}'"%fin ${_pwd_color}%~%f $ %b"
   RPROMPT=''
 }
 
