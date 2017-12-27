@@ -37,16 +37,13 @@ LC_ALL='en_US.UTF-8'
 alias brew-refill='brew update && brew upgrade && brew cleanup && brew doctor'
 alias ctags="`brew --prefix`/bin/ctags" # Use ctags from homebrew
 alias gw="./gradlew"
+alias kc="kubectl"
+
+# cat with syntax highlighting
+alias cats="highlight --out-format xterm256 --quiet --force --style molokai -- $1"
 
 # common typos...
 alias gits="git s"
-
-# highlight options for less
-alias less='less -m -g -i -J --underline-special'
-alias more='less'
-
-# Replace cat with highlight
-alias cat="highlight $1 --out-format xterm256 --quiet --force --style molokai"
 
 # vi-mode bindings
 bindkey -v
