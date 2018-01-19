@@ -96,7 +96,7 @@ function prompt_modille_setup {
   zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
   # Define prompts.
-  PROMPT="%B${ret_status} "'${vcs_info_msg_0_}'"%fin ${_pwd_color}%~%f $ %b"
+  PROMPT="${ret_status} "'${vcs_info_msg_0_}'"%fin ${_pwd_color}%~%f $ %b"
   RPROMPT=''
 }
 
