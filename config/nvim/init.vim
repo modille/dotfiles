@@ -22,11 +22,8 @@ call plug#begin('~/git/github.com/modille/dotfiles/tag-vim/plugged')
 Plug 'bluz71/vim-moonfly-colors'
 Plug 'chriskempson/base16-vim'
 Plug 'marciomazza/vim-brogrammer-theme'
-Plug 'morhetz/gruvbox'
 Plug 'nanotech/jellybeans.vim'
-Plug 'sickill/vim-monokai'
 Plug 'sjl/badwolf'
-Plug 'tomasr/molokai'
 
 " Language support {{{2
 Plug 'PProvost/vim-ps1',            { 'for': 'ps1' }
@@ -34,6 +31,7 @@ Plug 'cespare/vim-toml',            { 'for': 'toml' }
 Plug 'craigdallimore/vim-jest-cli', { 'for': 'javascript' }
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go',                { 'for': ['asm', 'go', 'gohtmltmpl'] }
+Plug 'flowtype/vim-flow',           { 'for': 'javascript' }
 Plug 'modille/groovy.vim',          { 'for': 'groovy' }
 Plug 'mzlogin/vim-markdown-toc',    { 'for': 'markdown' }
 Plug 'nginx/nginx',                 { 'rtp': 'contrib/vim' }
@@ -54,7 +52,9 @@ Plug 'vim-scripts/argtextobj.vim'
 " Other plugins {{{2
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color' " Highlight colors in CSS files
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'bronson/vim-trailing-whitespace'
+Plug 'dbmrq/vim-redacted'
 " Plug 'dodie/vim-disapprove-deep-indentation'
 Plug 'easymotion/vim-easymotion'
 Plug 'editorconfig/editorconfig-vim'
@@ -63,6 +63,7 @@ Plug 'haya14busa/is.vim'
 Plug 'haya14busa/vim-asterisk'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'hwartig/vim-seeing-is-believing'
+Plug 'janko-m/vim-test'
 Plug 'johngrib/vim-game-code-break'
 Plug 'jpalardy/spacehi.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
@@ -74,14 +75,17 @@ Plug 'mhinz/vim-startify'
 Plug 'modille/vim-search-maven', { 'branch': 'gradle' }
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'peterrincker/vim-argumentative'
+Plug 'reinh/vim-makegreen'
 Plug 'rizzatti/dash.vim'
 Plug 'schickling/vim-bufonly'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] } | Plug 'xuyuanp/nerdtree-git-plugin'
+Plug 'shougo/echodoc.vim'
 Plug 'shougo/vimproc.vim', { 'do': 'make' }
 Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'tfnico/vim-gradle'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch' " | Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-endwise'
@@ -99,11 +103,10 @@ Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
 " Neovim-only plugins {{{2
 if has('nvim')
   " Plug 'benekastah/neomake'
-  Plug 'bfredl/nvim-miniyank'
   Plug 'kassio/neoterm'
   Plug 'osyo-manga/vim-brightest' " Highlight word under cursor
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets'
+  Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets' | Plug 'joaohkfaria/vim-jest-snippets'
   " Plug 'valloric/YouCompleteMe', { 'do': './install.py' }
   Plug 'w0rp/ale'
 endif
@@ -144,6 +147,16 @@ nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
+
+" Copy current file name (relative/absolute) to system clipboard
+" relative path  (src/foo.txt)
+nnoremap <leader>cf :let @*=expand("%")<CR>
+" absolute path  (/something/src/foo.txt)
+nnoremap <leader>cF :let @*=expand("%:p")<CR>
+" filename       (foo.txt)
+nnoremap <leader>ct :let @*=expand("%:t")<CR>
+" directory name (/something/src)
+nnoremap <leader>ch :let @*=expand("%:p:h")<CR>
 
 " In terminal mode, use Esc to exit back to normal mode
 " Disabled so that Esc closes FZF window
@@ -198,8 +211,6 @@ nnoremap <C-Down> <C-W><C-J>
 nnoremap <C-Up> <C-W><C-K>
 nnoremap <C-Right> <C-W><C-L>
 nnoremap <C-Left> <C-W><C-H>
-" Rotate
-nnoremap <C-R> <C-W><C-R>
 " Xchange
 nnoremap <C-X> <C-W><C-X>
 
@@ -229,16 +240,19 @@ let g:vmt_auto_update_on_save = 0
 let g:markdown_fenced_languages = ['bash=sh', 'html', 'ruby']
 
 " NERDTree {{{2
-let NERDTreeIgnore=['node_modules$', '\~$']
-
-" Nvim-miniyank {{{2
-map p <Plug>(miniyank-autoput)
-map P <Plug>(miniyank-autoPut)
-map <Leader>n <Plug>(miniyank-cycle)
+let g:NERDTreeIgnore = ['node_modules$', '\~$']
 
 " Powerline {{{2
 " Add powerline fonts to the dictionary
 let g:airline_powerline_fonts = 1
+
+" LanguageClient
+let g:LanguageClient_serverCommands = {
+    \ 'dockerfile': ['/usr/local/bin/docker-langserver', '--stdio'],
+    \ 'javascript': ['flow-language-server', '--stdio']
+    \ }
+let g:LanguageClient_autoStart = 1
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 
 " ----------------------------------------------------------------------------
 "  Important
@@ -262,19 +276,23 @@ set number         " Show absolute line number on current line
 " ----------------------------------------------------------------------------
 "  Syntax, highlighting and spelling {{{1
 " ----------------------------------------------------------------------------
-au BufNewFile,BufRead Berksfile,Guardfile,Vagrantfile set syntax=ruby
-set background=dark
-colorscheme base16-oceanicnext
-if exists('+colorcolumn')
-  set colorcolumn=120
-endif
-set hlsearch " Highlight matches of most recent search
-
 if exists('+termguicolors')
   set termguicolors
 elseif exists('+guicolors')
   set guicolors
 endif
+
+au BufNewFile,BufRead Berksfile,Guardfile,Vagrantfile set syntax=ruby
+set background=dark
+autocmd vimenter * AirlineTheme base16
+" colorscheme base16-dracula
+if filereadable(expand('~/.vimrc_background'))
+  source ~/.vimrc_background
+endif
+if exists('+colorcolumn')
+  set colorcolumn=120
+endif
+set hlsearch " Highlight matches of most recent search
 
 " ----------------------------------------------------------------------------
 "  Multiple windows {{{1
