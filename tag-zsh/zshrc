@@ -40,7 +40,7 @@ alias gw="./gradlew"
 alias kc="kubectl"
 
 # cat with syntax highlighting
-alias cats="highlight --out-format xterm256 --quiet --force --style molokai -- $1"
+alias cats="highlight --out-format xterm256 --quiet --force --style zenburn -- $1"
 
 # common typos...
 alias gits="git s"

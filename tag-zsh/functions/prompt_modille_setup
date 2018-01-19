@@ -28,7 +28,7 @@ function prompt_modille_precmd {
 function prompt_modille_setup {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
-  prompt_opts=(cr percent subst)
+  prompt_opts=(cr percent sp subst)
 
   # Load required functions.
   autoload -Uz add-zsh-hook
@@ -64,10 +64,10 @@ function prompt_modille_setup {
   _color21_alt6="%F{21}"
 
   # Configure different prompt pieces
-  _branch_color="${_color16_alt1}"
+  _branch_color="${_color17_alt2}"
   _dot_unstaged_color="${_color03_yellow}"
   _dot_staged_color="${_color02_green}"
-  _pwd_color="${_color16_alt1}"
+  _pwd_color="${_color17_alt2}"
   _return_status_ok_color="${_color02_green}"
   _return_status_error_color="${_color01_red}"
 
