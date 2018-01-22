@@ -11,6 +11,12 @@ export PATH="$PATH:$HOME/bin"
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+# Go
+export GOPATH="$HOME/go"
+[[ -d $GOPATH ]] && export PATH="$PATH:$GOPATH/bin"
+# Rust
+export CARGOPATH="$HOME/.cargo"
+[[ -d $CARGOPATH ]] && export PATH="$PATH:$CARGOPATH/bin"
 
 # Pipe less to highlight
 export LESSOPEN="| $(which highlight) %s --out-format xterm256 --quiet --force --style molokai"
