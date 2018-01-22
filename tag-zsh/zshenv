@@ -2,7 +2,7 @@
 
 export EDITOR='nvim'
 export JRUBY_OPTS='--dev'
-export KEYTIMEOUT=1 # Reduce delay when hitting ESC
+export KEYTIMEOUT=25 # Reduce delay when hitting ESC, but not too low to interfere with surround module bindings
 export VISUAL='nvim'
 
 # Additions to PATH
