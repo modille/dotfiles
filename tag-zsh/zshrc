@@ -17,7 +17,6 @@ antigen bundles <<EOBUNDLES
   sorin-ionescu/prezto modules/ssh
   sorin-ionescu/prezto modules/completion
   sorin-ionescu/prezto modules/fasd
-  sorin-ionescu/prezto modules/git
   sorin-ionescu/prezto modules/syntax-highlighting
   sorin-ionescu/prezto modules/history-substring-search
   sorin-ionescu/prezto modules/prompt
@@ -157,6 +156,9 @@ MODILLE_COMPLETIONS="$HOME/git/github.com/modille/completions/`basename $SHELL`"
 # Gradle completion
 GRADLE_COMPLETION="$HOME/git/github.com/gradle/gradle-completion"
 [[ -d $GRADLE_COMPLETION ]] && fpath=($GRADLE_COMPLETION $fpath)
+
+# grc (Generic Colouriser)
+[[ -s "/etc/grc.zsh" ]] && source /usr/local/etc/grc.zsh
 
 # Private configs
 PRIVATE_RC="$HOME/.zshrc-private"
