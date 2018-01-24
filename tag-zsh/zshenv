@@ -19,5 +19,5 @@ export CARGOPATH="$HOME/.cargo"
 [[ -d $CARGOPATH ]] && export PATH="$PATH:$CARGOPATH/bin"
 
 # Pipe less to highlight
-export LESSOPEN="| $(which highlight) %s --out-format xterm256 --quiet --force --style molokai"
+export LESSOPEN="| /usr/local/bin/highlight %s --out-format xterm256 --quiet --force --style zenburn "
 export LESS=" -R"
