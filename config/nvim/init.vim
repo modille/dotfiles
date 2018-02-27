@@ -124,20 +124,11 @@ let g:mapleader = "\<space>"
 nnoremap ; :
 vnoremap ; :
 
-" Re-center as you go through search results
-map n  nzz
-map N  Nzz
-map *  *zz
-
 " Change cwd to current file
 map <Leader>cd :cd %:p:h<CR>:pwd<CR>
 
 " Hide other windows (:only, :on)
 map <Leader>o :only<CR>
-
-" Use +/- in normal mode to increment/decrement number
-" nmap <silent> + <C-a>
-" nmap <silent> - <C-x>
 
 " Yank, delete, and paste
 vmap <Leader>y "+y
@@ -171,10 +162,6 @@ xnoremap <S-Tab> <gv
 nnoremap > >>_
 nnoremap < <<_
 
-" Smart up and down
-nnoremap <silent><Down> gj
-nnoremap <silent><Up> gk
-
 " WIP: Folding
 " close all open folds apart from the one that the cursor is on
 nnoremap <Leader>zz zMzv
@@ -195,9 +182,6 @@ nnoremap <silent> <Leader>q :q<CR>
 nnoremap <silent> <Leader>w :w<CR>
 nnoremap <silent> <Leader>fed :e $MYVIMRC<CR>
 nnoremap <silent> <Leader>feR :source $MYVIMRC<CR>
-nnoremap <silent> <Leader>s- :split<CR>
-nnoremap <silent> <Leader>s<bar> :vsplit<CR>
-nnoremap <silent> <Leader>tn :set invnumber<CR>
 
 " Disable Ex mode
 nnoremap Q <nop>
@@ -292,6 +276,7 @@ if exists('+colorcolumn')
   set colorcolumn=120
 endif
 set hlsearch " Highlight matches of most recent search
+set spell
 
 " ----------------------------------------------------------------------------
 "  Multiple windows {{{1
@@ -334,4 +319,4 @@ set nowritebackup " No backup files while editing
 " TODO: Auto-create undodir
 set undofile " Persistent undo
 
-set autoread "Reload files changed outside vim
+set autoread " Reload files changed outside vim
