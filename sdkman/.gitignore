@@ -1,0 +1,10 @@
+# Ignore everything...
+/*
+
+# ...except the gitignore and sdkman config file
+!.gitignore
+
+# allow etc/config
+!/etc
+/etc/*
+!etc/config
