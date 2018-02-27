@@ -27,12 +27,15 @@ Plug 'sjl/badwolf'
 
 " Language support {{{2
 Plug 'PProvost/vim-ps1',            { 'for': 'ps1' }
+Plug 'Quramy/tsuquyomi',            { 'for': 'typescript' }
 Plug 'cespare/vim-toml',            { 'for': 'toml' }
 Plug 'craigdallimore/vim-jest-cli', { 'for': 'javascript' }
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go',                { 'for': ['asm', 'go', 'gohtmltmpl'] }
 Plug 'flowtype/vim-flow',           { 'for': 'javascript' }
+Plug 'leafgarland/typescript-vim',  { 'for': 'typescript' }
 Plug 'modille/groovy.vim',          { 'for': 'groovy' }
+Plug 'modille/vim-search-maven',    { 'for': 'groovy', 'branch': 'gradle' }
 Plug 'mzlogin/vim-markdown-toc',    { 'for': 'markdown' }
 Plug 'nginx/nginx',                 { 'rtp': 'contrib/vim' }
 Plug 'notriddle/vim-gitcommit-markdown'
@@ -45,7 +48,7 @@ Plug 'wavded/vim-stylus',           { 'for': 'stylus' }
 Plug 'wting/rust.vim',              { 'for': 'rust' }
 
 " Text objects {{{2
-Plug 'kana/vim-textobj-user' | Plug 'glts/vim-textobj-comment'
+Plug 'kana/vim-textobj-user' | Plug 'glts/vim-textobj-comment' | Plug 'Julian/vim-textobj-variable-segment'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'vim-scripts/argtextobj.vim'
 
@@ -54,9 +57,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color' " Highlight colors in CSS files
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'dbmrq/vim-redacted'
-" Plug 'dodie/vim-disapprove-deep-indentation'
-Plug 'easymotion/vim-easymotion'
+" Plug 'dbmrq/vim-redacted'
+Plug 'easymotion/vim-easymotion' | Plug 'haya14busa/vim-easyoperator-line' | Plug 'haya14busa/vim-easyoperator-phrase'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'godlygeek/tabular'
 Plug 'haya14busa/is.vim'
@@ -64,24 +66,21 @@ Plug 'haya14busa/vim-asterisk'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'hwartig/vim-seeing-is-believing'
 Plug 'janko-m/vim-test'
-Plug 'johngrib/vim-game-code-break'
+" Plug 'johngrib/vim-game-code-break'
 Plug 'jpalardy/spacehi.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 Plug 'kien/rainbow_parentheses.vim', { 'on': ['RainbowParenthesesToggle'] }
 Plug 'kshenoy/vim-signature' " Show marks in gutter
-" Plug 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-startify'
-Plug 'modille/vim-search-maven', { 'branch': 'gradle' }
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'peterrincker/vim-argumentative'
 Plug 'reinh/vim-makegreen'
 Plug 'rizzatti/dash.vim'
-Plug 'schickling/vim-bufonly'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] } | Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'shougo/echodoc.vim'
 Plug 'shougo/vimproc.vim', { 'do': 'make' }
-Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'tfnico/vim-gradle'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-bundler'
@@ -89,7 +88,7 @@ Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch' " | Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive' | Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
@@ -97,17 +96,17 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'tweekmonster/startuptime.vim'
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-scripts/YankRing.vim'
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
 
 " Neovim-only plugins {{{2
 if has('nvim')
-  " Plug 'benekastah/neomake'
+  " http://vim.wikia.com/wiki/Replace_a_word_with_yanked_text
+  " Consider yi" then ci"<C-R>0 then . to repeat
+  Plug 'bfredl/nvim-miniyank'
   Plug 'kassio/neoterm'
   Plug 'osyo-manga/vim-brightest' " Highlight word under cursor
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets' | Plug 'joaohkfaria/vim-jest-snippets'
-  " Plug 'valloric/YouCompleteMe', { 'do': './install.py' }
   Plug 'w0rp/ale'
 endif
 
