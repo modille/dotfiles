@@ -1,6 +1,7 @@
 let g:startify_change_to_vcs_root = 1
 let g:startify_session_dir = '~/.vim/sessions'
 
+" Custom header
 function! s:filter_header(lines) abort
   let longest_line   = max(map(copy(a:lines), 'strwidth(v:val)'))
   let centered_lines = map(copy(a:lines),
@@ -24,3 +25,8 @@ let g:startify_custom_header = s:filter_header([
    \ '        ''V/''   ++++++',
    \ '                 ++',
    \ ])
+
+" Prepend the vim-devicons logo to each Startify entry
+function! StartifyEntryFormat()
+  return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
+endfunction

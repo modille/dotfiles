@@ -16,7 +16,7 @@ if has('autocmd')
 
     " SpaceHi
     autocmd syntax * SpaceHi
-    autocmd FileType go,help NoSpaceHi
+    autocmd FileType go,help,nerdtree,startify NoSpaceHi
 
     " Templates
     autocmd BufNewFile *.sh 0r ~/git/github.com/modille/dotfiles/tag-vim/templates/skeleton.sh

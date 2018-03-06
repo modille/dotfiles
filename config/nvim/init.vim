@@ -110,6 +110,9 @@ if has('nvim')
   Plug 'w0rp/ale'
 endif
 
+" Source devicons last
+Plug 'ryanoasis/vim-devicons' | Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
 call plug#end()
 
 filetype indent on
