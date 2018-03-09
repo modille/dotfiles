@@ -146,6 +146,9 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [[ -x $(command -v rg) ]] && export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!*.class"'
 
+# helm
+source <(helm completion `basename $SHELL`)
+
 # k8s
 source <(kubectl completion `basename $SHELL`)
 
