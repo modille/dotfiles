@@ -240,86 +240,94 @@ let g:LanguageClient_serverCommands = {
 let g:LanguageClient_autoStart = 1
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 
+" The following sections are organized similar to :options
+
 " ----------------------------------------------------------------------------
-"  Important
+"  2 moving around, searching and patterns {{{1
+" ----------------------------------------------------------------------------
+set ignorecase
+set smartcase
+
+" ----------------------------------------------------------------------------
+"  4 displaying text {{{1
+" ----------------------------------------------------------------------------
+set number
+set relativenumber
+
+" ----------------------------------------------------------------------------
+"  5 syntax, highlighting and spelling {{{1
+" ----------------------------------------------------------------------------
+set background=dark
+set hlsearch
+set spell
+
+if exists('+termguicolors')
+  set termguicolors
+endif
+
+if exists('+colorcolumn')
+  set colorcolumn=120
+endif
+
+" Set colorscheme
+autocmd VimEnter * AirlineTheme base16
+if filereadable(expand('~/.vimrc_background'))
+  source ~/.vimrc_background
+endif
+
+" ----------------------------------------------------------------------------
+"  6 multiple windows {{{1
+" ----------------------------------------------------------------------------
+set hidden " Preserves undo history
+set splitbelow
+set splitright
+
+" ----------------------------------------------------------------------------
+"  9 using the mouse {{{1
+" ----------------------------------------------------------------------------
+set mouse=a
+
+" ----------------------------------------------------------------------------
+"  11 messages and info {{{1
+" ----------------------------------------------------------------------------
+set noshowmode " Airline displays it for us
+
+" ----------------------------------------------------------------------------
+"  12 selecting text {{{1
 " ----------------------------------------------------------------------------
 " See :help clipboard
 
 " ----------------------------------------------------------------------------
-"  Moving around, searching and patterns {{{1
+"  14 tabs and indenting {{{1
 " ----------------------------------------------------------------------------
-set ignorecase " Searches are case insensitive...
-set smartcase  " ...unless they contain at least one capital letter
-
-set mouse=a
-
-" ----------------------------------------------------------------------------
-"  Displaying text {{{1
-" ----------------------------------------------------------------------------
-set relativenumber " Show relative line numbers on other lines
-set number         " Show absolute line number on current line
+set tabstop=2
+set shiftwidth=2
+set expandtab
 
 " ----------------------------------------------------------------------------
-"  Syntax, highlighting and spelling {{{1
-" ----------------------------------------------------------------------------
-if exists('+termguicolors')
-  set termguicolors
-elseif exists('+guicolors')
-  set guicolors
-endif
-
-au BufNewFile,BufRead Berksfile,Guardfile,Vagrantfile set syntax=ruby
-set background=dark
-autocmd vimenter * AirlineTheme base16
-" colorscheme base16-dracula
-if filereadable(expand('~/.vimrc_background'))
-  source ~/.vimrc_background
-endif
-if exists('+colorcolumn')
-  set colorcolumn=120
-endif
-set hlsearch " Highlight matches of most recent search
-set spell
-
-" ----------------------------------------------------------------------------
-"  Multiple windows {{{1
-" ----------------------------------------------------------------------------
-set hidden " Hide abandoned buffers instead of unloading (preserves undo history)
-
-set splitright " Put new vsplit windows to the right of the current
-set splitbelow " Put new split windows to the bottom of the current
-
-" ----------------------------------------------------------------------------
-"  Messages and info {{{1
-" ----------------------------------------------------------------------------
-set noshowmode " Hide default mode display, since Airline displays it
-
-" ----------------------------------------------------------------------------
-"  Tabs and indenting {{{1
-" ----------------------------------------------------------------------------
-set tabstop=2    " Tab = 2 spaces
-set shiftwidth=2 " Autoindent indents 2 spaces
-set expandtab    " Replace tabs with spaces
-
-" ----------------------------------------------------------------------------
-"  Folding {{{1
+"  15 folding {{{1
 " ----------------------------------------------------------------------------
 if has('folding')
   set foldmethod=syntax
-  set nofoldenable " Open all folds when opening a file
+  set nofoldenable
 endif
 
 " ----------------------------------------------------------------------------
-"  The swap file {{{1
+"  18 reading and writing files {{{1
 " ----------------------------------------------------------------------------
-set nobackup      " No backup files
-set noswapfile    " No swap files
-set nowritebackup " No backup files while editing
+set nowritebackup
+set nobackup
+set autoread
 
 " ----------------------------------------------------------------------------
-"  Undo and Redo {{{1
+"  19 the swap file {{{1
 " ----------------------------------------------------------------------------
-" TODO: Auto-create undodir
-set undofile " Persistent undo
+set noswapfile
+set updatetime=100
 
-set autoread " Reload files changed outside vim
+" ----------------------------------------------------------------------------
+"  13 editing text {{{1
+" ----------------------------------------------------------------------------
+" Enable persistent undo so that undo history persists across vim sessions
+set undofile
+set undodir=~/.local/share/nvim/undo
