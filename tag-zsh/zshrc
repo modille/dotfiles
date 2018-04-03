@@ -33,7 +33,7 @@ LC_TIME='en_US.UTF-8'
 LC_ALL='en_US.UTF-8'
 
 # Aliases
-alias brew-refill='brew update && brew upgrade && brew cleanup && brew doctor'
+alias brew-refill='brew update && brew upgrade && brew cask upgrade && brew cleanup && brew doctor'
 alias ctags="`brew --prefix`/bin/ctags" # Use ctags from homebrew
 alias gw="./gradlew"
 alias kc="kubectl"
