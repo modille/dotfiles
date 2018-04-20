@@ -14,6 +14,9 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 # Go
 export GOPATH="$HOME/go"
 [[ -d $GOPATH ]] && export PATH="$PATH:$GOPATH/bin"
+# Node
+export NODEPATH="/usr/local/opt/node@8"
+[[ -d $NODEPATH ]] && export PATH="$PATH:$NODEPATH/bin"
 # Rust
 export CARGOPATH="$HOME/.cargo"
 [[ -d $CARGOPATH ]] && export PATH="$PATH:$CARGOPATH/bin"
