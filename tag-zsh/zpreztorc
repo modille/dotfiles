@@ -84,6 +84,7 @@ zstyle ':prezto:module:syntax-highlighting' highlighters \
   'main' \
   'brackets' \
   'pattern' \
+  'line' \
   'cursor' \
   'root'
 
@@ -95,7 +96,7 @@ zstyle ':prezto:module:syntax-highlighting' highlighters \
 zstyle ':prezto:module:terminal' auto-title 'yes'
 
 # Set the window title format.
-zstyle ':prezto:module:terminal:window-title' format '%m: %s'
+zstyle ':prezto:module:terminal:window-title' format '%s'
 
 # Set the tab title format.
 zstyle ':prezto:module:terminal:tab-title' format '%s'
