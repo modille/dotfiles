@@ -20,6 +20,8 @@ antigen bundles <<EOBUNDLES
   sorin-ionescu/prezto modules/syntax-highlighting
   sorin-ionescu/prezto modules/history-substring-search
   sorin-ionescu/prezto modules/prompt
+  zsh-users/zsh-autosuggestions
+  superbrothers/zsh-kubectl-prompt
 EOBUNDLES
 antigen apply
 
@@ -33,13 +35,13 @@ LC_TIME='en_US.UTF-8'
 LC_ALL='en_US.UTF-8'
 
 # Aliases
-alias brew-refill='brew update && brew upgrade && brew cask upgrade && brew cleanup && brew doctor'
+alias brew-refill='(set -x; brew update && brew upgrade && brew cask upgrade && brew cleanup && brew doctor)'
 alias ctags="`brew --prefix`/bin/ctags" # Use ctags from homebrew
 alias gw="./gradlew"
 alias kc="kubectl"
 
 # cat with syntax highlighting
-alias cats="highlight --out-format xterm256 --quiet --force --style zenburn -- $1"
+alias cats="highlight --out-format xterm256 --quiet --force --style solarized-light -- $1"
 
 # common typos...
 alias gits="git s"
@@ -88,18 +90,6 @@ bindkey "^[[1;5D" backward-word
 bindkey '^w' backward-kill-word
 
 # Show insert/normal mode indicator for vim-mode
-function zle-keymap-select zle-line-init zle-line-finish {
-  # iTerm2 escape codes: https://www.iterm2.com/documentation-escape-codes.html
-  case $KEYMAP in
-    vicmd)      print -n -- "\033]Pgb0fa00\033\\";;  # normal mode
-    viins|main) print -n -- "\033]Pgffffff\033\\";;  # insert mode
-  esac
-  zle reset-prompt
-  zle -R
-}
-zle -N zle-line-init
-zle -N zle-line-finish
-zle -N zle-keymap-select
 
 # Set tab title to pwd
 precmd() {

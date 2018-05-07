@@ -15,9 +15,9 @@
 function prompt_modille_precmd {
   # Check for untracked files or updated submodules since vcs_info does not.
   if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-    branch_format="%fon ${_branch_color}%b%f%u%c%F{1}●%f "
+    branch_format="%fon ${_branch_color}"$'\ue725'" %b%f%c%u%F{1}"$'\uf059'" %f"
   else
-    branch_format="%fon ${_branch_color}%b%f%u%c "
+    branch_format="%fon ${_branch_color}"$'\ue725'" %b%f%c%u "
   fi
 
   zstyle ':vcs_info:*:prompt:*' formats "${branch_format}"
@@ -64,15 +64,17 @@ function prompt_modille_setup {
   _color21_alt6="%F{21}"
 
   # Configure different prompt pieces
-  _branch_color="${_color17_alt2}"
+  _action_color="${_color01_red}"
+  _branch_color="${_color14_bright_cyan}"
   _dot_unstaged_color="${_color03_yellow}"
   _dot_staged_color="${_color02_green}"
-  _pwd_color="${_color17_alt2}"
+  _pwd_color="${_color14_bright_cyan}"
   _return_status_ok_color="${_color02_green}"
   _return_status_error_color="${_color01_red}"
 
   # Return status
-  local ret_status="%(?:${_return_status_ok_color}✔:${_return_status_error_color}×%s)"
+  # TODO Might be nice to also print the return code on error
+  local ret_status="%(?:${_return_status_ok_color}"$'\uf00c'":${_return_status_error_color}"$'\uf00d'"%s)"
 
   # Formats:
   #   %b - branchname
@@ -81,10 +83,10 @@ function prompt_modille_setup {
   #   %a - action (e.g. rebase-i)
   #   %R - repository path
   #   %S - path in the repository
-  local branch_format="%fon ${_branch_color}%b%f%u%c "
-  local action_format="%fon ${_branch_color}%a%f "
-  local unstaged_format="${_dot_unstaged_color}●%f"
-  local staged_format="${_dot_staged_color}●%f"
+  local branch_format="%fon ${_branch_color}"$'\ue725'"%b%f%c%u"
+  local action_format="%f${_action_color}"$'\uf0ad'" %a in progress %f"
+  local unstaged_format="${_dot_unstaged_color}"$'\uf111'" %f"
+  local staged_format="${_dot_staged_color}"$'\uf058'" %f"
 
   # Set vcs_info parameters.
   zstyle ':vcs_info:*' enable git
@@ -96,7 +98,7 @@ function prompt_modille_setup {
   zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
   # Define prompts.
-  PROMPT="${ret_status} "'${vcs_info_msg_0_}'"%fin ${_pwd_color}%~%f $ %b"
+  PROMPT=$'\u256D'$'\U2500'" ${ret_status} "'${vcs_info_msg_0_}'"%fin ${_pwd_color}"$'\uf413'" %~ %fat ${_color04_blue}"$'\ufd31'' $ZSH_KUBECTL_PROMPT'"%f"$'\n'$'\u2570'$'\U2500 '"$ %b"
   RPROMPT=''
 }
 
