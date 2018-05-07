@@ -241,6 +241,20 @@ nmap <S-Down> <Down>
 vmap <S-Up> <Up>
 vmap <S-Down> <Down>
 
+if has('nvim')
+  " Easier escape in terminal
+  tnoremap <Esc> <C-\><C-n>
+
+  " ...but still be able to send an Escape key
+  " Mnemonic: Verbatim escape (similar to :help i_ctrl-v)
+  tnoremap <C-v><Esc> <Esc>
+
+  " Commands
+  nnoremap <silent> <Leader>nrb :1T npm run build<CR>
+  nnoremap <silent> <Leader>nrl :1T npm run lint<CR>
+  nnoremap <silent> <Leader>nrt :1T npm run test<CR>
+endif
+
 " ----------------------------------------------------------------------------
 "  Plugin settings {{{1
 " ----------------------------------------------------------------------------
