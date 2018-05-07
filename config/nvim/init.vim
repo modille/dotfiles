@@ -304,7 +304,7 @@ set relativenumber
 " ----------------------------------------------------------------------------
 "  5 syntax, highlighting and spelling {{{1
 " ----------------------------------------------------------------------------
-set background=dark
+set background=light
 set hlsearch
 set spell
 
