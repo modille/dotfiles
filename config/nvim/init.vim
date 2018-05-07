@@ -331,7 +331,12 @@ if exists('+colorcolumn')
 endif
 
 " Set colorscheme
-autocmd VimEnter * AirlineTheme base16
+if has('autocmd')
+  augroup colorschemeAutocmds
+    autocmd!
+    autocmd VimEnter * AirlineTheme base16
+  augroup END
+endif
 if filereadable(expand('~/.vimrc_background'))
   source ~/.vimrc_background
 endif
