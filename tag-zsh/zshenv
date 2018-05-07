@@ -6,20 +6,24 @@ export KEYTIMEOUT=25 # Reduce delay when hitting ESC, but not too low to interfe
 export VISUAL='nvim'
 
 # Additions to PATH
+
+# Custom
 export PATH="$HOME/local/bin:$PATH"
-export PATH="$PATH:$HOME/bin"
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 # Go
 export GOPATH="$HOME/go"
 [[ -d $GOPATH ]] && export PATH="$PATH:$GOPATH/bin"
 # Node
 export NODEPATH="/usr/local/opt/node@8"
 [[ -d $NODEPATH ]] && export PATH="$PATH:$NODEPATH/bin"
+# Nvr
+export LIB_PYTHON_PATH="$HOME/Library/Python/3.6"
+[[ -d $LIB_PYTHON_PATH ]] && export PATH="$PATH:$LIB_PYTHON_PATH/bin"
 # Rust
 export CARGOPATH="$HOME/.cargo"
 [[ -d $CARGOPATH ]] && export PATH="$PATH:$CARGOPATH/bin"
+
+# Homebrew
+export PATH="/usr/local/bin:$PATH"
 
 # Pipe less to highlight
 export LESSOPEN="| /usr/local/bin/highlight %s --out-format xterm256 --quiet --force --style zenburn "

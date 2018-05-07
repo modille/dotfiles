@@ -166,6 +166,3 @@ GRADLE_COMPLETION="$HOME/git/github.com/gradle/gradle-completion"
 # Private configs
 PRIVATE_RC="$HOME/.zshrc-private"
 [[ -s $PRIVATE_RC ]] && source $PRIVATE_RC
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
