@@ -320,7 +320,7 @@ set relativenumber
 " ----------------------------------------------------------------------------
 set background=light
 set hlsearch
-set spell
+set inccommand=nosplit
 
 if exists('+termguicolors')
   set termguicolors
