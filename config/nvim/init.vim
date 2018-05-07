@@ -341,6 +341,9 @@ if filereadable(expand('~/.vimrc_background'))
   source ~/.vimrc_background
 endif
 
+" Italicised comments
+highlight Comment cterm=italic gui=italic
+
 " ----------------------------------------------------------------------------
 "  6 multiple windows {{{1
 " ----------------------------------------------------------------------------
