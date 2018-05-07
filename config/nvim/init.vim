@@ -347,6 +347,7 @@ highlight Comment cterm=italic gui=italic
 " ----------------------------------------------------------------------------
 "  6 multiple windows {{{1
 " ----------------------------------------------------------------------------
+set previewheight=28
 set hidden " Preserves undo history
 set splitbelow
 set splitright
