@@ -5,6 +5,9 @@ if has('autocmd')
     " Close the preview window after completion is done
     autocmd CompleteDone * pclose!
 
+    " Custom filetype/syntax
+    autocmd BufNewFile,BufRead Berksfile,Guardfile,Vagrantfile set syntax=ruby
+
     " Seeing-is-believing
     autocmd FileType ruby nmap <buffer> <Enter> <Plug>(seeing-is-believing-mark-and-run)
     autocmd FileType ruby xmap <buffer> <Enter> <Plug>(seeing-is-believing-mark-and-run)
@@ -16,7 +19,8 @@ if has('autocmd')
 
     " SpaceHi
     autocmd syntax * SpaceHi
-    autocmd FileType go,help,nerdtree,startify NoSpaceHi
+    autocmd FileType Mundo,MundoDiff,go,help,nerdtree,startify,vim NoSpaceHi
+    autocmd Syntax diff NoSpaceHi
 
     " Templates
     autocmd BufNewFile *.sh 0r ~/git/github.com/modille/dotfiles/tag-vim/templates/skeleton.sh

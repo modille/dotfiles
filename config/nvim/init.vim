@@ -16,11 +16,23 @@ if empty(glob('~/git/github.com/modille/dotfiles/tag-vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+function! BuildComposer(info)
+  if a:info.status != 'unchanged' || a:info.force
+    if has('nvim')
+      !cargo build --release
+    else
+      !cargo build --release --no-default-features --features json-rpc
+    endif
+  endif
+endfunction
+
 call plug#begin('~/git/github.com/modille/dotfiles/tag-vim/plugged')
 
 " Colorschemes {{{2
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'bluz71/vim-moonfly-colors'
 Plug 'chriskempson/base16-vim'
+Plug 'icymind/NeoSolarized'
 Plug 'marciomazza/vim-brogrammer-theme'
 Plug 'nanotech/jellybeans.vim'
 Plug 'sjl/badwolf'
@@ -30,6 +42,7 @@ Plug 'PProvost/vim-ps1',            { 'for': 'ps1' }
 Plug 'Quramy/tsuquyomi',            { 'for': 'typescript' }
 Plug 'cespare/vim-toml',            { 'for': 'toml' }
 Plug 'craigdallimore/vim-jest-cli', { 'for': 'javascript' }
+Plug 'docker/docker',               { 'for': 'dockerfile', 'rtp': 'contrib/syntax/vim'}
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go',                { 'for': ['asm', 'go', 'gohtmltmpl'] }
 Plug 'flowtype/vim-flow',           { 'for': 'javascript' }
@@ -56,10 +69,11 @@ Plug 'vim-scripts/argtextobj.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color' " Highlight colors in CSS files
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-Plug 'bronson/vim-trailing-whitespace'
 " Plug 'dbmrq/vim-redacted'
 Plug 'easymotion/vim-easymotion' | Plug 'haya14busa/vim-easyoperator-line' | Plug 'haya14busa/vim-easyoperator-phrase'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+Plug 'gerw/vim-HiLinkTrace'
 Plug 'godlygeek/tabular'
 Plug 'haya14busa/is.vim'
 Plug 'haya14busa/vim-asterisk'
@@ -71,22 +85,27 @@ Plug 'jpalardy/spacehi.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 Plug 'kien/rainbow_parentheses.vim', { 'on': ['RainbowParenthesesToggle'] }
 Plug 'kshenoy/vim-signature' " Show marks in gutter
+Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-startify'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'peterrincker/vim-argumentative'
+Plug 'raimondi/delimitmate'
 Plug 'reinh/vim-makegreen'
 Plug 'rizzatti/dash.vim'
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] } | Plug 'xuyuanp/nerdtree-git-plugin'
+Plug 'scrooloose/nerdtree' | Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'shougo/echodoc.vim'
 Plug 'shougo/vimproc.vim', { 'do': 'make' }
+Plug 'simnalamburt/vim-mundo'
 Plug 'tfnico/vim-gradle'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-dispatch' " | Plug 'radenling/vim-dispatch-neovim'
+Plug 'tpope/vim-dotenv'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive' | Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'tpope/vim-projectionist'
@@ -105,9 +124,13 @@ if has('nvim')
   Plug 'bfredl/nvim-miniyank'
   Plug 'kassio/neoterm'
   Plug 'osyo-manga/vim-brightest' " Highlight word under cursor
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets' | Plug 'joaohkfaria/vim-jest-snippets'
+  Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets' | Plug 'modille/vim-jest-snippets'
   Plug 'w0rp/ale'
+
+  " Deoplete
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+  Plug 'zchee/deoplete-docker'
 endif
 
 " Source devicons last
@@ -165,6 +188,10 @@ xnoremap <S-Tab> <gv
 nnoremap > >>_
 nnoremap < <<_
 
+" Smart up and down
+" nnoremap <silent><Down> gj
+" nnoremap <silent><Up> gk
+
 " WIP: Folding
 " close all open folds apart from the one that the cursor is on
 nnoremap <Leader>zz zMzv
@@ -181,6 +208,8 @@ nnoremap <Leader>z<Up> zk
 " spf13 and SpaceVim-like bindings
 nnoremap <silent> <Leader>cc :cclose<CR>
 nnoremap <silent> <Leader>co :copen<CR>
+nnoremap <silent> <Leader>lc :lclose<CR>
+nnoremap <silent> <Leader>lo :lopen<CR>
 nnoremap <silent> <Leader>q :q<CR>
 nnoremap <silent> <Leader>w :w<CR>
 nnoremap <silent> <Leader>fed :e $MYVIMRC<CR>
@@ -197,6 +226,12 @@ nnoremap <C-Down> <C-W><C-J>
 nnoremap <C-Up> <C-W><C-K>
 nnoremap <C-Right> <C-W><C-L>
 nnoremap <C-Left> <C-W><C-H>
+if has('nvim')
+  tnoremap <C-Down> <C-\><C-n><C-w><C-j>
+  tnoremap <C-Up> <C-\><C-n><C-w><C-k>
+  tnoremap <C-Right> <C-\><C-n><C-w><C-l>
+  tnoremap <C-Left> <C-\><C-n><C-w><C-h>
+endif
 " Xchange
 nnoremap <C-X> <C-W><C-X>
 
@@ -216,27 +251,39 @@ let g:EclimLoggingDisabled = 1
 
 " Deoplete {{{2
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#omni_patterns = {}
-" let g:deoplete#omni_patterns.java = '\k\.\k*'
-let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
-call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
+call deoplete#custom#option('omni_patterns', {
+  \ 'java': '[^. *\t]\.\w*',
+  \})
+call deoplete#custom#option('sources', {
+  \ 'javascript': ['buffer', 'tern', 'ultisnips'],
+  \})
+call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
+let g:tern#command = ['tern']
+let g:tern#arguments = ['--persistent']
+
+" gitgutter {{{2
+let g:gitgutter_sign_added              = '+'
+let g:gitgutter_sign_modified           = '~'
+let g:gitgutter_sign_removed            = '-'
+let g:gitgutter_sign_removed_first_line = '‾'
+let g:gitgutter_sign_modified_removed   = '≃'
 
 " Markdown {{{2
 let g:vmt_auto_update_on_save = 0
+let g:markdown_composer_open_browser = 0
 let g:markdown_fenced_languages = ['bash=sh', 'html', 'ruby']
 
 " NERDTree {{{2
 let g:NERDTreeIgnore = ['node_modules$', '\~$']
 
 " Powerline {{{2
-" Add powerline fonts to the dictionary
 let g:airline_powerline_fonts = 1
 
 " LanguageClient
 let g:LanguageClient_serverCommands = {
-    \ 'dockerfile': ['/usr/local/bin/docker-langserver', '--stdio'],
-    \ 'javascript': ['flow-language-server', '--stdio']
+    \ 'dockerfile': ['/usr/local/bin/docker-langserver', '--stdio']
     \ }
+" 'javascript': ['flow-language-server', '--stdio']
 let g:LanguageClient_autoStart = 1
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 
