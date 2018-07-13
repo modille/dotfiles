@@ -265,13 +265,28 @@ let g:EclimLoggingDisabled = 1
 
 " Deoplete {{{2
 let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('omni_patterns', {
-  \ 'java': '[^. *\t]\.\w*',
-  \})
-call deoplete#custom#option('sources', {
-  \ 'javascript': ['buffer', 'tern', 'ultisnips'],
-  \})
-call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
+if exists('g:loaded_deoplete')
+  call deoplete#custom#option('omni_patterns', {
+    \ 'java': [
+    \  '[^. \t0-9]\.\w*',
+    \  '[^. \t0-9]\->\w*',
+    \  '[^. \t0-9]\::\w*'
+    \]
+    \})
+  call deoplete#custom#option('sources', {
+    \ '_': ['buffer', 'dictionary', 'file', 'tag', 'ultisnips'],
+    \ 'javascript': ['buffer', 'dictionary', 'file', 'tern', 'tag', 'ultisnips']
+    \})
+  call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
+  call deoplete#custom#var('omni', 'input_patterns', {
+    \ 'ruby': ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::'],
+    \ 'java': [
+    \  '[^. \t0-9]\.\w*',
+    \  '[^. \t0-9]\->\w*',
+    \  '[^. \t0-9]\::\w*'
+    \]
+    \})
+endif
 let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent']
 
@@ -320,7 +335,9 @@ set relativenumber
 " ----------------------------------------------------------------------------
 set background=light
 set hlsearch
-set inccommand=nosplit
+if exists('&inccommand')
+  set inccommand=nosplit
+endif
 
 if exists('+termguicolors')
   set termguicolors
