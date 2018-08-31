@@ -102,8 +102,11 @@ stty -ixon
 # https://github.com/rvm/rvm/issues/3091
 unsetopt AUTO_NAME_DIRS
 
-# # https://www.gitignore.io/docs#-install-command-line
+# https://www.gitignore.io/docs#-install-command-line
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
+MOTD_SCRIPT="$HOME/motd.sh"
+[[ -s $MOTD_SCRIPT ]] && source $MOTD_SCRIPT
 
 # asdf
 [[ -s "/usr/local/opt/asdf/asdf.sh" ]] && source /usr/local/opt/asdf/asdf.sh
