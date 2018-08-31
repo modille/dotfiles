@@ -15,9 +15,9 @@
 function prompt_modille_precmd {
   # Check for untracked files or updated submodules since vcs_info does not.
   if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-    branch_format="%fon ${_branch_color}"$'\ue725'" %b%f%c%u%F{1}"$'\uf059'" %f"
+    branch_format="%fon ${_branch_color}%b%f%c%u %f"
   else
-    branch_format="%fon ${_branch_color}"$'\ue725'" %b%f%c%u "
+    branch_format="%fon ${_branch_color}%b%f%c%u "
   fi
 
   zstyle ':vcs_info:*:prompt:*' formats "${branch_format}"
@@ -83,10 +83,10 @@ function prompt_modille_setup {
   #   %a - action (e.g. rebase-i)
   #   %R - repository path
   #   %S - path in the repository
-  local branch_format="%fon ${_branch_color}"$'\ue725'"%b%f%c%u"
-  local action_format="%f${_action_color}"$'\uf0ad'" %a in progress %f"
-  local unstaged_format="${_dot_unstaged_color}"$'\uf111'" %f"
-  local staged_format="${_dot_staged_color}"$'\uf058'" %f"
+  local branch_format="%fon ${_branch_color}%b%f%c%u"
+  local action_format="%f ${_action_color}%a in progress %f"
+  local unstaged_format="${_dot_unstaged_color}~%f"
+  local staged_format="${_dot_staged_color}+%f"
 
   # Set vcs_info parameters.
   zstyle ':vcs_info:*' enable git
@@ -95,10 +95,16 @@ function prompt_modille_setup {
   zstyle ':vcs_info:*:prompt:*' stagedstr "${staged_format}"
   zstyle ':vcs_info:*:prompt:*' actionformats "${branch_format}${action_format}"
   zstyle ':vcs_info:*:prompt:*' formats "${branch_format}"
-  zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
+  zstyle ':vcs_info:*:prompt:*' nvcsformats ""
+
+  local _prompt_vcs='${vcs_info_msg_0_}'
+  local _prompt_pwd='%fin ${_pwd_color}%~'
+  local _prompt_k8s='%f at ${_color12_bright_blue}$ZSH_KUBECTL_PROMPT'
+  local _color_reset='%f'
+  local _newline=$'\n'
 
   # Define prompts.
-  PROMPT=$'\u256D'$'\U2500'" ${ret_status} "'${vcs_info_msg_0_}'"%fin ${_pwd_color}"$'\uf413'" %~ %fat ${_color04_blue}"$'\ufd31'' $ZSH_KUBECTL_PROMPT'"%f"$'\n'$'\u2570'$'\U2500 '"$ %b"
+  PROMPT="${_color08_bright_black}# ${_prompt_vcs}${_prompt_pwd}${_color_reset}${_newline}$ %b"
   RPROMPT=''
 }
 
