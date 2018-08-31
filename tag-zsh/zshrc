@@ -105,6 +105,10 @@ unsetopt AUTO_NAME_DIRS
 # # https://www.gitignore.io/docs#-install-command-line
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
+# asdf
+[[ -s "/usr/local/opt/asdf/asdf.sh" ]] && source /usr/local/opt/asdf/asdf.sh
+[[ -s "/usr/local/etc/bash_completion.d/asdf.bash" ]] && source /usr/local/etc/bash_completion.d/asdf.bash
+
 # AWS CLI completion
 AWS_COMPLETER="/usr/local/bin/aws_zsh_completer"
 [[ -s $AWS_COMPLETER ]] && source $AWS_COMPLETER
