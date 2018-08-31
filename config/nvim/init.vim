@@ -38,27 +38,28 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'sjl/badwolf'
 
 " Language support {{{2
-Plug 'PProvost/vim-ps1',            { 'for': 'ps1' }
-Plug 'Quramy/tsuquyomi',            { 'for': 'typescript' }
-Plug 'cespare/vim-toml',            { 'for': 'toml' }
-Plug 'craigdallimore/vim-jest-cli', { 'for': 'javascript' }
-Plug 'docker/docker',               { 'for': 'dockerfile', 'rtp': 'contrib/syntax/vim'}
+Plug 'PProvost/vim-ps1',                 { 'for': 'ps1' }
+Plug 'Quramy/tsuquyomi'
+Plug 'cespare/vim-toml',                 { 'for': 'toml' }
+Plug 'craigdallimore/vim-jest-cli',      { 'for': 'javascript' }
+Plug 'docker/docker',                    { 'for': 'dockerfile', 'rtp': 'contrib/syntax/vim'}
 Plug 'elzr/vim-json'
-Plug 'fatih/vim-go',                { 'for': ['asm', 'go', 'gohtmltmpl'] }
-Plug 'flowtype/vim-flow',           { 'for': 'javascript' }
-Plug 'leafgarland/typescript-vim',  { 'for': 'typescript' }
-Plug 'modille/groovy.vim',          { 'for': 'groovy' }
-Plug 'modille/vim-search-maven',    { 'for': 'groovy', 'branch': 'gradle' }
-Plug 'mzlogin/vim-markdown-toc',    { 'for': 'markdown' }
-Plug 'nginx/nginx',                 { 'rtp': 'contrib/vim' }
+Plug 'fatih/vim-go',                     { 'for': ['asm', 'go', 'gohtmltmpl'] }
+Plug 'flowtype/vim-flow',                { 'for': 'javascript' }
+Plug 'leafgarland/typescript-vim',       { 'for': 'typescript' }
+Plug 'modille/groovy.vim',               { 'for': 'groovy' }
+Plug 'modille/vim-search-maven',         { 'for': 'groovy', 'branch': 'gradle' }
+Plug 'mustache/vim-mustache-handlebars', { 'for': 'mustache' }
+Plug 'mzlogin/vim-markdown-toc',         { 'for': 'markdown' }
+Plug 'nginx/nginx',                      { 'rtp': 'contrib/vim' }
 Plug 'notriddle/vim-gitcommit-markdown'
-Plug 'pangloss/vim-javascript',     { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript',          { 'for': 'javascript' }
 Plug 'tetsuo13/Vim-log4j'
-Plug 'tmux-plugins/vim-tmux',       { 'for': 'tmux' }
+Plug 'tmux-plugins/vim-tmux',            { 'for': 'tmux' }
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-rails'
-Plug 'wavded/vim-stylus',           { 'for': 'stylus' }
-Plug 'wting/rust.vim',              { 'for': 'rust' }
+Plug 'wavded/vim-stylus',                { 'for': 'stylus' }
+Plug 'wting/rust.vim',                   { 'for': 'rust' }
 
 " Text objects {{{2
 Plug 'kana/vim-textobj-user' | Plug 'glts/vim-textobj-comment' | Plug 'Julian/vim-textobj-variable-segment'
