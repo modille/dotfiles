@@ -298,6 +298,11 @@ let g:gitgutter_sign_removed            = '-'
 let g:gitgutter_sign_removed_first_line = '‾'
 let g:gitgutter_sign_modified_removed   = '≃'
 
+" lightline {{{2
+let g:lightline = {
+  \ 'colorscheme': 'solarized',
+  \ }
+
 " Markdown {{{2
 let g:vmt_auto_update_on_save = 0
 let g:markdown_composer_open_browser = 0
