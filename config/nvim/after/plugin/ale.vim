@@ -21,6 +21,6 @@ let g:ale_sign_error = ''
 let g:ale_sign_warning = ''
 highlight link ALEErrorSign todo
 
-" Map movement through errors without wrapping.
-nmap <silent> <Leader>ap <Plug>(ale_previous)
-nmap <silent> <Leader>an <Plug>(ale_next)
+" Map movement through errors with wrapping around the file.
+nmap <silent> <Leader>ap <Plug>(ale_previous_wrap)
+nmap <silent> <Leader>an <Plug>(ale_next_wrap)
