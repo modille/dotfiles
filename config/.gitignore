@@ -9,6 +9,11 @@
 /nvim/*
 !nvim/init.vim
 
+# allow nvim/UltiSnips/*.snippets
+!/nvim/UltiSnips
+/nvim/UltiSnips/*
+!/nvim/UltiSnips/*.snippets
+
 # allow nvim/after/plugin/*.vim
 !/nvim/after
 /nvim/after/*
