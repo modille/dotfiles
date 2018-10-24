@@ -1,5 +1,8 @@
 let g:neoterm_rspec_lib_cmd = 'rspec --color --format doc'
 
+" Allow sending command directly to shell
+let g:neoterm_auto_repl_cmd = 0
+
 " nnoremap <silent> <Leader>ta :call neoterm#test#run('all')<cr>
 " nnoremap <silent> <Leader>tf :call neoterm#test#run('file')<cr>
 " nnoremap <silent> <Leader>tc :call neoterm#test#run('current')<cr>
