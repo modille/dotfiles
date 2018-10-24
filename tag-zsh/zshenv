@@ -18,6 +18,11 @@ export NODEPATH="/usr/local/opt/node@8"
 # Nvr
 export LIB_PYTHON_PATH="$HOME/Library/Python/3.6"
 [[ -d $LIB_PYTHON_PATH ]] && export PATH="$PATH:$LIB_PYTHON_PATH/bin"
+# rbenv
+export RBENVPATH="$HOME/.rbenv"
+[[ -d $RBENVPATH ]] && export PATH="$PATH:$RBENVPATH/bin"
+[[ -d $RBENVPATH ]] && export PATH="$PATH:$RBENVPATH/shims"
+export RBENV_SHELL=zsh
 # Rust
 export CARGOPATH="$HOME/.cargo"
 [[ -d $CARGOPATH ]] && export PATH="$PATH:$CARGOPATH/bin"
