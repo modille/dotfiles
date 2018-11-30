@@ -1,0 +1,2 @@
+highlight link NERDTreeGitStatusIgnored Comment
+highlight link NERDTreeGitStatusModified DiffAdd

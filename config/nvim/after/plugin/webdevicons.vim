@@ -5,7 +5,7 @@ let g:webdevicons_conceal_nerdtree_brackets = 0
 let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
 
 " Force extra padding in NERDTree so that the filetype icons line up vertically
-let g:WebDevIconsNerdTreeGitPluginForceVAlign = 0
+let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
 
 " specify OS to decide an icon for unix fileformat (not defined by default)
 " this is useful for avoiding unnecessary system() call

@@ -29,13 +29,13 @@ endfunction
 call plug#begin('~/git/github.com/modille/dotfiles/tag-vim/plugged')
 
 " Colorschemes {{{2
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'bluz71/vim-moonfly-colors'
+" Plug 'NLKNguyen/papercolor-theme'
+" Plug 'bluz71/vim-moonfly-colors'
 Plug 'chriskempson/base16-vim'
 Plug 'icymind/NeoSolarized'
-Plug 'marciomazza/vim-brogrammer-theme'
-Plug 'nanotech/jellybeans.vim'
-Plug 'sjl/badwolf'
+" Plug 'marciomazza/vim-brogrammer-theme'
+" Plug 'nanotech/jellybeans.vim'
+" Plug 'sjl/badwolf'
 
 " Language support {{{2
 Plug 'PProvost/vim-ps1',                 { 'for': 'ps1' }
@@ -60,6 +60,7 @@ Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-rails'
 Plug 'wavded/vim-stylus',                { 'for': 'stylus' }
 Plug 'wting/rust.vim',                   { 'for': 'rust' }
+Plug 'ChristianNogueira/Qlikview_Vim_Syntax'
 
 " Text objects {{{2
 Plug 'kana/vim-textobj-user' | Plug 'glts/vim-textobj-comment' | Plug 'Julian/vim-textobj-variable-segment'
@@ -69,8 +70,7 @@ Plug 'vim-scripts/argtextobj.vim'
 " Other plugins {{{2
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color' " Highlight colors in CSS files
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'dbmrq/vim-redacted'
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'easymotion/vim-easymotion' | Plug 'haya14busa/vim-easyoperator-line' | Plug 'haya14busa/vim-easyoperator-phrase'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
@@ -81,7 +81,6 @@ Plug 'haya14busa/vim-asterisk'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'hwartig/vim-seeing-is-believing'
 Plug 'janko-m/vim-test'
-" Plug 'johngrib/vim-game-code-break'
 Plug 'jpalardy/spacehi.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 Plug 'kien/rainbow_parentheses.vim', { 'on': ['RainbowParenthesesToggle'] }
@@ -92,10 +91,9 @@ Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-startify'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'peterrincker/vim-argumentative'
-Plug 'raimondi/delimitmate'
 Plug 'reinh/vim-makegreen'
 Plug 'rizzatti/dash.vim'
-Plug 'scrooloose/nerdtree' | Plug 'xuyuanp/nerdtree-git-plugin'
+Plug 'scrooloose/nerdtree' | Plug 'Aldlevine/nerdtree-git-plugin'
 Plug 'shougo/echodoc.vim'
 Plug 'shougo/vimproc.vim', { 'do': 'make' }
 Plug 'simnalamburt/vim-mundo'
@@ -108,6 +106,7 @@ Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-dispatch' " | Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-dotenv'
 Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive' | Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-repeat'
@@ -131,7 +130,7 @@ if has('nvim')
   " Deoplete
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-  Plug 'zchee/deoplete-docker'
+  " Plug 'zchee/deoplete-docker'
 endif
 
 " Source devicons last
@@ -233,8 +232,8 @@ if has('nvim')
   tnoremap <C-Right> <C-\><C-n><C-w><C-l>
   tnoremap <C-Left> <C-\><C-n><C-w><C-h>
 endif
-" Xchange
-nnoremap <C-X> <C-W><C-X>
+" Exchange
+nnoremap <C-E> <C-W><C-X>
 
 " Avoid accidental S-Up and S-Down when in V-LINE mode
 nmap <S-Up> <Up>
@@ -256,6 +255,29 @@ if has('nvim')
   nnoremap <silent> <Leader>nrt :1T npm run test<CR>
 endif
 
+" Lots of alternatives methods at
+" http://vim.wikia.com/wiki/Open_a_web-browser_with_the_URL_in_the_current_line
+" gx is similar
+function! SearchVisualDockerHubOpen() "{{{2
+  " Get search string from visual selection
+  let l:tmp = @"
+  execute 'normal! vgvy'
+  let l:result = @"
+  let @" = l:tmp
+
+  " 1. split the search string in seperate words
+  " 2. join the words seperated by +
+  " 3. replace all " with an empty string
+  let l:term = substitute(join(split(l:result),'+'),'"','','g')
+
+  let l:dockerhub = 'https://hub.docker.com/search/?isAutomated=0&isOfficial=0&page=1&pullCount=0&starCount=0&q='
+  let l:query = l:dockerhub . l:term
+
+  let l:browser_cmd = 'open'
+
+  execute 'silent !' . l:browser_cmd . ' "' . l:query . '"'
+endfunction
+
 " ----------------------------------------------------------------------------
 "  Plugin settings {{{1
 " ----------------------------------------------------------------------------
@@ -276,6 +298,7 @@ if exists('g:loaded_deoplete')
     \})
   call deoplete#custom#option('sources', {
     \ '_': ['buffer', 'dictionary', 'file', 'tag', 'ultisnips'],
+    \ 'java': ['buffer', 'dictionary', 'file', 'omni', 'tag', 'ultisnips'],
     \ 'javascript': ['buffer', 'dictionary', 'file', 'tern', 'tag', 'ultisnips']
     \})
   call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
@@ -310,6 +333,9 @@ let g:markdown_fenced_languages = ['bash=sh', 'html', 'ruby']
 
 " NERDTree {{{2
 let g:NERDTreeIgnore = ['node_modules$', '\~$']
+
+" netrw {{{2
+let g:netrw_keepdir=0
 
 " Powerline {{{2
 let g:airline_powerline_fonts = 1

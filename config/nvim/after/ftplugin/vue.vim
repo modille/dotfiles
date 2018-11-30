@@ -1,1 +1,1 @@
-autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.javascript
+autocmd FileType vue setlocal filetype=vue.javascript

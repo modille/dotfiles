@@ -1,1 +1,1 @@
-setlocal equalprg=xmllint\ --format\ -
+" autocmd FileType xml setlocal equalprg=xmllint\ --format\ -
