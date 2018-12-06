@@ -99,9 +99,6 @@ precmd() {
 # Disable C-s
 stty -ixon
 
-# https://github.com/rvm/rvm/issues/3091
-unsetopt AUTO_NAME_DIRS
-
 # https://www.gitignore.io/docs#-install-command-line
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
@@ -160,6 +157,10 @@ MODILLE_COMPLETIONS="$HOME/git/github.com/modille/completions/`basename $SHELL`"
 # Gradle completion
 GRADLE_COMPLETION="$HOME/git/github.com/gradle/gradle-completion"
 [[ -d $GRADLE_COMPLETION ]] && fpath=($GRADLE_COMPLETION $fpath)
+
+# rbenv completion
+RBENV_COMPLETER="$HOME/git/github.com/rbenv/rbenv/completions/rbenv.zsh"
+[[ -s $RBENV_COMPLETER ]] && source $RBENV_COMPLETER
 
 # grc (Generic Colouriser)
 [[ -s "/etc/grc.zsh" ]] && source /usr/local/etc/grc.zsh
