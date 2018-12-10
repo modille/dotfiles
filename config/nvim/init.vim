@@ -38,15 +38,11 @@ Plug 'icymind/NeoSolarized'
 " Plug 'sjl/badwolf'
 
 " Language support {{{2
-Plug 'PProvost/vim-ps1',                 { 'for': 'ps1' }
-Plug 'Quramy/tsuquyomi'
 Plug 'cespare/vim-toml',                 { 'for': 'toml' }
 Plug 'craigdallimore/vim-jest-cli',      { 'for': 'javascript' }
 Plug 'docker/docker',                    { 'for': 'dockerfile', 'rtp': 'contrib/syntax/vim'}
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go',                     { 'for': ['asm', 'go', 'gohtmltmpl'] }
-Plug 'flowtype/vim-flow',                { 'for': 'javascript' }
-Plug 'leafgarland/typescript-vim',       { 'for': 'typescript' }
 Plug 'modille/groovy.vim',               { 'for': 'groovy' }
 Plug 'modille/vim-search-maven',         { 'for': 'groovy', 'branch': 'gradle' }
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'mustache' }
@@ -54,13 +50,10 @@ Plug 'mzlogin/vim-markdown-toc',         { 'for': 'markdown' }
 Plug 'nginx/nginx',                      { 'rtp': 'contrib/vim' }
 Plug 'notriddle/vim-gitcommit-markdown'
 Plug 'pangloss/vim-javascript',          { 'for': 'javascript' }
-Plug 'tetsuo13/Vim-log4j'
 Plug 'tmux-plugins/vim-tmux',            { 'for': 'tmux' }
+Plug 'tpope/vim-cucumber'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-rails'
-Plug 'wavded/vim-stylus',                { 'for': 'stylus' }
-Plug 'wting/rust.vim',                   { 'for': 'rust' }
-Plug 'ChristianNogueira/Qlikview_Vim_Syntax'
 
 " Text objects {{{2
 Plug 'kana/vim-textobj-user' | Plug 'glts/vim-textobj-comment' | Plug 'Julian/vim-textobj-variable-segment'
@@ -83,7 +76,7 @@ Plug 'hwartig/vim-seeing-is-believing'
 Plug 'janko-m/vim-test'
 Plug 'jpalardy/spacehi.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
-Plug 'kien/rainbow_parentheses.vim', { 'on': ['RainbowParenthesesToggle'] }
+" Plug 'kien/rainbow_parentheses.vim', { 'on': ['RainbowParenthesesToggle'] }
 Plug 'kshenoy/vim-signature' " Show marks in gutter
 Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'
@@ -347,7 +340,6 @@ let g:vim_json_syntax_conceal = 0
 let g:LanguageClient_serverCommands = {
     \ 'dockerfile': ['/usr/local/bin/docker-langserver', '--stdio']
     \ }
-" 'javascript': ['flow-language-server', '--stdio']
 let g:LanguageClient_autoStart = 1
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 
