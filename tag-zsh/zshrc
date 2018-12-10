@@ -102,7 +102,7 @@ stty -ixon
 # https://www.gitignore.io/docs#-install-command-line
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
-MOTD_SCRIPT="$HOME/motd.sh"
+MOTD_SCRIPT="$HOME/git/github.com/modille/motd/motd.sh"
 [[ -s $MOTD_SCRIPT ]] && source $MOTD_SCRIPT
 
 # asdf
