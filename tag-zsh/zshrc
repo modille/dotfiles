@@ -114,7 +114,7 @@ AWS_COMPLETER="/usr/local/bin/aws_zsh_completer"
 [[ -s $AWS_COMPLETER ]] && source $AWS_COMPLETER
 
 # Base16 Shell
-BASE16_SHELL=$HOME/.config/base16-shell/
+BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 # iTerm2 shell integration
@@ -126,8 +126,7 @@ export NVM_DIR="/Users/odillem2/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
 
 # rbenv
-# Init manually for better performance:
-#     rbenv init
+eval "$(rbenv init -)"
 
 # SDKMAN!
 setopt clobber
