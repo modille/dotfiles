@@ -19,7 +19,7 @@ if has('autocmd')
 
     " SpaceHi
     autocmd syntax * SpaceHi
-    autocmd FileType Mundo,MundoDiff,go,help,nerdtree,startify,vim NoSpaceHi
+    autocmd FileType Mundo,MundoDiff,go,help,startify,vim NoSpaceHi
     autocmd Syntax diff NoSpaceHi
 
     " Templates

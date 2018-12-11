@@ -86,7 +86,6 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'peterrincker/vim-argumentative'
 Plug 'reinh/vim-makegreen'
 Plug 'rizzatti/dash.vim'
-Plug 'scrooloose/nerdtree' | Plug 'Aldlevine/nerdtree-git-plugin'
 Plug 'shougo/echodoc.vim'
 Plug 'shougo/vimproc.vim', { 'do': 'make' }
 Plug 'simnalamburt/vim-mundo'
@@ -127,7 +126,7 @@ if has('nvim')
 endif
 
 " Source devicons last
-Plug 'ryanoasis/vim-devicons' | Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -324,10 +323,8 @@ let g:vmt_auto_update_on_save = 0
 let g:markdown_composer_open_browser = 0
 let g:markdown_fenced_languages = ['bash=sh', 'html', 'ruby']
 
-" NERDTree {{{2
-let g:NERDTreeIgnore = ['node_modules$', '\~$']
-
 " netrw {{{2
+let g:netrw_altfile=1
 let g:netrw_keepdir=0
 
 " Powerline {{{2
