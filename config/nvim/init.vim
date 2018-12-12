@@ -89,7 +89,6 @@ Plug 'rizzatti/dash.vim'
 Plug 'shougo/echodoc.vim'
 Plug 'shougo/vimproc.vim', { 'do': 'make' }
 Plug 'simnalamburt/vim-mundo'
-Plug 'tfnico/vim-gradle'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-characterize'
