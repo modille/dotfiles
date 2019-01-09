@@ -1,3 +1,9 @@
+# frozen_string_literal: true
+
+# Enable command history
+IRB.conf[:SAVE_HISTORY] = 10_000
+IRB.conf[:HISTORY_FILE] = '~/.irb-history'
+
 def bench( repetitions=1000, &block )
   require 'benchmark'
   Benchmark.bmbm do |b|
