@@ -331,9 +331,6 @@ let g:netrw_keepdir=0
 " Powerline {{{2
 let g:airline_powerline_fonts = 1
 
-" vim-json {{{2
-let g:vim_json_syntax_conceal = 0
-
 " LanguageClient
 let g:LanguageClient_serverCommands = {
     \ 'dockerfile': ['/usr/local/bin/docker-langserver', '--stdio']
