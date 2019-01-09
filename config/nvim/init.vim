@@ -326,7 +326,6 @@ let g:markdown_fenced_languages = ['bash=sh', 'html', 'ruby']
 
 " netrw {{{2
 let g:netrw_altfile=1
-let g:netrw_keepdir=0
 
 " Powerline {{{2
 let g:airline_powerline_fonts = 1
