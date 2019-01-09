@@ -46,6 +46,7 @@ Plug 'fatih/vim-go',                     { 'for': ['asm', 'go', 'gohtmltmpl'] }
 Plug 'modille/groovy.vim',               { 'for': 'groovy' }
 Plug 'modille/vim-search-maven',         { 'for': 'groovy', 'branch': 'gradle' }
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'mustache' }
+Plug 'mxw/vim-jsx',                      { 'for': ['javascript', 'jsx'] }
 Plug 'mzlogin/vim-markdown-toc',         { 'for': 'markdown' }
 Plug 'nginx/nginx',                      { 'rtp': 'contrib/vim' }
 Plug 'notriddle/vim-gitcommit-markdown'
@@ -64,6 +65,7 @@ Plug 'vim-scripts/argtextobj.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color' " Highlight colors in CSS files
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+Plug 'brooth/far.vim'
 Plug 'easymotion/vim-easymotion' | Plug 'haya14busa/vim-easyoperator-line' | Plug 'haya14busa/vim-easyoperator-phrase'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
