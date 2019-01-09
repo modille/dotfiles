@@ -4,10 +4,13 @@
 IRB.conf[:SAVE_HISTORY] = 10_000
 IRB.conf[:HISTORY_FILE] = '~/.irb-history'
 
-def bench( repetitions=1000, &block )
-  require 'benchmark'
-  Benchmark.bmbm do |b|
-    b.report { repetitions.times( &block ) }
+# Utility module for any helpful methods
+module Modille
+  def self.bench(repetitions = 1000, &block)
+    require 'benchmark'
+    Benchmark.bmbm do |bench|
+      bench.report { repetitions.times(&block) }
+    end
+    nil
   end
-  nil
 end
