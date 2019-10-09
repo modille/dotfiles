@@ -1,2 +1,2 @@
 IndentGuidesEnable
-UltiSnipsAddFiletypes javascript-jasmine-arrow
+setlocal spell
