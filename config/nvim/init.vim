@@ -337,7 +337,7 @@ if exists('+termguicolors')
 endif
 
 if exists('+colorcolumn')
-  set colorcolumn=120
+  set colorcolumn=80
 endif
 
 colorscheme solarized
