@@ -6,8 +6,10 @@
   user = modille
 
 [alias]
+  a = add
   b = "!f() { nvim -c 'Gblame' $1; }; f"
   br = branch
+  cm = commit -m
   co = checkout
   d = diff
   dc = diff --cached
@@ -21,16 +23,22 @@
   l = log --abbrev-commit --decorate
   lg = log --abbrev-commit --decorate --graph --stat
   lgp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  mrs = "!f() { \
+           gitlab merge_requests `git remote get-url origin | cut -d':' -f2` '{state: opened}' --only=source_branch,title,web_url; \
+         }; f"
   pick = cherry-pick
   push-up = push --set-upstream origin
   reset-hard = reset --hard HEAD^
   reset-soft = reset --soft HEAD^
+  rh = reset --hard
   ri = rebase -i
   rpo = remote prune origin
   rr = for-each-ref --format='%(refname:strip=3)' refs/remotes
+  rs = reset --soft
   s = status
   si = submodule init
   su = submodule update
+  suir = submodule update --init --recursive
 
   # Alias praise to blame, and use vim for colorized blame
   praise = "!f() { nvim -c 'Gblame' $1; }; f"
@@ -116,3 +124,6 @@
 
 [status]
   submoduleSummary = true
+
+[diff-so-fancy]
+  rulerWidth = 240
