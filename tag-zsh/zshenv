@@ -15,8 +15,8 @@ export GOPATH="$HOME/go"
 # Node
 export NODEPATH="/usr/local/opt/node@8"
 [[ -d $NODEPATH ]] && export PATH="$PATH:$NODEPATH/bin"
-# Nvr
-export LIB_PYTHON_PATH="$HOME/Library/Python/3.6"
+# Python
+export LIB_PYTHON_PATH="$HOME/Library/Python/3.7"
 [[ -d $LIB_PYTHON_PATH ]] && export PATH="$PATH:$LIB_PYTHON_PATH/bin"
 # rbenv
 export RBENVPATH="$HOME/.rbenv"
@@ -36,3 +36,6 @@ export LIBRARY_PATH="$LIBRARY_PATH:/usr/local/opt/openssl/lib"
 # Pipe less to highlight
 export LESSOPEN="| /usr/local/bin/highlight %s --out-format xterm256 --quiet --force --style solarized-light "
 export LESS=" -R"
+
+# Quiet direnv
+export DIRENV_LOG_FORMAT=

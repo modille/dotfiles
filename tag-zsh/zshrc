@@ -1,5 +1,8 @@
 # .zshrc
 
+# Uncomment and run zprof at the end to profile startup time
+# zmodload zsh/zprof
+
 # Source Antigen
 source /usr/local/share/antigen/antigen.zsh
 
@@ -21,7 +24,6 @@ antigen bundles <<EOBUNDLES
   sorin-ionescu/prezto modules/history-substring-search
   sorin-ionescu/prezto modules/prompt
   zsh-users/zsh-autosuggestions
-  superbrothers/zsh-kubectl-prompt
 EOBUNDLES
 antigen apply
 
@@ -89,13 +91,6 @@ bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 bindkey '^w' backward-kill-word
 
-# Show insert/normal mode indicator for vim-mode
-
-# Set tab title to pwd
-precmd() {
-  echo -ne "\e]1;${PWD##*/}\a"
-}
-
 # Disable C-s
 stty -ixon
 
@@ -117,22 +112,34 @@ AWS_COMPLETER="/usr/local/bin/aws_zsh_completer"
 BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
-# iTerm2 shell integration
-# ITERM_SHELL="$HOME/.iterm2_shell_integration.zsh"
-# [[ -s $ITERM_SHELL ]] && source $ITERM_SHELL
-
 # NVM
 export NVM_DIR="/Users/odillem2/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
 
+# place this after nvm initialization!
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+
 # rbenv
 eval "$(rbenv init -)"
-
-# SDKMAN!
-setopt clobber
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
-setopt noclobber
 
 # direnv
 if hash direnv 2>/dev/null; then
@@ -143,11 +150,18 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [[ -x $(command -v rg) ]] && export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!*.class"'
 
-# helm
-source <(helm completion `basename $SHELL`)
-
-# k8s
-source <(kubectl completion `basename $SHELL`)
+# k8s completions (cached)
+# Inspired by:
+#   https://github.com/belak/prezto-contrib/blob/356c8e29dd97268fbc9050a6c40da69b3501cf62/contrib-kubernetes/init.zsh#L13-L22
+# With cache dir from completion module:
+#   https://github.com/sorin-ionescu/prezto/blob/1f4601e44c989b90dc7314b151891fa60a101251/modules/completion/init.zsh#L47-L49
+__kubectl_completion_file="${ZDOTDIR:-$HOME}/.zcompcache/kubectl.zsh"
+__kubectl_command="${commands[kubectl]}"
+if [[ "${__kubectl_command}" -nt "${__kubectl_completion_file}" || ! -s "${__kubectl_completion_file}" ]]; then
+  ${__kubectl_command} completion zsh >! "${__kubectl_completion_file}" 2> /dev/null
+fi
+source "${__kubectl_completion_file}"
+unset __kubectl_completion_file __kubectl_command
 
 # Completions
 MODILLE_COMPLETIONS="$HOME/git/github.com/modille/completions/`basename $SHELL`"
@@ -167,3 +181,6 @@ RBENV_COMPLETER="$HOME/git/github.com/rbenv/rbenv/completions/rbenv.zsh"
 # Private configs
 PRIVATE_RC="$HOME/.zshrc-private"
 [[ -s $PRIVATE_RC ]] && source $PRIVATE_RC
+
+# Uncomment and load zprof at the top to profile startup time
+# zprof
