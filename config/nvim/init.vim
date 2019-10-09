@@ -29,15 +29,11 @@ endfunction
 call plug#begin('~/git/github.com/modille/dotfiles/tag-vim/plugged')
 
 " Colorschemes {{{2
-" Plug 'NLKNguyen/papercolor-theme'
-" Plug 'bluz71/vim-moonfly-colors'
 Plug 'chriskempson/base16-vim'
-Plug 'icymind/NeoSolarized'
-" Plug 'marciomazza/vim-brogrammer-theme'
-" Plug 'nanotech/jellybeans.vim'
-" Plug 'sjl/badwolf'
+Plug 'jez/vim-colors-solarized'
 
 " Language support {{{2
+Plug 'briancollins/vim-jst',             { 'for': 'ejs' }
 Plug 'cespare/vim-toml',                 { 'for': 'toml' }
 Plug 'craigdallimore/vim-jest-cli',      { 'for': 'javascript' }
 Plug 'docker/docker',                    { 'for': 'dockerfile', 'rtp': 'contrib/syntax/vim'}
@@ -74,19 +70,17 @@ Plug 'godlygeek/tabular'
 Plug 'haya14busa/is.vim'
 Plug 'haya14busa/vim-asterisk'
 Plug 'heavenshell/vim-jsdoc'
-Plug 'hwartig/vim-seeing-is-believing'
 Plug 'janko-m/vim-test'
 Plug 'jpalardy/spacehi.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
-" Plug 'kien/rainbow_parentheses.vim', { 'on': ['RainbowParenthesesToggle'] }
 Plug 'kshenoy/vim-signature' " Show marks in gutter
 Plug 'machakann/vim-highlightedyank'
+Plug 'machakann/vim-swap'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-startify'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'peterrincker/vim-argumentative'
-Plug 'reinh/vim-makegreen'
 Plug 'rizzatti/dash.vim'
 Plug 'shougo/echodoc.vim'
 Plug 'shougo/vimproc.vim', { 'do': 'make' }
@@ -96,13 +90,14 @@ Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dadbod'
-Plug 'tpope/vim-dispatch' " | Plug 'radenling/vim-dispatch-neovim'
+Plug 'tpope/vim-dispatch' | Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-dotenv'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive' | Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
@@ -116,18 +111,22 @@ if has('nvim')
   " Consider yi" then ci"<C-R>0 then . to repeat
   Plug 'bfredl/nvim-miniyank'
   Plug 'kassio/neoterm'
-  Plug 'osyo-manga/vim-brightest' " Highlight word under cursor
-  Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets' | Plug 'modille/vim-jest-snippets'
+  " Plug 'osyo-manga/vim-brightest' " Highlight word under cursor
   Plug 'w0rp/ale'
 
+  " Snippets
+  " Plug 'sirver/ultisnips'
+  Plug 'honza/vim-snippets'
+  Plug 'modille/vim-jest-snippets'
+
+  " CoC intellisense engine
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
   " Deoplete
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  " Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
   " Plug 'zchee/deoplete-docker'
 endif
-
-" Source devicons last
-Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -225,8 +224,6 @@ if has('nvim')
   tnoremap <C-Right> <C-\><C-n><C-w><C-l>
   tnoremap <C-Left> <C-\><C-n><C-w><C-h>
 endif
-" Exchange
-nnoremap <C-E> <C-W><C-X>
 
 " Avoid accidental S-Up and S-Down when in V-LINE mode
 nmap <S-Up> <Up>
@@ -271,41 +268,20 @@ function! SearchVisualDockerHubOpen() "{{{2
   execute 'silent !' . l:browser_cmd . ' "' . l:query . '"'
 endfunction
 
+nnoremap tc :tabclose<CR>
+nnoremap tn :tabnext<CR>
+nnoremap tp :tabprev<CR>
+
 " ----------------------------------------------------------------------------
 "  Plugin settings {{{1
 " ----------------------------------------------------------------------------
+" Cucumber {{{2
+let g:cucumber_steps_glob = '/features/**/*.{js,rb} /green_hill/step_definitions/**/*.{js,rb}'
+
 " Eclim {{{2
 let g:EclimJavascriptValidate = 0
 let g:EclimCompletionMethod = 'omnifunc'
 let g:EclimLoggingDisabled = 1
-
-" Deoplete {{{2
-let g:deoplete#enable_at_startup = 1
-if exists('g:loaded_deoplete')
-  call deoplete#custom#option('omni_patterns', {
-    \ 'java': [
-    \  '[^. \t0-9]\.\w*',
-    \  '[^. \t0-9]\->\w*',
-    \  '[^. \t0-9]\::\w*'
-    \]
-    \})
-  call deoplete#custom#option('sources', {
-    \ '_': ['buffer', 'dictionary', 'file', 'tag', 'ultisnips'],
-    \ 'java': ['buffer', 'dictionary', 'file', 'omni', 'tag', 'ultisnips'],
-    \ 'javascript': ['buffer', 'dictionary', 'file', 'tern', 'tag', 'ultisnips']
-    \})
-  call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
-  call deoplete#custom#var('omni', 'input_patterns', {
-    \ 'ruby': ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::'],
-    \ 'java': [
-    \  '[^. \t0-9]\.\w*',
-    \  '[^. \t0-9]\->\w*',
-    \  '[^. \t0-9]\::\w*'
-    \]
-    \})
-endif
-let g:tern#command = ['tern']
-let g:tern#arguments = ['--persistent']
 
 " gitgutter {{{2
 let g:gitgutter_sign_added              = '+'
@@ -314,10 +290,8 @@ let g:gitgutter_sign_removed            = '-'
 let g:gitgutter_sign_removed_first_line = '‾'
 let g:gitgutter_sign_modified_removed   = '≃'
 
-" lightline {{{2
-let g:lightline = {
-  \ 'colorscheme': 'solarized',
-  \ }
+" javascript {{{2
+let g:javascript_plugin_jsdoc = 1
 
 " Markdown {{{2
 let g:vmt_auto_update_on_save = 0
@@ -328,14 +302,13 @@ let g:markdown_fenced_languages = ['bash=sh', 'html', 'ruby']
 let g:netrw_altfile=1
 
 " Powerline {{{2
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
 
 " LanguageClient
 let g:LanguageClient_serverCommands = {
     \ 'dockerfile': ['/usr/local/bin/docker-langserver', '--stdio']
     \ }
 let g:LanguageClient_autoStart = 1
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 
 " The following sections are organized similar to :options
 
@@ -349,7 +322,6 @@ set smartcase
 "  4 displaying text {{{1
 " ----------------------------------------------------------------------------
 set number
-set relativenumber
 
 " ----------------------------------------------------------------------------
 "  5 syntax, highlighting and spelling {{{1
@@ -368,19 +340,28 @@ if exists('+colorcolumn')
   set colorcolumn=120
 endif
 
-" Set colorscheme
-if has('autocmd')
-  augroup colorschemeAutocmds
-    autocmd!
-    autocmd VimEnter * AirlineTheme base16
-  augroup END
-endif
-if filereadable(expand('~/.vimrc_background'))
-  source ~/.vimrc_background
-endif
+colorscheme solarized
+let g:airline_theme='solarized'
 
-" Italicised comments
+" Italicised highlight groups
+" You can see all the groups currently active with this command:
+"   :so $VIMRUNTIME/syntax/hitest.vim
+" https://vim.fandom.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+  \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+  \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 highlight Comment cterm=italic gui=italic
+highlight cucumberBackground cterm=italic gui=italic ctermfg=5 guifg=#6c71c4
+highlight cucumberFeature cterm=italic gui=italic ctermfg=1 guifg=#dc322f
+highlight cucumberGiven cterm=italic gui=italic ctermfg=5 guifg=#6c71c4
+highlight cucumberScenario cterm=italic gui=italic ctermfg=5 guifg=#6c71c4
+highlight cucumberScenarioOutline cterm=italic gui=italic ctermfg=5 guifg=#6c71c4
+highlight cucumberThen cterm=italic gui=italic ctermfg=3 guifg=#b58900
+highlight cucumberWhen cterm=italic gui=italic ctermfg=4 guifg=#268bd2
+highlight htmlArg cterm=italic gui=italic
+highlight rubyConstant cterm=italic gui=italic
+
+let ruby_spellcheck_strings = 1
 
 " ----------------------------------------------------------------------------
 "  6 multiple windows {{{1
@@ -391,11 +372,6 @@ set splitbelow
 set splitright
 
 " ----------------------------------------------------------------------------
-"  9 using the mouse {{{1
-" ----------------------------------------------------------------------------
-set mouse=a
-
-" ----------------------------------------------------------------------------
 "  11 messages and info {{{1
 " ----------------------------------------------------------------------------
 set noshowmode " Airline displays it for us
@@ -404,6 +380,11 @@ set noshowmode " Airline displays it for us
 "  12 selecting text {{{1
 " ----------------------------------------------------------------------------
 " See :help clipboard
+
+" ----------------------------------------------------------------------------
+"  13 editing text {{{1
+" ----------------------------------------------------------------------------
+set dictionary=/usr/share/dict/words
 
 " ----------------------------------------------------------------------------
 "  14 tabs and indenting {{{1

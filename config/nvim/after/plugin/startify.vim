@@ -25,8 +25,3 @@ let g:startify_custom_header = s:filter_header([
    \ '        ''V/''   ++++++',
    \ '                 ++',
    \ ])
-
-" Prepend the vim-devicons logo to each Startify entry
-function! StartifyEntryFormat()
-  return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
-endfunction

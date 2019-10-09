@@ -1,6 +1,9 @@
 " let g:ale_javascript_eslint_use_global = 1
 let g:ale_javascript_eslint_use_global = 0
 
+" Use `bundle exec rubocop`
+let g:ale_ruby_rubocop_executable = 'bundle'
+
 let g:ale_linter_aliases = {'javascript.jsx': 'javascript', 'jsx': 'javascript'}
 
 " Disable ale for java in order to use Eclim instead
@@ -19,8 +22,13 @@ let g:ale_fixers = {
 
 let g:ale_fix_on_save = 1
 
-let g:ale_sign_error = ''
-let g:ale_sign_warning = ''
+" Will eventually become the default
+" https://www.reddit.com/r/vim/comments/bs95ud/announcement_changing_default_linting_options_for
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+
+" let g:ale_sign_error = ''
+" let g:ale_sign_warning = ''
 highlight link ALEErrorSign todo
 
 " Map movement through errors with wrapping around the file.

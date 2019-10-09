@@ -8,15 +8,6 @@ if has('autocmd')
     " Custom filetype/syntax
     autocmd BufNewFile,BufRead Berksfile,Guardfile,Vagrantfile set syntax=ruby
 
-    " Seeing-is-believing
-    autocmd FileType ruby nmap <buffer> <Enter> <Plug>(seeing-is-believing-mark-and-run)
-    autocmd FileType ruby xmap <buffer> <Enter> <Plug>(seeing-is-believing-mark-and-run)
-    autocmd FileType ruby nmap <buffer> <F4> <Plug>(seeing-is-believing-mark)
-    autocmd FileType ruby xmap <buffer> <F4> <Plug>(seeing-is-believing-mark)
-    autocmd FileType ruby imap <buffer> <F4> <Plug>(seeing-is-believing-mark)
-    autocmd FileType ruby nmap <buffer> <F5> <Plug>(seeing-is-believing-run)
-    autocmd FileType ruby imap <buffer> <F5> <Plug>(seeing-is-believing-run)
-
     " SpaceHi
     autocmd syntax * SpaceHi
     autocmd FileType Mundo,MundoDiff,go,help,startify,vim NoSpaceHi
