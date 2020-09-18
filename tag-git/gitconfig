@@ -23,6 +23,7 @@
   l = log --abbrev-commit --decorate
   lg = log --abbrev-commit --decorate --graph --stat
   lgp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  lr = log --remotes --no-walk --oneline
   mrs = "!f() { \
            gitlab merge_requests `git remote get-url origin | cut -d':' -f2` '{state: opened}' --only=source_branch,title,web_url; \
          }; f"
@@ -106,9 +107,12 @@
 
 [core]
   autocrlf = input
-  excludesfile = ~/.gitignore
   editor = nvim
-  pager = diff-so-fancy | less --tabs=4 -RX
+  excludesfile = ~/.gitignore
+  pager = delta --light
+
+[delta]
+  theme = 'Solarized (light)'
 
 [diff]
   guitool = diffmerge
@@ -116,14 +120,17 @@
 [gitsh]
   noGreeting = true
 
+[interactive]
+  diffFilter = delta --color-only --light
+
 [mergetool]
   keepBackup = false
+
+[pull]
+  ff = only
 
 [push]
   default = current
 
 [status]
   submoduleSummary = true
-
-[diff-so-fancy]
-  rulerWidth = 240
