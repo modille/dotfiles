@@ -15,7 +15,6 @@ function! JestDebugNearest()
   unlet g:test#javascript#runner
   unlet g:test#javascript#jest#executable
 endfunction
-nmap <silent> <Leader>td :call DebugNearest()<CR>
 
 function! CucumberRecordNearest()
   let g:test#javascript#runner = 'cucumberjs'
