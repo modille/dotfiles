@@ -29,16 +29,17 @@ endfunction
 call plug#begin('~/git/github.com/modille/dotfiles/tag-vim/plugged')
 
 " Colorschemes {{{2
-Plug 'chriskempson/base16-vim'
+" Plug 'chriskempson/base16-vim'
 Plug 'jez/vim-colors-solarized'
 
 " Language support {{{2
 Plug 'briancollins/vim-jst',             { 'for': 'ejs' }
 Plug 'cespare/vim-toml',                 { 'for': 'toml' }
 Plug 'craigdallimore/vim-jest-cli',      { 'for': 'javascript' }
-Plug 'docker/docker',                    { 'for': 'dockerfile', 'rtp': 'contrib/syntax/vim'}
+Plug 'docker/docker',                    { 'for': 'dockerfile', 'rtp': 'contrib/syntax/vim' }
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go',                     { 'for': ['asm', 'go', 'gohtmltmpl'] }
+Plug 'heavenshell/vim-jsdoc',            { 'for': ['javascript', 'javascript.jsx','typescript'], 'do': 'make install' }
 Plug 'modille/groovy.vim',               { 'for': 'groovy' }
 Plug 'modille/vim-search-maven',         { 'for': 'groovy', 'branch': 'gradle' }
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'mustache' }
@@ -53,8 +54,9 @@ Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-rails'
 
 " Text objects {{{2
-Plug 'kana/vim-textobj-user' | Plug 'glts/vim-textobj-comment' | Plug 'Julian/vim-textobj-variable-segment'
+Plug 'kana/vim-textobj-user' | Plug 'kana/vim-textobj-function' | Plug 'Julian/vim-textobj-variable-segment' | Plug 'glts/vim-textobj-comment' | Plug 'haya14busa/vim-textobj-function-syntax'
 Plug 'michaeljsmith/vim-indent-object'
+Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
 Plug 'vim-scripts/argtextobj.vim'
 
 " Other plugins {{{2
@@ -62,22 +64,20 @@ Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color' " Highlight colors in CSS files
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'brooth/far.vim'
-Plug 'easymotion/vim-easymotion' | Plug 'haya14busa/vim-easyoperator-line' | Plug 'haya14busa/vim-easyoperator-phrase'
+" Plug 'easymotion/vim-easymotion' | Plug 'haya14busa/vim-easyoperator-line' | Plug 'haya14busa/vim-easyoperator-phrase'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+" Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'godlygeek/tabular'
 Plug 'haya14busa/is.vim'
 Plug 'haya14busa/vim-asterisk'
-Plug 'heavenshell/vim-jsdoc'
 Plug 'janko-m/vim-test'
 Plug 'jpalardy/spacehi.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 Plug 'kshenoy/vim-signature' " Show marks in gutter
+Plug 'liuchengxu/vista.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'machakann/vim-swap'
-Plug 'majutsushi/tagbar'
-Plug 'mattn/emmet-vim'
+" Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-startify'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'peterrincker/vim-argumentative'
@@ -89,7 +89,7 @@ Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-dadbod'
+Plug 'tpope/vim-dadbod' | Plug 'kristijanhusak/vim-dadbod-ui'
 Plug 'tpope/vim-dispatch' | Plug 'radenling/vim-dispatch-neovim'
 Plug 'tpope/vim-dotenv'
 Plug 'tpope/vim-endwise'
@@ -105,6 +105,10 @@ Plug 'tweekmonster/startuptime.vim'
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
 
+" FZF
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+
 " Neovim-only plugins {{{2
 if has('nvim')
   " http://vim.wikia.com/wiki/Replace_a_word_with_yanked_text
@@ -112,7 +116,7 @@ if has('nvim')
   Plug 'bfredl/nvim-miniyank'
   Plug 'kassio/neoterm'
   " Plug 'osyo-manga/vim-brightest' " Highlight word under cursor
-  Plug 'w0rp/ale'
+  Plug 'dense-analysis/ale'
 
   " Snippets
   " Plug 'sirver/ultisnips'
@@ -129,6 +133,17 @@ if has('nvim')
 endif
 
 call plug#end()
+
+if has('nvim')
+  " Disable Python2 check since it's EOL
+  let g:loaded_python2_provider = 0
+
+  " Use python3 binary from Homebrew
+  let g:python3_host_prog = '/usr/local/bin/python3'
+
+  " To use an absolute path (e.g. to an rbenv installation): >
+  let g:ruby_host_prog = '~/.rbenv/versions/2.5.8/bin/neovim-ruby-host'
+endif
 
 filetype indent on
 filetype plugin on
@@ -175,8 +190,8 @@ xnoremap < <gv
 xnoremap > >gv|
 
 " Use tab for indenting in visual mode
-xnoremap <Tab> >gv|
-xnoremap <S-Tab> <gv
+" xnoremap <Tab> >gv|
+" xnoremap <S-Tab> <gv
 nnoremap > >>_
 nnoremap < <<_
 
@@ -341,6 +356,7 @@ if exists('+colorcolumn')
 endif
 
 colorscheme solarized
+" colorscheme base16-solarized-light
 let g:airline_theme='solarized'
 
 " Italicised highlight groups
@@ -397,7 +413,7 @@ set expandtab
 "  15 folding {{{1
 " ----------------------------------------------------------------------------
 if has('folding')
-  set foldmethod=syntax
+  set foldmethod=indent " https://github.com/dense-analysis/ale/issues/1829
   set nofoldenable
 endif
 
