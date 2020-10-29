@@ -69,12 +69,12 @@ function prompt_modille_setup {
   _dot_unstaged_color="${_color03_yellow}"
   _dot_staged_color="${_color02_green}"
   _pwd_color="${_color14_bright_cyan}"
-  _return_status_ok_color="${_color02_green}"
+  _return_status_ok_color="${_color08_bright_black}"
   _return_status_error_color="${_color01_red}"
 
   # Return status
   # TODO Might be nice to also print the return code on error
-  local ret_status="%(?:${_return_status_ok_color}"$'\uf00c'":${_return_status_error_color}"$'\uf00d'"%s)"
+  local _return_status="%(?:${_return_status_ok_color}#:${_return_status_error_color}#)"
 
   # Formats:
   #   %b - branchname
@@ -104,7 +104,7 @@ function prompt_modille_setup {
   local _newline=$'\n'
 
   # Define prompts.
-  PROMPT="${_color08_bright_black}# ${_prompt_vcs}${_prompt_pwd}${_color_reset}${_newline}$ %b"
+  PROMPT="${_return_status} ${_prompt_vcs}${_prompt_pwd}${_color_reset}${_newline}$ %b"
   RPROMPT=''
 }
 

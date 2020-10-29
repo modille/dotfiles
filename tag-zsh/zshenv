@@ -12,6 +12,8 @@ export PATH="$HOME/local/bin:$PATH"
 # Go
 export GOPATH="$HOME/go"
 [[ -d $GOPATH ]] && export PATH="$PATH:$GOPATH/bin"
+# Krew
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 # Node
 export NODEPATH="/usr/local/opt/node@8"
 [[ -d $NODEPATH ]] && export PATH="$PATH:$NODEPATH/bin"
@@ -28,6 +30,7 @@ export CARGOPATH="$HOME/.cargo"
 [[ -d $CARGOPATH ]] && export PATH="$PATH:$CARGOPATH/bin"
 
 # Homebrew
+export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 
 # https://github.com/brianmario/mysql2/issues/795
@@ -39,3 +42,9 @@ export LESS=" -R"
 
 # Quiet direnv
 export DIRENV_LOG_FORMAT=
+
+# ruby-build
+# To link Rubies to Homebrew's OpenSSL 1.1 (which is upgraded) add the following to your ~/.zshrc:
+# Note: this may interfere with building old versions of Ruby (e.g <2.4) that use OpenSSL <1.1.
+# export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=/usr/local/opt/openssl@1.1"

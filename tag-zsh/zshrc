@@ -8,24 +8,24 @@ source /usr/local/share/antigen/antigen.zsh
 
 # Configure Antigen
 antigen use prezto
-antigen bundles <<EOBUNDLES
-  sorin-ionescu/prezto modules/helper
-  sorin-ionescu/prezto modules/environment
-  sorin-ionescu/prezto modules/terminal
-  sorin-ionescu/prezto modules/editor
-  sorin-ionescu/prezto modules/history
-  sorin-ionescu/prezto modules/directory
-  sorin-ionescu/prezto modules/spectrum
-  sorin-ionescu/prezto modules/utility
-  sorin-ionescu/prezto modules/ssh
-  sorin-ionescu/prezto modules/completion
-  sorin-ionescu/prezto modules/fasd
-  sorin-ionescu/prezto modules/syntax-highlighting
-  sorin-ionescu/prezto modules/history-substring-search
-  sorin-ionescu/prezto modules/prompt
-  zsh-users/zsh-autosuggestions
-EOBUNDLES
+antigen bundle sorin-ionescu/prezto modules/terminal
+antigen bundle sorin-ionescu/prezto modules/editor
+antigen bundle sorin-ionescu/prezto modules/history
+antigen bundle sorin-ionescu/prezto modules/directory
+antigen bundle sorin-ionescu/prezto modules/spectrum
+antigen bundle sorin-ionescu/prezto modules/utility
+antigen bundle sorin-ionescu/prezto modules/ssh
+antigen bundle sorin-ionescu/prezto modules/completion
+antigen bundle sorin-ionescu/prezto modules/fasd
+antigen bundle sorin-ionescu/prezto modules/git
+antigen bundle sorin-ionescu/prezto modules/syntax-highlighting
+antigen bundle sorin-ionescu/prezto modules/history-substring-search
+antigen bundle sorin-ionescu/prezto modules/prompt
+antigen bundle zsh-users/zsh-autosuggestions
 antigen apply
+
+# Manually update occasionally:
+# antigen update
 
 LANG='en_US.UTF-8'
 LC_COLLATE='en_US.UTF-8'
@@ -38,7 +38,7 @@ LC_ALL='en_US.UTF-8'
 
 # Aliases
 alias brew-refill='(set -x; brew update && brew upgrade && brew cask upgrade && brew cleanup && brew doctor)'
-alias ctags="`brew --prefix`/bin/ctags" # Use ctags from homebrew
+alias ctags="/usr/local/bin/ctags" # Use ctags from homebrew
 alias gw="./gradlew"
 alias kc="kubectl"
 
@@ -47,6 +47,7 @@ alias cats="highlight --out-format xterm256 --quiet --force --style solarized-li
 
 # common typos...
 alias gits="git s"
+alias xit="exit"
 
 # vi-mode bindings
 bindkey -v
@@ -97,58 +98,21 @@ stty -ixon
 # https://www.gitignore.io/docs#-install-command-line
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
-MOTD_SCRIPT="$HOME/git/github.com/modille/motd/motd.sh"
-[[ -s $MOTD_SCRIPT ]] && source $MOTD_SCRIPT
-
 # asdf
-[[ -s "/usr/local/opt/asdf/asdf.sh" ]] && source /usr/local/opt/asdf/asdf.sh
-[[ -s "/usr/local/etc/bash_completion.d/asdf.bash" ]] && source /usr/local/etc/bash_completion.d/asdf.bash
-
-# AWS CLI completion
-AWS_COMPLETER="/usr/local/bin/aws_zsh_completer"
-[[ -s $AWS_COMPLETER ]] && source $AWS_COMPLETER
+source /usr/local/lib/asdf.sh
+fpath=(${ASDF_DIR}/completions $fpath)
 
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
-# NVM
-export NVM_DIR="/Users/odillem2/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
-
-# place this after nvm initialization!
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
-
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
-
-# rbenv
-eval "$(rbenv init -)"
-
-# direnv
-if hash direnv 2>/dev/null; then
-  eval "$(direnv hook `basename $SHELL`)"
-fi
+# git zsh completion
+GIT_ZSH_COMPLETIONS="$HOME/.zsh/git-completion.zsh"
+[[ -d $GIT_ZSH_COMPLETIONS ]] && fpath=($GIT_ZSH_COMPLETIONS $fpath)
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[[ -x $(command -v rg) ]] && export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!*.class"'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!*.class"'
 
 # k8s completions (cached)
 # Inspired by:
@@ -162,18 +126,22 @@ if [[ "${__kubectl_command}" -nt "${__kubectl_completion_file}" || ! -s "${__kub
 fi
 source "${__kubectl_completion_file}"
 unset __kubectl_completion_file __kubectl_command
+# See https://github.com/ohmyzsh/ohmyzsh/issues/6843
 
 # Completions
-MODILLE_COMPLETIONS="$HOME/git/github.com/modille/completions/`basename $SHELL`"
+MODILLE_COMPLETIONS="$HOME/git/github.com/modille/completions/zsh"
 [[ -d $MODILLE_COMPLETIONS ]] && fpath=($MODILLE_COMPLETIONS $fpath)
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+# [[ -f /Users/odillem2/git/git.tdc.upmc.edu/ZipScript/iblis/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/odillem2/git/git.tdc.upmc.edu/ZipScript/iblis/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+# [[ -f /Users/odillem2/git/git.tdc.upmc.edu/ZipScript/iblis/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/odillem2/git/git.tdc.upmc.edu/ZipScript/iblis/node_modules/tabtab/.completions/sls.zsh
 
 # Gradle completion
 GRADLE_COMPLETION="$HOME/git/github.com/gradle/gradle-completion"
 [[ -d $GRADLE_COMPLETION ]] && fpath=($GRADLE_COMPLETION $fpath)
-
-# rbenv completion
-RBENV_COMPLETER="$HOME/git/github.com/rbenv/rbenv/completions/rbenv.zsh"
-[[ -s $RBENV_COMPLETER ]] && source $RBENV_COMPLETER
 
 # grc (Generic Colouriser)
 [[ -s "/etc/grc.zsh" ]] && source /usr/local/etc/grc.zsh

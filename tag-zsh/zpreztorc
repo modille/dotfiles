@@ -12,7 +12,6 @@ zstyle ':prezto:*:*' color 'yes'
 # Set the Prezto modules to load (browse modules).
 # The order matters.
 zstyle ':prezto:load' pmodule \
-  'environment' \
   'terminal' \
   'editor' \
   'history' \
@@ -27,7 +26,6 @@ zstyle ':prezto:load' pmodule \
   'history-substring-search' \
   'prompt'
 
-
 #
 # Completion
 #
@@ -35,6 +33,10 @@ zstyle ':prezto:load' pmodule \
 # Short-option stacking for docker completion
 zstyle ':completion:*:*:docker:*' option-stacking yes
 zstyle ':completion:*:*:docker-*:*' option-stacking yes
+
+# Bash completion is required by zsh completion script from git
+# https://github.com/git/git/tree/master/contrib/completion
+zstyle ':completion:*:*:git:*' script ~/.git-completion.bash
 
 #
 # Editor
@@ -59,13 +61,6 @@ zstyle ':prezto:module:git:alias' skip 'yes'
 MODILLE_FUNCTIONS="$HOME/git/github.com/modille/dotfiles/tag-zsh/functions"
 [[ -d $MODILLE_FUNCTIONS ]] && fpath=($MODILLE_FUNCTIONS $fpath)
 zstyle ':prezto:module:prompt' theme 'modille'
-
-#
-# Ruby
-#
-
-# Auto switch the Ruby version on directory change.
-zstyle ':prezto:module:ruby:chruby' auto-switch 'yes'
 
 #
 # SSH
