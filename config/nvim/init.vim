@@ -400,6 +400,9 @@ set noshowmode " Airline displays it for us
 " ----------------------------------------------------------------------------
 "  13 editing text {{{1
 " ----------------------------------------------------------------------------
+" Enable persistent undo so that undo history persists across vim sessions
+set undofile
+set undodir=~/.local/share/nvim/undo
 set dictionary=/usr/share/dict/words
 
 " ----------------------------------------------------------------------------
@@ -407,6 +410,7 @@ set dictionary=/usr/share/dict/words
 " ----------------------------------------------------------------------------
 set tabstop=2
 set shiftwidth=2
+set shiftround
 set expandtab
 
 " ----------------------------------------------------------------------------
@@ -429,10 +433,3 @@ set autoread
 " ----------------------------------------------------------------------------
 set noswapfile
 set updatetime=100
-
-" ----------------------------------------------------------------------------
-"  13 editing text {{{1
-" ----------------------------------------------------------------------------
-" Enable persistent undo so that undo history persists across vim sessions
-set undofile
-set undodir=~/.local/share/nvim/undo

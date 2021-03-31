@@ -1,9 +1,3 @@
-command! -bar -bang -nargs=? -complete=buffer Buffers
-  \ call fzf#vim#buffers(<q-args>, <bang>0)
-
-command! -bang -nargs=* History
-  \ call fzf#vim#history(<bang>0)
-
 command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
   \   'git grep --line-number -- '.shellescape(<q-args>), 0,
@@ -44,10 +38,18 @@ command! -bang -nargs=* Rgs
 
 " command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
+" An action can be a reference to a function that processes selected lines
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
 let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit'
-  \ }
+  \ 'ctrl-v': 'vsplit' }
 
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
