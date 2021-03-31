@@ -18,7 +18,7 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export NODEPATH="/usr/local/opt/node@8"
 [[ -d $NODEPATH ]] && export PATH="$PATH:$NODEPATH/bin"
 # Python
-export LIB_PYTHON_PATH="$HOME/Library/Python/3.7"
+export LIB_PYTHON_PATH="$HOME/Library/Python/3.9"
 [[ -d $LIB_PYTHON_PATH ]] && export PATH="$PATH:$LIB_PYTHON_PATH/bin"
 # rbenv
 export RBENVPATH="$HOME/.rbenv"
