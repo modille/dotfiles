@@ -22,6 +22,7 @@ antigen bundle sorin-ionescu/prezto modules/syntax-highlighting
 antigen bundle sorin-ionescu/prezto modules/history-substring-search
 antigen bundle sorin-ionescu/prezto modules/prompt
 antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle mafredri/zsh-async
 antigen apply
 
 # Manually update occasionally:
@@ -37,7 +38,7 @@ LC_TIME='en_US.UTF-8'
 LC_ALL='en_US.UTF-8'
 
 # Aliases
-alias brew-refill='(set -x; brew update && brew upgrade && brew cask upgrade && brew cleanup && brew doctor)'
+alias brew-refill='(set -x; brew update && brew upgrade && brew upgrade --cask && brew cleanup && brew doctor)'
 alias ctags="/usr/local/bin/ctags" # Use ctags from homebrew
 alias gw="./gradlew"
 alias kc="kubectl"
