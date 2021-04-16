@@ -4,3 +4,9 @@
 # ...except the plug.vim files
 autoload/plug.vim
 autoload/plug.vim.old
+
+# allow templates
+!/templates
+/templates/*
+!templates/Gemfile
+!templates/skeleton.sh
