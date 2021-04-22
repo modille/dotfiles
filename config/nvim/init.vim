@@ -73,7 +73,6 @@ Plug 'haya14busa/is.vim'
 Plug 'haya14busa/vim-asterisk'
 Plug 'janko-m/vim-test'
 Plug 'jpalardy/spacehi.vim'
-Plug 'junegunn/vim-peekaboo'
 Plug 'kshenoy/vim-signature' " Show marks in gutter
 Plug 'liuchengxu/vista.vim'
 Plug 'machakann/vim-highlightedyank'
@@ -117,7 +116,7 @@ if has('nvim')
   Plug 'bfredl/nvim-miniyank'
   Plug 'kassio/neoterm'
   " Plug 'osyo-manga/vim-brightest' " Highlight word under cursor
-  " Plug 'dense-analysis/ale'
+  Plug 'dense-analysis/ale'
 
   " Snippets
   Plug 'sirver/ultisnips'
@@ -302,6 +301,9 @@ nnoremap tp :tabprev<CR>
 " ----------------------------------------------------------------------------
 "  Plugin settings {{{1
 " ----------------------------------------------------------------------------
+" ALE {{{2
+let g:ale_disable_lsp = 1
+
 " Cucumber {{{2
 let g:cucumber_steps_glob = '/features/**/*.{js,rb} /green_hill/step_definitions/**/*.{js,rb}'
 
