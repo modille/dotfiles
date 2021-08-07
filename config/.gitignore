@@ -4,29 +4,5 @@
 # ...except the gitignore and nvim config files
 !.gitignore
 
-# allow nvim/init.vim
+# allow nvim
 !/nvim
-/nvim/*
-!nvim/init.vim
-
-# allow nvim/UltiSnips/*.snippets
-!/nvim/UltiSnips
-/nvim/UltiSnips/*
-!/nvim/UltiSnips/*.snippets
-
-# allow nvim/after/plugin/*.vim
-!/nvim/after
-/nvim/after/*
-!/nvim/after/plugin
-/nvim/after/plugin/*
-!/nvim/after/plugin/*.vim
-
-# allow nvim/after/ftplugin/*.vim
-!/nvim/after/ftplugin
-/nvim/after/ftplugin/*
-!/nvim/after/ftplugin/*.vim
-
-# allow nvim/plugin/autocmds.vim
-!/nvim/plugin
-/nvim/plugin/*
-!/nvim/plugin/autocmds.vim

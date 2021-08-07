@@ -1,2 +1,2 @@
-IndentGuidesEnable
+setlocal spelloptions=camel
 setlocal spell
