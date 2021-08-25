@@ -31,3 +31,9 @@ require'indent_blankline'.setup {
   show_current_context = true, -- Note: With this option enabled, the plugin refreshes on |CursorMoved|, which might be slower
   context_patterns = {'call', 'class', 'function', 'method', 'pair'},
 }
+
+-- https://github.com/phaazon/hop.nvim
+require'hop'.setup()
+vim.api.nvim_set_keymap('n', '<leader><leader>w', "<cmd>lua require'hop'.hint_words()<cr>", {})
+vim.api.nvim_set_keymap('n', '<leader><leader>l', "<cmd>lua require'hop'.hint_lines()<cr>", {})
+vim.api.nvim_set_keymap('n', '<leader><leader>c', "<cmd>lua require'hop'.hint_char1()<cr>", {})

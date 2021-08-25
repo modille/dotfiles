@@ -110,6 +110,7 @@ if has('nvim')
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'norcalli/nvim-colorizer.lua'
   Plug 'lukas-reineke/indent-blankline.nvim'
+  Plug 'phaazon/hop.nvim'
 endif
 
 call plug#end()
