@@ -7,7 +7,7 @@ nnoremap <leader>fg :lua require('telescope.builtin').grep_string({ search = vim
 nnoremap <leader>fs :Telescope git_files<CR>
 
 " buffer select
-nnoremap <leader>bs :Telescope buffers<CR>
+nnoremap <leader>bs :lua require('telescope.builtin').buffers({ previewer = false, sort_lastused = true })<CR>
 
 " file old select
 nnoremap <leader>fos :Telescope oldfiles<CR>

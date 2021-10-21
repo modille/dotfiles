@@ -4,4 +4,8 @@ require 'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true
   },
+  -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
+  context_commentstring = {
+    enable = true
+  },
 }

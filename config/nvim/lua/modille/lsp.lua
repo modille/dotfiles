@@ -2,7 +2,6 @@
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
 
 -- https://github.com/neovim/nvim-lspconfig
--- https://github.com/hrsh7th/nvim-compe#how-to-use-lsp-snippet
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
@@ -12,6 +11,8 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     'additionalTextEdits',
   },
 }
+-- https://github.com/hrsh7th/nvim-cmp
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#bashls
 require'lspconfig'.bashls.setup {}
@@ -20,15 +21,15 @@ require'lspconfig'.dockerls.setup {}
 -- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#solargraph
 require'lspconfig'.solargraph.setup {
   capabilities = capabilities,
-    filetypes = { 'eruby', 'ruby' },
-    settings = {
-      solargraph = {
-        checkGemVersion = false,
-        diagnostics = true,
-        folding = false,
-        useBundler = false,
-      }
+  filetypes = { 'ruby' },
+  settings = {
+    solargraph = {
+      checkGemVersion = false,
+      diagnostics = true,
+      folding = false,
+      useBundler = false,
     }
+  }
 }
 -- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#tsserver
 require'lspconfig'.tsserver.setup{

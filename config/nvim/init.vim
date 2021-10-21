@@ -37,6 +37,7 @@ Plug 'vim-scripts/argtextobj.vim'
 
 " Other plugins
 Plug 'brooth/far.vim'
+Plug 'dbeniamine/cheat.sh-vim'
 Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'godlygeek/tabular' " For aligning text
@@ -47,7 +48,6 @@ Plug 'jpalardy/spacehi.vim' " Highlight tabs and trailing spaces
 Plug 'machakann/vim-highlightedyank'
 Plug 'machakann/vim-swap' " Swap args with g< or g>
 Plug 'mhinz/vim-startify'
-Plug 'rizzatti/dash.vim'
 Plug 'simnalamburt/vim-mundo'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-bundler'
@@ -73,28 +73,35 @@ if has('nvim')
   Plug 'nvim-treesitter/playground'
   Plug 'modille/nvim-base16.lua' " Props to https://github.com/norcalli ❤️
   Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
+  Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 
   " Fuzzy finder
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+  Plug 'Kapeli/dash.nvim'
 
   " LSP
   Plug 'neovim/nvim-lspconfig'
-  Plug 'hrsh7th/nvim-compe'
-  Plug 'hrsh7th/vim-vsnip' | Plug 'hrsh7th/vim-vsnip-integ' | Plug 'rafamadriz/friendly-snippets'
   Plug 'kosayoda/nvim-lightbulb' " Show gutter sign when action is available
   Plug 'glepnir/lspsaga.nvim'
   Plug 'simrat39/symbols-outline.nvim'
 
+  " Completion
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-vsnip'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-calc'
+  Plug 'hrsh7th/cmp-path'
+
+  " Snippets
+  Plug 'hrsh7th/vim-vsnip'
+  Plug 'rafamadriz/friendly-snippets'
+
   " Status line
   Plug 'hoob3rt/lualine.nvim'
   Plug 'kyazdani42/nvim-web-devicons'
-
-  " Snippets
-  Plug 'sirver/ultisnips'
-  Plug 'honza/vim-snippets'
-  Plug 'modille/vim-jest-snippets'
 
   " Debugging
   Plug 'mfussenegger/nvim-dap'
@@ -116,11 +123,7 @@ endif
 call plug#end()
 
 " Always seems to work best if these are done early
-set background=light
-lua << EOF
-local base16 = require 'base16'
-base16(base16.themes['solarized-light'], true)
-EOF
+lua require('modille.colorscheme_light')
 
 " Are these still needed nowadays?
 filetype indent on
