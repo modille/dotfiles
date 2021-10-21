@@ -3,31 +3,91 @@
 # Uncomment and run zprof at the end to profile startup time
 # zmodload zsh/zprof
 
-# Source Antigen
-source /usr/local/share/antigen/antigen.zsh
+source ~/.zinit/bin/zinit.zsh
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-# Configure Antigen
-antigen use prezto
-antigen bundle sorin-ionescu/prezto modules/terminal
-antigen bundle sorin-ionescu/prezto modules/editor
-antigen bundle sorin-ionescu/prezto modules/history
-antigen bundle sorin-ionescu/prezto modules/directory
-antigen bundle sorin-ionescu/prezto modules/spectrum
-antigen bundle sorin-ionescu/prezto modules/utility
-antigen bundle sorin-ionescu/prezto modules/ssh
-antigen bundle sorin-ionescu/prezto modules/completion
-antigen bundle sorin-ionescu/prezto modules/fasd
-antigen bundle sorin-ionescu/prezto modules/git
-antigen bundle sorin-ionescu/prezto modules/syntax-highlighting
-antigen bundle sorin-ionescu/prezto modules/history-substring-search
-antigen bundle sorin-ionescu/prezto modules/prompt
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle mafredri/zsh-async
-antigen apply
+# Snippets are cached locally. Update all with:
+#
+#    zinit update --all
+#
 
-# Manually update occasionally:
-# antigen update
+# Prezto modules
+# https://github.com/sorin-ionescu/prezto/blob/master/modules
+zinit ice svn
+zinit snippet PZTM::helper
+zinit snippet PZTM::terminal
+zinit snippet PZTM::editor
+zinit snippet PZTM::history
+zinit snippet PZTM::directory
+zinit snippet PZTM::spectrum
+zinit ice svn
+zinit snippet PZTM::utility
+# zinit ice svn wait lucid blockf \
+#   atclone'git clone --recursive https://github.com/zsh-users/zsh-completions.git external'
+# zinit snippet PZTM::completion
+zinit ice svn blockf \
+  atclone'git clone --recursive https://github.com/clvv/fasd.git external'
+zinit snippet PZTM::fasd
+zinit ice svn
+zinit snippet PZTM::git
+zinit ice svn blockf \
+  atclone'git clone --recursive https://github.com/zsh-users/zsh-history-substring-search.git external'
+zinit snippet PZTM::history-substring-search
 
+# Theme
+# https://github.com/modille/pure
+PURE_CMD_MAX_EXEC_TIME=60
+PURE_PROMPT_SYMBOL='$'
+PURE_PROMPT_VICMD_SYMBOL=':'
+zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
+zinit light modille/pure
+zstyle :prompt:pure:path color 'cyan'
+zstyle :prompt:pure:git:branch color 'cyan'
+zstyle :prompt:pure:prompt:error color 'red'
+zstyle :prompt:pure:prompt:success color 'white'
+
+# Used for improving nvm usage (skip since already loaded by pure theme above)
+# https://github.com/mafredri/zsh-async
+# zinit ice pick'async.zsh'
+# zinit load mafredri/zsh-async
+
+# Syntax highlighting, completions, and auto-suggestions
+# https://github.com/zdharma/fast-syntax-highlighting
+# https://github.com/zsh-users/zsh-completions
+# https://github.com/zsh-users/zsh-autosuggestions
+zinit wait'0' lucid for \
+ atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    zdharma/fast-syntax-highlighting \
+ blockf \
+    zsh-users/zsh-completions \
+ atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions
+
+# Color output (auto set to 'no' on dumb terminals).
+zstyle ':prezto:*:*' color 'yes'
+
+# Short-option stacking for docker completion
+zstyle ':completion:*:*:docker:*' option-stacking yes
+zstyle ':completion:*:*:docker-*:*' option-stacking yes
+
+# Set the key mapping style to 'emacs' or 'vi'.
+zstyle ':prezto:module:editor' key-bindings 'vi'
+
+# Aliases are enabled by default. You can disable them with:
+zstyle ':prezto:module:git:alias' skip 'yes'
+
+# Set the SSH identities to load into the agent.
+zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa_gmail'
+
+# Auto set the tab and window titles.
+zstyle ':prezto:module:terminal' auto-title 'yes'
+
+# Set the window title format.
+zstyle ':prezto:module:terminal:window-title' format '%s'
+
+HISTSIZE=100000 # The maximum number of events to save in the internal history
+SAVEHIST=100000 # The maximum number of events to save in the history file
 LANG='en_US.UTF-8'
 LC_COLLATE='en_US.UTF-8'
 LC_CTYPE='en_US.UTF-8'
@@ -108,7 +168,7 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 # git zsh completion
-GIT_ZSH_COMPLETIONS="$HOME/.zsh/git-completion.zsh"
+GIT_ZSH_COMPLETIONS="$HOME/git/github.com/zsh-users/zsh/Completion/Unix/Command/_git"
 [[ -d $GIT_ZSH_COMPLETIONS ]] && fpath=($GIT_ZSH_COMPLETIONS $fpath)
 
 # fzf
@@ -120,13 +180,13 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 #   https://github.com/belak/prezto-contrib/blob/356c8e29dd97268fbc9050a6c40da69b3501cf62/contrib-kubernetes/init.zsh#L13-L22
 # With cache dir from completion module:
 #   https://github.com/sorin-ionescu/prezto/blob/1f4601e44c989b90dc7314b151891fa60a101251/modules/completion/init.zsh#L47-L49
-__kubectl_completion_file="${ZDOTDIR:-$HOME}/.zcompcache/kubectl.zsh"
-__kubectl_command="${commands[kubectl]}"
-if [[ "${__kubectl_command}" -nt "${__kubectl_completion_file}" || ! -s "${__kubectl_completion_file}" ]]; then
-  ${__kubectl_command} completion zsh >! "${__kubectl_completion_file}" 2> /dev/null
-fi
-source "${__kubectl_completion_file}"
-unset __kubectl_completion_file __kubectl_command
+# __kubectl_completion_file="${ZDOTDIR:-$HOME}/.zcompcache/kubectl.zsh"
+# __kubectl_command="${commands[kubectl]}"
+# if [[ "${__kubectl_command}" -nt "${__kubectl_completion_file}" || ! -s "${__kubectl_completion_file}" ]]; then
+#   ${__kubectl_command} completion zsh >! "${__kubectl_completion_file}" 2> /dev/null
+# fi
+# source "${__kubectl_completion_file}"
+# unset __kubectl_completion_file __kubectl_command
 # See https://github.com/ohmyzsh/ohmyzsh/issues/6843
 
 # Completions
@@ -150,6 +210,8 @@ GRADLE_COMPLETION="$HOME/git/github.com/gradle/gradle-completion"
 # Private configs
 PRIVATE_RC="$HOME/.zshrc-private"
 [[ -s $PRIVATE_RC ]] && source $PRIVATE_RC
+
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment and load zprof at the top to profile startup time
 # zprof

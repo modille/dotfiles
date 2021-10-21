@@ -19,8 +19,8 @@ if hash direnv 2>/dev/null; then
 fi
 
 # iTerm2 shell integration
-ITERM_SHELL_INTEGRATION="$HOME/.iterm2_shell_integration.zsh"
-[[ -s $ITERM_SHELL_INTEGRATION ]] && source $ITERM_SHELL_INTEGRATION
+# ITERM_SHELL_INTEGRATION="$HOME/.iterm2_shell_integration.zsh"
+# [[ -s $ITERM_SHELL_INTEGRATION ]] && source $ITERM_SHELL_INTEGRATION
 
 # NVM
 # Adapted from https://github.com/allanjamesvestal/fast-zsh-nvm
