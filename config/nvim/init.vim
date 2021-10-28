@@ -140,7 +140,7 @@ let g:loaded_python2_provider = 0
 let g:python3_host_prog = '/usr/local/bin/python3'
 
 " To use an absolute path (e.g. to an rbenv installation): >
-let g:ruby_host_prog = '~/.rbenv/versions/2.5.8/bin/neovim-ruby-host'
+let g:ruby_host_prog = '~/.rbenv/versions/3.0.2/bin/neovim-ruby-host'
 
 " Use ale for linting and fixing,
 let g:ale_disable_lsp = 1
