@@ -1,5 +1,6 @@
 -- https://github.com/hoob3rt/lualine.nvim
 local function vim_icon() return '  ' end
+
 local function fileformat_warning()
   if vim.bo.fileformat == 'dos' then
     return 'dos!'
@@ -7,11 +8,14 @@ local function fileformat_warning()
 
   return nil
 end
+
+local hour = tonumber(os.date('%H'))
+
 require'lualine'.setup {
   options = {
     icons_enabled = true,
-    theme = 'solarized_dark',
-    -- theme = 'solarized_light',
+    -- A job could switch these automatically, but for now just choose one at startup
+    theme = (hour < 6 or hour > 20) and 'solarized_dark' or 'solarized_light',
     component_separators = {'', ''},
     section_separators = {'', ''},
     disabled_filetypes = {},

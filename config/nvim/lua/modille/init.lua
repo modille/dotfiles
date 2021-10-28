@@ -5,7 +5,7 @@ require('modille.completion')
 require('modille.debuggers')
 require('modille.fuzzy_finder')
 require('modille.lsp')
-require('modille.status_line_light')
+require('modille.status_line')
 require('modille.treesitter')
 
 -- https://github.com/lewis6991/gitsigns.nvim

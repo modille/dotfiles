@@ -166,6 +166,9 @@ fpath=(${ASDF_DIR}/completions $fpath)
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+# A job could switch these automatically, but for now just choose one at startup
+H=$(date "+%k")
+(( H < 6 && H > 20 )) && base16_solarized-dark || base16_solarized-light
 
 # git zsh completion
 GIT_ZSH_COMPLETIONS="$HOME/git/github.com/zsh-users/zsh/Completion/Unix/Command/_git"

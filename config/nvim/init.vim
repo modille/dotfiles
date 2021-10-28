@@ -123,7 +123,7 @@ endif
 call plug#end()
 
 " Always seems to work best if these are done early
-lua require('modille.colorscheme_light')
+lua require('modille.colorscheme')
 
 " Are these still needed nowadays?
 filetype indent on
