@@ -15,7 +15,7 @@ vim.opt.termguicolors = true
 vim.opt.colorcolumn = '80'
 
 -- 6 multiple windows
-vim.opt.previewheight=28
+vim.opt.previewheight = 28
 vim.opt.hidden = true -- Preserves undo history
 vim.opt.splitbelow = true
 vim.opt.splitright = true
@@ -23,7 +23,7 @@ vim.opt.splitright = true
 -- 13 editing text
 -- Enable persistent undo so that undo history persists across vim sessions
 vim.opt.undofile = true
-vim.opt.undodir= os.getenv('HOME') .. '/.local/share/nvim/undo'
+vim.opt.undodir = os.getenv('HOME') .. '/.local/share/nvim/undo'
 vim.opt.dictionary = '/usr/share/dict/words'
 
 -- 14 tabs and indenting

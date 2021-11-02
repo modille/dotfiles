@@ -10,7 +10,7 @@ dap.adapters.node2 = {
   args = { os.getenv('HOME') .. '/git/github.com/microsoft/vscode-node-debug2/out/src/nodeDebug.js' },
 }
 
-vim.fn.sign_define('DapBreakpoint', {text='⏸ ', texthl='', linehl='', numhl=''})
+vim.fn.sign_define('DapBreakpoint', { text = '⏸ ', texthl = '', linehl = '', numhl = '' })
 
 -- https://github.com/rcarriga/nvim-dap-ui
 require('dapui').setup({

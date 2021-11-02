@@ -4,6 +4,9 @@ augroup modilleAutocmds
   " Custom filetype/syntax
   autocmd BufNewFile,BufRead Berksfile,Guardfile,Vagrantfile set syntax=ruby
 
+  " Custom options
+  autocmd FileType lua set colorcolumn=120
+
   " https://github.com/jpalardy/spacehi.vim
   autocmd FileType Mundo,MundoDiff,go,help,startify,vim NoSpaceHi
   autocmd Syntax * SpaceHi

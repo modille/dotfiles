@@ -9,31 +9,33 @@ require('modille.status_line')
 require('modille.treesitter')
 
 -- https://github.com/lewis6991/gitsigns.nvim
+-- stylua: ignore start
 require'gitsigns'.setup {
   signs = {
-    add          = {hl = 'GitSignsAdd'   , text = '┃', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
-    change       = {hl = 'GitSignsChange', text = '┃', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-    delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    add          = {hl = 'GitSignsAdd'   , text = '┃', numhl = 'GitSignsAddNr'   , linehl = 'GitSignsAddLn'},
+    change       = {hl = 'GitSignsChange', text = '┃', numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn'},
+    delete       = {hl = 'GitSignsDelete', text = '_', numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn'},
+    topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn'},
+    changedelete = {hl = 'GitSignsChange', text = '~', numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn'},
   },
 }
+-- stylua: ignore end
 
 -- https://github.com/norcalli/nvim-colorizer.lua
-require'colorizer'.setup()
+require('colorizer').setup()
 
 -- https://github.com/lukas-reineke/indent-blankline.nvim
-require'indent_blankline'.setup {
+require('indent_blankline').setup({
   use_treesitter = true,
   show_first_indent_level = false,
-  buftype_exclude = {'help', 'terminal', 'startify'},
-  filetype_exclude = {'help', 'terminal', 'startify'},
+  buftype_exclude = { 'help', 'terminal', 'startify' },
+  filetype_exclude = { 'help', 'terminal', 'startify' },
   show_current_context = true, -- Note: With this option enabled, the plugin refreshes on |CursorMoved|, which might be slower
-  context_patterns = {'call', 'class', 'function', 'method', 'pair'},
-}
+  context_patterns = { 'call', 'class', 'function', 'method', 'pair' },
+})
 
 -- https://github.com/phaazon/hop.nvim
-require'hop'.setup()
+require('hop').setup()
 vim.api.nvim_set_keymap('n', '<leader><leader>w', "<cmd>lua require'hop'.hint_words()<cr>", {})
 vim.api.nvim_set_keymap('n', '<leader><leader>l', "<cmd>lua require'hop'.hint_lines()<cr>", {})
 vim.api.nvim_set_keymap('n', '<leader><leader>c', "<cmd>lua require'hop'.hint_char1()<cr>", {})

@@ -2,7 +2,7 @@ local actions = require('telescope.actions')
 local builtin = require('telescope.builtin')
 
 -- https://github.com/nvim-telescope/telescope.nvim
-require('telescope').setup {
+require('telescope').setup({
   defaults = {
     prompt_prefix = '> ',
     selection_caret = '  ',
@@ -20,15 +20,14 @@ require('telescope').setup {
         ['<C-p>'] = actions.cycle_history_prev,
         ['<C-n>'] = actions.cycle_history_next,
       },
-    }
+    },
   },
   extensions = {
     fzf = {
-      fuzzy = true,                    -- false will only do exact matching
-      override_generic_sorter = true,  -- override the generic sorter
-      override_file_sorter = true,     -- override the file sorter
-      case_mode = 'smart_case',        -- or "ignore_case" or "respect_case"
-                                       -- the default case_mode is "smart_case"
+      fuzzy = true,
+      override_generic_sorter = true,
+      override_file_sorter = true,
+      case_mode = 'smart_case', -- or 'ignore_case' or 'respect_case'
     },
     dash = {
       -- map filetype strings to the keywords you've configured for docsets in Dash
@@ -40,12 +39,12 @@ require('telescope').setup {
       -- set file_type_keywords = false
       file_type_keywords = {
         javascript = { 'js', 'javascript', 'nodejs' },
-        eruby = { 'rb', 'rubygems', 'gem', 'rails', 'ruby'  },
-        ruby = { 'rb', 'rubygems', 'gem', 'rails', 'ruby'  },
+        eruby = { 'rb', 'rubygems', 'gem', 'rails', 'ruby' },
+        ruby = { 'rb', 'rubygems', 'gem', 'rails', 'ruby' },
       },
     },
   },
-}
+})
 
 -- https://github.com/nvim-telescope/telescope-dap.nvim
 require('telescope').load_extension('dap')
@@ -66,7 +65,7 @@ end
 
 local function file_grep_dotfiles()
   builtin.grep_string({
-    search = vim.fn.input("dotfiles 🔍 "),
+    search = vim.fn.input('dotfiles 🔍 '),
     cwd = os.getenv('HOME') .. '/git/github.com/modille/dotfiles',
     hidden = false,
   })

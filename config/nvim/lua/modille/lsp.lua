@@ -1,5 +1,5 @@
 -- https://github.com/kosayoda/nvim-lightbulb
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
 
 -- https://github.com/neovim/nvim-lspconfig
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -15,11 +15,11 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#bashls
-require'lspconfig'.bashls.setup {}
+require('lspconfig').bashls.setup({})
 -- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#dockerls
-require'lspconfig'.dockerls.setup {}
+require('lspconfig').dockerls.setup({})
 -- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#solargraph
-require'lspconfig'.solargraph.setup {
+require('lspconfig').solargraph.setup({
   capabilities = capabilities,
   filetypes = { 'ruby' },
   settings = {
@@ -28,13 +28,13 @@ require'lspconfig'.solargraph.setup {
       diagnostics = true,
       folding = false,
       useBundler = false,
-    }
-  }
-}
+    },
+  },
+})
 -- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#tsserver
-require'lspconfig'.tsserver.setup{
- capabilities = capabilities,
-}
+require('lspconfig').tsserver.setup({
+  capabilities = capabilities,
+})
 
 -- https://github.com/neovim/nvim-lspconfig#keybindings-and-completion
 local nvim_lsp = require('lspconfig')
@@ -42,14 +42,18 @@ local nvim_lsp = require('lspconfig')
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+  local function buf_set_keymap(...)
+    vim.api.nvim_buf_set_keymap(bufnr, ...)
+  end
+  local function buf_set_option(...)
+    vim.api.nvim_buf_set_option(bufnr, ...)
+  end
 
   --Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
-  local opts = { noremap=true, silent=true }
+  local opts = { noremap = true, silent = true }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
@@ -76,10 +80,10 @@ end
 -- local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
 local servers = { 'bashls', 'dockerls', 'solargraph', 'tsserver' }
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
+  nvim_lsp[lsp].setup({
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
     },
-  }
+  })
 end

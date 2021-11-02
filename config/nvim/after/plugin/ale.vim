@@ -11,6 +11,7 @@ let g:ale_html_tidy_executable = '/usr/local/bin/tidy'
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint'],
+\   'lua': ['stylua'],
 \   'markdown': ['prettier'],
 \   'ruby': ['rubocop'],
 \}

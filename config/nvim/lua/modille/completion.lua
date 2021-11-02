@@ -1,6 +1,6 @@
 -- https://github.com/hrsh7th/nvim-cmp
 vim.o.completeopt = 'menu,menuone,noselect'
-local cmp = require'cmp'
+local cmp = require('cmp')
 
 -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#vim-vsnip
 local has_words_before = function()
@@ -26,16 +26,22 @@ cmp.setup({
       if vim.fn['vsnip#available']() == 1 then
         feedkey('<Plug>(vsnip-expand-or-jump)', '')
       elseif cmp.visible() then
-        cmp.confirm({select = true })
+        cmp.confirm({ select = true })
       else
         fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
       end
-    end, { 'i', 's' }),
+    end, {
+      'i',
+      's',
+    }),
     ['<S-Tab>'] = cmp.mapping(function()
       if vim.fn['vsnip#jumpable'](-1) == 1 then
         feedkey('<Plug>(vsnip-jump-prev)', '')
       end
-    end, { 'i', 's' }),
+    end, {
+      'i',
+      's',
+    }),
   },
   sources = {
     { name = 'nvim_lsp' },
@@ -43,6 +49,6 @@ cmp.setup({
     { name = 'buffer' },
     { name = 'calc' },
     { name = 'path' },
-  }
+  },
 })
 -- Note: Setup lspconfig in ./lsp.lua
