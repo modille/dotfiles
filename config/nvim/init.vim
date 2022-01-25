@@ -27,6 +27,7 @@ Plug 'notriddle/vim-gitcommit-markdown'
 Plug 'pangloss/vim-javascript',          { 'for': 'javascript' }
 Plug 'tmux-plugins/vim-tmux',            { 'for': 'tmux' }
 Plug 'tpope/vim-cucumber'
+Plug 'tpope/vim-markdown',               { 'for': 'markdown' }
 Plug 'tpope/vim-rails'
 
 " Text objects
@@ -36,9 +37,9 @@ Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
 Plug 'vim-scripts/argtextobj.vim'
 
 " Other plugins
+Plug 'azabiong/vim-highlighter'
 Plug 'brooth/far.vim'
 Plug 'dbeniamine/cheat.sh-vim'
-Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'godlygeek/tabular' " For aligning text
 Plug 'haya14busa/is.vim' " Incremental search
@@ -46,8 +47,8 @@ Plug 'haya14busa/vim-asterisk'
 Plug 'janko-m/vim-test'
 Plug 'jpalardy/spacehi.vim' " Highlight tabs and trailing spaces
 Plug 'machakann/vim-highlightedyank'
-Plug 'machakann/vim-swap' " Swap args with g< or g>
 Plug 'mhinz/vim-startify'
+Plug 'mzlogin/vim-markdown-toc'
 Plug 'simnalamburt/vim-mundo'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-bundler'
@@ -72,8 +73,11 @@ if has('nvim')
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'nvim-treesitter/playground'
   Plug 'modille/nvim-base16.lua' " Props to https://github.com/norcalli ❤️
+  Plug 'ishan9299/nvim-solarized-lua'
   Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
   Plug 'JoosepAlviste/nvim-ts-context-commentstring'
+  Plug 'code-biscuits/nvim-biscuits'
+  Plug 'ThePrimeagen/refactoring.nvim'
 
   " Fuzzy finder
   Plug 'nvim-lua/popup.nvim'
@@ -84,8 +88,11 @@ if has('nvim')
   " LSP
   Plug 'neovim/nvim-lspconfig'
   Plug 'kosayoda/nvim-lightbulb' " Show gutter sign when action is available
-  Plug 'glepnir/lspsaga.nvim'
   Plug 'simrat39/symbols-outline.nvim'
+  Plug 'b0o/schemastore.nvim'
+  Plug 'jose-elias-alvarez/null-ls.nvim'
+  Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+  Plug 'folke/trouble.nvim'
 
   " Completion
   Plug 'hrsh7th/nvim-cmp'
@@ -115,12 +122,17 @@ if has('nvim')
   " Consider yi" then ci"<C-R>0 then . to repeat
   Plug 'bfredl/nvim-miniyank'
   Plug 'lewis6991/gitsigns.nvim'
+  Plug 'lewis6991/impatient.nvim'
   Plug 'norcalli/nvim-colorizer.lua'
   Plug 'lukas-reineke/indent-blankline.nvim'
-  Plug 'phaazon/hop.nvim'
+  Plug 'phaazon/hop.nvim', { 'branch': 'v1' }
 endif
 
 call plug#end()
+
+" https://github.com/lewis6991/impatient.nvim#setup
+" Impatient needs to be setup before any other lua plugin is loaded
+lua require('impatient')
 
 " Always seems to work best if these are done early
 lua require('modille.colorscheme')
@@ -142,8 +154,13 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 " To use an absolute path (e.g. to an rbenv installation): >
 let g:ruby_host_prog = '~/.rbenv/versions/3.0.2/bin/neovim-ruby-host'
 
-" Use ale for linting and fixing,
-let g:ale_disable_lsp = 1
+" https://github.com/tpope/vim-markdown/pull/135
+let g:markdown_folding = 1
+
+let g:HiSet   = 'f<CR>'           " normal, visual
+let g:HiClear = 'f<BS>'           " normal, visual
+let g:HiErase = 'f<C-L>'          " normal
+let g:HiFind  = 'f<Tab>'          " normal, visual
 
 " Personal lua module
 lua require('modille')

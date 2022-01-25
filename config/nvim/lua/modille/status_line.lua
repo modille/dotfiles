@@ -17,7 +17,7 @@ require('lualine').setup({
   options = {
     icons_enabled = true,
     -- A job could switch these automatically, but for now just choose one at startup
-    theme = (hour < 6 or hour > 20) and 'solarized_dark' or 'solarized_light',
+    theme = (hour < 6 or hour > 17) and 'solarized_dark' or 'solarized_light',
     component_separators = { '', '' },
     section_separators = { '', '' },
     disabled_filetypes = {},
@@ -30,11 +30,17 @@ require('lualine').setup({
         icon = '',
       },
     },
-    lualine_c = { 'filename' },
+    lualine_c = {
+      {
+        'filename',
+        file_status = true,
+        path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
+      },
+    },
     lualine_x = {
       {
         'diagnostics',
-        sources = { 'nvim_lsp' },
+        sources = { 'nvim_diagnostic' },
         sections = { 'error', 'warn', 'info', 'hint' },
         symbols = { error = '﯇ ', warn = ' ', info = ' ', hint = ' ' },
       },
@@ -47,7 +53,13 @@ require('lualine').setup({
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = { 'filename' },
+    lualine_c = {
+      {
+        'filename',
+        file_status = true,
+        path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
+      },
+    },
     lualine_x = { 'location' },
     lualine_y = {},
     lualine_z = {},

@@ -14,9 +14,7 @@ require('telescope').setup({
     },
     mappings = {
       i = {
-        ['<esc>'] = actions.close,
-        ['<C-x>'] = false,
-        ['<C-q>'] = actions.send_to_qflist,
+        -- ['<esc>'] = actions.close, -- should try getting used to C-c instead, so you don't lose Normal mode features
         ['<C-p>'] = actions.cycle_history_prev,
         ['<C-n>'] = actions.cycle_history_next,
       },
@@ -71,7 +69,17 @@ local function file_grep_dotfiles()
   })
 end
 
+-- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#falling-back-to-find_files-if-git_files-cant-find-a-git-directory
+local function project_files()
+  local opts = {} -- define here if you want to define something
+  local ok = pcall(builtin.git_files, opts)
+  if not ok then
+    builtin.find_files(opts)
+  end
+end
+
 return {
   file_search_dotfiles = file_search_dotfiles,
   file_grep_dotfiles = file_grep_dotfiles,
+  project_files = project_files,
 }

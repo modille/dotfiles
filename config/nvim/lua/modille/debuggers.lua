@@ -1,5 +1,8 @@
 -- https://github.com/theHamsta/nvim-dap-virtual-text
-vim.g.dap_virtual_text = true
+require('nvim-dap-virtual-text').setup({
+  -- use a comment-like syntax to further improve distinguishability between actual code and debugger info
+  commented = true,
+})
 
 -- https://github.com/mfussenegger/nvim-dap
 local dap = require('dap')
@@ -15,13 +18,11 @@ vim.fn.sign_define('DapBreakpoint', { text = '⏸ ', texthl = '', linehl = '', n
 -- https://github.com/rcarriga/nvim-dap-ui
 require('dapui').setup({
   sidebar = {
-    elements = {
-      {
-        id = 'scopes',
-        size = 0.5,
-      },
-      { id = 'breakpoints', size = 0.25 },
-      { id = 'watches', size = 0.25 },
-    },
+    elements = {},
+  },
+  tray = {
+    elements = { 'repl' },
+    size = 15,
+    position = 'bottom',
   },
 })

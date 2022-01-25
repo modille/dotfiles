@@ -1,8 +1,6 @@
 setlocal nowrap
 setlocal spell
 
-" let b:ale_cucumber_executable = 'node_modules/.bin/cucumber.js'
-
 " http://vimcasts.org/episodes/aligning-text-with-tabular-vim/
 " https://gist.github.com/tpope/287147
 " If you put this in your vimrc file, then it will call the :Tabularize command each time you insert a | character.

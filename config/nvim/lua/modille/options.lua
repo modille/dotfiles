@@ -6,17 +6,17 @@ vim.opt.smartcase = true
 
 -- 4 displaying text
 vim.opt.number = true
-vim.opt.relativenumber = false
 
 -- 5 syntax, highlighting and spelling
 vim.opt.hlsearch = true
-vim.opt.inccommand = 'nosplit'
+vim.opt.inccommand = 'split' -- or 'nosplit'
 vim.opt.termguicolors = true
+vim.opt.cursorline = true
 vim.opt.colorcolumn = '80'
+vim.opt.spell = false -- TODO removeme
 
 -- 6 multiple windows
 vim.opt.previewheight = 28
-vim.opt.hidden = true -- Preserves undo history
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 

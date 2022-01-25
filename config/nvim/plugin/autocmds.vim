@@ -13,6 +13,7 @@ augroup modilleAutocmds
   autocmd Syntax diff NoSpaceHi
 
   " Templates
+  autocmd BufNewFile *.rb 0r ~/git/github.com/modille/dotfiles/tag-vim/templates/skeleton.rb
   autocmd BufNewFile *.sh 0r ~/git/github.com/modille/dotfiles/tag-vim/templates/skeleton.sh
   autocmd BufNewFile Gemfile 0r ~/git/github.com/modille/dotfiles/tag-vim/templates/Gemfile
 augroup END

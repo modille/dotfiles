@@ -4,7 +4,7 @@ lua require('modille')
 nnoremap <leader>fg :lua require('telescope.builtin').grep_string({ search = vim.fn.input("🔍 ")})<CR>
 
 " file select
-nnoremap <leader>fs :Telescope git_files<CR>
+nnoremap <leader>fs :lua require('modille.fuzzy_finder').project_files()<CR>
 
 " buffer select
 nnoremap <leader>bs :lua require('telescope.builtin').buffers({ previewer = false, sort_lastused = true })<CR>

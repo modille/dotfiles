@@ -53,12 +53,12 @@ zstyle :prompt:pure:prompt:success color 'white'
 # zinit load mafredri/zsh-async
 
 # Syntax highlighting, completions, and auto-suggestions
-# https://github.com/zdharma/fast-syntax-highlighting
+# https://github.com/zdharma-continuum/fast-syntax-highlighting
 # https://github.com/zsh-users/zsh-completions
 # https://github.com/zsh-users/zsh-autosuggestions
 zinit wait'0' lucid for \
  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-    zdharma/fast-syntax-highlighting \
+    zdharma-continuum/fast-syntax-highlighting \
  blockf \
     zsh-users/zsh-completions \
  atload"!_zsh_autosuggest_start" \
@@ -168,7 +168,7 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 # A job could switch these automatically, but for now just choose one at startup
 hour=$(date +%H)
-if [[ "$hour" < "06" ]] || [[ "$hour" > "20" ]]; then
+if [[ "$hour" < "06" ]] || [[ "$hour" > "17" ]]; then
   base16_solarized-dark
 else
   base16_solarized-light

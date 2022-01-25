@@ -65,3 +65,7 @@ nnoremap tp :tabprev<CR>
 " After pasting, type gp to select the pasted text in visual mode.
 " This is similar to the standard gv which you can type to select the last visually-selected text.
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
+
+" Paragraph motions don't change the jumplist
+nnoremap <silent> } :keepjumps normal! }<cr>
+nnoremap <silent> { :keepjumps normal! {<cr>

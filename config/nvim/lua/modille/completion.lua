@@ -10,10 +10,48 @@ local feedkey = function(key, mode)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
+local kind_icons = {
+  Text = '',
+  Method = '',
+  Function = '',
+  Constructor = '',
+  Field = '',
+  Variable = '',
+  Class = 'ﴯ',
+  Interface = '',
+  Module = '',
+  Property = 'ﰠ',
+  Unit = '',
+  Value = '',
+  Enum = '',
+  Keyword = '',
+  Snippet = '',
+  Color = '',
+  File = '',
+  Reference = '',
+  Folder = '',
+  EnumMember = '',
+  Constant = '',
+  Struct = '',
+  Event = '',
+  Operator = '',
+  TypeParameter = '',
+}
+
 cmp.setup({
-  snippet = {
-    expand = function(args)
-      vim.fn['vsnip#anonymous'](args.body)
+  formatting = {
+    format = function(entry, vim_item)
+      -- Kind icons
+      vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
+      -- Source
+      vim_item.menu = ({
+        nvim_lsp = '[LSP]',
+        vsnip = '[Vsnip]',
+        buffer = '[Buffer]',
+        calc = '[Calc]',
+        path = '[Path]',
+      })[entry.source.name]
+      return vim_item
     end,
   },
   mapping = {
@@ -24,7 +62,7 @@ cmp.setup({
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     }),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['<CR>'] = cmp.mapping.confirm({ select = false }),
     -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#vim-vsnip
     ['<Tab>'] = cmp.mapping(function(fallback)
       if vim.fn['vsnip#available']() == 1 then
@@ -47,10 +85,23 @@ cmp.setup({
       's',
     }),
   },
+  snippet = {
+    expand = function(args)
+      vim.fn['vsnip#anonymous'](args.body)
+    end,
+  },
   sources = {
     { name = 'nvim_lsp' },
     { name = 'vsnip' },
-    { name = 'buffer' },
+    {
+      name = 'buffer',
+      option = {
+        get_bufnrs = function()
+          -- https://github.com/hrsh7th/cmp-buffer#all-buffers
+          return vim.api.nvim_list_bufs()
+        end,
+      },
+    },
     { name = 'calc' },
     { name = 'path' },
   },
