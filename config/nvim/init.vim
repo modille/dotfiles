@@ -149,7 +149,7 @@ let mapleader = " "
 let g:loaded_python2_provider = 0
 
 " Use python3 binary from Homebrew
-let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python3_host_prog = '/opt/homebrew/bin/python3'
 
 " To use an absolute path (e.g. to an rbenv installation): >
 let g:ruby_host_prog = '~/.rbenv/versions/3.0.2/bin/neovim-ruby-host'

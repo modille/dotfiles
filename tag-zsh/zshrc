@@ -99,7 +99,7 @@ LC_ALL='en_US.UTF-8'
 
 # Aliases
 alias brew-refill='(set -x; brew update && brew outdated && brew upgrade && brew cleanup && brew doctor)'
-alias ctags="/usr/local/bin/ctags" # Use ctags from homebrew
+alias ctags="/opt/homebrew/bin/ctags" # Use ctags from homebrew
 alias gw="./gradlew"
 alias kc="kubectl"
 
@@ -160,7 +160,7 @@ stty -ixon
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
 # asdf
-source /usr/local/lib/asdf.sh
+source /opt/homebrew/lib/asdf.sh
 fpath=(${ASDF_DIR}/completions $fpath)
 
 # Base16 Shell
@@ -212,7 +212,7 @@ GRADLE_COMPLETION="$HOME/git/github.com/gradle/gradle-completion"
 [[ -d $GRADLE_COMPLETION ]] && fpath=($GRADLE_COMPLETION $fpath)
 
 # grc (Generic Colouriser)
-[[ -s "/etc/grc.zsh" ]] && source /usr/local/etc/grc.zsh
+[[ -s "/etc/grc.zsh" ]] && source /opt/homebrew/etc/grc.zsh
 
 # Private configs
 PRIVATE_RC="$HOME/.zshrc-private"
