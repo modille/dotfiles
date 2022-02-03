@@ -64,6 +64,13 @@ zinit wait'0' lucid for \
  atload"!_zsh_autosuggest_start" \
     zsh-users/zsh-autosuggestions
 
+# Cache kubectl completion. Borrowed from:
+# https://github.com/zdharma-continuum/zinit/issues/147#issue-1087228101
+zinit lucid wait has"kubectl" for \
+  id-as"kubectl_completion" as"completion" \
+  atclone"kubectl completion zsh > _kubectl" \
+  atpull"%atclone" run-atpull zdharma-continuum/null
+
 # Color output (auto set to 'no' on dumb terminals).
 zstyle ':prezto:*:*' color 'yes'
 
@@ -187,7 +194,7 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 #   https://github.com/belak/prezto-contrib/blob/356c8e29dd97268fbc9050a6c40da69b3501cf62/contrib-kubernetes/init.zsh#L13-L22
 # With cache dir from completion module:
 #   https://github.com/sorin-ionescu/prezto/blob/1f4601e44c989b90dc7314b151891fa60a101251/modules/completion/init.zsh#L47-L49
-# __kubectl_completion_file="${ZDOTDIR:-$HOME}/.zcompcache/kubectl.zsh"
+# __kubectl_completion_file="$HOME/.zcompcache/kubectl.zsh"
 # __kubectl_command="${commands[kubectl]}"
 # if [[ "${__kubectl_command}" -nt "${__kubectl_completion_file}" || ! -s "${__kubectl_completion_file}" ]]; then
 #   ${__kubectl_command} completion zsh >! "${__kubectl_completion_file}" 2> /dev/null
@@ -195,6 +202,7 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 # source "${__kubectl_completion_file}"
 # unset __kubectl_completion_file __kubectl_command
 # See https://github.com/ohmyzsh/ohmyzsh/issues/6843
+# Replaced after switching from prezto to zinit
 
 # Completions
 MODILLE_COMPLETIONS="$HOME/git/github.com/modille/completions/zsh"
