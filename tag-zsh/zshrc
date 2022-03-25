@@ -3,9 +3,10 @@
 # Uncomment and run zprof at the end to profile startup time
 # zmodload zsh/zprof
 
-source ~/.zinit/bin/zinit.zsh
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+source "${ZINIT_HOME}/zinit.zsh"
+# autoload -Uz _zinit
+# (( ${+_comps} )) && _comps[zinit]=_zinit
 
 # Snippets are cached locally. Update all with:
 #
@@ -38,9 +39,10 @@ zinit snippet PZTM::history-substring-search
 # Theme
 # https://github.com/modille/pure
 PURE_CMD_MAX_EXEC_TIME=60
+PURE_GIT_PULL=0
 PURE_PROMPT_SYMBOL='$'
 PURE_PROMPT_VICMD_SYMBOL=':'
-zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
+zinit ice pick"async.zsh" src"pure.zsh" # with zsh-async library that's bundled with it.
 zinit light modille/pure
 zstyle :prompt:pure:path color 'cyan'
 zstyle :prompt:pure:git:branch color 'cyan'
@@ -64,12 +66,16 @@ zinit wait'0' lucid for \
  atload"!_zsh_autosuggest_start" \
     zsh-users/zsh-autosuggestions
 
+zinit wait lucid for \
+  as"completion" https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
+
 # Cache kubectl completion. Borrowed from:
 # https://github.com/zdharma-continuum/zinit/issues/147#issue-1087228101
-zinit lucid wait has"kubectl" for \
-  id-as"kubectl_completion" as"completion" \
-  atclone"kubectl completion zsh > _kubectl" \
-  atpull"%atclone" run-atpull zdharma-continuum/null
+zinit wait lucid has"kubectl" for \
+  id-as"kubectl--completion" as"completion" \
+  atclone"kubectl completion zsh > _kubectl; zinit creinstall -q kubectl--completion" \
+  atpull"%atclone" \
+  run-atpull nocompile zdharma-continuum/null
 
 # Color output (auto set to 'no' on dumb terminals).
 zstyle ':prezto:*:*' color 'yes'
@@ -167,8 +173,9 @@ stty -ixon
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
 # asdf
-source /opt/homebrew/lib/asdf.sh
+source /opt/homebrew/opt/asdf/libexec/asdf.sh
 fpath=(${ASDF_DIR}/completions $fpath)
+[[ -d ${ASDF_DIR}/completions ]] && fpath=(${ASDF_DIR}/completions $fpath)
 
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/"

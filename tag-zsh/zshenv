@@ -26,15 +26,8 @@ export RBENV_SHELL=zsh
 # Rust
 export CARGOPATH="$HOME/.cargo"
 [[ -d $CARGOPATH ]] && export PATH="$PATH:$CARGOPATH/bin"
-
-# Homebrew
-# eval "$(/opt/homebrew/bin/brew shellenv)"
-export HOMEBREW_PREFIX="/opt/homebrew";
-export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
-export HOMEBREW_REPOSITORY="/opt/homebrew";
-export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
-export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
-export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
+# asdf
+export PATH="$HOME/.asdf/shims:$PATH"
 
 # https://github.com/brianmario/mysql2/issues/795
 export LIBRARY_PATH="$LIBRARY_PATH:/opt/homebrew/opt/openssl@1.1/lib"
