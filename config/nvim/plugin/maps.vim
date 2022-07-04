@@ -69,3 +69,8 @@ nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 " Paragraph motions don't change the jumplist
 nnoremap <silent> } :keepjumps normal! }<cr>
 nnoremap <silent> { :keepjumps normal! {<cr>
+
+" https://www.reddit.com/r/vim/comments/uorjet/comment/i8ie8om/
+" 0 once = to the first character of the line
+" 0 twice = to the first non-blank character of the line
+nnoremap <expr> 0 (col('.') == 1) ? '^' : '0'

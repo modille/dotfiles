@@ -6,6 +6,8 @@ vim.opt.smartcase = true
 
 -- 4 displaying text
 vim.opt.number = true
+vim.opt.list = true
+vim.opt.listchars = 'nbsp:○,tab:▷ ,trail:␣'
 
 -- 5 syntax, highlighting and spelling
 vim.opt.hlsearch = true

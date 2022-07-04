@@ -12,22 +12,23 @@ endif
 call plug#begin('~/git/github.com/modille/dotfiles/tag-vim/plugged')
 
 " Language support
+Plug 'blankname/vim-fish',               { 'for': 'fish' }
 Plug 'briancollins/vim-jst',             { 'for': 'ejs' }
 Plug 'cespare/vim-toml',                 { 'for': 'toml' }
 Plug 'craigdallimore/vim-jest-cli',      { 'for': 'javascript' }
 Plug 'docker/docker',                    { 'for': 'dockerfile', 'rtp': 'contrib/syntax/vim' }
-Plug 'elzr/vim-json'
 Plug 'fatih/vim-go',                     { 'for': ['asm', 'go', 'gohtmltmpl'] }
 Plug 'modille/groovy.vim',               { 'for': 'groovy' }
 Plug 'modille/vim-search-maven',         { 'for': 'groovy', 'branch': 'gradle' }
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'mustache' }
 Plug 'maxmellon/vim-jsx-pretty',         { 'for': 'javascript' }
 Plug 'nginx/nginx',                      { 'rtp': 'contrib/vim' }
-Plug 'notriddle/vim-gitcommit-markdown'
 Plug 'pangloss/vim-javascript',          { 'for': 'javascript' }
 Plug 'tmux-plugins/vim-tmux',            { 'for': 'tmux' }
-Plug 'tpope/vim-cucumber'
 Plug 'tpope/vim-markdown',               { 'for': 'markdown' }
+Plug 'elzr/vim-json'
+Plug 'notriddle/vim-gitcommit-markdown'
+Plug 'tpope/vim-cucumber'
 Plug 'tpope/vim-rails'
 
 " Text objects
@@ -44,10 +45,9 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'godlygeek/tabular' " For aligning text
 Plug 'haya14busa/is.vim' " Incremental search
 Plug 'haya14busa/vim-asterisk'
+Plug 'ivyl/vim-bling'
 Plug 'janko-m/vim-test'
-Plug 'jpalardy/spacehi.vim' " Highlight tabs and trailing spaces
 Plug 'machakann/vim-highlightedyank'
-Plug 'mhinz/vim-startify'
 Plug 'mzlogin/vim-markdown-toc'
 Plug 'simnalamburt/vim-mundo'
 Plug 'tpope/vim-abolish'
@@ -73,11 +73,14 @@ if has('nvim')
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'nvim-treesitter/playground'
   Plug 'modille/nvim-base16.lua' " Props to https://github.com/norcalli ❤️
-  Plug 'ishan9299/nvim-solarized-lua'
-  Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
+  " Plug 'ishan9299/nvim-solarized-lua'
+  " Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
+  Plug 'danymat/neogen'
   Plug 'JoosepAlviste/nvim-ts-context-commentstring'
   Plug 'code-biscuits/nvim-biscuits'
   Plug 'ThePrimeagen/refactoring.nvim'
+  Plug 'shaunsingh/solarized.nvim'
+  Plug 'Iron-E/nvim-soluarized'
 
   " Fuzzy finder
   Plug 'nvim-lua/popup.nvim'
@@ -88,7 +91,7 @@ if has('nvim')
   " LSP
   Plug 'neovim/nvim-lspconfig'
   Plug 'kosayoda/nvim-lightbulb' " Show gutter sign when action is available
-  Plug 'simrat39/symbols-outline.nvim'
+  Plug 'stevearc/aerial.nvim'
   Plug 'b0o/schemastore.nvim'
   Plug 'jose-elias-alvarez/null-ls.nvim'
   Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
@@ -138,9 +141,9 @@ lua require('impatient')
 lua require('modille.colorscheme')
 
 " Are these still needed nowadays?
-filetype indent on
-filetype plugin on
-syntax enable
+" filetype indent on
+" filetype plugin on
+" syntax enable
 
 " Use space for leader since thumbs rest there
 let mapleader = " "
@@ -150,9 +153,6 @@ let g:loaded_python2_provider = 0
 
 " Use python3 binary from Homebrew
 let g:python3_host_prog = '/opt/homebrew/bin/python3'
-
-" To use an absolute path (e.g. to an rbenv installation): >
-let g:ruby_host_prog = '~/.rbenv/versions/3.0.2/bin/neovim-ruby-host'
 
 " https://github.com/tpope/vim-markdown/pull/135
 let g:markdown_folding = 1

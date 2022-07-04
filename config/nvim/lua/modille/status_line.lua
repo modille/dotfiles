@@ -17,7 +17,8 @@ require('lualine').setup({
   options = {
     icons_enabled = true,
     -- A job could switch these automatically, but for now just choose one at startup
-    theme = (hour < 6 or hour > 17) and 'solarized_dark' or 'solarized_light',
+    -- theme = (hour < 6 or hour > 17) and 'solarized_dark' or 'solarized_light',
+    theme = (hour < 6 or hour > 17) and 'solarized_dark' or 'solarized',
     component_separators = { '', '' },
     section_separators = { '', '' },
     disabled_filetypes = {},

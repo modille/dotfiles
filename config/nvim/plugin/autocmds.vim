@@ -8,9 +8,11 @@ augroup modilleAutocmds
   autocmd FileType lua set colorcolumn=120
 
   " https://github.com/jpalardy/spacehi.vim
-  autocmd FileType Mundo,MundoDiff,go,help,startify,vim NoSpaceHi
-  autocmd Syntax * SpaceHi
-  autocmd Syntax diff NoSpaceHi
+  " autocmd FileType Mundo,MundoDiff,alpha,go,help,startify,vim NoSpaceHi
+  " autocmd Syntax * SpaceHi
+  " autocmd Syntax diff NoSpaceHi
+  " autocmd User TelescopeFindPre NoSpaceHi
+  " autocmd User TelescopePreviewerLoaded NoSpaceHi
 
   " Templates
   autocmd BufNewFile *.rb 0r ~/git/github.com/modille/dotfiles/tag-vim/templates/skeleton.rb

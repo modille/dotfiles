@@ -1,10 +1,40 @@
 -- https://github.com/nvim-treesitter/nvim-treesitter
 require('nvim-treesitter.configs').setup({
-  ensure_installed = 'maintained',
+  ensure_installed = {
+    'bash',
+    'css',
+    'dockerfile',
+    'go',
+    'graphql',
+    'html',
+    'http',
+    'java',
+    'javascript',
+    -- 'jsdoc',
+    'json',
+    'lua',
+    'make',
+    'markdown',
+    'python',
+    'query',
+    'regex',
+    'ruby',
+    'rust',
+    'scss',
+    'toml',
+    'tsx',
+    'typescript',
+    'vim',
+    'yaml',
+  },
   highlight = {
     enable = true,
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
   },
-  ignore_install = { 'jsdoc' },
   -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
   context_commentstring = {
     enable = true,

@@ -19,27 +19,28 @@ lspconfig.solargraph.setup({
   flags = {
     debounce_text_changes = 150,
   },
+  cmd = { 'bundle', 'exec', 'solargraph', 'stdio' },
   filetypes = { 'ruby' },
+  init_options = { formatting = true },
+  root_dir = lspconfig.util.root_pattern('Gemfile', '.git'),
   settings = {
     solargraph = {
       diagnostics = true,
-      formatting = true,
-      folding = true,
-      checkGemVersion = false,
-      useBundler = true,
-      bundlePath = vim.fn.expand('~/.rbenv/shims/bundle'),
     },
   },
-  on_attach = function(client)
+  on_attach = function(client, bufnr)
     -- Format on save
-    if client.resolved_capabilities.document_formatting then
+    if client.server_capabilities.documentFormattingProvider then
       vim.cmd([[
       augroup ModilleSolargraphFormatting
       autocmd! * <buffer>
-      autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+      autocmd BufWritePre <buffer> lua vim.lsp.buf.format()
       augroup END
       ]])
     end
+
+    -- https://github.com/stevearc/aerial.nvim
+    require('aerial').on_attach(client, bufnr)
 
     -- Options
     local function buf_set_option(...)
@@ -61,8 +62,8 @@ lspconfig.solargraph.setup({
     buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-    buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-    buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+    buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+    buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+    buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
   end,
 })

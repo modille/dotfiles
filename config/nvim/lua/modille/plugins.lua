@@ -1,0 +1,207 @@
+--local packer = nil
+--local function init()
+--  if packer == nil then
+--    packer = require('packer')
+--    packer.init({ disable_commands = true })
+--  end
+
+--  local use = packer.use
+--  packer.reset()
+--  -- Packer can manage itself
+--  use('wbthomason/packer.nvim')
+
+--  use('lewis6991/impatient.nvim')
+--  use('nvim-lua/plenary.nvim')
+
+--  -- Language support
+--  use('elzr/vim-json')
+--  use('notriddle/vim-gitcommit-markdown')
+--  use('tpope/vim-cucumber')
+--  use('tpope/vim-rails')
+--  use({ 'briancollins/vim-jst', ft = { 'ejs' } })
+--  use({ 'cespare/vim-toml', ft = { 'toml' } })
+--  use({ 'craigdallimore/vim-jest-cli', ft = { 'javascript' } })
+--  use({ 'docker/docker', ft = { 'dockerfile' }, rtp = 'contrib/syntax/vim' })
+--  use({ 'fatih/vim-go', ft = { 'asm', 'go', 'gohtmltmpl' } })
+--  use({ 'maxmellon/vim-jsx-pretty', ft = { 'javascript' } })
+--  use({ 'modille/groovy.vim', ft = { 'groovy' } })
+--  use({ 'modille/vim-search-maven', ft = { 'groovy' }, branch = 'gradle' })
+--  use({ 'mustache/vim-mustache-handlebars', ft = { 'mustache' } })
+--  use({ 'nginx/nginx', rtp = 'contrib/vim' })
+--  use({ 'pangloss/vim-javascript', ft = { 'javascript' } })
+--  use({ 'tmux-plugins/vim-tmux', ft = { 'tmux' } })
+--  use({ 'tpope/vim-markdown', ft = { 'markdown' } })
+
+--  -- Text objects
+
+--  -- Other plugins
+--  use('azabiong/vim-highlighter')
+--  use('brooth/far.vim')
+--  use('dbeniamine/cheat.sh-vim')
+--  use('editorconfig/editorconfig-vim')
+--  use('godlygeek/tabular') -- For aligning text
+--  use('haya14busa/is.vim') -- Incremental search
+--  use('haya14busa/vim-asterisk')
+--  use('ivyl/vim-bling')
+--  use('janko-m/vim-test')
+--  use('machakann/vim-highlightedyank')
+--  use('mzlogin/vim-markdown-toc')
+--  use('simnalamburt/vim-mundo')
+--  use('tpope/vim-abolish')
+--  use('tpope/vim-bundler')
+--  use('tpope/vim-commentary')
+--  use('tpope/vim-dotenv')
+--  use('RRethy/nvim-treesitter-endwise') -- use('tpope/vim-endwise')
+--  use('tpope/vim-projectionist')
+--  use('tpope/vim-repeat')
+--  use('tpope/vim-rhubarb')
+--  use('tpope/vim-surround')
+--  use('tpope/vim-unimpaired')
+--  use('tpope/vim-vinegar')
+--  use({ 'tpope/vim-dispatch', opt = true, cmd = { 'Dispatch', 'Make', 'Focus', 'Start' } })
+--  use({ 'tpope/vim-fugitive', requires = 'shumphrey/fugitive-gitlab.vim' })
+--  use({ 'tweekmonster/startuptime.vim', cmd = 'StartupTime' })
+
+--  -- Treesitter
+--  use({
+--    'nvim-treesitter/nvim-treesitter',
+--    run = ':TSUpdate',
+--  })
+--  --  use({ 'nvim-treesitter/playground', requires = 'nvim-treesitter/nvim-treesitter' })
+--  --  use('modille/nvim-base16.lua') -- Props to https://github.com/norcalli ❤️
+--  --  use({
+--  --    'danymat/neogen',
+--  --    config = function()
+--  --      require('neogen').setup({})
+--  --    end,
+--  --    requires = 'nvim-treesitter/nvim-treesitter',
+--  --    -- Uncomment next line if you want to follow only stable versions
+--  --    -- tag = "*"
+--  --  })
+--  --  use('JoosepAlviste/nvim-ts-context-commentstring')
+--  --  use({ 'code-biscuits/nvim-biscuits', requires = 'nvim-treesitter/nvim-treesitter' })
+--  --  use({ 'ThePrimeagen/refactoring.nvim', opt = true })
+--  use({ 'shaunsingh/solarized.nvim', config = [[require('modille.colorscheme_light')]] })
+--  --use('Iron-E/nvim-soluarized')
+
+--  -- Debugging
+--  use({
+--    'mfussenegger/nvim-dap',
+--    requires = {
+--      { 'rcarriga/nvim-dap-ui', after = 'nvim-dap' },
+--      { 'theHamsta/nvim-dap-virtual-text', after = 'nvim-dap' },
+--      { 'David-Kunz/jester', after = 'nvim-dap' }, -- Debug jest tests
+--    },
+--    -- TODO use setup for mappings
+--    config = function()
+--      require('modille.debuggers')
+--    end,
+--    module = 'dap',
+--  })
+
+--  -- Fuzzy finder
+--  use({
+--    'nvim-telescope/telescope.nvim',
+--    requires = {
+--      { 'nvim-telescope/telescope-frecency.nvim', after = 'telescope.nvim', requires = 'tami5/sqlite.lua' },
+--      { 'nvim-telescope/telescope-fzf-native.nvim', after = 'telescope.nvim', run = 'make' },
+--      { 'nvim-lua/popup.nvim', after = 'telescope.nvim' },
+--      { 'nvim-telescope/telescope-frecency.nvim', after = 'telescope.nvim' },
+--      { 'nvim-telescope/telescope-fzf-native.nvim', after = 'telescope.nvim' },
+--      -- { 'nvim-telescope/telescope-dap.nvim', after = 'telescope.nvim' },
+--    },
+--    -- TODO use setup for mappings
+--    config = function()
+--      require('modille.fuzzy_finder')
+--    end,
+--    module = 'telescope',
+--  })
+
+--  -- LSP
+--  use('neovim/nvim-lspconfig')
+--  use({
+--    'b0o/schemastore.nvim',
+--    'folke/trouble.nvim', -- TODO all this plugin config needs fixed for packer...
+--    'jose-elias-alvarez/nvim-lsp-ts-utils',
+--    'kosayoda/nvim-lightbulb',
+--    'ray-x/lsp_signature.nvim',
+--    'stevearc/aerial.nvim',
+--  })
+--  use({
+--    'jose-elias-alvarez/null-ls.nvim',
+--    requires = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+--  })
+
+--  -- Completion
+--  use({
+--    'hrsh7th/nvim-cmp',
+--    branch = 'dev', -- borders!
+--    requires = {
+--      { 'hrsh7th/vim-vsnip', after = 'nvim-cmp' },
+--      { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
+--      { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
+--      { 'hrsh7th/cmp-nvim-lsp-signature-help', after = 'nvim-cmp' },
+--      { 'hrsh7th/cmp-calc', after = 'nvim-cmp' },
+--      { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+--      { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
+--      { 'hrsh7th/cmp-vsnip', after = 'nvim-cmp' },
+--      { 'hrsh7th/cmp-nvim-lsp-document-symbol', after = 'nvim-cmp' },
+--    },
+--    config = function()
+--      require('modille.completion')
+--    end,
+--    event = 'InsertEnter *',
+--  })
+
+--  -- Snippets
+--  use('rafamadriz/friendly-snippets')
+
+--  -- Status line
+--  use({
+--    'nvim-lualine/lualine.nvim',
+--    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+--    config = function()
+--      require('modille.status_line')
+--    end,
+--  })
+--  use('kyazdani42/nvim-web-devicons')
+
+--  -- Other
+--  use('bfredl/nvim-miniyank')
+--  use({
+--    'lewis6991/gitsigns.nvim',
+--    requires = {
+--      'nvim-lua/plenary.nvim',
+--    },
+--    -- tag = 'release' -- To use the latest release
+--  })
+--  use({
+--    'norcalli/nvim-colorizer.lua',
+--    ft = { 'css', 'javascript', 'vim', 'html' },
+--    config = [[require('colorizer').setup {'css', 'javascript', 'vim', 'html'}]],
+--  })
+--  use('lukas-reineke/indent-blankline.nvim')
+--  use({ 'phaazon/hop.nvim', branch = 'v1' })
+--  use({
+--    'goolord/alpha-nvim',
+--    requires = { 'kyazdani42/nvim-web-devicons' },
+--    config = function()
+--      require('modille.startup')
+--    end,
+--  })
+--  use({
+--    'lukas-reineke/headlines.nvim',
+--    config = function()
+--      require('headlines').setup()
+--    end,
+--  })
+--end
+
+--local plugins = setmetatable({}, {
+--  __index = function(_, key)
+--    init()
+--    return packer[key]
+--  end,
+--})
+
+--return plugins

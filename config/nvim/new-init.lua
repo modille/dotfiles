@@ -1,0 +1,11 @@
+--require('modille.globals')
+--require('modille.options')
+--require('modille.colorscheme_light')
+----require('modille.autocmds')
+----require('modille.maps')
+
+--vim.cmd([[command! PackerInstall packadd packer.nvim | lua require('modille.plugins').install()]])
+--vim.cmd([[command! PackerUpdate packadd packer.nvim | lua require('modille.plugins').update()]])
+--vim.cmd([[command! PackerSync packadd packer.nvim | lua require('modille.plugins').sync()]])
+--vim.cmd([[command! PackerClean packadd packer.nvim | lua require('modille.plugins').clean()]])
+--vim.cmd([[command! PackerCompile packadd packer.nvim | lua require('modille.plugins').compile()]])
