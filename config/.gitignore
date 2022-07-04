@@ -3,6 +3,10 @@
 
 # ...except the gitignore and nvim config files
 !.gitignore
-
-# allow nvim
 !/nvim
+
+# Allow fish
+!/fish
+
+# ...except fish_variables, which may contain API keys, etc.
+/fish/fish_variables
