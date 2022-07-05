@@ -137,6 +137,17 @@ call plug#end()
 " Impatient needs to be setup before any other lua plugin is loaded
 lua require('impatient')
 
+" When Light, you get a non-0 exit code with output:
+"   2022-07-04 14:43:51.299 defaults[50713:32971078]
+"   The domain/default pair of (kCFPreferencesAnyApplication, AppleInterfaceStyle) does not exist
+" When Dark, you get exit code 0 with output:
+"   Dark
+if system('defaults read -g AppleInterfaceStyle') =~ '^Dark'
+  let g:modille_background = 'dark'
+else
+  let g:modille_background = 'light'
+endif
+
 " Always seems to work best if these are done early
 lua require('modille.colorscheme')
 

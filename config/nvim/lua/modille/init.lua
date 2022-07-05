@@ -5,8 +5,11 @@ require('modille.completion')
 require('modille.debuggers')
 require('modille.fuzzy_finder')
 require('modille.lsp')
-require('modille.status_line')
 require('modille.treesitter')
+
+local status_line_module = vim.g.modille_background == 'dark' and 'modille.status_line_dark'
+  or 'modille.status_line_light'
+require(status_line_module).load()
 
 -- https://github.com/lewis6991/gitsigns.nvim
 -- stylua: ignore start
