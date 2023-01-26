@@ -60,4 +60,12 @@ function change_background --argument mode_setting
 
   # Slack
   # TODO: Built-in sidebar themes can do this, but custom ones can't yet
+
+  # bat, delta
+  switch $mode
+    case dark
+      set -Ux BAT_THEME 'Solarized (dark)'
+    case light
+      set -Ux BAT_THEME 'Solarized (light)'
+  end
 end

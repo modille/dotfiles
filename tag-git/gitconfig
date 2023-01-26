@@ -1,6 +1,7 @@
 [user]
   name = Matt Odille
   useConfigOnly = true
+  email = matt.odille@gmail.com
 
 [github]
   user = modille
@@ -8,7 +9,7 @@
 [alias]
   a = add
   b = "!f() { nvim -c 'Gblame' $1; }; f"
-  br = branch --sort=-committerdate --format='%(color:green)%(committerdate:relative)%(color:reset) %(refname:short)'
+  br = "!f() { count=$1; git branch --all --sort=-committerdate --color=always --format='%(color:green)%(committerdate:relative)|%(color:reset)%(color:bold)%(refname:short)|%(color:reset)%(color:blue)%(subject)' | head -n ${count:-20} | column -ts'|'; }; f"
   cane = commit --amend --no-edit
   cnv = commit --no-verify
   co = checkout
@@ -72,9 +73,9 @@
 
   # Same as above, but with a diff stat instead of just names
   # (better for interactive use)
-  stat = !git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\")
+  stat = !git --no-pager diff --stat $(git merge-base HEAD \"$REVIEW_BASE\") \":(exclude)features/support/__recordings__/*\" \":(exclude)features/auto_mocks/*\"
   # ignore test files
-  statsrc = !git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\") \":(exclude)features/*\" \":(exclude)spec/*\" \":(exclude)*/__tests__/*\" \":(exclude)*/__mocks__/*\"
+  statsrc = !git --no-pager diff --stat $(git merge-base HEAD \"$REVIEW_BASE\") \":(exclude)features/*\" \":(exclude)spec/*\" \":(exclude)*/__tests__/*\" \":(exclude)*/__mocks__/*\"
 
   # Visualizing relationships between files
   # git depgraph | imgcat
@@ -116,10 +117,7 @@
   autocrlf = input
   editor = nvim
   excludesfile = ~/.gitignore
-  pager = delta --light
-
-[delta]
-  theme = 'Solarized (light)'
+  pager = delta
 
 [diff]
   guitool = diffmerge
@@ -128,7 +126,7 @@
   noGreeting = true
 
 [interactive]
-  diffFilter = delta --color-only --light
+  diffFilter = delta --color-only
 
 [mergetool]
   keepBackup = false
