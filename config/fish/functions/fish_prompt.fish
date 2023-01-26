@@ -1,6 +1,6 @@
 # Default appearance options. Override in config.fish if you want.
 if ! set -q lucid_dirty_indicator
-    set -g lucid_dirty_indicator "•"
+    set -g lucid_dirty_indicator "(dirty)"
 end
 
 if ! set -q lucid_prompt_symbol
@@ -16,7 +16,7 @@ if ! set -q lucid_prompt_symbol_color
 end
 
 if ! set -q lucid_prompt_symbol_error_color
-    set -g lucid_prompt_symbol_error_color "$fish_color_normal"
+    set -g lucid_prompt_symbol_error_color red
 end
 
 # This should be set to be at least as long as lucid_dirty_indicator, due to a fish bug
@@ -25,11 +25,11 @@ if ! set -q lucid_clean_indicator
 end
 
 if ! set -q lucid_cwd_color
-    set -g lucid_cwd_color green
+    set -g lucid_cwd_color cyan
 end
 
 if ! set -q lucid_git_color
-    set -g lucid_git_color blue
+    set -g lucid_git_color yellow
 end
 
 # State used for memoization and async calls.
