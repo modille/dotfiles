@@ -9,6 +9,7 @@ export VISUAL='nvim'
 
 # Custom
 export PATH="$HOME/local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/Downloads/nvim-osx64/bin:$PATH"
 # Go
 export GOPATH="$HOME/go"
@@ -44,9 +45,9 @@ export DIRENV_LOG_FORMAT=
 # Note: this may interfere with building old versions of Ruby (e.g <2.4) that use OpenSSL <1.1.
 # export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=/opt/homebrew/opt/openssl@1.1"
-export LDFLAGS="-L/opt/homebrew/opt/readline/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/readline/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/readline/lib/pkgconfig"
+export LDFLAGS="-L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/libpq/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/libpq/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/readline/lib/pkgconfig:/opt/homebrew/opt/libpq/lib/pkgconfig"
 
 # https://gitlab.com/gnachman/iterm2/-/wikis/tmux-Integration-Best-Practices#how-do-i-use-shell-integration
 export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
