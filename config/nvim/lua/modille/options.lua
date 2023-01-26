@@ -34,6 +34,10 @@ vim.opt.shiftwidth = 2
 vim.opt.shiftround = true
 vim.opt.expandtab = true
 
+-- 17 mapping
+-- Recommended value from https://github.com/folke/which-key.nvim/blob/61553aeb3d5ca8c11eea8be6eadf478062982ac9/README.md#%EF%B8%8F-configuration
+-- vim.opt.timeoutlen = 500
+
 -- 18 reading and writing files
 vim.opt.writebackup = false
 vim.opt.backup = false

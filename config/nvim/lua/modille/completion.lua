@@ -61,7 +61,10 @@ cmp.setup({
     ['<C-d>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = false }),
+    ['<CR>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = false,
+    }),
 
     -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#vim-vsnip
     ['<Tab>'] = cmp.mapping(function(fallback)
@@ -106,6 +109,7 @@ cmp.setup({
         end,
       },
     },
+    { name = 'nvim_lsp_signature_help' },
     { name = 'omni' }, -- for cucumber_language_server
     { name = 'calc' },
     { name = 'path' },

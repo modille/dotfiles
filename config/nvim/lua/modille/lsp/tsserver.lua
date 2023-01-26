@@ -1,7 +1,18 @@
 -- https://github.com/neovim/nvim-lspconfig
 local lspconfig = require('lspconfig')
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- capabilities.textDocument.completion.completionItem.resolveSupport = {
+--   properties = {
+--     'documentation',
+--     'detail',
+--     'additionalTextEdits',
+--   },
+-- }
+-- https://github.com/hrsh7th/nvim-cmp
+-- capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
   properties = {
@@ -10,8 +21,6 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     'additionalTextEdits',
   },
 }
--- https://github.com/hrsh7th/nvim-cmp
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
 lspconfig.tsserver.setup({
@@ -22,7 +31,20 @@ lspconfig.tsserver.setup({
   },
 
   -- https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils#setup
-  init_options = require('nvim-lsp-ts-utils').init_options,
+  -- init_options = require('nvim-lsp-ts-utils').init_options,
+  init_options = {
+    hostInfo = 'neovim',
+    preferences = {
+      includeInlayParameterNameHints = 'all',
+      includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+      includeInlayFunctionParameterTypeHints = true,
+      includeInlayVariableTypeHints = true,
+      includeInlayPropertyDeclarationTypeHints = true,
+      includeInlayFunctionLikeReturnTypeHints = true,
+      includeInlayEnumMemberValueHints = true,
+      completions = { completeFunctionCalls = true },
+    },
+  },
 
   on_attach = function(client, bufnr)
     local ts_utils = require('nvim-lsp-ts-utils')

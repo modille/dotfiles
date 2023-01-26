@@ -18,6 +18,7 @@ Plug 'cespare/vim-toml',                 { 'for': 'toml' }
 Plug 'craigdallimore/vim-jest-cli',      { 'for': 'javascript' }
 Plug 'docker/docker',                    { 'for': 'dockerfile', 'rtp': 'contrib/syntax/vim' }
 Plug 'fatih/vim-go',                     { 'for': ['asm', 'go', 'gohtmltmpl'] }
+Plug 'jgdavey/vim-blockle',              { 'for': 'ruby' }
 Plug 'modille/groovy.vim',               { 'for': 'groovy' }
 Plug 'modille/vim-search-maven',         { 'for': 'groovy', 'branch': 'gradle' }
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'mustache' }
@@ -28,6 +29,7 @@ Plug 'tmux-plugins/vim-tmux',            { 'for': 'tmux' }
 Plug 'tpope/vim-markdown',               { 'for': 'markdown' }
 Plug 'elzr/vim-json'
 Plug 'notriddle/vim-gitcommit-markdown'
+Plug 'towolf/vim-helm'
 Plug 'tpope/vim-cucumber'
 Plug 'tpope/vim-rails'
 
@@ -46,7 +48,6 @@ Plug 'godlygeek/tabular' " For aligning text
 Plug 'haya14busa/is.vim' " Incremental search
 Plug 'haya14busa/vim-asterisk'
 Plug 'ivyl/vim-bling'
-Plug 'janko-m/vim-test'
 Plug 'machakann/vim-highlightedyank'
 Plug 'mzlogin/vim-markdown-toc'
 Plug 'simnalamburt/vim-mundo'
@@ -64,6 +65,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'tweekmonster/startuptime.vim'
+Plug 'vim-test/vim-test'
 
 if has('nvim')
   " Utils
@@ -79,8 +81,11 @@ if has('nvim')
   Plug 'JoosepAlviste/nvim-ts-context-commentstring'
   Plug 'code-biscuits/nvim-biscuits'
   Plug 'ThePrimeagen/refactoring.nvim'
-  Plug 'shaunsingh/solarized.nvim'
-  Plug 'Iron-E/nvim-soluarized'
+  " Plug 'shaunsingh/solarized.nvim'
+  " Plug 'Iron-E/nvim-soluarized'
+  Plug 'https://gitlab.com/HiPhish/resolarized.nvim.git'
+  Plug 'olimorris/onedarkpro.nvim'
+  Plug 'EdenEast/nightfox.nvim'
 
   " Fuzzy finder
   Plug 'nvim-lua/popup.nvim'
@@ -95,11 +100,14 @@ if has('nvim')
   Plug 'b0o/schemastore.nvim'
   Plug 'jose-elias-alvarez/null-ls.nvim'
   Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+  " TODO replace above with 'jose-elias-alvarez/typescript.nvim'
   Plug 'folke/trouble.nvim'
+  Plug 'j-hui/fidget.nvim'
 
   " Completion
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
   Plug 'hrsh7th/cmp-vsnip'
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/cmp-calc'
@@ -119,23 +127,34 @@ if has('nvim')
   Plug 'theHamsta/nvim-dap-virtual-text'
   Plug 'rcarriga/nvim-dap-ui'
   Plug 'David-Kunz/jester' " Debug jest tests
+  " Plug 'mxsdev/nvim-dap-vscode-js' | Plug 'microsoft/vscode-js-debug', { 'do': 'npm install --legacy-peer-deps && npm run compile' } " Needed for neotest + javascript + dap
 
   " Other
   " http://vim.wikia.com/wiki/Replace_a_word_with_yanked_text
   " Consider yi" then ci"<C-R>0 then . to repeat
   Plug 'bfredl/nvim-miniyank'
   Plug 'lewis6991/gitsigns.nvim'
-  Plug 'lewis6991/impatient.nvim'
+  " Plug 'lewis6991/impatient.nvim' " Removed for nvim 0.8
   Plug 'norcalli/nvim-colorizer.lua'
   Plug 'lukas-reineke/indent-blankline.nvim'
   Plug 'phaazon/hop.nvim', { 'branch': 'v1' }
+  Plug 'ggandor/leap.nvim'
+  " Plug 'folke/which-key.nvim'
+  Plug 'MunifTanjim/nui.nvim'
+  Plug 'bennypowers/nvim-regexplainer'
+
+  " Testing
+  Plug 'antoinemadec/FixCursorHold.nvim'
+  Plug 'nvim-neotest/neotest'
+  Plug 'olimorris/neotest-rspec'
+  Plug 'haydenmeade/neotest-jest'
 endif
 
 call plug#end()
 
 " https://github.com/lewis6991/impatient.nvim#setup
 " Impatient needs to be setup before any other lua plugin is loaded
-lua require('impatient')
+" lua require('impatient')
 
 " When Light, you get a non-0 exit code with output:
 "   2022-07-04 14:43:51.299 defaults[50713:32971078]
@@ -159,6 +178,9 @@ lua require('modille.colorscheme')
 " Use space for leader since thumbs rest there
 let mapleader = " "
 
+" Disable Perl provider
+let g:loaded_perl_provider = 0
+
 " Disable Python2 check since it's EOL
 let g:loaded_python2_provider = 0
 
@@ -168,10 +190,19 @@ let g:python3_host_prog = '/opt/homebrew/bin/python3'
 " https://github.com/tpope/vim-markdown/pull/135
 let g:markdown_folding = 1
 
-let g:HiSet   = 'f<CR>'           " normal, visual
-let g:HiClear = 'f<BS>'           " normal, visual
-let g:HiErase = 'f<C-L>'          " normal
-let g:HiFind  = 'f<Tab>'          " normal, visual
+" https://github.com/jgdavey/vim-blockle
+let g:blockle_mapping = '<Leader>bt'
+
+let g:HiSet   = 'f<CR>'  " normal, visual
+let g:HiClear = 'f<BS>'  " normal, visual
+let g:HiErase = 'f<C-L>' " normal
+let g:HiFind  = 'f<Tab>' " normal, visual
+
+" https://github.com/vim/vim/issues/4738
+let g:netrw_browsex_viewer= 'open'
+
+" nah, bro
+set mouse=
 
 " Personal lua module
 lua require('modille')

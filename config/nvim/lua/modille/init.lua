@@ -5,7 +5,10 @@ require('modille.completion')
 require('modille.debuggers')
 require('modille.fuzzy_finder')
 require('modille.lsp')
+-- require('modille.mappings').setup()
 require('modille.treesitter')
+require('modille.testing')
+require('modille.autocmds')
 
 local status_line_module = vim.g.modille_background == 'dark' and 'modille.status_line_dark'
   or 'modille.status_line_light'
@@ -84,8 +87,16 @@ vim.api.nvim_set_keymap('v', '<leader><leader>w', "<cmd>lua require'hop'.hint_wo
 vim.api.nvim_set_keymap('v', '<leader><leader>l', "<cmd>lua require'hop'.hint_lines()<cr>", {})
 vim.api.nvim_set_keymap('v', '<leader><leader>c', "<cmd>lua require'hop'.hint_char1()<cr>", {})
 
+-- https://github.com/ggandor/leap.nvim
+require('leap').add_default_mappings()
+
 -- https://github.com/danymat/neogen
 require('neogen').setup({})
+
+require('aerial').setup({
+  backends = { 'lsp', 'treesitter', 'markdown' }, -- in priority order
+  filter_kind = false,
+})
 
 -- https://github.com/nvim-treesitter/nvim-treesitter/issues/1167#issuecomment-920824125
 function _G.javascript_indent()
@@ -104,3 +115,6 @@ function _G.javascript_indent()
 end
 
 vim.cmd([[autocmd FileType javascript setlocal indentexpr=v:lua.javascript_indent()]])
+
+-- https://github.com/bennypowers/nvim-regexplainer
+require('regexplainer').setup()

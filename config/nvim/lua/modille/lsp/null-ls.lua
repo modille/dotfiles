@@ -20,6 +20,10 @@ null_ls.setup({
     null_ls.builtins.code_actions.shellcheck,
     -- stylua
     null_ls.builtins.formatting.stylua,
+    -- vale
+    -- null_ls.builtins.diagnostics.vale.with({
+    --   filetypes = { 'markdown', 'gitcommit_markdown', 'javascript', 'ruby' },
+    -- }),
   },
   should_attach = function(bufnr)
     return not vim.api.nvim_buf_get_name(bufnr):match('.env')
@@ -34,6 +38,12 @@ null_ls.setup({
           vim.lsp.buf.format({ bufnr = bufnr })
         end,
       })
+    end
+
+    -- Fix null-ls + markdown + gq
+    -- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1131
+    if client.server_capabilities.documentFormattingProvider then
+      vim.api.nvim_buf_set_option(bufnr, 'formatexpr', '')
     end
   end,
 })

@@ -4,13 +4,31 @@ nnoremap <silent> <Leader>ts :TestSuite<CR>
 nnoremap <silent> <Leader>tl :TestLast<CR>
 nnoremap <silent> <Leader>tg :TestVisit<CR>
 
-" Test
-" Make test commands execute using dispatch.vim
+" Runs test commands with :terminal in a split window.
 let g:test#strategy = 'neovim'
+
+" Run tests in a full-height vertical right split in order to see more output
+let test#neovim#term_position = 'vert botright'
 
 function! JestDebugNearest()
   let g:test#javascript#runner = 'jest'
   let g:test#javascript#jest#executable = 'node --inspect-brk node_modules/jest/bin/jest.js --runInBand'
+  TestNearest
+  unlet g:test#javascript#runner
+  unlet g:test#javascript#jest#executable
+endfunction
+
+function! JestNearestFeature()
+  let g:test#javascript#runner = 'jest'
+  let g:test#javascript#jest#executable = './node_modules/jest/bin/jest.js --runInBand --config=jest.config.features.js'
+  TestNearest
+  unlet g:test#javascript#runner
+  unlet g:test#javascript#jest#executable
+endfunction
+
+function! JestDebugNearestFeature()
+  let g:test#javascript#runner = 'jest'
+  let g:test#javascript#jest#executable = 'node --inspect-brk node_modules/jest/bin/jest.js --runInBand --config=jest.config.features.js'
   TestNearest
   unlet g:test#javascript#runner
   unlet g:test#javascript#jest#executable
