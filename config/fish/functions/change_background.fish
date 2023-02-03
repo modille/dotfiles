@@ -45,14 +45,14 @@ function change_background --argument mode_setting
       osascript -e 'tell application "System Events" to tell every desktop to set picture to "/Users/odillem2/Pictures/light.png"'
   end
 
-  # Brave
+  # Google Chrome
   # WIP: Requires manual intervention for now
   # TODO: Use native messaging https://developer.chrome.com/docs/apps/nativeMessaging/
   switch $mode
     case dark
-      open -a 'Brave Browser' 'https://chrome.google.com/webstore/detail/solarized-dark-refresh-th/jinmjipikfdhmacpjdddmpffflhehcah'
+      open -a 'Google Chrome' 'https://chrome.google.com/webstore/detail/solarized-dark-refresh-th/jinmjipikfdhmacpjdddmpffflhehcah'
     case light
-      open -a 'Brave Browser' 'https://chrome.google.com/webstore/detail/solarized-light/kkaomacmcjmeajgdkgbemiigiphgcabj'
+      open -a 'Google Chrome' 'https://chrome.google.com/webstore/detail/solarized-light/kkaomacmcjmeajgdkgbemiigiphgcabj'
   end
 
   # Firefox
