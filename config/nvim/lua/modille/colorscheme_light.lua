@@ -160,10 +160,11 @@ local function load()
       ['@text.uri.markdown_inline'] = { fg = '${purple}' },
 
       SpecialKey = { link = 'Special' },
+      LineNr = { fg = '${fg}' },
     },
   })
   vim.o.background = 'light'
-  vim.cmd('colorscheme onedarkpro')
+  vim.cmd('colorscheme onelight')
 end
 
 -- solarized light cheatsheet:

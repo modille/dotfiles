@@ -45,6 +45,7 @@ require('nvim-treesitter.configs').setup({
 -- https://github.com/code-biscuits/nvim-biscuits#configuration
 require('nvim-biscuits').setup({
   toggle_keybind = '<leader>cb',
+  show_on_start = false,
   default_config = {
     prefix_string = '🍪 ',
   },
