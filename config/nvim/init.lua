@@ -1,0 +1,6 @@
+require('modille.globals')
+require('modille.options')
+require('modille.lazy')
+require('modille.colorscheme').setup()
+require('modille.autocmds')
+require('modille.keymaps')

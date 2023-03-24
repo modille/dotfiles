@@ -1,3 +1,4 @@
+vim.cmd([[
 " Use ; to enter command mode instead of :
 nmap ; :
 vmap ; :
@@ -19,9 +20,6 @@ xnoremap > >gv|
 nnoremap > >>_
 nnoremap < <<_
 
-" WIP: Folding
-" close all open folds apart from the one that the cursor is on
-nnoremap <Leader>zz zMzv
 " Better folding mnemonics: [o]pen, [c]lose, etc.
 " open all folds
 nnoremap <Leader>zo zR
@@ -31,6 +29,8 @@ nnoremap <Leader>zc zM
 nnoremap <Leader>z<Down> zj
 " move up to bottom of previous fold
 nnoremap <Leader>z<Up> zk
+" close all open folds apart from the one that the cursor is on
+nnoremap <Leader>zz zMzv
 
 " spf13 and SpaceVim-like bindings
 nnoremap <silent> <Leader>cc :cclose<CR>
@@ -48,18 +48,12 @@ nnoremap Q <nop>
 " Clear current search highlight by double tapping //
 nmap <silent> // :nohlsearch<CR>
 
-if has('nvim')
-  " Easier escape in terminal
-  tnoremap <Esc> <C-\><C-n>
+" Easier escape in terminal
+tnoremap <Esc> <C-\><C-n>
 
-  " ...but still be able to send an Escape key
-  " Mnemonic: Verbatim escape (similar to :help i_ctrl-v)
-  tnoremap <C-v><Esc> <Esc>
-endif
-
-nnoremap tc :tabclose<CR>
-nnoremap tn :tabnext<CR>
-nnoremap tp :tabprev<CR>
+" ...but still be able to send an Escape key
+" Mnemonic: Verbatim escape (similar to :help i_ctrl-v)
+tnoremap <C-v><Esc> <Esc>
 
 " https://vim.fandom.com/wiki/Selecting_your_pasted_text
 " After pasting, type gp to select the pasted text in visual mode.
@@ -74,3 +68,10 @@ nnoremap <silent> { :keepjumps normal! {<cr>
 " 0 once = to the first character of the line
 " 0 twice = to the first non-blank character of the line
 nnoremap <expr> 0 (col('.') == 1) ? '^' : '0'
+]])
+
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+-- vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)

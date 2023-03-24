@@ -1,17 +1,7 @@
 -- https://github.com/neovim/nvim-lspconfig
 local lspconfig = require('lspconfig')
 
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities.textDocument.completion.completionItem.snippetSupport = true
--- capabilities.textDocument.completion.completionItem.resolveSupport = {
---   properties = {
---     'documentation',
---     'detail',
---     'additionalTextEdits',
---   },
--- }
 -- https://github.com/hrsh7th/nvim-cmp
--- capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
@@ -25,13 +15,10 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
 lspconfig.tsserver.setup({
   capabilities = capabilities,
-
   flags = {
     debounce_text_changes = 150,
   },
-
   -- https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils#setup
-  -- init_options = require('nvim-lsp-ts-utils').init_options,
   init_options = {
     hostInfo = 'neovim',
     preferences = {
@@ -45,7 +32,6 @@ lspconfig.tsserver.setup({
       completions = { completeFunctionCalls = true },
     },
   },
-
   on_attach = function(client, bufnr)
     local ts_utils = require('nvim-lsp-ts-utils')
     ts_utils.setup({
@@ -80,9 +66,6 @@ lspconfig.tsserver.setup({
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
 
-    -- https://github.com/stevearc/aerial.nvim
-    require('aerial').on_attach(client, bufnr)
-
     -- Options
     local function buf_set_option(...)
       vim.api.nvim_buf_set_option(bufnr, ...)
@@ -96,12 +79,6 @@ lspconfig.tsserver.setup({
     end
 
     local opts = { noremap = true, silent = true }
-
-    -- https://github.com/neovim/nvim-lspconfig#suggested-configuration
-    buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-    buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-    buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-    -- buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 
     -- https://github.com/neovim/nvim-lspconfig#suggested-configuration
     buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)

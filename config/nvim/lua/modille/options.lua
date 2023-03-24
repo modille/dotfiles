@@ -15,28 +15,28 @@ vim.opt.inccommand = 'split' -- or 'nosplit'
 vim.opt.termguicolors = true
 vim.opt.cursorline = true
 vim.opt.colorcolumn = '80'
-vim.opt.spell = false -- TODO removeme
 
 -- 6 multiple windows
 vim.opt.previewheight = 28
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
+-- 9 using the mouse
+vim.opt.mouse = ''
+
 -- 13 editing text
 -- Enable persistent undo so that undo history persists across vim sessions
 vim.opt.undofile = true
 vim.opt.undodir = os.getenv('HOME') .. '/.local/share/nvim/undo'
 vim.opt.dictionary = '/usr/share/dict/words'
+-- https://github.com/hrsh7th/nvim-cmp
+vim.opt.completeopt = 'menu,menuone,noselect'
 
 -- 14 tabs and indenting
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.shiftround = true
 vim.opt.expandtab = true
-
--- 17 mapping
--- Recommended value from https://github.com/folke/which-key.nvim/blob/61553aeb3d5ca8c11eea8be6eadf478062982ac9/README.md#%EF%B8%8F-configuration
--- vim.opt.timeoutlen = 500
 
 -- 18 reading and writing files
 vim.opt.writebackup = false
@@ -46,3 +46,6 @@ vim.opt.autoread = true
 -- 19 the swap file
 vim.opt.swapfile = false
 vim.opt.updatetime = 100
+
+-- 24 various
+vim.opt.signcolumn = 'yes'

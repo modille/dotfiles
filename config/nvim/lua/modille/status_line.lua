@@ -1,5 +1,6 @@
-local function load(theme)
-  -- https://github.com/hoob3rt/lualine.nvim
+local M = {}
+
+function M.setup()
   local function vim_icon()
     return '  '
   end
@@ -12,10 +13,37 @@ local function load(theme)
     return nil
   end
 
+  -- TODO: Fix so that maxmx03/solarized.nvim overrides the builtin theme
+  local solarized = require('solarized')
+  local chromatic = require('solarized.utils.chromatic')
+  local colors = solarized.colors
+  local lighten = chromatic.lighten
+  local solarized_theme = {
+    normal = {
+      a = { fg = lighten(colors.blue, 50), bg = colors.blue, gui = 'bold' },
+      b = { fg = colors.bg_alt, bg = colors.content },
+      c = { fg = colors.content, bg = solarized:is_transparent(colors.bg_alt) },
+      z = { fg = lighten(colors.blue, 50), bg = colors.blue },
+    },
+    insert = {
+      a = { fg = lighten(colors.green, 50), bg = colors.green },
+    },
+    visual = {
+      a = { fg = lighten(colors.magenta, 50), bg = colors.magenta },
+    },
+    replace = {
+      a = { fg = lighten(colors.red, 50), bg = colors.red },
+    },
+    command = {
+      a = { fg = colors.blue, bg = lighten(colors.blue, 50) },
+    },
+  }
+
+  -- https://github.com/hoob3rt/lualine.nvim
   require('lualine').setup({
     options = {
       icons_enabled = true,
-      theme = theme,
+      theme = solarized_theme,
       component_separators = { '', '' },
       section_separators = { '', '' },
       disabled_filetypes = {},
@@ -67,6 +95,4 @@ local function load(theme)
   })
 end
 
-return {
-  load = load,
-}
+return M

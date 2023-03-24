@@ -1,2 +1,2 @@
 setlocal spelloptions=camel
-setlocal nospell
+setlocal spell

@@ -1,31 +1,6 @@
--- https://github.com/kosayoda/nvim-lightbulb
-vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb({ ignore = {"null-ls"} })]])
-
--- https://github.com/folke/trouble.nvim
-require('trouble').setup({})
-
--- https://github.com/j-hui/fidget.nvim
-require('fidget').setup({
-  sources = {
-    ['null-ls'] = {
-      ignore = true,
-    },
-  },
-})
-
 -- https://github.com/neovim/nvim-lspconfig
 local lspconfig = require('lspconfig')
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities.textDocument.completion.completionItem.snippetSupport = true
--- capabilities.textDocument.completion.completionItem.resolveSupport = {
---   properties = {
---     'documentation',
---     'detail',
---     'additionalTextEdits',
---   },
--- }
 -- https://github.com/hrsh7th/nvim-cmp
--- capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
@@ -52,8 +27,8 @@ lspconfig.bashls.setup({ flags = { debounce_text_changes = 150 } })
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#dockerls
 lspconfig.dockerls.setup({ flags = { debounce_text_changes = 150 } })
 
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
-lspconfig.sumneko_lua.setup({
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
+lspconfig.lua_ls.setup({
   settings = {
     Lua = {
       runtime = {
@@ -65,6 +40,7 @@ lspconfig.sumneko_lua.setup({
         globals = { 'vim' },
       },
       workspace = {
+        checkThirdParty = false,
         -- Make the server aware of Neovim runtime files
         library = vim.api.nvim_get_runtime_file('', true),
       },
@@ -81,6 +57,6 @@ lspconfig.pylsp.setup({ flags = { debounce_text_changes = 150 } })
 
 require('modille.lsp.cucumber_language_server')
 require('modille.lsp.jsonls')
-require('modille.lsp.null-ls')
+-- require('modille.lsp.ruby-lsp')
 require('modille.lsp.solargraph')
 require('modille.lsp.tsserver')
