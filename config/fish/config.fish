@@ -14,9 +14,9 @@ if status is-interactive
   abbr --add gsi "git status --ignored"
   abbr --add gsuir "git submodule update --init --recursive"
   abbr --add kc "kubectl"
-  abbr --add kcd "kubectl --context\x3ddev"
-  abbr --add kcp "kubectl --context\x3dprd"
-  abbr --add kcs "kubectl --context\x3dstg"
+  abbr --add kcd "kubectl --context=dev"
+  abbr --add kcp "kubectl --context=prd"
+  abbr --add kcs "kubectl --context=stg"
 end
 
 source /opt/homebrew/opt/asdf/libexec/asdf.fish
