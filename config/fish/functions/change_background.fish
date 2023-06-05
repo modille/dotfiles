@@ -23,6 +23,15 @@ function change_background --argument mode_setting
     end
   end
 
+  # Wallpaper
+  # TODO: This doesn't work for desktops that have a full-screened app in-focus
+  switch $mode
+    case dark
+      osascript -e 'tell application "System Events" to tell every desktop to set picture to "/Users/modille/Pictures/dark.png"'
+    case light
+      osascript -e 'tell application "System Events" to tell every desktop to set picture to "/Users/modille/Pictures/light.png"'
+  end
+
   # Tracks the current mode in a file, and only proceed if the new mode is different than the current mode
   set -l previous_mode (cat /Users/modille/.local/state/modille/current_background_mode.txt) > /dev/null
   if test $mode = $previous_mode
@@ -61,15 +70,6 @@ function change_background --argument mode_setting
       open -a 'Google Chrome' 'https://chrome.google.com/webstore/detail/solarized-dark-refresh-th/jinmjipikfdhmacpjdddmpffflhehcah'
     case light
       open -a 'Google Chrome' 'https://chrome.google.com/webstore/detail/solarized-light/kkaomacmcjmeajgdkgbemiigiphgcabj'
-  end
-
-  # Wallpaper
-  # TODO: This doesn't work for desktops that have a full-screened app in-focus
-  switch $mode
-    case dark
-      osascript -e 'delay 0.5' -e 'tell application "System Events" to tell every desktop to set picture to "/Users/modille/Pictures/dark.png"'
-    case light
-      osascript -e 'delay 0.5' -e 'tell application "System Events" to tell every desktop to set picture to "/Users/modille/Pictures/light.png"'
   end
 
   # Slack
