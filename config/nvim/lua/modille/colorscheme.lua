@@ -7,9 +7,23 @@ function M.reload()
       theme = 'neovim',
       transparent = false,
     },
-    highlights = function()
+    highlights = function(colors, darken, lighten, blend)
       return {
+        -- better :intro
         SpecialKey = { link = 'Special' },
+
+        -- keep syntax highlighting in diffs
+        DiffText = { bg = blend(colors.blue, colors.bg, 0.15) },
+        DiffAdd = { bg = blend(colors.added, colors.bg, 0.15) },
+        DiffChange = { bg = blend(colors.changed, colors.bg, 0.15) },
+        DiffDelete = { bg = blend(colors.removed, colors.bg, 0.15) },
+        DiffAdded = { fg = colors.added },
+        DiffChanged = { fg = colors.changed },
+        DiffRemoved = { fg = colors.removed },
+        DiffFile = { fg = colors.comment },
+        DiffIndexLine = { fg = colors.violet },
+        ['@text.diff.add'] = { link = 'DiffAdd' },
+        ['@text.diff.delete'] = { link = 'DiffDelete' },
       }
     end,
   })

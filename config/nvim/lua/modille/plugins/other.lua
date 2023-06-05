@@ -2,10 +2,10 @@ return {
   {
     'azabiong/vim-highlighter',
     init = function()
-      vim.g.HiSet = 'f<CR>' -- normal, visual
-      vim.g.HiClear = 'f<BS>' -- normal, visual
+      vim.g.HiSet = 'f<CR>'    -- normal, visual
+      vim.g.HiClear = 'f<BS>'  -- normal, visual
       vim.g.HiErase = 'f<C-L>' -- normal
-      vim.g.HiFind = 'f<Tab>' -- normal, visual
+      vim.g.HiFind = 'f<Tab>'  -- normal, visual
     end,
   },
   { 'brooth/far.vim' },
@@ -29,8 +29,8 @@ return {
   {
     'godlygeek/tabular', -- For aligning text
     keys = {
-      { '<leader>a=', '<cmd>Tabularize /=<CR>', mode = { 'n', 'v' } },
-      { '<leader>a|', '<cmd>Tabularize /|<CR>', mode = { 'n', 'v' } },
+      { '<leader>a=', '<cmd>Tabularize /=<CR>',         mode = { 'n', 'v' } },
+      { '<leader>a|', '<cmd>Tabularize /|<CR>',         mode = { 'n', 'v' } },
       { '<leader>a:', '<cmd>Tabularize /:\zs/l0l1<CR>', mode = { 'n', 'v' } },
     },
   },
@@ -39,12 +39,13 @@ return {
     lazy = false,
     dependencies = { 'haya14busa/is.vim' },
     keys = {
-      { '*', '<Plug>(asterisk-z*)', mode = '' },
-      { 'g*', 'Plug>(asterisk-gz*)', mode = '' },
-      { '#', '<Plug>(asterisk-z#)', mode = '' },
+      { '*',  '<Plug>(asterisk-z*)',  mode = '' },
+      { 'g*', 'Plug>(asterisk-gz*)',  mode = '' },
+      { '#',  '<Plug>(asterisk-z#)',  mode = '' },
       { 'g#', '<Plug>(asterisk-gz#)', mode = '' },
     },
   },
+  { 'mechatroner/rainbow_csv' },
   { 'mzlogin/vim-markdown-toc' },
   { 'simnalamburt/vim-mundo' },
   { 'tpope/vim-abolish' },
@@ -58,10 +59,10 @@ return {
   { 'tpope/vim-endwise' },
   {
     'tpope/vim-fugitive',
-    event = 'VeryLazy',
+    lazy = false, -- for "review" git alias
     dependencies = { 'shumphrey/fugitive-gitlab.vim' },
     init = function()
-      vim.g.fugitive_gitlab_domains = { 'https://git.tdc.upmc.edu', 'https://gitlab.com' }
+      vim.g.fugitive_gitlab_domains = { 'https://gitlab.upmc.com', 'https://gitlab.com' }
     end,
     keys = {
       { '<Leader>gs', '<cmd>Git<CR>' },
@@ -77,7 +78,11 @@ return {
   {
     'stevearc/oil.nvim',
     lazy = false, -- so that it works with "nvim ./directory"
-    config = true,
+    config = {
+      view_options = {
+        show_hidden = true,
+      },
+    },
     keys = {
       {
         '-',
@@ -97,8 +102,13 @@ return {
       vim.g.vimwiki_global_ext = 0
       vim.g.vimwiki_hl_cb_checked = 1
       vim.g.vimwiki_auto_header = 1
-      -- remove conflict with tpope/vim-vinegar
-      vim.cmd([[ nmap <Nop> <Plug>VimwikiRemoveHeaderLevel ]])
+      vim.g.vimwiki_key_mappings = {
+        -- header mapping (-) conflicts with tpope/vim-vinegar
+        headers = 0,
+      }
+      -- remove tab-related mappings
+      vim.cmd([[ nmap <Nop> <Plug>VimwikiTabIndex ]])
+      vim.cmd([[ nmap <Nop> <Plug>VimwikiTabMakeDiaryNote ]])
     end,
   },
   {
@@ -112,8 +122,8 @@ return {
     lazy = false,
     config = true,
     keys = {
-      { 'p', '<Plug>(YankyPutAfter)', mode = { 'n', 'x' } },
-      { 'P', '<Plug>(YankyPutBefore)', mode = { 'n', 'x' } },
+      { 'p',          '<Plug>(YankyPutAfter)',    mode = { 'n', 'x' } },
+      { 'P',          '<Plug>(YankyPutBefore)',   mode = { 'n', 'x' } },
       { '<leader>mc', '<Plug>(YankyCycleForward)' },
     },
   },
@@ -191,7 +201,7 @@ return {
       require('leap').add_default_mappings()
     end,
   },
-  { 'MunifTanjim/nui.nvim', lazy = true },
+  { 'MunifTanjim/nui.nvim',         lazy = true },
   { 'bennypowers/nvim-regexplainer' },
   {
     'karb94/neoscroll.nvim',
@@ -199,14 +209,15 @@ return {
       -- All these keys will be mapped to their corresponding default scrolling animation
       -- mappings = { '<C-u>', '<C-d>', '<C-b>', '<C-f>', '<C-y>', '<C-e>', 'zt', 'zz', 'zb' },
       mappings = { '<C-u>', '<C-d>', '<C-b>', '<C-f>', '<C-y>', '<C-e>', 'zz', 'zb' },
-      hide_cursor = false, -- Hide cursor while scrolling
-      stop_eof = true, -- Stop at <EOF> when scrolling downwards
-      respect_scrolloff = false, -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+      hide_cursor = false,         -- Hide cursor while scrolling
+      stop_eof = true,             -- Stop at <EOF> when scrolling downwards
+      respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
       cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
-      easing_function = nil, -- Default easing function
-      pre_hook = nil, -- Function to run before the scrolling animation starts
-      post_hook = nil, -- Function to run after the scrolling animation ends
-      performance_mode = false, -- Disable "Performance Mode" on all buffers.
+      easing_function = nil,       -- Default easing function
+      pre_hook = nil,              -- Function to run before the scrolling animation starts
+      post_hook = nil,             -- Function to run after the scrolling animation ends
+      performance_mode = false,    -- Disable "Performance Mode" on all buffers.
     },
   },
+  { 'sindrets/diffview.nvim' },
 }

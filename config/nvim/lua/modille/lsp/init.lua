@@ -21,6 +21,20 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
   return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
+-- Use icons for diagnostics signs
+local icons = {
+  diagnostics = {
+    Error = ' ',
+    Warn = ' ',
+    Hint = ' ',
+    Info = ' ',
+  },
+}
+for name, icon in pairs(icons.diagnostics) do
+  name = 'DiagnosticSign' .. name
+  vim.fn.sign_define(name, { text = icon, texthl = name, numhl = '' })
+end
+
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bashls
 lspconfig.bashls.setup({ flags = { debounce_text_changes = 150 } })
 

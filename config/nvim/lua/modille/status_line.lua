@@ -10,7 +10,7 @@ function M.setup()
       return 'dos!'
     end
 
-    return nil
+    return ''
   end
 
   -- TODO: Fix so that maxmx03/solarized.nvim overrides the builtin theme
@@ -68,7 +68,7 @@ function M.setup()
           'diagnostics',
           sources = { 'nvim_diagnostic' },
           sections = { 'error', 'warn', 'info', 'hint' },
-          symbols = { error = '﯇ ', warn = ' ', info = ' ', hint = ' ' },
+          symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
         },
         { 'filetype' },
       },

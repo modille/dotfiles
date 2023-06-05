@@ -1,12 +1,13 @@
 return {
   {
     'vim-test/vim-test',
-    dependencies = { 'skywind3000/asyncrun.vim', 'voldikss/vim-floaterm' },
+    dependencies = { 'voldikss/vim-floaterm' },
     init = function()
       vim.g['test#strategy'] = 'floaterm'
       vim.cmd([[
       let test#ruby#use_binstubs = 1
       let test#ruby#bundle_exec = 1
+      let test#ruby#rspec#options = '--format documentation'
 
       function! JestDebugNearest()
         let g:test#javascript#runner = 'jest'
