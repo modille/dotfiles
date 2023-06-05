@@ -78,7 +78,7 @@ return {
   {
     'stevearc/oil.nvim',
     lazy = false, -- so that it works with "nvim ./directory"
-    config = {
+    opts = {
       view_options = {
         show_hidden = true,
       },
