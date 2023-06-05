@@ -8,7 +8,6 @@
 
 [alias]
   a = add
-  b = "!f() { nvim -c 'Gblame' $1; }; f"
   br = "!f() { count=$1; git branch --all --sort=-committerdate --color=always --format='%(color:green)%(committerdate:relative)|%(color:reset)%(color:bold)%(refname:short)|%(color:reset)%(color:blue)%(subject)' | head -n ${count:-20} | column -ts'|'; }; f"
   cane = commit --amend --no-edit
   cnv = commit --no-verify
