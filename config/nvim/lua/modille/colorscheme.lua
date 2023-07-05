@@ -2,32 +2,40 @@ local M = {}
 
 function M.reload()
   local _, solarized = pcall(require, 'solarized')
-  solarized:setup({
-    config = {
-      theme = 'neovim',
-      transparent = false,
-    },
-    highlights = function(colors, darken, lighten, blend)
+  solarized.setup({
+    theme = 'default',
+    transparent = false,
+    highlights = function(colors, colorhelper)
+      -- local darken = colorhelper.darken
+      -- local lighten = colorhelper.lighten
+      local blend = colorhelper.blend
       return {
+        -- fix ColorColumn. TODO open issue
+        ColorColumn = { link = 'CursorColumn' },
         -- better :intro
         SpecialKey = { link = 'Special' },
 
         -- keep syntax highlighting in diffs
-        DiffText = { bg = blend(colors.blue, colors.bg, 0.15) },
-        DiffAdd = { bg = blend(colors.added, colors.bg, 0.15) },
-        DiffChange = { bg = blend(colors.changed, colors.bg, 0.15) },
-        DiffDelete = { bg = blend(colors.removed, colors.bg, 0.15) },
-        DiffAdded = { fg = colors.added },
-        DiffChanged = { fg = colors.changed },
-        DiffRemoved = { fg = colors.removed },
-        DiffFile = { fg = colors.comment },
+        -- (using these "Custom" groups + link is the only way to replace a default theme hl)
+        CustomDiffAdd = { bg = blend(colors.add, colors.base03, 0.15) },
+        CustomDiffChange = { bg = blend(colors.change, colors.base03, 0.15) },
+        CustomDiffDelete = { bg = blend(colors.delete, colors.base03, 0.15) },
+        CustomDiffText = { bg = blend(colors.blue, colors.base03, 0.15) },
+        DiffAdd = { link = 'CustomDiffAdd' },
+        DiffChange = { link = 'CustomDiffChange' },
+        DiffDelete = { link = 'CustomDiffDelete' },
+        DiffText = { link = 'CustomDiffText' },
+        DiffAdded = { fg = colors.add },
+        DiffChanged = { fg = colors.change },
+        DiffRemoved = { fg = colors.delete },
+        DiffFile = { fg = colors.base01 },
         DiffIndexLine = { fg = colors.violet },
         ['@text.diff.add'] = { link = 'DiffAdd' },
         ['@text.diff.delete'] = { link = 'DiffDelete' },
       }
     end,
   })
-  vim.cmd('colorscheme solarized')
+  vim.cmd.colorscheme = 'solarized'
   require('modille.status_line').setup()
 end
 

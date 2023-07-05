@@ -4,7 +4,7 @@ return {
     config = false,
     dependencies = {
       {
-        'kyazdani42/nvim-web-devicons',
+        'nvim-tree/nvim-web-devicons',
         init = function()
           -- specify OS to decide an icon for unix fileformat (not defined by default)
           -- this is useful for avoiding unnecessary system() call
