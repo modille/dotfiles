@@ -12,6 +12,7 @@ if status is-interactive
   abbr --add grs "git reset --soft HEAD^"
   abbr --add gs "git status"
   abbr --add gsi "git status --ignored"
+  abbr --add gsw "git switch"
   abbr --add gsuir "git submodule update --init --recursive"
   abbr --add kc "kubectl"
   abbr --add kcd "kubectl --context=dev"
