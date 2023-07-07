@@ -10,8 +10,6 @@ function M.reload()
       -- local lighten = colorhelper.lighten
       local blend = colorhelper.blend
       return {
-        -- fix ColorColumn. TODO open issue
-        ColorColumn = { link = 'CursorColumn' },
         -- better :intro
         SpecialKey = { link = 'Special' },
 
@@ -32,6 +30,23 @@ function M.reload()
         DiffIndexLine = { fg = colors.violet },
         ['@text.diff.add'] = { link = 'DiffAdd' },
         ['@text.diff.delete'] = { link = 'DiffDelete' },
+
+        -- Neotest
+        NeotestPassed = { fg = colors.green },
+        NeotestFailed = { fg = colors.red },
+        NeotestRunning = { fg = colors.yellow },
+        NeotestSkipped = { fg = colors.cyan },
+        NeotestNamespace = { fg = colors.blue },
+        NeotestFocused = { link = 'CursorLine' },
+        NeotestFile = { fg = colors.base0 },
+        NeotestDir = { link = 'Directory' },
+        NeotestIndent = { fg = colors.base01 },
+        NeotestExpandMarker = { fg = colors.base01 },
+        NeotestAdapterName = { fg = colors.violet },
+        -- NeotestWinSelect = {},
+        -- NeotestMarked = {},
+        -- NeotestTarget = {},
+        NeotestWatching = { link = 'NeotestRunning' },
       }
     end,
   })
