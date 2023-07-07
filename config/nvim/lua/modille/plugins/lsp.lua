@@ -21,12 +21,7 @@ return {
           library = { plugins = { 'neotest' }, types = true },
         },
       },
-      {
-        'hrsh7th/cmp-nvim-lsp',
-        cond = function()
-          return require('lazy.core.config').plugins['nvim-cmp'] ~= nil
-        end,
-      },
+      'hrsh7th/cmp-nvim-lsp',
       'folke/trouble.nvim',
       {
         'j-hui/fidget.nvim',
