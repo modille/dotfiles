@@ -1,5 +1,7 @@
 local M = {}
 
+-- reminder: as of nvim 0.9, you can use :Inspect and :InspectTree
+
 function M.reload()
   local _, solarized = pcall(require, 'solarized')
   solarized.setup({
@@ -7,11 +9,17 @@ function M.reload()
     transparent = false,
     highlights = function(colors, colorhelper)
       -- local darken = colorhelper.darken
-      -- local lighten = colorhelper.lighten
+      local lighten = colorhelper.lighten
       local blend = colorhelper.blend
       return {
         -- better :intro
         SpecialKey = { link = 'Special' },
+
+        -- more readable inlay hints
+        LspInlayHint = { fg = lighten(colors.base01, 10), italic = true },
+
+        -- italic for builtins
+        ['@variable.builtin'] = { fg = colors.blue, italic = true }, -- Function + italic
 
         -- keep syntax highlighting in diffs
         -- (using these "Custom" groups + link is the only way to replace a default theme hl)
@@ -31,7 +39,7 @@ function M.reload()
         ['@text.diff.add'] = { link = 'DiffAdd' },
         ['@text.diff.delete'] = { link = 'DiffDelete' },
 
-        -- Neotest
+        -- neotest
         NeotestPassed = { fg = colors.green },
         NeotestFailed = { fg = colors.red },
         NeotestRunning = { fg = colors.yellow },
@@ -47,10 +55,49 @@ function M.reload()
         -- NeotestMarked = {},
         -- NeotestTarget = {},
         NeotestWatching = { link = 'NeotestRunning' },
+
+        -- octo
+        OctoGreenFloat = { fg = colors.green, bg = colors.base02 },
+        OctoRedFloat = { fg = colors.red, bg = colors.base02 },
+        OctoPurpleFloat = { fg = colors.violet, bg = colors.base02 },
+        OctoYellowFloat = { fg = colors.yellow, bg = colors.base02 },
+        OctoBlueFloat = { fg = colors.blue, bg = colors.base02 },
+        OctoGreyFloat = { fg = colors.base0, bg = colors.base02 },
+        OctoFilePanelTitle = { fg = colors.blue, bold = true },
+        OctoFilePanelCounter = { fg = colors.violet, bold = true },
+        OctoNormalFront = { fg = colors.base0 },
+        OctoViewer = { fg = colors.blue, reverse = true },
+        OctoEditable = { bg = colors.base02 },
+
+        -- nvim-dap
+        DebugBreakpoint = { fg = colors.red },
+        DebugBreakpointLine = { fg = colors.red },
+        DebugHighlight = { fg = colors.blue },
+        DebugHighlightLine = { fg = colors.violet },
+        NvimDapVirtualText = { fg = colors.cyan },
+
+        -- nvim-dap-ui
+        DapUIScope = { bg = colors.blue, fg = colors.base03 },
+        DapUIType = { fg = colors.blue },
+        DapUIDecoration = { fg = colors.blue },
+        DapUIModifiedValue = { fg = colors.cyan },
+        DapUIThread = { fg = colors.purple },
+        DapUIStoppedThread = { bg = colors.purple, fg = colors.base03 },
+        DapUIFloatBorder = { bg = colors.base03, fg = colors.base01 },
+        DapUILineNumber = { fg = colors.base01 },
+        DapUIFrameName = { fg = colors.base0 },
+        DapUISource = { fg = colors.purple },
+        DapUIBreakpointsPath = { bg = colors.yellow, fg = colors.base03 },
+        DapUIBreakpointsInfo = { fg = colors.base0 },
+        DapUIBreakpointsCurrentLine = { fg = colors.yellow },
+        DapUIBreakpointsLine = { link = 'DapUIBreakpointsCurrentLine' },
+        DapUIWatchesEmpty = { bg = colors.red, fg = colors.base03 },
+        DapUIWatchesValue = { fg = colors.red },
+        DapUIWatchesError = { fg = colors.red },
       }
     end,
   })
-  vim.cmd.colorscheme = 'solarized'
+  vim.cmd.colorscheme('solarized')
   require('modille.status_line').setup()
 end
 

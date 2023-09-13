@@ -10,6 +10,7 @@ return {
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-calc',
       'hrsh7th/cmp-path',
+      'rcarriga/cmp-dap',
     },
     opts = function()
       local cmp = require('cmp')
@@ -137,7 +138,22 @@ return {
             border = { '┌', '─', '┐', '│', '┘', '─', '└', '│' },
           },
         },
+        -- https://github.com/rcarriga/cmp-dap
+        enabled = function()
+          return vim.api.nvim_get_option_value('buftype', {}) ~= 'prompt' or require('cmp_dap').is_dap_buffer()
+        end,
       }
+    end,
+    config = function(_, opts)
+      local cmp = require('cmp')
+      cmp.setup(opts)
+
+      -- https://github.com/rcarriga/cmp-dap
+      cmp.setup.filetype({ 'dap-repl', 'dapui_watches', 'dapui_hover' }, {
+        sources = {
+          { name = 'dap' },
+        },
+      })
     end,
   },
   {

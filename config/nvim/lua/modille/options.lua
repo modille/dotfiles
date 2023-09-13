@@ -1,4 +1,6 @@
--- The following sections are organized similar to :options
+-- See:
+-- :options
+-- :help vim.opt
 
 -- 2 moving around, searching and patterns
 vim.opt.ignorecase = true
@@ -23,6 +25,9 @@ vim.opt.splitright = true
 
 -- 9 using the mouse
 vim.opt.mouse = ''
+
+-- 10 messages and info
+vim.opt.shortmess:append({ S = true })
 
 -- 13 editing text
 -- Enable persistent undo so that undo history persists across vim sessions

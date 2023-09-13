@@ -25,18 +25,23 @@ lspconfig.solargraph.setup({
   settings = {
     solargraph = {
       diagnostics = true,
+      formatting = true,
+      folding = true,
+      checkGemVersion = false,
+      useBundler = true,
+      -- bundlePath = '/var/folders/xk/lm_549095ml5lvk1bkl3vc000000gp/T/frum_1103_1690382810047/bin/bundle',
     },
   },
   on_attach = function(client, bufnr)
     -- Format on save
-    if client.server_capabilities.documentFormattingProvider then
-      vim.cmd([[
+    -- if client.server_capabilities.documentFormattingProvider then
+    vim.cmd([[
       augroup ModilleSolargraphFormatting
       autocmd! * <buffer>
       autocmd BufWritePre <buffer> lua vim.lsp.buf.format()
       augroup END
-      ]])
-    end
+    ]])
+    -- end
 
     -- Options
     local function buf_set_option(...)

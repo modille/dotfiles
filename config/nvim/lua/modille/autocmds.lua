@@ -6,6 +6,11 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = { 'Berksfile', 'Guardfile', 'Vagrantfile' },
   command = 'set syntax=ruby',
 })
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+  group = augroup,
+  pattern = '*.pem',
+  command = 'set filetype=pem',
+})
 
 -- Templates
 vim.api.nvim_create_autocmd('BufNewFile', {

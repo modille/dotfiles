@@ -18,18 +18,36 @@ lspconfig.tsserver.setup({
   flags = {
     debounce_text_changes = 150,
   },
-  -- https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils#setup
-  init_options = {
-    hostInfo = 'neovim',
-    preferences = {
-      includeInlayParameterNameHints = 'all',
-      includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-      includeInlayFunctionParameterTypeHints = true,
-      includeInlayVariableTypeHints = true,
-      includeInlayPropertyDeclarationTypeHints = true,
-      includeInlayFunctionLikeReturnTypeHints = true,
-      includeInlayEnumMemberValueHints = true,
-      completions = { completeFunctionCalls = true },
+  settings = {
+    diagnostics = {
+      ignoredCodes = {
+        7016,  -- Allow untyped modules
+        80001, -- Allow CommonJS modules
+      },
+    },
+    typescript = {
+      inlayHints = {
+        includeInlayParameterNameHints = 'all',
+        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = true,
+        includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayEnumMemberValueHints = true,
+      },
+    },
+    javascript = {
+      inlayHints = {
+        includeInlayParameterNameHints = 'all',
+        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = true,
+        includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayEnumMemberValueHints = true,
+      },
     },
   },
   on_attach = function(client, bufnr)
@@ -48,12 +66,12 @@ lspconfig.tsserver.setup({
       import_all_scan_buffers = 100,
       import_all_select_source = false,
       filter_out_diagnostics_by_severity = {},
-      filter_out_diagnostics_by_code = {
-        -- Allow untyped modules
-        7016,
-        -- Allow CommonJs modules
-        80001,
-      },
+      -- filter_out_diagnostics_by_code = {
+      --   -- Allow untyped modules
+      --   7016,
+      --   -- Allow CommonJs modules
+      --   80001,
+      -- },
       auto_inlay_hints = false,
       inlay_hints_highlight = 'Comment',
       update_imports_on_move = true,
@@ -96,8 +114,23 @@ lspconfig.tsserver.setup({
     -- buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
     -- https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils
-    buf_set_keymap('n', 'gs', ':TSLspOrganize<CR>', opts)
+    -- buf_set_keymap('n', 'gs', ':TSLspOrganize<CR>', opts)
     -- buf_set_keymap('n', 'gr', ':TSLspRenameFile<CR>', opts)
     -- buf_set_keymap('n', 'gi', ':TSLspImportAll<CR>', opts)
+  end,
+})
+
+require('lsp-inlayhints').setup()
+vim.api.nvim_create_augroup('LspAttach_inlayhints', {})
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = 'LspAttach_inlayhints',
+  callback = function(args)
+    if not (args.data and args.data.client_id) then
+      return
+    end
+
+    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    require('lsp-inlayhints').on_attach(client, bufnr)
   end,
 })

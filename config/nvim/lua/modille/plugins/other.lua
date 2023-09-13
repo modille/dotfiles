@@ -169,8 +169,14 @@ return {
         end, { expr = true })
 
         -- Actions
-        map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
-        map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>')
+        map('n', '<leader>hs', gs.stage_hunk)
+        map('n', '<leader>hr', gs.reset_hunk)
+        map('v', '<leader>hs', function()
+          gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+        end)
+        map('v', '<leader>hr', function()
+          gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+        end)
         map('n', '<leader>hS', gs.stage_buffer)
         map('n', '<leader>hu', gs.undo_stage_hunk)
         map('n', '<leader>hR', gs.reset_buffer)
@@ -205,6 +211,7 @@ return {
   { 'bennypowers/nvim-regexplainer' },
   {
     'karb94/neoscroll.nvim',
+    enabled = false,
     opts = {
       -- All these keys will be mapped to their corresponding default scrolling animation
       -- mappings = { '<C-u>', '<C-d>', '<C-b>', '<C-f>', '<C-y>', '<C-e>', 'zt', 'zz', 'zb' },
@@ -220,4 +227,25 @@ return {
     },
   },
   { 'sindrets/diffview.nvim' },
+  {
+    'aryklein/NoTrailing.nvim',
+    commit = '05e82df91d75fc41d10f8df6cbc5fdcf762f1d36',
+    cmd = { 'TrailingTrim', 'TrailingHighlightToggle' },
+    opts = {
+      highlight = 'ErrorMsg',
+      exclude_filetypes = { 'Telescope', 'help', 'lazy', 'Trouble' },
+    },
+    init = function()
+      require('NoTrailing').highlight()
+    end,
+  },
+  {
+    'pwntester/octo.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'nvim-tree/nvim-web-devicons',
+    },
+    config = true,
+  },
 }

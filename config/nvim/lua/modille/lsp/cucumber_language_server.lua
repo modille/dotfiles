@@ -1,7 +1,6 @@
 local lspconfig = require('lspconfig')
 
 -- https://github.com/hrsh7th/nvim-cmp
--- capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {

@@ -11,6 +11,8 @@ return {
         'css',
         'dockerfile',
         'fish',
+        'git_config',
+        'gitattributes',
         'go',
         'graphql',
         'html',
@@ -20,20 +22,23 @@ return {
         'jsdoc',
         'json',
         'lua',
+        'luadoc',
         'make',
         'markdown',
         'markdown_inline',
+        'mermaid',
+        'pem',
         'python',
         'query',
         'regex',
         'ruby',
         'rust',
         'scss',
+        'sql',
         'toml',
         'tsx',
         'typescript',
         'vim',
-        'vimdoc', -- fka 'help' https://github.com/nvim-treesitter/nvim-treesitter/issues/2293#issuecomment-1492982270
         'yaml',
       },
       highlight = {
@@ -67,14 +72,43 @@ return {
       end
 
       vim.cmd([[autocmd FileType javascript setlocal indentexpr=v:lua.javascript_indent()]])
+
+      if load_textobjects then
+        local Loader = require('lazy.core.loader')
+        Loader.disabled_rtp_plugins['nvim-treesitter-textobjects'] = nil
+        local plugin = require('lazy.core.config').plugins['nvim-treesitter-textobjects']
+        require('lazy.core.loader').source_runtime(plugin.dir, 'plugin')
+
+        require('nvim-treesitter.configs').setup({
+          textobjects = {
+            swap = {
+              enable = true,
+              swap_next = {
+                ['<leader>a'] = '@parameter.inner',
+              },
+              swap_previous = {
+                ['<leader>A'] = '@parameter.inner',
+              },
+            },
+          },
+        })
+      end
     end,
     dependencies = {
       'nvim-treesitter/playground',
       'JoosepAlviste/nvim-ts-context-commentstring',
       'ThePrimeagen/refactoring.nvim',
       'code-biscuits/nvim-biscuits',
+      {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        init = function()
+          require('lazy.core.loader').disable_rtp_plugin('nvim-treesitter-textobjects')
+          load_textobjects = true
+        end,
+      },
     },
   },
+
   {
     'danymat/neogen',
     event = { 'BufReadPost', 'BufNewFile' },
