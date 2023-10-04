@@ -39,6 +39,12 @@ return {
           },
         },
         extensions = {
+          dash = {
+            debounce = 750,
+            file_type_keywords = {
+              ruby = { 'rspec', 'factory_bot', 'ruby', 'rubygems' },
+            },
+          },
           fzf = {
             fuzzy = true,
             override_generic_sorter = true,

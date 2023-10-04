@@ -94,6 +94,9 @@ function M.reload()
         DapUIWatchesEmpty = { bg = colors.red, fg = colors.base03 },
         DapUIWatchesValue = { fg = colors.red },
         DapUIWatchesError = { fg = colors.red },
+
+        -- Telescope
+        TelescopeSelection = { fg = colors.base2, bg = colors.base03 },
       }
     end,
   })
