@@ -70,6 +70,7 @@ lspconfig.lua_ls.setup({
 lspconfig.pylsp.setup({ flags = { debounce_text_changes = 150 } })
 
 require('modille.lsp.cucumber_language_server')
+require('modille.lsp.helm_ls')
 require('modille.lsp.jsonls')
 -- require('modille.lsp.ruby-lsp')
 require('modille.lsp.solargraph')
