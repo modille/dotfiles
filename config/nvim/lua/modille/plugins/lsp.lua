@@ -61,8 +61,9 @@ return {
   },
 
   {
-    'jose-elias-alvarez/null-ls.nvim',
-    event = { 'BufReadPre', 'BufNewFile' },
+    'nvimtools/none-ls.nvim',
+    event = { 'BufReadPre', 'BufNewFile' }, -- can use LazyFile in v10
+    dependencies = { 'mason.nvim' },
     opts = function()
       local augroup = vim.api.nvim_create_augroup('ModilleNullLsFormatting', {})
       local null_ls = require('null-ls')
