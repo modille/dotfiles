@@ -119,12 +119,12 @@ return {
 
   {
     'kosayoda/nvim-lightbulb', -- Show gutter sign when action is available
-    dependencies = 'antoinemadec/FixCursorHold.nvim',
-    config = function()
-      vim.cmd(
-        [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb({ ignore = {"null-ls"} })]]
-      )
-    end,
+    opts = {
+      autocmd = { enabled = true },
+      ignore = {
+        clients = { 'null-ls' },
+      },
+    },
   },
 
   { 'lvimuser/lsp-inlayhints.nvim', branch = 'anticonceal' },

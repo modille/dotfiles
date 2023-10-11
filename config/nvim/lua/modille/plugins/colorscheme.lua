@@ -1,7 +1,7 @@
 return {
   {
     'olimorris/onedarkpro.nvim',
-    enabled = true,
+    enabled = false,
     lazy = true,
     priority = 1000,
     opts = {
@@ -26,6 +26,7 @@ return {
   },
   {
     'folke/tokyonight.nvim',
+    enabled = false,
     lazy = false,
     priority = 1000,
     opts = {
@@ -34,9 +35,14 @@ return {
       day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
     },
   },
-  { 'EdenEast/nightfox.nvim', config = false },
+  {
+    'EdenEast/nightfox.nvim',
+    enabled = false,
+    config = false,
+  },
   {
     'catppuccin/nvim',
+    enabled = false,
     name = 'catppuccin',
     priority = 1000,
     opts = {
@@ -47,6 +53,12 @@ return {
       },
     },
   },
-  { 'sainnhe/everforest' },
-  { 'maxmx03/solarized.nvim', config = false },
+  {
+    'sainnhe/everforest',
+    enabled = false,
+  },
+  {
+    'maxmx03/solarized.nvim',
+    config = false,
+  },
 }

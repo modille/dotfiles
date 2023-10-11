@@ -199,7 +199,12 @@ return {
   { 'norcalli/nvim-colorizer.lua' },
   {
     'lukas-reineke/indent-blankline.nvim',
-    event = { 'BufReadPost', 'BufNewFile' },
+    main = 'ibl',
+    opts = {
+      indent = {
+        char = '▏',
+      },
+    },
   },
   {
     'ggandor/leap.nvim',
