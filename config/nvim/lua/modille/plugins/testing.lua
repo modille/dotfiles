@@ -57,13 +57,13 @@ return {
       endfunction
       ]])
     end,
-    -- keys = {
-    --   { '<leader>tn', '<cmd>TestNearest<cr>', desc = 'Test nearest' },
-    --   { '<leader>tf', '<cmd>TestFile<cr>',    desc = 'Test file' },
-    --   { '<leader>tl', '<cmd>TestLast<cr>',    desc = 'Test last' },
-    --   { '<leader>ts', '<cmd>TestSuite<cr>',   desc = 'Test suite' },
-    --   { '<leader>ts', '<cmd>TestVisit<cr>',   desc = 'Test visit' },
-    -- },
+    keys = {
+      { '<leader>Tn', '<cmd>TestNearest<cr>', desc = 'Test nearest' },
+      { '<leader>Tf', '<cmd>TestFile<cr>',    desc = 'Test file' },
+      { '<leader>Tl', '<cmd>TestLast<cr>',    desc = 'Test last' },
+      { '<leader>Ts', '<cmd>TestSuite<cr>',   desc = 'Test suite' },
+      { '<leader>Tg', '<cmd>TestVisit<cr>',   desc = 'Test visit' },
+    },
   },
   {
     'nvim-neotest/neotest',
