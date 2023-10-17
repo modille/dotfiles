@@ -2,10 +2,10 @@ return {
   {
     'azabiong/vim-highlighter',
     init = function()
-      vim.g.HiSet = 'f<CR>' -- normal, visual
-      vim.g.HiClear = 'f<BS>' -- normal, visual
+      vim.g.HiSet = 'f<CR>'    -- normal, visual
+      vim.g.HiClear = 'f<BS>'  -- normal, visual
       vim.g.HiErase = 'f<C-L>' -- normal
-      vim.g.HiFind = 'f<Tab>' -- normal, visual
+      vim.g.HiFind = 'f<Tab>'  -- normal, visual
     end,
   },
   { 'brooth/far.vim' },
@@ -29,8 +29,8 @@ return {
   {
     'godlygeek/tabular', -- For aligning text
     keys = {
-      { '<leader>a=', '<cmd>Tabularize /=<CR>', mode = { 'n', 'v' } },
-      { '<leader>a|', '<cmd>Tabularize /|<CR>', mode = { 'n', 'v' } },
+      { '<leader>a=', '<cmd>Tabularize /=<CR>',         mode = { 'n', 'v' } },
+      { '<leader>a|', '<cmd>Tabularize /|<CR>',         mode = { 'n', 'v' } },
       { '<leader>a:', '<cmd>Tabularize /:\zs/l0l1<CR>', mode = { 'n', 'v' } },
     },
   },
@@ -39,9 +39,9 @@ return {
     lazy = false,
     dependencies = { 'haya14busa/is.vim' },
     keys = {
-      { '*', '<Plug>(asterisk-z*)', mode = '' },
-      { 'g*', 'Plug>(asterisk-gz*)', mode = '' },
-      { '#', '<Plug>(asterisk-z#)', mode = '' },
+      { '*',  '<Plug>(asterisk-z*)',  mode = '' },
+      { 'g*', 'Plug>(asterisk-gz*)',  mode = '' },
+      { '#',  '<Plug>(asterisk-z#)',  mode = '' },
       { 'g#', '<Plug>(asterisk-gz#)', mode = '' },
     },
   },
@@ -97,7 +97,7 @@ return {
     'vimwiki/vimwiki',
     init = function()
       vim.cmd(
-        [[ let g:vimwiki_list = [{ 'path': '~/Library/CloudStorage/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': '.md', 'auto_diary_index': 1 }] ]]
+        [[ let g:vimwiki_list = [{ 'path': '~/Library/CloudStorage/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': 'md', 'auto_diary_index': 1 }] ]]
       )
       vim.g.vimwiki_global_ext = 0
       vim.g.vimwiki_hl_cb_checked = 1
@@ -122,8 +122,8 @@ return {
     lazy = false,
     config = true,
     keys = {
-      { 'p', '<Plug>(YankyPutAfter)', mode = { 'n', 'x' } },
-      { 'P', '<Plug>(YankyPutBefore)', mode = { 'n', 'x' } },
+      { 'p',          '<Plug>(YankyPutAfter)',    mode = { 'n', 'x' } },
+      { 'P',          '<Plug>(YankyPutBefore)',   mode = { 'n', 'x' } },
       { '<leader>mc', '<Plug>(YankyCycleForward)' },
     },
   },
@@ -212,7 +212,7 @@ return {
       require('leap').add_default_mappings()
     end,
   },
-  { 'MunifTanjim/nui.nvim', lazy = true },
+  { 'MunifTanjim/nui.nvim',         lazy = true },
   { 'bennypowers/nvim-regexplainer' },
   {
     'karb94/neoscroll.nvim',
@@ -221,14 +221,14 @@ return {
       -- All these keys will be mapped to their corresponding default scrolling animation
       -- mappings = { '<C-u>', '<C-d>', '<C-b>', '<C-f>', '<C-y>', '<C-e>', 'zt', 'zz', 'zb' },
       mappings = { '<C-u>', '<C-d>', '<C-b>', '<C-f>', '<C-y>', '<C-e>', 'zz', 'zb' },
-      hide_cursor = false, -- Hide cursor while scrolling
-      stop_eof = true, -- Stop at <EOF> when scrolling downwards
-      respect_scrolloff = false, -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+      hide_cursor = false,         -- Hide cursor while scrolling
+      stop_eof = true,             -- Stop at <EOF> when scrolling downwards
+      respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
       cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
-      easing_function = nil, -- Default easing function
-      pre_hook = nil, -- Function to run before the scrolling animation starts
-      post_hook = nil, -- Function to run after the scrolling animation ends
-      performance_mode = false, -- Disable "Performance Mode" on all buffers.
+      easing_function = nil,       -- Default easing function
+      pre_hook = nil,              -- Function to run before the scrolling animation starts
+      post_hook = nil,             -- Function to run after the scrolling animation ends
+      performance_mode = false,    -- Disable "Performance Mode" on all buffers.
     },
   },
   { 'sindrets/diffview.nvim' },
