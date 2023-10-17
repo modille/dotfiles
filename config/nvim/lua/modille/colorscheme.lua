@@ -96,7 +96,8 @@ function M.reload()
         DapUIWatchesError = { fg = colors.red },
 
         -- Telescope
-        TelescopeSelection = { fg = colors.base2, bg = colors.base03 },
+        CustomTelescopeSelection = { fg = colors.base2, bg = colors.base03 },
+        TelescopeSelection = { link = 'CustomTelescopeSelection' },
       }
     end,
   })
