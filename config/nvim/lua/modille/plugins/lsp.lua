@@ -128,7 +128,14 @@ return {
     },
   },
 
-  { 'lvimuser/lsp-inlayhints.nvim', branch = 'anticonceal' },
+  {
+    'lvimuser/lsp-inlayhints.nvim',
+    branch = 'anticonceal',
+    lazy = false,
+    keys = {
+      { '<leader>il', "<cmd>lua require('lsp-inlayhints').toggle()<CR>" },
+    },
+  },
 
   {
     'williamboman/mason.nvim',
