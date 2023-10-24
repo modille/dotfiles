@@ -11,6 +11,11 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = '*.pem',
   command = 'set filetype=pem',
 })
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+  group = augroup,
+  pattern = '.twilioserverlessrc',
+  command = 'set filetype=json5',
+})
 
 -- Templates
 vim.api.nvim_create_autocmd('BufNewFile', {

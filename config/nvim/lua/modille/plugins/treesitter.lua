@@ -21,6 +21,7 @@ return {
         'javascript',
         'jsdoc',
         'json',
+        'json5',
         'lua',
         'luadoc',
         'make',
