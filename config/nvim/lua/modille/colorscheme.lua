@@ -145,7 +145,7 @@ end
 
 function M.setup()
   -- Read and store current system theme
-  if vim.fn.system('defaults read -g AppleInterfaceStyle'):sub(1, 4) == 'Dark' then
+  if vim.fn.system('defaults read -g AppleInterfaceStyle'):gsub('\n', ''):sub(-4) == 'Dark' then
     vim.g.modille_background = 'dark'
   else
     vim.g.modille_background = 'light'
