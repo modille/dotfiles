@@ -14,7 +14,6 @@
   "cmp-vsnip": { "branch": "main", "commit": "989a8a73c44e926199bfd05fa7a516d51f2d2752" },
   "dash.nvim": { "branch": "master", "commit": "2050947e035945c8c2fd16c028f1a8676a76d1cd" },
   "diffview.nvim": { "branch": "main", "commit": "d38c1b5266850f77f75e006bcc26213684e1e141" },
-  "docker": { "branch": "master", "commit": "b4a08b3b7cc9cbffee008ce0d4d472d300071477" },
   "editorconfig-vim": { "branch": "master", "commit": "0d54ea863089fb13be423b4aed6cca35f3a5d778" },
   "far.vim": { "branch": "master", "commit": "5ad7d647434c7d89f715afa5aeae46e5441d32b3" },
   "fidget.nvim": { "branch": "main", "commit": "0ba1e16d07627532b6cae915cc992ecac249fb97" },

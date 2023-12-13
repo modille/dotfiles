@@ -3,13 +3,6 @@ return {
   { 'briancollins/vim-jst', ft = 'ejs' },
   { 'cespare/vim-toml', ft = 'toml' },
   { 'craigdallimore/vim-jest-cli', ft = 'javascript' },
-  {
-    'docker/docker',
-    ft = 'dockerfile',
-    config = function(plugin)
-      vim.opt.rtp:append(plugin.dir .. '/contrib/syntax/vim')
-    end,
-  },
   { 'fatih/vim-go', ft = { 'asm', 'go', 'gohtmltmpl' } },
   {
     'jgdavey/vim-blockle',
