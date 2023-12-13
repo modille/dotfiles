@@ -39,6 +39,20 @@ function M.reload()
         ['@text.diff.add'] = { link = 'DiffAdd' },
         ['@text.diff.delete'] = { link = 'DiffDelete' },
 
+        -- markdown/vimwiki
+        ['@text.title.1'] = { fg = colors.red, bold = true, underline = true },
+        ['@text.title.1.marker'] = { fg = colors.red, bold = true, underline = true },
+        ['@text.title.2'] = { fg = colors.red, bold = true },
+        ['@text.title.2.marker'] = { fg = colors.red, bold = true },
+        ['@text.title.3'] = { fg = colors.red },
+        ['@text.title.3.marker'] = { fg = colors.red },
+        ['@text.title.4'] = { fg = lighten(colors.red, 25) },
+        ['@text.title.4.marker'] = { fg = lighten(colors.red, 25) },
+        ['VimwikiHeader1'] = { fg = colors.red, bold = true, underline = true },
+        ['VimwikiHeader2'] = { fg = colors.red, bold = true },
+        ['VimwikiHeader3'] = { fg = colors.red },
+        ['VimwikiHeader4'] = { fg = lighten(colors.red, 25) },
+
         -- neotest
         NeotestPassed = { fg = colors.green },
         NeotestFailed = { fg = colors.red },
