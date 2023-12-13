@@ -120,7 +120,9 @@ lspconfig.tsserver.setup({
   end,
 })
 
-require('lsp-inlayhints').setup()
+require('lsp-inlayhints').setup({
+  enabled_at_startup = false,
+})
 vim.api.nvim_create_augroup('LspAttach_inlayhints', {})
 vim.api.nvim_create_autocmd('LspAttach', {
   group = 'LspAttach_inlayhints',
