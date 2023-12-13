@@ -26,7 +26,7 @@ require('lazy').setup('modille.plugins', {
   checker = {
     enabled = true,
     concurrency = 8,
-    notify = true,
+    notify = false,
     frequency = 3600, -- or 3600 * 24 * 7
   },
   change_detection = {
