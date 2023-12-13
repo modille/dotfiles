@@ -11,6 +11,7 @@ return {
       'hrsh7th/cmp-calc',
       'hrsh7th/cmp-path',
       'rcarriga/cmp-dap',
+      'hrsh7th/cmp-cmdline',
     },
     opts = function()
       local cmp = require('cmp')
@@ -153,6 +154,27 @@ return {
         sources = {
           { name = 'dap' },
         },
+      })
+
+      -- https://github.com/hrsh7th/cmp-cmdline
+      cmp.setup.cmdline('/', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = 'buffer' },
+        },
+      })
+      cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = 'path' },
+        }, {
+          {
+            name = 'cmdline',
+            option = {
+              ignore_cmds = { 'Man', '!' },
+            },
+          },
+        }),
       })
     end,
   },
