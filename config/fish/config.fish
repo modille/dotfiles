@@ -4,6 +4,18 @@ if status is-interactive
   set fish_cursor_insert line
   set fish_cursor_replace_one underscore
 
+  # https://github.com/wez/wezterm/issues/2781#issuecomment-1324143452
+  set fish_vi_force_cursor 1
+
+  abbr --add be "bundle exec"
+  abbr --add dc "docker compose"
+  abbr --add dcd "docker compose down"
+  abbr --add dcp "docker compose ps"
+  abbr --add dcs "docker compose stop"
+  abbr --add dcu "docker compose up --detach"
+  abbr --add ga "git add"
+  abbr --add gcane "git commit --amend --no-edit"
+  abbr --add gcnv "git commit --no-verify"
   abbr --add gco "git checkout"
   abbr --add gd "git diff"
   abbr --add gdc "git diff --cached"
@@ -11,8 +23,6 @@ if status is-interactive
   abbr --add gfp "git fetch --prune"
   abbr --add gpr "git pull --rebase"
   abbr --add gpu "git push --set-upstream origin"
-  abbr --add grh "git reset --hard HEAD^"
-  abbr --add grs "git reset --soft HEAD^"
   abbr --add gs "git status"
   abbr --add gsi "git status --ignored"
   abbr --add gsw "git switch"
@@ -21,6 +31,8 @@ if status is-interactive
   abbr --add kcd "kubectl --context=dev"
   abbr --add kcp "kubectl --context=prd"
   abbr --add kcs "kubectl --context=stg"
+  abbr --add npmlt "npm run lint && npm test"
+  abbr --add npmltc "npm run lint && npm test && npm run cukes"
 end
 
 source /opt/homebrew/opt/asdf/libexec/asdf.fish
