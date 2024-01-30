@@ -29,10 +29,11 @@ if status is-interactive
   abbr --add gsuir "git submodule update --init --recursive"
   abbr --add kc "kubectl"
   abbr --add kcd "kubectl --context=dev"
+  abbr --add kcm "kubectl --context=demo"
   abbr --add kcp "kubectl --context=prd"
   abbr --add kcs "kubectl --context=stg"
   abbr --add npmlt "npm run lint && npm test"
   abbr --add npmltc "npm run lint && npm test && npm run cukes"
-end
 
-source /opt/homebrew/opt/asdf/libexec/asdf.fish
+  zoxide init fish | source
+end
