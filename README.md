@@ -33,6 +33,12 @@ Install the dotfiles:
 env RCRC=$HOME/git/github.com/modille/dotfiles/rcrc rcup
 ```
 
+or certain tags:
+
+```sh
+env RCRC=$HOME/git/github.com/modille/dotfiles/rcrc rcup -t zsh
+```
+
 After the initial installation, you can run `rcup` without the one-time variable `RCRC` being set.
 This command will create symlinks for config files in your home directory.
 
