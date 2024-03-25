@@ -22,6 +22,7 @@ return {
         'jsdoc',
         'json',
         'json5',
+        'kotlin',
         'lua',
         'luadoc',
         'make',
@@ -36,6 +37,7 @@ return {
         'rust',
         'scss',
         'sql',
+        'terraform',
         'toml',
         'tsx',
         'typescript',
@@ -98,7 +100,32 @@ return {
     dependencies = {
       'nvim-treesitter/playground',
       'JoosepAlviste/nvim-ts-context-commentstring',
-      'ThePrimeagen/refactoring.nvim',
+      {
+        'ThePrimeagen/refactoring.nvim',
+        keys = {
+          {
+            '<leader>rp',
+            function()
+              require('refactoring').debug.printf({ below = false })
+            end,
+            mode = { 'n' },
+          },
+          {
+            '<leader>rv',
+            function()
+              require('refactoring').debug.print_var({ below = false })
+            end,
+            mode = { 'n', 'v' },
+          },
+          {
+            '<leader>rc',
+            function()
+              require('refactoring').debug.cleanup({})
+            end,
+            mode = { 'n' },
+          },
+        },
+      },
       'code-biscuits/nvim-biscuits',
       {
         'nvim-treesitter/nvim-treesitter-textobjects',

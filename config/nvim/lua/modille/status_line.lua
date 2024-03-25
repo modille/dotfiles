@@ -66,7 +66,7 @@ function M.setup()
       lualine_z = {},
     },
     tabline = {},
-    extensions = { 'quickfix' },
+    extensions = { 'aerial', 'fugitive', 'fzf', 'lazy', 'mason', 'nvim-dap-ui', 'quickfix', 'trouble' },
   })
 end
 

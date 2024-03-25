@@ -182,4 +182,10 @@ return {
       end
     end,
   },
+
+  {
+    'adoyle-h/lsp-toggle.nvim',
+    lazy = false,
+    config = true,
+  },
 }

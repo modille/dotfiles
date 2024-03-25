@@ -35,7 +35,7 @@ vim.opt.undofile = true
 vim.opt.undodir = os.getenv('HOME') .. '/.local/share/nvim/undo'
 vim.opt.dictionary = '/usr/share/dict/words'
 -- https://github.com/hrsh7th/nvim-cmp
-vim.opt.completeopt = 'menu,menuone,noselect'
+-- vim.opt.completeopt = 'menu,menuone'
 
 -- 14 tabs and indenting
 vim.opt.tabstop = 2

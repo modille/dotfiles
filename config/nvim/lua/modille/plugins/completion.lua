@@ -70,17 +70,18 @@ return {
             return vim_item
           end,
         },
+        preselect = cmp.PreselectMode.None,
+        completion = {
+          completeopt = 'menu,menuone,noselect', -- for preselect use 'menu,menuone,noinsert'
+        },
         mapping = cmp.mapping.preset.insert({
           ['<C-u>'] = cmp.mapping.scroll_docs(-4),
           ['<C-d>'] = cmp.mapping.scroll_docs(4),
-          ['<C-Space>'] = cmp.mapping.complete(),
           ['<C-e>'] = cmp.mapping.abort(),
           ['<C-y>'] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
+            select = false,
           }),
           ['<CR>'] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Replace,
             select = false,
           }),
           -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#vim-vsnip
