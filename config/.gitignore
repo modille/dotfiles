@@ -10,3 +10,9 @@
 
 # ...except fish_variables, which may contain API keys, etc.
 /fish/fish_variables
+
+# Allow kitty
+!/kitty
+
+# Allow wezterm
+!/wezterm
