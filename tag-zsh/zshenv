@@ -51,3 +51,10 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/readline/lib/pkgconfig:/opt/homebrew/o
 
 # https://gitlab.com/gnachman/iterm2/-/wikis/tmux-Integration-Best-Practices#how-do-i-use-shell-integration
 export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
+
+#AWSume alias to source the AWSume script
+alias awsume="source awsume"
+
+#Auto-Complete function for AWSume
+#Auto-Complete function for AWSume
+fpath=(~/.awsume/zsh-autocomplete/ $fpath)
