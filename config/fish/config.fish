@@ -37,4 +37,6 @@ if status is-interactive
   abbr --add npmltc "npm run lint && npm test && npm run cukes"
 
   zoxide init fish | source
+
+  source ~/.asdf/asdf.fish
 end
