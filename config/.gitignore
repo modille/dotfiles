@@ -4,6 +4,7 @@
 # ...except the gitignore and nvim config files
 !.gitignore
 !/nvim
+!/lazyyy
 
 # Allow fish
 !/fish
