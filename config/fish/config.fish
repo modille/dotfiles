@@ -22,6 +22,7 @@ if status is-interactive
   abbr --add gf "git fetch"
   abbr --add gfp "git fetch --prune"
   abbr --add gpr "git pull --rebase"
+  abbr --add gpfwl "git push --force-with-lease"
   abbr --add gpu "git push --set-upstream origin"
   abbr --add gs "git status"
   abbr --add gsi "git status --ignored"
