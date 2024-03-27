@@ -11,3 +11,11 @@ vim.opt.relativenumber = false
 
 -- 5 syntax, highlighting and spelling
 vim.opt.colorcolumn = "80"
+
+-- 18 reading and writing files
+vim.opt.writebackup = false
+vim.opt.backup = false
+vim.opt.autoread = true
+
+-- 19 the swap file
+vim.opt.swapfile = false
