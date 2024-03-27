@@ -6,6 +6,7 @@ return {
       "olimorris/neotest-rspec",
       "vim-test/vim-test",
       "nvim-neotest/neotest-vim-test",
+      "weilbith/neotest-gradle",
     },
     opts = function()
       local neotest_jest_adapter = require("neotest-jest")({
@@ -19,6 +20,7 @@ return {
         adapters = {
           neotest_jest_adapter,
           require("neotest-rspec"),
+          require("neotest-gradle"),
           require("neotest-vim-test")({
             allow_file_types = { "cucumber" },
           }),
