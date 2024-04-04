@@ -23,6 +23,7 @@ return {
   -- Plugins
   require("plugins.coding.diffview_nvim"),
   require("plugins.coding.nvim-cmp"),
+  require("plugins.coding.nvim-ts-context-commentstring"),
   require("plugins.coding.octo_nvim"),
   require("plugins.coding.refactoring_nvim"),
   require("plugins.coding.vim-dispatch"),
