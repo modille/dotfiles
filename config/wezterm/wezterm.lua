@@ -8,6 +8,7 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
+config.bold_brightens_ansi_colors = true
 config.color_scheme = 'Solarized (light) (terminal.sexy)'
 config.colors = {
   cursor_bg = '#586e75',
@@ -17,6 +18,23 @@ config.default_cursor_style = 'SteadyBar'
 config.default_prog = { '/opt/homebrew/bin/fish' }
 config.font = wezterm.font('JetBrainsMono Nerd Font')
 config.font_size = 14.0
+config.font_rules = {
+  {
+    intensity = 'Bold',
+    italic = true,
+    font = wezterm.font({ family = 'Maple Mono', weight = 'Bold', style = 'Italic' }),
+  },
+  {
+    italic = true,
+    intensity = 'Half',
+    font = wezterm.font({ family = 'Maple Mono', weight = 'DemiBold', style = 'Italic' }),
+  },
+  {
+    italic = true,
+    intensity = 'Normal',
+    font = wezterm.font({ family = 'Maple Mono', style = 'Italic' }),
+  },
+}
 config.keys = {
   {
     key = 'Enter',
