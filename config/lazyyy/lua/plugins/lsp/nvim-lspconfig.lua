@@ -6,6 +6,7 @@ return {
         enabled = true,
       },
       servers = {
+        bashls = {},
         tsserver = {
           settings = {
             diagnostics = {

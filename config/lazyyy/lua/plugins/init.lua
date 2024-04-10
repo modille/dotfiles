@@ -1,27 +1,10 @@
 return {
-  -- LazyVim extras
-  { import = "lazyvim.plugins.extras.coding.yanky" },
-  { import = "lazyvim.plugins.extras.dap.core" },
-  { import = "lazyvim.plugins.extras.editor.aerial" },
-  { import = "lazyvim.plugins.extras.editor.leap" },
-  { import = "lazyvim.plugins.extras.editor.navic" },
-  { import = "lazyvim.plugins.extras.formatting.prettier" },
-  { import = "lazyvim.plugins.extras.lang.docker" },
-  { import = "lazyvim.plugins.extras.lang.java" },
-  { import = "lazyvim.plugins.extras.lang.json" },
-  { import = "lazyvim.plugins.extras.lang.markdown" },
-  { import = "lazyvim.plugins.extras.lang.ruby" },
-  { import = "lazyvim.plugins.extras.lang.terraform" },
-  { import = "lazyvim.plugins.extras.lang.typescript" },
-  { import = "lazyvim.plugins.extras.lang.yaml" },
-  { import = "lazyvim.plugins.extras.linting.eslint" },
-  { import = "lazyvim.plugins.extras.test.core" },
-  { import = "lazyvim.plugins.extras.ui.mini-animate" },
-  { import = "lazyvim.plugins.extras.util.dot" },
-  { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
-
-  -- Plugins
+  -- TODO: fix :intro
+  -- https://github.com/folke/lazy.nvim/issues/1038#issuecomment-1733035996
   require("plugins.coding.diffview_nvim"),
+  require("plugins.coding.gen_nvim"),
+  require("plugins.coding.mason_nvim"),
+  require("plugins.coding.mini_pairs"),
   require("plugins.coding.nvim-cmp"),
   require("plugins.coding.nvim-ts-context-commentstring"),
   require("plugins.coding.octo_nvim"),
@@ -29,6 +12,7 @@ return {
   require("plugins.coding.vim-dispatch"),
   require("plugins.coding.vim-fugitive"),
   require("plugins.coding.vim-rhubarb"),
+  require("plugins.coding.yanky_nvim"),
 
   require("plugins.colorscheme.bgwinch_nvim"),
 
@@ -42,7 +26,6 @@ return {
   require("plugins.editor.vim-endwise"),
   require("plugins.editor.vim-projectionist"),
   require("plugins.editor.vim-repeat"),
-  require("plugins.editor.vim-surround"),
   require("plugins.editor.vim-unimpaired"),
 
   require("plugins.formatting.conform_nvim"),
@@ -62,7 +45,9 @@ return {
   require("plugins.treesitter.nvim-treesitter"),
 
   require("plugins.ui.bufferline_nvim"),
-  require("plugins.ui.zen-mode_nvim"),
+  require("plugins.ui.dashboard-nvim"),
+  require("plugins.ui.noice_nvim"),
+  -- require("plugins.ui.zen-mode_nvim"),
 
   require("plugins.wiki.obsidian_nvim"),
   require("plugins.wiki.vimwiki"),

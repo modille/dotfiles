@@ -25,7 +25,7 @@ return {
             return text
           end
 
-          require("telescope.builtin").grep_string({ search = buf_vtext() })
+          require("telescope.builtin").grep_string({ hidden = true, search = buf_vtext() })
         end,
         mode = { "v" },
         desc = "file grep visual selection",
@@ -39,7 +39,9 @@ return {
         "<leader>fs",
         function()
           local builtin = require("telescope.builtin")
-          local opts = {} -- define here if you want to define something
+          local opts = {
+            show_untracked = true,
+          } -- define here if you want to define something
           local ok = pcall(builtin.git_files, opts)
           if not ok then
             builtin.find_files(opts)
