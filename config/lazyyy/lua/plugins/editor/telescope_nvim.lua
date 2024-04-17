@@ -89,7 +89,8 @@ return {
         function()
           require("telescope.builtin").find_files({
             prompt_title = "wiki >",
-            cwd = os.getenv("HOME") .. "/Dropbox/vimwiki",
+            cwd = os.getenv("HOME") .. "/Dropbox",
+            search_dirs = { "vimwiki", "obsidian" },
             hidden = false,
           })
         end,
