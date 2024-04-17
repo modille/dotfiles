@@ -1,6 +1,12 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
+    opts = function(_, opts)
+      opts.defaults.get_selection_window = function()
+        return 0
+      end
+      return opts
+    end,
     keys = {
       {
         "<leader>fg",
