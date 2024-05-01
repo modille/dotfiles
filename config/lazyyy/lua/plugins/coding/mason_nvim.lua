@@ -14,7 +14,6 @@ return {
         "json-lsp",
         "kotlin-debug-adapter",
         "kotlin-language-server",
-        "ktlint", -- :MasonUninstall ktlint and :MasonInstall ktlint@0.49.1 to install specific version
         "lua-language-server",
         "markdownlint",
         "marksman",
