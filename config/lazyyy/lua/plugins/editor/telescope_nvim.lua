@@ -11,7 +11,7 @@ return {
       {
         "<leader>fg",
         function()
-          require("telescope.builtin").grep_string({ search = vim.fn.input("🔍 ") })
+          require("telescope.builtin").grep_string({ additional_args = { "--hidden" }, search = vim.fn.input("🔍 ") })
         end,
         mode = { "n" },
         desc = "file grep",
@@ -31,7 +31,7 @@ return {
             return text
           end
 
-          require("telescope.builtin").grep_string({ hidden = true, search = buf_vtext() })
+          require("telescope.builtin").grep_string({ additional_args = { "--hidden" }, search = buf_vtext() })
         end,
         mode = { "v" },
         desc = "file grep visual selection",
