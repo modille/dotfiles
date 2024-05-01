@@ -31,6 +31,7 @@ return {
   require("plugins.formatting.conform_nvim"),
   require("plugins.formatting.tabular"),
 
+  require("plugins.lang.csv.rainbow_csv"),
   require("plugins.lang.markdown.headlines_nvim"),
   require("plugins.lang.ruby.vim-rails"),
 
@@ -47,7 +48,6 @@ return {
   require("plugins.ui.bufferline_nvim"),
   require("plugins.ui.dashboard-nvim"),
   require("plugins.ui.noice_nvim"),
-  -- require("plugins.ui.zen-mode_nvim"),
 
   require("plugins.wiki.obsidian_nvim"),
   require("plugins.wiki.vimwiki"),
