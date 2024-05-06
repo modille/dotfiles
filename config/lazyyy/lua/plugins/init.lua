@@ -15,6 +15,7 @@ return {
   require("plugins.coding.yanky_nvim"),
 
   require("plugins.colorscheme.bgwinch_nvim"),
+  require("plugins.colorscheme.tokyonight_nvim"),
 
   require("plugins.editor.neo-tree_nvim"),
   require("plugins.editor.oil_nvim"),
