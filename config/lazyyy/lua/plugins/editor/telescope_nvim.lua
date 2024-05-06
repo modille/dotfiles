@@ -56,6 +56,20 @@ return {
         desc = "file select",
       },
       {
+        "<leader><leader>fs",
+        function()
+          local builtin = require("telescope.builtin")
+          local opts = {
+            recurse_submodules = true,
+          } -- define here if you want to define something
+          local ok = pcall(builtin.git_files, opts)
+          if not ok then
+            builtin.find_files(opts)
+          end
+        end,
+        desc = "file select recurse submodules",
+      },
+      {
         "<leader>bs",
         function()
           require("telescope.builtin").buffers({ previewer = false, sort_lastused = true })
