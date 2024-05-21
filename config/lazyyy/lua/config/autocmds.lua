@@ -48,3 +48,11 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.b.autoformat = false
   end,
 })
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  group = augroup("commentstring"),
+  pattern = { "sql" },
+  callback = function(ev)
+    vim.bo[ev.buf].commentstring = "-- %s"
+  end,
+})

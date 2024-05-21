@@ -1,8 +1,8 @@
 return {
   {
     "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
+    opts = function(_, opts)
+      vim.list_extend(opts.ensure_installed, {
         "docker-compose-language-service",
         "dockerfile-language-server",
         "eslint-lsp",
@@ -21,12 +21,11 @@ return {
         "prettierd",
         "shellcheck",
         "shfmt",
-        "solargraph",
         "stylua",
         "terraform-ls",
         "typescript-language-server",
         "yaml-language-server",
-      },
-    },
+      })
+    end,
   },
 }

@@ -28,3 +28,5 @@ vim.opt.autoread = true
 
 -- 19 the swap file
 vim.opt.swapfile = false
+
+vim.opt.pumblend = 0 -- Fully opaque popup-menu (completion)

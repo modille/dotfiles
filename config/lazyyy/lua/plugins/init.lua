@@ -17,6 +17,7 @@ return {
   require("plugins.colorscheme.bgwinch_nvim"),
   require("plugins.colorscheme.tokyonight_nvim"),
 
+  require("plugins.editor.bigfile_nvim"),
   require("plugins.editor.neo-tree_nvim"),
   require("plugins.editor.oil_nvim"),
   require("plugins.editor.telescope_nvim"),

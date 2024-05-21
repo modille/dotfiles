@@ -2,6 +2,7 @@ return {
   {
     "nvim-cmp",
     dependencies = {
+      "SergioRibera/cmp-dotenv",
       "hrsh7th/cmp-calc",
       "hrsh7th/cmp-cmdline",
       "rcarriga/cmp-dap",
@@ -70,6 +71,7 @@ return {
             end,
           },
         },
+        { name = "dotenv" },
         { name = "omni" }, -- for cucumber_language_server
         { name = "calc" },
       })
@@ -94,7 +96,7 @@ return {
 
       -- https://github.com/rcarriga/cmp-dap
       opts.enabled = function()
-        return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
+        return vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt" or require("cmp_dap").is_dap_buffer()
       end
     end,
 
