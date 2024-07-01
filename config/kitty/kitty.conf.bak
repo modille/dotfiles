@@ -6,10 +6,29 @@
 #: individual font faces and even specify special fonts for particular
 #: characters.
 
-# font_family      monospace
-# bold_font        auto
+# Pro-tip: Quit and restart kitty to take effect
+
+font_family      JetBrainsMono Nerd Font
+bold_font        auto
 # italic_font      auto
 # bold_italic_font auto
+italic_font      Maple Mono Italic
+bold_italic_font Maple Mono BoldItalic
+
+# font_family      Rec Mono Duotone
+# bold_font        auto
+# italic_font      Rec Mono Duotone Italic
+# bold_italic_font auto
+
+# font_family      Monaspace Neon Var
+# italic_font      Monaspace Radon Var Italic
+# bold_font        Monaspace Neon Var SemiBold
+# bold_italic_font Monaspace Radon Var SemiBold Italic
+# # font_features MonaspaceArgonVar-Light  calt ss01 ss02 ss03 ss04 ss05 ss08
+# # font_features MonaspaceRadonVar-Italic calt ss01 ss02 ss03 ss04 ss05 ss08
+# # font_features MonaspaceArgonVar-Bold  calt ss01 ss02 ss03 ss04 ss05 ss08
+# # font_features MonaspaceRadonVar-Bold  calt ss01 ss02 ss03 ss04 ss05 ss08
+# modify_font cell_height +6px
 
 #: You can specify different fonts for the bold/italic/bold-italic
 #: variants. To get a full list of supported fonts use the `kitty
@@ -24,7 +43,7 @@
 #:     italic_font      Operator Mono Book Italic
 #:     bold_italic_font Operator Mono Medium Italic
 
-# font_size 11.0
+font_size 14.0
 
 #: Font size (in pts)
 
@@ -294,7 +313,7 @@
 
 #: Scrollback {{{
 
-# scrollback_lines 2000
+scrollback_lines 200000
 
 #: Number of lines of history to keep in memory for scrolling back.
 #: Memory is allocated on demand. Negative numbers are (effectively)
@@ -413,7 +432,7 @@
 #: When the mouse hovers over a terminal hyperlink, show the actual
 #: URL that will be activated when the hyperlink is clicked.
 
-# copy_on_select no
+copy_on_select yes
 
 #: Copy to clipboard or a private buffer on select. With this set to
 #: clipboard, selecting text with the mouse will cause the text to be
@@ -796,7 +815,7 @@
 #: set the vertical and horizontal sides. Three values set top,
 #: horizontal and bottom. Four values set top, right, bottom and left.
 
-# window_padding_width 0
+window_padding_width 6
 
 #: The window padding (in pts) (blank area between the text and the
 #: window border). A single value sets all four sides. Two values set
@@ -920,14 +939,14 @@
 
 #: The margin to the left and right of the tab bar (in pts).
 
-# tab_bar_margin_height 0.0 0.0
+tab_bar_margin_height 6.0 0.0
 
 #: The margin above and below the tab bar (in pts). The first number
 #: is the margin between the edge of the OS Window and the tab bar.
 #: The second number is the margin between the tab bar and the
 #: contents of the current tab.
 
-# tab_bar_style fade
+tab_bar_style separator
 
 #: The tab bar style, can be one of:
 
@@ -958,7 +977,7 @@
 #: The horizontal alignment of the tab bar, can be one of: left,
 #: center, right.
 
-# tab_bar_min_tabs 2
+tab_bar_min_tabs 1
 
 #: The minimum number of tabs that must exist before the tab bar is
 #: shown.
@@ -980,12 +999,12 @@
 #: can change the number of cells used by adding/removing entries to
 #: this list.
 
-# tab_separator " ┇"
+tab_separator " "
 
 #: The separator between tabs in the tab bar when using separator as
 #: the tab_bar_style.
 
-# tab_powerline_style angled
+tab_powerline_style slanted
 
 #: The powerline separator style between tabs in the tab bar when
 #: using powerline as the tab_bar_style, can be one of: angled,
@@ -1003,7 +1022,7 @@
 #: The maximum number of cells that can be used to render the text in
 #: a tab. A value of zero means that no limit is applied.
 
-# tab_title_template "{fmt.fg.red}{bell_symbol}{activity_symbol}{fmt.fg.tab}{title}"
+tab_title_template  " {fmt.fg.red}{bell_symbol}{activity_symbol}{fmt.fg.tab}{title} 󰘳 {index} "
 
 #: A template to render the tab title. The default just renders the
 #: title with optional symbols for bell and activity. If you wish to
@@ -1052,19 +1071,19 @@
 
 # active_tab_foreground   #000
 # active_tab_background   #eee
-# active_tab_font_style   bold-italic
+active_tab_font_style   normal
 # inactive_tab_foreground #444
 # inactive_tab_background #999
 # inactive_tab_font_style normal
 
 #: Tab bar colors and styles.
 
-# tab_bar_background none
+# tab_bar_background #eee8d5
 
 #: Background color for the tab bar. Defaults to using the terminal
 #: background color.
 
-# tab_bar_margin_color none
+# tab_bar_margin_color #eee8d5
 
 #: Color for the tab bar margin area. Defaults to using the terminal
 #: background color for margins above and below the tab bar. For side
@@ -1171,37 +1190,27 @@
 #: the program running in the terminal.
 
 #: The color table {{{
-
-background              #fdf6e3
-foreground              #657b83
-cursor                  #586e75
-
-selection_background    #475b62
-selection_foreground    #eae3cb
-
-color0                #073642
-color8                #002b36
-
-color1                #dc322f
-color9                #cb4b16
-
-color2                #859900
-color10               #586e75
-
-color3                #b58900
-color11               #657b83
-
-color4                #268bd2
-color12               #839496
-
-color5                #d33682
-color13               #6c71c4
-
-color6                #2aa198
-color14               #93a1a1
-
-color7                #eee8d5
-color15               #fdf6e3
+# background              #fdf6e3
+# foreground              #657b83
+# cursor                  #586e75
+# selection_background    #475b62
+# selection_foreground    #eae3cb
+# color0                #073642
+# color8                #002b36
+# color1                #dc322f
+# color9                #cb4b16
+# color2                #859900
+# color10               #586e75
+# color3                #b58900
+# color11               #657b83
+# color4                #268bd2
+# color12               #839496
+# color5                #d33682
+# color13               #6c71c4
+# color6                #2aa198
+# color14               #93a1a1
+# color7                #eee8d5
+# color15               #fdf6e3
 
 #: The 256 terminal colors. There are 8 basic colors, each color has a
 #: dull and bright version, for the first 16 colors. You can set the
@@ -1343,7 +1352,7 @@ shell /opt/homebrew/bin/fish
 #: See rc_custom_auth <https://sw.kovidgoyal.net/kitty/remote-
 #: control/#rc-custom-auth> for details.
 
-# allow_remote_control no
+allow_remote_control yes
 
 #: Allow other programs to control kitty. If you turn this on, other
 #: programs can control all aspects of kitty, including sending text
@@ -1641,7 +1650,7 @@ shell /opt/homebrew/bin/fish
 #: mouse cursor invisible on dual GPU machines. Changing this option
 #: by reloading the config is not supported.
 
-# macos_colorspace srgb
+macos_colorspace displayp3
 
 #: The colorspace in which to interpret terminal colors. The default
 #: of srgb will cause colors to match those seen in web browsers. The
@@ -1908,7 +1917,7 @@ shell /opt/homebrew/bin/fish
 #: New window
 
 # map kitty_mod+enter new_window
-# map cmd+enter       new_window
+map cmd+enter       toggle_fullscreen
 
 #::  You can open a new kitty window running an arbitrary program, for
 #::  example::
@@ -2059,7 +2068,7 @@ shell /opt/homebrew/bin/fish
 #: New tab
 
 # map kitty_mod+t new_tab
-# map cmd+t       new_tab
+map cmd+t       new_tab_with_cwd
 
 #: Close tab
 
@@ -2090,6 +2099,15 @@ shell /opt/homebrew/bin/fish
 
 #:     map ctrl+alt+1 goto_tab 1
 #:     map ctrl+alt+2 goto_tab 2
+map cmd+1 goto_tab 1
+map cmd+2 goto_tab 2
+map cmd+3 goto_tab 3
+map cmd+4 goto_tab 4
+map cmd+5 goto_tab 5
+map cmd+6 goto_tab 6
+map cmd+7 goto_tab 7
+map cmd+8 goto_tab 8
+map cmd+9 goto_tab 9
 
 #: Just as with new_window above, you can also pass the name of
 #: arbitrary commands to run when using new_tab and new_tab_with_cwd.
@@ -2419,4 +2437,12 @@ shell /opt/homebrew/bin/fish
 
 #: }}}
 
+
 #: }}}
+
+include theme.conf
+
+# BEGIN_KITTY_THEME
+# Tokyo Night Day
+# include current-theme.conf
+# END_KITTY_THEME
