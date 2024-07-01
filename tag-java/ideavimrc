@@ -22,9 +22,14 @@ sethandler <c-w> a:vim
 " https://github.com/JetBrains/ideavim/blob/master/doc/IdeaVim%20Plugins.md
 
 Plug 'justinmk/vim-sneak'
+Plug 'preservim/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'vim-scripts/argtextobj.vim'
 Plug 'machakann/vim-highlightedyank'
+Plug 'michaeljsmith/vim-indent-object'
+" https://plugins.jetbrains.com/plugin/15976-which-key
+set which-key
 
 " Keymaps
 
@@ -33,7 +38,7 @@ nmap ; :
 vmap ; :
 
 " Hide other windows (:only, :on)
-map <Leader>o :only<CR>
+map <Leader>o :on<CR>
 
 " Yank, delete, and paste
 vmap <Leader>y "+y
@@ -77,7 +82,38 @@ nnoremap <expr> 0 (col('.') == 1) ? '^' : '0'
 
 nnoremap <Leader>h :action ShowHoverInfo<cr>
 nnoremap <Leader>db :action ToggleLineBreakpoint<cr>
-nnoremap <Leader>fs :action SearchEverywhere<cr>
-map <leader>tf <Action>(EditorTextStart) \| <Action>(RunClass) \| <Action>(Back)
-map <leader>tn <Action>(RunClass)
-map <leader>tl <Action>(Rerun)
+
+nnoremap <Leader>fg :action SearchEverywhere<cr>
+nnoremap <Leader>fs :action GotoFile<cr>
+
+map <Leader>tf <Action>(EditorTextStart) \| <Action>(RunClass) \| <Action>(Back)
+map <Leader>tn <Action>(RunClass)
+map <Leader>tl <Action>(Rerun)
+
+nmap ]e <Action>(GotoNextError)
+nmap [e <Action>(GotoPreviousError)
+
+" Hide Terminal, Structure, Project, etc.
+nnoremap <Leader><Leader>o :action HideAllWindows<CR>
+
+nnoremap <Leader>g :action Gradle.ExecuteTask<CR>
+
+" TODO how to move cursor from Terminal/Structure back to editor?
+nnoremap <Leader>at :action ActivateTerminalToolWindow<CR>
+nnoremap <C-w>t     :action ActivateTerminalToolWindow<CR>
+nnoremap <Leader>as :action ActivateStructureToolWindow<CR>
+nnoremap <C-w>s     :action ActivateStructureToolWindow<CR>
+
+" Refactor This
+nnoremap <Leader>rt :action Refactorings.QuickListPopupAction<CR>
+
+" Git Blame
+nnoremap <Leader>gb :action Annotate<CR>
+
+nnoremap - :action SelectInProjectView<CR>
+
+" Code Symbols (LazyVim default Aerial keymap)
+nnoremap <leader>cs :action ShowNavBar<CR>
+
+" IDE keymaps:
+" Focus Editor = <esc>
