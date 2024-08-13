@@ -21,12 +21,13 @@ if status is-interactive
     abbr --add gdc "git diff --cached"
     abbr --add gf "git fetch"
     abbr --add gfp "git fetch --prune"
-    abbr --add gpr "git pull --rebase"
     abbr --add gpfwl "git push --force-with-lease"
+    abbr --add gpr "git pull --rebase"
+    abbr --add gprp "git pull --rebase --prune"
     abbr --add gpu "git push --set-upstream origin"
-    # abbr --add gs "git status"
-    scmpuff init --shell=fish --aliases=false | source
-    abbr --add gs scmpuff_status
+    abbr --add gs "git status"
+    # scmpuff init --shell=fish --aliases=false | source
+    # abbr --add gs scmpuff_status
     abbr --add gsi "git status --ignored"
     abbr --add gsw "git switch"
     abbr --add gsuir "git submodule update --init --recursive"
@@ -39,7 +40,8 @@ if status is-interactive
     abbr --add npmlt "npm run lint && npm test"
     abbr --add npmltc "npm run lint && npm test && npm run cukes"
 
-    alias lazyvim "NVIM_APPNAME=lazyyy nvim"
+    alias lazyvim "NVIM_APPNAME=lazyyy /opt/homebrew/bin/nvim"
+    alias nvim "NVIM_APPNAME=lazyyy /opt/homebrew/bin/nvim"
 end
 
 test -e {$HOME}/.iterm2_shell_integration.fish; and source {$HOME}/.iterm2_shell_integration.fish
