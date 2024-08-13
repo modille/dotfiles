@@ -89,6 +89,9 @@ nnoremap <Leader>fs :action GotoFile<cr>
 map <Leader>tf <Action>(EditorTextStart) \| <Action>(RunClass) \| <Action>(Back)
 map <Leader>tn <Action>(RunClass)
 map <Leader>tl <Action>(Rerun)
+map <Leader>tl <Action>(Rerun)
+" TODO test suite (equivalient of src/test -> Run 'Tests' in '<app name>'.
+" probably need a macro like tf that opens project, chooses test root, and Run
 
 nmap ]e <Action>(GotoNextError)
 nmap [e <Action>(GotoPreviousError)
@@ -96,7 +99,7 @@ nmap [e <Action>(GotoPreviousError)
 " Hide Terminal, Structure, Project, etc.
 nnoremap <Leader><Leader>o :action HideAllWindows<CR>
 
-nnoremap <Leader>g :action Gradle.ExecuteTask<CR>
+nnoremap <Leader>gt :action Gradle.ExecuteTask<CR>
 
 " TODO how to move cursor from Terminal/Structure back to editor?
 nnoremap <Leader>at :action ActivateTerminalToolWindow<CR>
@@ -114,6 +117,8 @@ nnoremap - :action SelectInProjectView<CR>
 
 " Code Symbols (LazyVim default Aerial keymap)
 nnoremap <leader>cs :action ShowNavBar<CR>
+
+nnoremap <Leader>bs :action RecentFiles<CR>
 
 " IDE keymaps:
 " Focus Editor = <esc>
