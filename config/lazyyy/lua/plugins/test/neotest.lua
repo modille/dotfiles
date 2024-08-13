@@ -24,6 +24,11 @@ return {
           require("neotest-vim-test")({
             allow_file_types = { "cucumber" },
           }),
+          ["neotest-python"] = {
+            -- Here you can specify the settings for the adapter, i.e.
+            runner = "pytest",
+            -- python = ".venv/bin/python",
+          },
         },
         status = {
           enabled = true,
@@ -54,13 +59,13 @@ return {
         end,
         desc = "Test last",
       },
-      {
-        "<leader>ts",
-        function()
-          require("neotest").run.run({ suite = true })
-        end,
-        desc = "Test suite",
-      },
+      -- {
+      --   "<leader>ts",
+      --   function()
+      --     require("neotest").run.run({ suite = true })
+      --   end,
+      --   desc = "Test suite",
+      -- },
       {
         "<leader>tdn",
         function()
@@ -82,13 +87,13 @@ return {
         end,
         desc = "Test debug last",
       },
-      {
-        "<leader>tds",
-        function()
-          require("neotest").run.run({ suite = true, strategy = "dap" })
-        end,
-        desc = "Test debug suite",
-      },
+      -- {
+      --   "<leader>tds",
+      --   function()
+      --     require("neotest").run.run({ suite = true, strategy = "dap" })
+      --   end,
+      --   desc = "Test debug suite",
+      -- },
       {
         "<leader>twj",
         function()
@@ -96,13 +101,13 @@ return {
         end,
         desc = "Test watch jest",
       },
-      {
-        "<leader>to",
-        function()
-          require("neotest").output.open({ enter = true })
-        end,
-        desc = "Test output",
-      },
+      -- {
+      --   "<leader>to",
+      --   function()
+      --     require("neotest").output.open({ enter = true })
+      --   end,
+      --   desc = "Test output",
+      -- },
     },
   },
 }

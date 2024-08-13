@@ -6,6 +6,7 @@ return {
       "hrsh7th/cmp-calc",
       "hrsh7th/cmp-cmdline",
       "rcarriga/cmp-dap",
+      -- "tzachar/cmp-ai",
     },
 
     opts = function(_, opts)
@@ -56,6 +57,16 @@ return {
             fallback()
           end
         end, { "i", "s" }),
+        -- ["<C-x>"] = cmp.mapping(
+        --   cmp.mapping.complete({
+        --     config = {
+        --       sources = cmp.config.sources({
+        --         { name = "cmp_ai" },
+        --       }),
+        --     },
+        --   }),
+        --   { "i" }
+        -- ),
       })
 
       opts.sources = cmp.config.sources({
@@ -89,6 +100,7 @@ return {
             buffer = "[Buffer]",
             omni = "[Omni]",
             calc = "[Calc]",
+            -- cmp_ai = "[AI]",
           })[entry.source.name]
           return item
         end,

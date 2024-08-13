@@ -8,7 +8,6 @@ return {
   require("plugins.coding.nvim-cmp"),
   require("plugins.coding.nvim-ts-context-commentstring"),
   require("plugins.coding.octo_nvim"),
-  require("plugins.coding.refactoring_nvim"),
   require("plugins.coding.vim-dispatch"),
   require("plugins.coding.vim-fugitive"),
   require("plugins.coding.vim-rhubarb"),
@@ -16,6 +15,8 @@ return {
 
   require("plugins.colorscheme.bgwinch_nvim"),
   require("plugins.colorscheme.tokyonight_nvim"),
+
+  require("plugins.dap.nvim-dap"),
 
   require("plugins.editor.bigfile_nvim"),
   require("plugins.editor.neo-tree_nvim"),
@@ -44,7 +45,6 @@ return {
   require("plugins.test.neotest"),
   require("plugins.test.vim-test"),
 
-  require("plugins.treesitter.neogen"),
   require("plugins.treesitter.nvim-treesitter"),
 
   require("plugins.ui.bufferline_nvim"),
@@ -53,4 +53,31 @@ return {
 
   require("plugins.wiki.obsidian_nvim"),
   require("plugins.wiki.vimwiki"),
+
+  -- wip ollama
+  -- {
+  --   "tzachar/cmp-ai",
+  --   dependencies = "nvim-lua/plenary.nvim",
+  --   config = function()
+  --     local cmp_ai = require("cmp_ai.config")
+
+  --     cmp_ai:setup({
+  --       max_lines = 100,
+  --       provider = "Ollama",
+  --       provider_options = {
+  --         model = "codellama",
+  --       },
+  --       notify = true,
+  --       notify_callback = function(msg)
+  --         vim.notify(msg)
+  --       end,
+  --       run_on_every_keystroke = true,
+  --       ignored_file_types = {
+  --         -- default is not to ignore
+  --         -- uncomment to ignore in lua:
+  --         -- lua = true
+  --       },
+  --     })
+  --   end,
+  -- },
 }
