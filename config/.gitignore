@@ -6,6 +6,9 @@
 !/nvim
 !/lazyyy
 
+# Allow bat
+!/bat
+
 # Allow fish
 !/fish
 
