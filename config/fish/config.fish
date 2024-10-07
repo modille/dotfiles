@@ -21,11 +21,12 @@ if status is-interactive
     abbr --add gdc "git diff --cached"
     abbr --add gf "git fetch"
     abbr --add gfp "git fetch --prune"
-    abbr --add gpfwl "git push --force-with-lease"
+    abbr --add gpf "git push --force-with-lease"
     abbr --add gpr "git pull --rebase"
     abbr --add gprp "git pull --rebase --prune"
     abbr --add gpu "git push --set-upstream origin"
     abbr --add gs "git status"
+    abbr --add gsc "git switch --create"
     # scmpuff init --shell=fish --aliases=false | source
     # abbr --add gs scmpuff_status
     abbr --add gsi "git status --ignored"
