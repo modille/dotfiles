@@ -63,14 +63,16 @@ function change_background --argument mode_setting
     # Supported in 3.5.0
     # https://gitlab.com/gnachman/iterm2/-/issues/7943
 
-    # bat, delta
+    # bat, delta, lazygit
     switch $mode
         case dark
             # set -Ux BAT_THEME 'Solarized (dark)'
             set -Ux BAT_THEME tokyonight_moon
+            set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/dark_config.yml,$HOME/.config/lazygit/tokyonight_moon.yml"
         case light
             # set -Ux BAT_THEME 'Solarized (light)'
             set -Ux BAT_THEME tokyonight_day
+            set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/light_config.yml,$HOME/.config/lazygit/tokyonight_day.yml"
     end
 
     # Firefox

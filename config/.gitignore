@@ -15,6 +15,9 @@
 # ...except fish_variables, which may contain API keys, etc.
 /fish/fish_variables
 
+# Allow lazygit
+!/lazygit
+
 # Allow kitty
 !/kitty
 
