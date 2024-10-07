@@ -42,6 +42,8 @@ if status is-interactive
 
     alias lazyvim "NVIM_APPNAME=lazyyy /opt/homebrew/bin/nvim"
     alias nvim "NVIM_APPNAME=lazyyy /opt/homebrew/bin/nvim"
+
+    # eval "$(frum init)"
 end
 
 test -e {$HOME}/.iterm2_shell_integration.fish; and source {$HOME}/.iterm2_shell_integration.fish
