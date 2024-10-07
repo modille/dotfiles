@@ -1,6 +1,9 @@
 
 modille_*
 
+# LazyVim project-specific plugin specs
+.lazy.lua
+
 # Kotlin language server
 kls_database.db
 .kotlin/
