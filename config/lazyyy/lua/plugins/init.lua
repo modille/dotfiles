@@ -16,7 +16,7 @@ return {
   require("plugins.colorscheme.bgwinch_nvim"),
   require("plugins.colorscheme.tokyonight_nvim"),
 
-  require("plugins.dap.nvim-dap"),
+  -- require("plugins.dap.nvim-dap"),
 
   require("plugins.editor.bigfile_nvim"),
   require("plugins.editor.neo-tree_nvim"),
@@ -35,7 +35,10 @@ return {
   require("plugins.formatting.tabular"),
 
   require("plugins.lang.csv.rainbow_csv"),
-  require("plugins.lang.markdown.headlines_nvim"),
+  require("plugins.lang.markdown.render-markdown_nvim"),
+  require("plugins.lang.python.jupytext_nvim"),
+  require("plugins.lang.python.molten-nvim"),
+  require("plugins.lang.python.quarto-nvim"),
   require("plugins.lang.ruby.vim-rails"),
 
   require("plugins.linting.nvim-lint"),
@@ -49,35 +52,16 @@ return {
 
   require("plugins.ui.bufferline_nvim"),
   require("plugins.ui.dashboard-nvim"),
+  require("plugins.ui.indent-blankline_nvim"),
+  require("plugins.ui.lualine_nvim"),
   require("plugins.ui.noice_nvim"),
 
   require("plugins.wiki.obsidian_nvim"),
   require("plugins.wiki.vimwiki"),
 
-  -- wip ollama
-  -- {
-  --   "tzachar/cmp-ai",
-  --   dependencies = "nvim-lua/plenary.nvim",
-  --   config = function()
-  --     local cmp_ai = require("cmp_ai.config")
-
-  --     cmp_ai:setup({
-  --       max_lines = 100,
-  --       provider = "Ollama",
-  --       provider_options = {
-  --         model = "codellama",
-  --       },
-  --       notify = true,
-  --       notify_callback = function(msg)
-  --         vim.notify(msg)
-  --       end,
-  --       run_on_every_keystroke = true,
-  --       ignored_file_types = {
-  --         -- default is not to ignore
-  --         -- uncomment to ignore in lua:
-  --         -- lua = true
-  --       },
-  --     })
-  --   end,
-  -- },
+  -- WIP: code runner
+  {
+    "stevearc/overseer.nvim",
+    opts = {},
+  },
 }

@@ -19,7 +19,11 @@ return {
         log_level = 1,
         adapters = {
           neotest_jest_adapter,
-          require("neotest-rspec"),
+          require("neotest-rspec")({
+            -- rspec_cmd = function()
+            --   return vim.iter({ "bin/bundle", "exec", "rspec" }):flatten():totable()
+            -- end,
+          }),
           require("neotest-gradle"),
           require("neotest-vim-test")({
             allow_file_types = { "cucumber" },
@@ -34,6 +38,40 @@ return {
           enabled = true,
           signs = true,
           virtual_text = false,
+        },
+        consumers = {
+          neotest_consumers = function(client)
+            return {
+              yank = function()
+                local async = require("neotest.async")
+
+                local file = async.fn.expand("%:p")
+                local row = async.fn.getpos(".")[2] - 1
+                local position = client:get_nearest(file, row, {})
+                if not position then
+                  print("no position found")
+                  return
+                end
+
+                if not position then
+                  return
+                end
+
+                local file = async.fn.expand("%:p")
+
+                local adapter_name, adapter = client:get_adapter(file)
+
+                local command = adapter.build_spec({
+                  tree = position,
+                }).command
+
+                -- convert to string
+                local command_str = table.concat(command, " ")
+
+                vim.fn.setreg("+", command_str)
+              end,
+            }
+          end,
         },
       }
     end,
@@ -108,6 +146,13 @@ return {
       --   end,
       --   desc = "Test output",
       -- },
+      {
+        "<leader>ty",
+        function()
+          require("neotest").neotest_consumers.yank()
+        end,
+        desc = "test yank command",
+      },
     },
   },
 }

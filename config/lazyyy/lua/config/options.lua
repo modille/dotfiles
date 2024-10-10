@@ -3,14 +3,15 @@
 -- Add any additional options here
 
 -- See:
--- :options
+-- :options (vim docs, split into categories)
+-- :help options (nvim docs, alphabetical)
 -- :help vim.opt
 
 -- 4 displaying text
 vim.opt.relativenumber = false
 
 -- 5 syntax, highlighting and spelling
-vim.opt.colorcolumn = "80"
+-- vim.opt.colorcolumn = "80"
 
 -- 11 selecting text
 vim.opt.clipboard = "" -- don't sync with system clipboard
@@ -29,4 +30,8 @@ vim.opt.autoread = true
 -- 19 the swap file
 vim.opt.swapfile = false
 
+-- 24 various
+vim.opt.exrc = true
+
+-- other
 vim.opt.pumblend = 0 -- Fully opaque popup-menu (completion)

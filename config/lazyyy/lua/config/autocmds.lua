@@ -49,6 +49,22 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  group = augroup("diagnostic"),
+  pattern = { ".env", ".env.local" },
+  callback = function(args)
+    vim.diagnostic.disable(args.buf)
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  group = augroup("diagnostic"),
+  pattern = { "markdown" },
+  callback = function(args)
+    vim.diagnostic.disable(args.buf)
+  end,
+})
+
 vim.api.nvim_create_autocmd({ "FileType" }, {
   group = augroup("commentstring"),
   pattern = { "sql" },

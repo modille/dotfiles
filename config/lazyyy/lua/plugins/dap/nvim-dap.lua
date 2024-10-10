@@ -1,3 +1,4 @@
+-- disabled in ../init.lua because I think this overwrites LazyVim defaults?
 return {
   {
     "mfussenegger/nvim-dap",

@@ -11,8 +11,8 @@ vim.g.loaded_python2_provider = 0
 vim.g.python3_host_prog = '/opt/homebrew/bin/python3'
 
 -- Use frum installation for ruby
--- vim.g.ruby_host_prog = os.getenv('HOME') .. '/.frum/versions/3.0.6/bin/neovim-ruby-host'
-vim.g.ruby_host_prog = os.getenv('HOME') .. '/.frum/versions/3.2.3/bin/neovim-ruby-host'
+-- vim.g.ruby_host_prog = os.getenv('HOME') .. '/.frum/versions/3.2.3/bin/neovim-ruby-host'
+-- vim.g.ruby_host_prog = os.getenv('HOME') .. '/.local/share/mise/installs/ruby/3.3.1/bin/ruby'
 
 -- https://github.com/vim/vim/issues/4738
 vim.g.netrw_browsex_viewer = 'open'

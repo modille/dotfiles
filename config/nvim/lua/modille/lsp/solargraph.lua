@@ -29,7 +29,6 @@ lspconfig.solargraph.setup({
       folding = true,
       checkGemVersion = false,
       useBundler = true,
-      -- bundlePath = '/var/folders/xk/lm_549095ml5lvk1bkl3vc000000gp/T/frum_1103_1690382810047/bin/bundle',
     },
   },
   on_attach = function(client, bufnr)

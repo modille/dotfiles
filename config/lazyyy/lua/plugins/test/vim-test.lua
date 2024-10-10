@@ -4,8 +4,6 @@ return {
     enabled = true,
     dependencies = { "voldikss/vim-floaterm" },
     init = function()
-      vim.g.ruby_host_prog = os.getenv("HOME") .. "/.frum/versions/3.2.3/bin/neovim-ruby-host"
-
       vim.g["test#strategy"] = "neovim" -- 'floaterm' -- 'neovim'
       vim.cmd([[
       let test#ruby#use_binstubs = 1
