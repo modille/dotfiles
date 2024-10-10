@@ -8,11 +8,13 @@ if status is-interactive
     set fish_vi_force_cursor 1
 
     abbr --add be "bundle exec"
+
     abbr --add dc "docker compose"
     abbr --add dcd "docker compose down"
     abbr --add dcp "docker compose ps"
     abbr --add dcs "docker compose stop"
     abbr --add dcu "docker compose up --detach"
+
     abbr --add ga "git add"
     abbr --add gcane "git commit --amend --no-edit"
     abbr --add gcnv "git commit --no-verify"
@@ -22,9 +24,7 @@ if status is-interactive
     abbr --add gf "git fetch"
     abbr --add gfp "git fetch --prune"
     abbr --add gpf "git push --force-with-lease"
-    abbr --add gpr "git pull --rebase"
     abbr --add gprp "git pull --rebase --prune"
-    abbr --add gpu "git push --set-upstream origin"
     abbr --add gs "git status"
     abbr --add gsc "git switch --create"
     # scmpuff init --shell=fish --aliases=false | source
@@ -38,13 +38,31 @@ if status is-interactive
     abbr --add kcm "kubectl --context=demo"
     abbr --add kcp "kubectl --context=prd"
     abbr --add kcs "kubectl --context=stg"
-    abbr --add npmlt "npm run lint && npm test"
-    abbr --add npmltc "npm run lint && npm test && npm run cukes"
 
     alias lazyvim "NVIM_APPNAME=lazyyy /opt/homebrew/bin/nvim"
     alias nvim "NVIM_APPNAME=lazyyy /opt/homebrew/bin/nvim"
 
-    # eval "$(frum init)"
+    test -e {$HOME}/.iterm2_shell_integration.fish; and source {$HOME}/.iterm2_shell_integration.fish
 end
 
-test -e {$HOME}/.iterm2_shell_integration.fish; and source {$HOME}/.iterm2_shell_integration.fish
+# From homebrew caveats
+if test -d /opt/homebrew/opt/mysql@8.0
+    # If you need to have mysql@8.0 first in your PATH, run:
+    fish_add_path /opt/homebrew/opt/mysql@8.0/bin
+    # For compilers to find mysql@8.0 you may need to set:
+    set -gx LDFLAGS "-L/opt/homebrew/opt/mysql@8.0/lib"
+    set -gx CPPFLAGS "-I/opt/homebrew/opt/mysql@8.0/include"
+    # For pkg-config to find mysql@8.0 you may need to set:
+    set -gx PKG_CONFIG_PATH "/opt/homebrew/opt/mysql@8.0/lib/pkgconfig"
+end
+if test -d /opt/homebrew/opt/sqlite
+    # If you need to have sqlite first in your PATH, run:
+    fish_add_path /opt/homebrew/opt/sqlite/bin
+
+    # For compilers to find sqlite you may need to set:
+    set -gx LDFLAGS -L/opt/homebrew/opt/sqlite/lib
+    set -gx CPPFLAGS -I/opt/homebrew/opt/sqlite/include
+
+    # For pkg-config to find sqlite you may need to set:
+    set -gx PKG_CONFIG_PATH /opt/homebrew/opt/sqlite/lib/pkgconfig
+end
