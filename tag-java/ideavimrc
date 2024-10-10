@@ -113,7 +113,9 @@ nnoremap <Leader>rt :action Refactorings.QuickListPopupAction<CR>
 " Git Blame
 nnoremap <Leader>gb :action Annotate<CR>
 
-nnoremap - :action SelectInProjectView<CR>
+" nnoremap - :action SelectInProjectView<CR>
+" TODO: try NERDTree instead:
+nnoremap - :NERDTreeFind<CR>
 
 " Code Symbols (LazyVim default Aerial keymap)
 nnoremap <leader>cs :action ShowNavBar<CR>
