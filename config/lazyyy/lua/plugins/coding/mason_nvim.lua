@@ -6,7 +6,6 @@ return {
         "docker-compose-language-service",
         "dockerfile-language-server",
         "eslint-lsp",
-        "hadolint",
         "java-debug-adapter",
         "java-test",
         "jdtls",
@@ -21,11 +20,21 @@ return {
         "prettierd",
         "shellcheck",
         "shfmt",
+        "sonarlint-language-server",
         "stylua",
         "terraform-ls",
         "typescript-language-server",
         "yaml-language-server",
       })
+      local function remove_item(t, item)
+        for i, v in ipairs(t) do
+          if v == item then
+            table.remove(t, i)
+            break
+          end
+        end
+      end
+      remove_item(opts.ensure_installed, "hadolint") -- not working with nvim-lint
     end,
   },
 }
