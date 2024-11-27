@@ -1,8 +1,10 @@
+---@type LazySpec
 return {
   -- TODO: fix :intro
   -- https://github.com/folke/lazy.nvim/issues/1038#issuecomment-1733035996
   require("plugins.coding.diffview_nvim"),
   require("plugins.coding.gen_nvim"),
+  require("plugins.coding.leetcode_nvim"),
   require("plugins.coding.mason_nvim"),
   require("plugins.coding.mini_pairs"),
   require("plugins.coding.nvim-cmp"),
@@ -16,7 +18,7 @@ return {
   require("plugins.colorscheme.bgwinch_nvim"),
   require("plugins.colorscheme.tokyonight_nvim"),
 
-  -- require("plugins.dap.nvim-dap"),
+  require("plugins.dap.nvim-dap"),
 
   require("plugins.editor.bigfile_nvim"),
   require("plugins.editor.neo-tree_nvim"),
