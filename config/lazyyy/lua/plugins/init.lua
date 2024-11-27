@@ -59,9 +59,5 @@ return {
   require("plugins.wiki.obsidian_nvim"),
   require("plugins.wiki.vimwiki"),
 
-  -- WIP: code runner
-  {
-    "stevearc/overseer.nvim",
-    opts = {},
-  },
+  require("plugins.wip"),
 }
