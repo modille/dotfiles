@@ -10,6 +10,7 @@ return {
   require("plugins.coding.nvim-cmp"),
   require("plugins.coding.nvim-ts-context-commentstring"),
   require("plugins.coding.octo_nvim"),
+  require("plugins.coding.supermaven-nvim"),
   require("plugins.coding.vim-dispatch"),
   require("plugins.coding.vim-fugitive"),
   require("plugins.coding.vim-rhubarb"),
