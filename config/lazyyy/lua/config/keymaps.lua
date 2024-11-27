@@ -50,3 +50,23 @@ vim.keymap.set("n", "[e", "<Plug>(unimpaired-move-up)")
 vim.keymap.set("n", "]e", "<Plug>(unimpaired-move-down)")
 vim.keymap.set("x", "[e", "<Plug>(unimpaired-move-selection-up)")
 vim.keymap.set("x", "]e", "<Plug>(unimpaired-move-selection-down)")
+
+vim.keymap.set("n", "<leader>tid", function()
+  -- Get the current buffer and all lines in the buffer
+  local bufnr = vim.api.nvim_get_current_buf()
+  local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+
+  -- Define the pattern to match
+  local pattern = "^# On branch.*-#?(%d+)$"
+
+  -- Search through each line for the pattern
+  for _, line in ipairs(lines) do
+    local tracker_id = line:match(pattern)
+    if tracker_id then
+      -- If a match is found, insert the tracker_id at the current cursor position
+      local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+      vim.api.nvim_buf_set_text(bufnr, row - 1, col, row - 1, col, { "[#" .. tracker_id .. "]" })
+      break
+    end
+  end
+end, { noremap = true })
