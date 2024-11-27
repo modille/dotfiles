@@ -4,6 +4,11 @@ modille_*
 # LazyVim project-specific plugin specs
 .lazy.lua
 
+# Neovim 'exrc' option
+.nvim.lua
+.nvimrc
+.exrc
+
 # Kotlin language server
 kls_database.db
 .kotlin/
