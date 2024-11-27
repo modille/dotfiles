@@ -2,9 +2,12 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     opts = function(_, opts)
-      opts.defaults.get_selection_window = function()
-        return 0
-      end
+      -- On macOS, M-q enters "œ" and it's hard to disable that, so use something else for the default M-q behavior
+      local actions = require("telescope.actions")
+      opts.defaults.mappings.i = vim.tbl_extend("force", opts.defaults.mappings.i, {
+        ["<C-f>"] = actions.send_selected_to_qflist + actions.open_qflist,
+      })
+
       return opts
     end,
     keys = {
