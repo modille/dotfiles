@@ -7,23 +7,15 @@ return {
       "vim-test/vim-test",
       "nvim-neotest/neotest-vim-test",
       "weilbith/neotest-gradle",
+      "zidhuss/neotest-minitest",
     },
     opts = function()
-      local neotest_jest_adapter = require("neotest-jest")({
-        jestCommand = "npm test --",
-      })
-      neotest_jest_adapter.filter_dir = function(name)
-        return name ~= "node_modules" and name ~= "__snapshots__"
-      end
       return {
         log_level = 1,
         adapters = {
-          neotest_jest_adapter,
-          require("neotest-rspec")({
-            -- rspec_cmd = function()
-            --   return vim.iter({ "bin/bundle", "exec", "rspec" }):flatten():totable()
-            -- end,
-          }),
+          require("neotest-jest"),
+          require("neotest-minitest"),
+          require("neotest-rspec"),
           require("neotest-gradle"),
           require("neotest-vim-test")({
             allow_file_types = { "cucumber" },
@@ -135,7 +127,7 @@ return {
       {
         "<leader>twj",
         function()
-          require("neotest").run.run({ jestCommand = "jest --watch " })
+          require("neotest").run.run({ jestCommand = "npx jest --watch " })
         end,
         desc = "Test watch jest",
       },
