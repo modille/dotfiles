@@ -54,4 +54,9 @@ return {
       -- { "<space>s", function() require("treesj").split() end, desc = "Split treesj" },
     },
   },
+
+  {
+    "sphamba/smear-cursor.nvim",
+    opts = {},
+  },
 }
