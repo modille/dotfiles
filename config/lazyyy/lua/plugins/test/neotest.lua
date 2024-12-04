@@ -125,6 +125,13 @@ return {
       --   desc = "Test debug suite",
       -- },
       {
+        "<leader>ta",
+        function()
+          require("neotest").run.attach()
+        end,
+        desc = "Test attach",
+      },
+      {
         "<leader>twj",
         function()
           require("neotest").run.run({ jestCommand = "npx jest --watch " })
