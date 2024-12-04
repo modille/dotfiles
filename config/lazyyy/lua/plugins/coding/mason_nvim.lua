@@ -13,6 +13,7 @@ return {
         "json-lsp",
         "kotlin-debug-adapter",
         "kotlin-language-server",
+        "lemminx",
         "lua-language-server",
         "markdownlint",
         "marksman",

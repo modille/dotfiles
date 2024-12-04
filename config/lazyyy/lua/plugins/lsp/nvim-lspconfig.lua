@@ -24,6 +24,7 @@ return {
         dockerls = {},
         docker_compose_language_service = {},
         kotlin_language_server = {},
+        lemminx = {},
         -- solargraph = {
         --   flags = {
         --     debounce_text_changes = 150,

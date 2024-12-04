@@ -9,6 +9,7 @@ return {
         lua = { "stylua" },
         markdown = { "prettier" },
         sh = { "shfmt" },
+        xml = { "xmllint" },
         yaml = {},
       },
     },
