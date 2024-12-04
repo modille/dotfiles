@@ -50,18 +50,18 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 })
 
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-  group = augroup("diagnostic"),
+  group = augroup("diagnostic_buf"),
   pattern = { ".env", ".env.local" },
   callback = function(args)
-    vim.diagnostic.disable(args.buf)
+    vim.diagnostic.enable(false, { bufnr = args.buf })
   end,
 })
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  group = augroup("diagnostic"),
+  group = augroup("diagnostic_filetype"),
   pattern = { "markdown" },
   callback = function(args)
-    vim.diagnostic.disable(args.buf)
+    vim.diagnostic.enable(false, { bufnr = args.buf })
   end,
 })
 
