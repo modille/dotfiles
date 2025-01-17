@@ -16,6 +16,30 @@ return {
     end,
     keys = {
       {
+        "<leader>fa",
+        function()
+          local current_file = vim.fn.expand("%:t")
+          local basename = current_file:gsub("%..*$", "")
+          local default_text
+
+          if current_file:match("_spec") or current_file:match("_test") or current_file:match("Test") then
+            default_text = basename
+              :gsub("_spec$", "") -- Remove any test suffix
+              :gsub("_test$", "")
+              :gsub("Test$", "")
+          else
+            default_text = basename .. " test | spec"
+          end
+
+          require("telescope.builtin").git_files({
+            prompt_title = "Alternative files",
+            default_text = default_text .. " ",
+          })
+        end,
+        mode = { "n" },
+        { desc = "file alternatives" },
+      },
+      {
         "<leader>fg",
         function()
           require("telescope.builtin").grep_string({ additional_args = { "--hidden" }, search = vim.fn.input("🔍 ") })
