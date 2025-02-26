@@ -56,12 +56,17 @@ vim.keymap.set("n", "<leader>tid", function()
   local bufnr = vim.api.nvim_get_current_buf()
   local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
 
-  -- Define the pattern to match
-  local pattern = "^# On branch.*-#?(%d+)$"
+  -- When doing a typical git commit:
+  -- # On branch yadda-123456789
+  local onBranchPattern = "^# On branch .*-#?(%d+)$"
+
+  -- When doing an interactive rebase:
+  -- # You are currently rebasing branch 'yadda-123456789' on '76c05108'.
+  local rebasingBranchPattern = "^# You are currently rebasing branch '.*-#?(%d+)' on '.*'.$"
 
   -- Search through each line for the pattern
   for _, line in ipairs(lines) do
-    local tracker_id = line:match(pattern)
+    local tracker_id = line:match(onBranchPattern) or line:match(rebasingBranchPattern)
     if tracker_id then
       -- If a match is found, insert the tracker_id at the current cursor position
       local row, col = unpack(vim.api.nvim_win_get_cursor(0))
