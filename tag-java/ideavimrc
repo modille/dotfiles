@@ -28,7 +28,7 @@ Plug 'preservim/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'vim-matchit'
-Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'vim-scripts/ReplaceWithRegister' " Use gr instead of p when you want to replace but not yank
 Plug 'vim-scripts/argtextobj.vim'
 " https://plugins.jetbrains.com/plugin/15976-which-key
 set which-key
@@ -40,7 +40,8 @@ nmap ; :
 vmap ; :
 
 " Hide other windows (:only, :on)
-map <Leader>o :on<CR>
+" map <Leader>o :action CloseAllEditorsButActive<CR>
+map <Leader>o <Action>(Unsplit) \| <Action>(CloseAllEditorsButActive)
 
 " Yank, delete, and paste
 vmap <Leader>y "+y
@@ -88,8 +89,9 @@ nnoremap <expr> 0 (col('.') == 1) ? '^' : '0'
 nnoremap <Leader>h :action ShowHoverInfo<cr>
 nnoremap <Leader>db :action ToggleLineBreakpoint<cr>
 
-nnoremap <Leader>fg :action SearchEverywhere<cr>
+nnoremap <Leader>fg :action FindInPath<cr>
 nnoremap <Leader>fs :action GotoFile<cr>
+nnoremap <Leader>f<Leader>f :action SearchEverywhere<cr>
 
 map <Leader>tf <Action>(EditorTextStart) \| <Action>(RunClass) \| <Action>(Back)
 map <Leader>tn <Action>(RunClass)
@@ -100,10 +102,11 @@ map <Leader>tl <Action>(Rerun)
 nmap ]d <Action>(GotoNextError)
 nmap [d <Action>(GotoPreviousError)
 
-" Hide Terminal, Structure, Project, etc.
-nnoremap <Leader><Leader>o :action HideAllWindows<CR>
+nmap ]h :action Diff.NextChange<CR>
+nmap [h :action Diff.PrevChange<CR>
 
 nnoremap <Leader>gt :action Gradle.ExecuteTask<CR>
+map <leader>ts :action Gradle.RunTask:test<CR>
 
 " TODO how to move cursor from Terminal/Structure back to editor?
 nnoremap <Leader>at :action ActivateTerminalToolWindow<CR>
@@ -142,7 +145,9 @@ nmap <leader><tab>d <Action>(CloseContent)
 " Goto Definition
 nmap gd <Action>(GotoDeclaration)
 " References
-nmap gr <Action>(FindUsages)
+" nmap gr <Action>(FindUsages) -- interfered with ReplaceWithRegister
+nmap gR <Action>(FindUsages) -- interfered with ReplaceWithRegister
+nnoremap <Leader>fu :action FindUsages<cr>
 " Goto Implementation
 nmap gI <Action>(GotoImplementation)
 " Goto Type Definition
