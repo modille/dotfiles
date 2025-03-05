@@ -91,6 +91,7 @@ nnoremap <Leader>db :action ToggleLineBreakpoint<cr>
 
 nnoremap <Leader>fg :action FindInPath<cr>
 nnoremap <Leader>fs :action GotoFile<cr>
+" nnoremap <Leader>fs :action SearchEverywhere<cr>
 nnoremap <Leader>f<Leader>f :action SearchEverywhere<cr>
 
 map <Leader>tf <Action>(EditorTextStart) \| <Action>(RunClass) \| <Action>(Back)
@@ -98,6 +99,8 @@ map <Leader>tn <Action>(RunClass)
 map <Leader>tl <Action>(Rerun)
 " TODO test suite (equivalient of src/test -> Run 'Tests' in '<app name>'.
 " probably need a macro like tf that opens project, chooses test root, and Run
+" map <Leader>ts :action Gradle.RunTask:test<CR>
+map <Leader>tq <Action>(Stop)
 
 nmap ]d <Action>(GotoNextError)
 nmap [d <Action>(GotoPreviousError)
@@ -106,7 +109,6 @@ nmap ]h :action Diff.NextChange<CR>
 nmap [h :action Diff.PrevChange<CR>
 
 nnoremap <Leader>gt :action Gradle.ExecuteTask<CR>
-map <leader>ts :action Gradle.RunTask:test<CR>
 
 " TODO how to move cursor from Terminal/Structure back to editor?
 nnoremap <Leader>at :action ActivateTerminalToolWindow<CR>
