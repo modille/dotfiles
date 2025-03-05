@@ -60,4 +60,53 @@ return {
     enabled = false,
     opts = {},
   },
+
+  {
+    "andythigpen/nvim-coverage",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      load_coverage_cb = function(ftype)
+        vim.notify("Loaded " .. ftype .. " coverage")
+      end,
+    },
+  },
+
+  {
+    "craftzdog/solarized-osaka.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
+
+  {
+    "robitx/gp.nvim",
+    config = function()
+      local conf = {
+        -- For customization, refer to Install > Configuration in the Documentation/Readme
+        openai_api_key = os.getenv("OPENAI_API_KEY"),
+        providers = {
+          openai = {
+            disable = false,
+            endpoint = "https://api.openai.com/v1/chat/completions",
+            -- secret = os.getenv("OPENAI_API_KEY"),
+            model = { model = "auto" },
+          },
+          ollama = {
+            disable = false,
+            endpoint = "http://localhost:11434/v1/chat/completions",
+            secret = "dummy_secret",
+          },
+        },
+        agents = {
+          {
+            name = "ChatGPT4o",
+            disable = true,
+          },
+        },
+      }
+      require("gp").setup(conf)
+
+      -- Setup shortcuts here (see Usage > Shortcuts in the Documentation/Readme)
+    end,
+  },
 }

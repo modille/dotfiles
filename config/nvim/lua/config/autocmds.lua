@@ -49,7 +49,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   group = augroup("diagnostic_buf"),
   pattern = { ".env", ".env.local" },
   callback = function(args)

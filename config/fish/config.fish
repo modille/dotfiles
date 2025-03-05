@@ -44,9 +44,6 @@ if status is-interactive
     abbr --add wip "git commit --no-verify -m 'WIP [skip ci]'"
     # abbr --add handoff "git add --all && git commit --amend --no-edit && git push --force-with-lease"
 
-    alias lazyvim "NVIM_APPNAME=lazyyy /opt/homebrew/bin/nvim"
-    alias nvim "NVIM_APPNAME=lazyyy /opt/homebrew/bin/nvim"
-
     test -e {$HOME}/.iterm2_shell_integration.fish; and source {$HOME}/.iterm2_shell_integration.fish
 end
 

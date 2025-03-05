@@ -96,7 +96,7 @@
 
 [core]
   autocrlf = input
-  editor = NVIM_APPNAME=lazyyy nvim
+  editor = nvim
   excludesfile = ~/.gitignore
   pager = delta
 
