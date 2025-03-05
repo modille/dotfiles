@@ -51,7 +51,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   group = augroup("diagnostic_buf"),
-  pattern = { ".env", ".env.local" },
+  pattern = { "*.env", ".env.local" },
   callback = function(args)
     vim.diagnostic.enable(false, { bufnr = args.buf })
   end,
