@@ -2,6 +2,7 @@
 return {
   -- TODO: fix :intro
   -- https://github.com/folke/lazy.nvim/issues/1038#issuecomment-1733035996
+  require("plugins.coding.blink_cmp"),
   require("plugins.coding.diffview_nvim"),
   require("plugins.coding.gen_nvim"),
   require("plugins.coding.leetcode_nvim"),
@@ -22,6 +23,7 @@ return {
   require("plugins.dap.nvim-dap"),
 
   require("plugins.editor.bigfile_nvim"),
+  require("plugins.editor.fzf-lua"),
   require("plugins.editor.neo-tree_nvim"),
   require("plugins.editor.oil_nvim"),
   require("plugins.editor.telescope_nvim"),
@@ -55,7 +57,6 @@ return {
 
   require("plugins.ui.bufferline_nvim"),
   require("plugins.ui.dashboard-nvim"),
-  require("plugins.ui.indent-blankline_nvim"),
   require("plugins.ui.lualine_nvim"),
   require("plugins.ui.noice_nvim"),
 

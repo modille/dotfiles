@@ -1,20 +1,7 @@
 return {
   {
-    "nvim-telescope/telescope.nvim",
-    enabled = false, -- this or fzf-lua
-    opts = function(_, opts)
-      opts.defaults.get_selection_window = function()
-        return 0
-      end
-
-      -- On macOS, M-q enters "œ" and it's hard to disable that, so use something else for the default M-q behavior
-      local actions = require("telescope.actions")
-      opts.defaults.mappings.i = vim.tbl_extend("force", opts.defaults.mappings.i, {
-        ["<C-f>"] = actions.send_selected_to_qflist + actions.open_qflist,
-      })
-
-      return opts
-    end,
+    "ibhagwan/fzf-lua",
+    enabled = true, -- this or telescope.nvim
     keys = {
       {
         "<leader>fa",
@@ -32,18 +19,25 @@ return {
             default_text = basename .. " test | spec"
           end
 
-          require("telescope.builtin").git_files({
-            prompt_title = "Alternative files",
+          require("fzf-lua").git_files({
+            prompt = "Alternative files> ",
+            cmd = "git ls-files --exclude-standard --cached --others",
             default_text = default_text .. " ",
           })
         end,
         mode = { "n" },
-        { desc = "file alternatives" },
+        desc = "file alternatives",
       },
+      -- { "<leader>fg", LazyVim.pick("grep_cword", { root = false }),  desc = "Word (cwd)" },
+      -- { "<leader>fg", LazyVim.pick("grep_visual", { root = false }), mode = "v",         desc = "Selection (cwd)" },
       {
         "<leader>fg",
         function()
-          require("telescope.builtin").grep_string({ additional_args = { "--hidden" }, search = vim.fn.input("🔍 ") })
+          local search = vim.fn.input("🔍 ")
+          require("fzf-lua").grep({
+            search = search,
+            rg_opts = "--hidden --column --line-number --no-heading --color=always --smart-case --max-columns=4096 -e",
+          })
         end,
         mode = { "n" },
         desc = "file grep",
@@ -63,26 +57,28 @@ return {
             return text
           end
 
-          require("telescope.builtin").grep_string({ additional_args = { "--hidden" }, search = buf_vtext() })
+          require("fzf-lua").grep({
+            search = buf_vtext(),
+            rg_opts = "--hidden --column --line-number --no-heading --color=always --smart-case --max-columns=4096 -e",
+          })
         end,
         mode = { "v" },
         desc = "file grep visual selection",
       },
       {
         "<leader>fos",
-        "<cmd>Telescope oldfiles<cr>",
+        function() require("fzf-lua").oldfiles() end,
         desc = "file old select",
       },
       {
         "<leader>fs",
         function()
-          local builtin = require("telescope.builtin")
-          local opts = {
-            show_untracked = true,
-          } -- define here if you want to define something
-          local ok = pcall(builtin.git_files, opts)
-          if not ok then
-            builtin.find_files(opts)
+          if vim.fn.system("git rev-parse --is-inside-work-tree 2>/dev/null") == "" then
+            require("fzf-lua").files()
+          else
+            require("fzf-lua").git_files({
+              show_untracked = true,
+            })
           end
         end,
         desc = "file select",
@@ -90,13 +86,12 @@ return {
       {
         "<leader><leader>fs",
         function()
-          local builtin = require("telescope.builtin")
-          local opts = {
-            recurse_submodules = true,
-          } -- define here if you want to define something
-          local ok = pcall(builtin.git_files, opts)
-          if not ok then
-            builtin.find_files(opts)
+          if vim.fn.system("git rev-parse --is-inside-work-tree 2>/dev/null") == "" then
+            require("fzf-lua").files()
+          else
+            require("fzf-lua").git_files({
+              git_submodules = true,
+            })
           end
         end,
         desc = "file select recurse submodules",
@@ -104,17 +99,20 @@ return {
       {
         "<leader>bs",
         function()
-          require("telescope.builtin").buffers({ previewer = false, sort_lastused = true })
+          require("fzf-lua").buffers({
+            previewer = false,
+            sort_lastused = true,
+          })
         end,
         desc = "buffer select",
       },
       {
         "<leader>fds",
         function()
-          require("telescope.builtin").find_files({
-            prompt_title = "dotfiles >",
+          require("fzf-lua").files({
+            prompt = "dotfiles> ",
             cwd = os.getenv("HOME") .. "/git/github.com/modille/dotfiles",
-            hidden = false,
+            no_hidden = true,
           })
         end,
         desc = "file dotfiles select",
@@ -122,10 +120,11 @@ return {
       {
         "<leader>fdg",
         function()
-          require("telescope.builtin").grep_string({
-            search = vim.fn.input("dotfiles 🔍 "),
+          local search = vim.fn.input("dotfiles 🔍 ")
+          require("fzf-lua").grep({
+            search = search,
             cwd = os.getenv("HOME") .. "/git/github.com/modille/dotfiles",
-            hidden = false,
+            rg_opts = "--column --line-number --no-heading --color=always --smart-case --max-columns=4096 -e",
           })
         end,
         desc = "file dotfiles grep",
@@ -133,11 +132,11 @@ return {
       {
         "<leader>fws",
         function()
-          require("telescope.builtin").find_files({
-            prompt_title = "wiki >",
+          require("fzf-lua").files({
+            prompt = "wiki> ",
             cwd = os.getenv("HOME") .. "/Dropbox",
             search_dirs = { "vimwiki", "obsidian" },
-            hidden = false,
+            no_hidden = true,
           })
         end,
         desc = "file wiki select",
@@ -145,10 +144,11 @@ return {
       {
         "<leader>fwg",
         function()
-          require("telescope.builtin").grep_string({
-            search = vim.fn.input("wiki 🔍 "),
+          local search = vim.fn.input("wiki 🔍 ")
+          require("fzf-lua").grep({
+            search = search,
             cwd = os.getenv("HOME") .. "/Dropbox/vimwiki",
-            hidden = false,
+            rg_opts = "--column --line-number --no-heading --color=always --smart-case --max-columns=4096 -e",
           })
         end,
         desc = "file wiki grep",

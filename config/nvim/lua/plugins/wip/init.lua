@@ -109,4 +109,15 @@ return {
       -- Setup shortcuts here (see Usage > Shortcuts in the Documentation/Readme)
     end,
   },
+  {
+    "folke/snacks.nvim",
+    ---@type snacks.Config
+    opts = {
+      indent = {
+        scope = {
+          underline = true, -- underline the start of the scope
+        },
+      },
+    },
+  },
 }
