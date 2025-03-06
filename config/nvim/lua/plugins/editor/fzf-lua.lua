@@ -2,6 +2,18 @@ return {
   {
     "ibhagwan/fzf-lua",
     enabled = true, -- this or telescope.nvim
+
+    opts = {
+      winopts = {
+        height = 0.85,
+        width = 0.80,
+        preview = {
+          layout = "down",
+          height = 0.4, -- 40% of total height
+        },
+      },
+    },
+
     keys = {
       {
         "<leader>fa",
@@ -12,9 +24,9 @@ return {
 
           if current_file:match("_spec") or current_file:match("_test") or current_file:match("Test") then
             default_text = basename
-                :gsub("_spec$", "") -- Remove any test suffix
-                :gsub("_test$", "")
-                :gsub("Test$", "")
+              :gsub("_spec$", "") -- Remove any test suffix
+              :gsub("_test$", "")
+              :gsub("Test$", "")
           else
             default_text = basename .. " test | spec"
           end
@@ -67,7 +79,9 @@ return {
       },
       {
         "<leader>fos",
-        function() require("fzf-lua").oldfiles() end,
+        function()
+          require("fzf-lua").oldfiles()
+        end,
         desc = "file old select",
       },
       {
