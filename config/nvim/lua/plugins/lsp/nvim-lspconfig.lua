@@ -23,6 +23,16 @@ return {
         bashls = {},
         dockerls = {},
         docker_compose_language_service = {},
+        html = {
+          init_options = {
+            configurationSection = { "html", "css", "javascript" },
+            embeddedLanguages = {
+              css = true,
+              javascript = true,
+            },
+            provideFormatter = false, -- disable; use prettier for formatting instead
+          },
+        },
         kotlin_language_server = {},
         lemminx = {},
         -- solargraph = {
