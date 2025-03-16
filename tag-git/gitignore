@@ -1,5 +1,6 @@
 
 modille_*
+.idea/icon.svg
 
 # LazyVim project-specific plugin specs
 .lazy.lua
