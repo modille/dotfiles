@@ -12,6 +12,42 @@ return {
           height = 0.4, -- 40% of total height
         },
       },
+      keymap = {
+        -- fzf '--bind=' options
+        ["ctrl-z"] = "abort",
+        ["ctrl-u"] = "unix-line-discard",
+        ["ctrl-f"] = "half-page-down",
+        ["ctrl-b"] = "half-page-up",
+        ["ctrl-a"] = "beginning-of-line",
+        ["ctrl-e"] = "end-of-line",
+        ["alt-a"] = "toggle-all",
+        ["alt-g"] = "first",
+        ["alt-G"] = "last",
+        -- Only valid with fzf previewers (bat/cat/git/etc)
+        ["f3"] = "toggle-preview-wrap",
+        ["f4"] = "toggle-preview",
+        ["shift-down"] = "preview-page-down",
+        ["shift-up"] = "preview-page-up",
+      },
+      actions = {
+        files = {
+          -- Pickers inheriting these actions:
+          --   files, git_files, git_status, grep, lsp, oldfiles, quickfix, loclist,
+          --   tags, btags, args, buffers, tabs, lines, blines
+          -- `file_edit_or_qf` opens a single selection or sends multiple selection to quickfix
+          -- replace `enter` with `file_edit` to open all files/bufs whether single or multiple
+          -- replace `enter` with `file_switch_or_edit` to attempt a switch in current tab first
+          ["enter"] = require("fzf-lua").actions.file_edit_or_qf,
+          ["ctrl-s"] = require("fzf-lua").actions.file_split,
+          ["ctrl-v"] = require("fzf-lua").actions.file_vsplit,
+          ["ctrl-t"] = require("fzf-lua").actions.file_tabedit,
+          ["alt-q"] = require("fzf-lua").actions.file_sel_to_qf,
+          ["alt-Q"] = require("fzf-lua").actions.file_sel_to_ll,
+          ["ctrl-i"] = require("fzf-lua").actions.toggle_ignore,
+          ["ctrl-h"] = require("fzf-lua").actions.toggle_hidden,
+          ["alt-f"] = require("fzf-lua").actions.toggle_follow,
+        },
+      },
     },
 
     keys = {
@@ -45,11 +81,7 @@ return {
       {
         "<leader>fg",
         function()
-          local search = vim.fn.input("🔍 ")
-          require("fzf-lua").grep({
-            search = search,
-            rg_opts = "--hidden --column --line-number --no-heading --color=always --smart-case --max-columns=4096 -e",
-          })
+          require("fzf-lua").live_grep()
         end,
         mode = { "n" },
         desc = "file grep",
