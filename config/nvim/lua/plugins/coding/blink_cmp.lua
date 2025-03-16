@@ -1,7 +1,7 @@
 return {
   {
     "saghen/blink.cmp",
-    enabled = true, -- this or nvim-cmp
+    enabled = false, -- this or nvim-cmp
     dependencies = {
       {
         "saghen/blink.compat",

@@ -1,7 +1,7 @@
 return {
   {
     "nvim-cmp",
-    enabled = false, -- this or blink.cmp
+    enabled = true, -- this or blink.cmp
     dependencies = {
       "SergioRibera/cmp-dotenv",
       "hrsh7th/cmp-calc",
