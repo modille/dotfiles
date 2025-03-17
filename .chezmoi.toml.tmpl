@@ -1,4 +1,8 @@
-{{- $enableSupermaven := promptBoolOnce . "enableSupermaven" "Enable Supermaven? (y/n)" false -}}
+# {{- $enableSupermaven := promptBoolOnce . "enableSupermaven" "Enable Supermaven? (y/n)" false -}}
 
 [data]
-    enableSupermaven = {{ $enableSupermaven }}
+# {{- if $enableSupermaven }}
+enableSupermaven = true
+# {{- else }}
+enableSupermaven = false
+# {{- end }}

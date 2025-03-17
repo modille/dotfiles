@@ -1,0 +1,4 @@
+*.fish.tmpl linguist-language=fish
+*.lua.tmpl linguist-language=Lua
+*.sh.tmpl linguist-language=Shell
+*.toml.tmpl linguist-language=TOML
