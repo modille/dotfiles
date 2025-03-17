@@ -10,25 +10,22 @@ set -x
 mkdir -p ~/Pictures/Screenshots
 # shellcheck disable=SC2088
 defaults write "com.apple.screencapture" "location" -string "~/Pictures/Screenshots"
-killall SystemUIServer
 
 defaults write "com.apple.Safari" "ShowFullURLInSmartSearchField" -bool "true"
-killall Safari || true
 
 defaults write "com.apple.finder" "ShowPathbar" -bool "true"
 defaults write "com.apple.finder" "FXPreferredViewStyle" -string "Nlsv"
-killall Finder
 
 # Appearance
 # -----------
 defaults write "Apple Global Domain" "AppleInterfaceStyleSwitchesAutomatically" '1'
-defaults write "Apple Global Domain" "AppleShowScrollBars" 'Always'
+defaults write "Apple Global Domain" "AppleShowScrollBars" -string "Always"
 
 # Control Center
 # --------------
 defaults write "com.apple.controlcenter" "NSStatusItem Visible WiFi" '1'
 defaults write "com.apple.controlcenter" "NSStatusItem Visible Bluetooth" '1'
-# Clock = Mon Feb 17 9:45 AM
+# Clock format = Mon Feb 17 9:45 AM
 defaults write "com.apple.menuextra.clock" "ShowDate" '0'
 defaults write "com.apple.menuextra.clock" "IsAnalog" '0'
 defaults write "com.apple.menuextra.clock" "ShowAMPM" '1'
@@ -37,22 +34,20 @@ defaults write "com.apple.menuextra.clock" "ShowSeconds" '0'
 
 # Desktop & Dock
 # --------------
+# Use Rectangle instead of the built-in tiling
 defaults write "com.apple.WindowManager" "EnableTilingByEdgeDrag" '0'
 defaults write "com.apple.WindowManager" "EnableTopTilingByEdgeDrag" '0'
 defaults write "com.apple.WindowManager" "EnableTilingOptionAccelerator" '0'
-defaults write "com.apple.dock" "tilesize" -int "64" &&
-  defaults write "com.apple.dock" "autohide" -bool "true" &&
-  defaults write "com.apple.dock" "show-recents" -bool "false" &&
-  defaults write "com.apple.dock" "wvous-bl-corner" '5' &&
-  killall Dock
-
-# Notifications
-# -------------
-defaults write "com.apple.ncprefs" "content_visibility" '2'
+defaults write "com.apple.dock" "tilesize" -int "64"
+defaults write "com.apple.dock" "autohide" -bool "true"
+defaults write "com.apple.dock" "show-recents" -bool "false"
+# Bottom left hot corner = Start screen saver
+defaults write "com.apple.dock" "wvous-bl-corner" -int 5
 
 # Keyboard
 # --------
 defaults write "com.apple.TextInputMenu" "visible" -bool "false"
+# Disable auto-correct, auto-capitalization, adding period with double-space, and smart quotes and dashes
 defaults write "Apple Global Domain" "NSAutomaticSpellingCorrectionEnabled" -bool "false"
 defaults write "Apple Global Domain" "WebAutomaticSpellingCorrectionEnabled" -bool "false"
 defaults write "Apple Global Domain" "NSAutomaticCapitalizationEnabled" -bool "false"

@@ -32,6 +32,8 @@ If you're happy with the changes then apply them:
 
 After this, `chezmoi` will be available without needing the local binary.
 
+A restart will be required for macOS defaults changes to take effect.
+
 ## Daily operations
 
 ```sh
