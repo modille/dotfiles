@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# {{- if eq .chezmoi.os "darwin" }}
+
+if [[ ! $(command -v brew) ]]; then
+  # From https://brew.sh
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# {{ end -}}

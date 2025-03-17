@@ -1,5 +1,0 @@
-# Ignore all tmuxinator projects...
-*.yml
-
-# ...except the sample ones
-!sample_*.yml

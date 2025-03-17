@@ -1,0 +1,4 @@
+{{- $enableSupermaven := promptBoolOnce . "enableSupermaven" "Enable Supermaven? (y/n)" false -}}
+
+[data]
+    enableSupermaven = {{ $enableSupermaven }}

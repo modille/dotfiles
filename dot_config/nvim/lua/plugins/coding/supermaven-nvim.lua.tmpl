@@ -1,0 +1,19 @@
+return {
+  {
+    "supermaven-inc/supermaven-nvim",
+    -- {{- if .chezmoi.config.data.enableSupermaven }}
+    enabled = true,
+    -- {{- else }}
+    enabled = false,
+    -- {{- end }}
+    config = function()
+      require("supermaven-nvim").setup({
+        keymaps = {
+          accept_suggestion = "<C-l>",
+          clear_suggestion = "<C-[>",
+          accept_word = "<C-w>",
+        },
+      })
+    end,
+  },
+}

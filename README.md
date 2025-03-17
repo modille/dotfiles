@@ -1,51 +1,39 @@
 # modille's dotfiles
 
-![editor](https://raw.githubusercontent.com/modille/modille.github.io/master/images/modille-dotfiles-editor.png)
-
-![zsh](https://raw.githubusercontent.com/modille/modille.github.io/master/images/modille-dotfiles-zsh.png)
-
 ## Requirements
 
-Set zsh as your login shell:
-
-```sh
-chsh -s $(which zsh)
-```
+Setup and sign in to 1Password, and install the 1Password CLI.
 
 ## Install
 
-Clone this repo:
+Download [chezmoi](https://www.chezmoi.io):
 
 ```sh
-git clone git://github.com/modille/dotfiles.git $HOME/git/github.com/modille/dotfiles
+sh -c "$(curl -fsLS get.chezmoi.io)"
 ```
 
-Install [rcm](https://github.com/thoughtbot/rcm):
+Clone this repo to setup the source directory:
 
 ```sh
-brew tap thoughtbot/formulae
-brew install rcm
+./bin/chezmoi init https://github.com/modille/dotfiles.git
 ```
 
-Install the dotfiles:
+You can then see what would be changed:
 
 ```sh
-env RCRC=$HOME/git/github.com/modille/dotfiles/rcrc rcup
+./bin/chezmoi diff
 ```
 
-or certain tags:
+If you're happy with the changes then apply them:
 
 ```sh
-env RCRC=$HOME/git/github.com/modille/dotfiles/rcrc rcup -t zsh
+./bin/chezmoi apply --verbose
 ```
 
-After the initial installation, you can run `rcup` without the one-time variable `RCRC` being set.
-This command will create symlinks for config files in your home directory.
+After this, `chezmoi` will be available without needing the local binary.
 
-You can safely run `rcup` multiple times to update:
+## Daily operations
 
 ```sh
-rcup
+chezmoi diff
 ```
-
-You should run `rcup` after pulling a new version of the repository to symlink any new files in the repository.

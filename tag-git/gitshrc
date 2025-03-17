@@ -1,3 +1,0 @@
-:echo "Reminder: exit with Ctrl-D"
-:echo
-status
