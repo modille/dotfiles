@@ -7,6 +7,7 @@ return {
       "nvim-lua/plenary.nvim",
     },
     opts = {
+      ui = { enable = false }, -- use render-markdown instead
       workspaces = {
         {
           name = "work",

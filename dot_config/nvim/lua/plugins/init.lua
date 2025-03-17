@@ -40,7 +40,6 @@ return {
   require("plugins.formatting.tabular"),
 
   require("plugins.lang.csv.rainbow_csv"),
-  require("plugins.lang.markdown.render-markdown_nvim"),
   require("plugins.lang.python.jupytext_nvim"),
   require("plugins.lang.python.molten-nvim"),
   require("plugins.lang.python.quarto-nvim"),
