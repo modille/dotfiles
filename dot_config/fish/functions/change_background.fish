@@ -27,9 +27,9 @@ function change_background --argument mode_setting
     # TODO: This doesn't work for desktops that have a full-screened app in-focus
     switch $mode
         case dark
-            osascript -e 'tell application "System Events" to tell every desktop to set picture to "/Users/modille/Pictures/dark.png"'
+            osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$HOME/Pictures/dark.png\""
         case light
-            osascript -e 'tell application "System Events" to tell every desktop to set picture to "/Users/modille/Pictures/light.png"'
+            osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$HOME/Pictures/light\""
     end
 
     # Tracks the current mode in a file, and only proceed if the new mode is different than the current mode
