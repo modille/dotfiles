@@ -65,14 +65,7 @@ return {
         --     ]])
         --   end,
         -- },
-        rubocop = {
-          mason = false,
-          cmd = { vim.fn.expand("~/.asdf/shims/rubocop"), "--lsp" },
-        },
         ruby_lsp = {
-          mason = false,
-          -- cmd = { vim.fn.expand("~/.local/share/mise/installs/ruby/3.3.4/bin/ruby-lsp") },
-          cmd = { vim.fn.expand("~/.asdf/shims/ruby-lsp") },
           init_options = {
             enabledFeatures = {
               codeActions = true,
@@ -96,48 +89,41 @@ return {
             },
           },
         },
-        sorbet = {
-          mason = false,
-          cmd = { "bundle", "exec", "srb", "tc", "--lsp" },
-          init_options = {
-            highlightUntyped = true,
+        tailwindcss = {},
+        ts_ls = {
+          settings = {
+            diagnostics = {
+              ignoredCodes = {
+                7016, -- Allow untyped modules
+                80001, -- Allow CommonJS modules
+              },
+            },
+            typescript = {
+              inlayHints = {
+                includeInlayParameterNameHints = "all",
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHints = true,
+                includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+              },
+            },
+            javascript = {
+              inlayHints = {
+                includeInlayParameterNameHints = "all",
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHints = true,
+                includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+              },
+            },
           },
         },
-        tailwindcss = {},
-        -- ts_ls = {
-        --   settings = {
-        --     diagnostics = {
-        --       ignoredCodes = {
-        --         7016, -- Allow untyped modules
-        --         80001, -- Allow CommonJS modules
-        --       },
-        --     },
-        --     typescript = {
-        --       inlayHints = {
-        --         includeInlayParameterNameHints = "all",
-        --         includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-        --         includeInlayFunctionParameterTypeHints = true,
-        --         includeInlayVariableTypeHints = true,
-        --         includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-        --         includeInlayPropertyDeclarationTypeHints = true,
-        --         includeInlayFunctionLikeReturnTypeHints = true,
-        --         includeInlayEnumMemberValueHints = true,
-        --       },
-        --     },
-        --     javascript = {
-        --       inlayHints = {
-        --         includeInlayParameterNameHints = "all",
-        --         includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-        --         includeInlayFunctionParameterTypeHints = true,
-        --         includeInlayVariableTypeHints = true,
-        --         includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-        --         includeInlayPropertyDeclarationTypeHints = true,
-        --         includeInlayFunctionLikeReturnTypeHints = true,
-        --         includeInlayEnumMemberValueHints = true,
-        --       },
-        --     },
-        --   },
-        -- },
         vtsls = {
           ["js/ts"] = {
             implicitProjectConfig = {

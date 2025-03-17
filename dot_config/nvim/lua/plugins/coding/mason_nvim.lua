@@ -38,8 +38,6 @@ return {
         end
       end
       remove_item(opts.ensure_installed, "hadolint") -- not working with nvim-lint
-      remove_item(opts.ensure_installed, "rubocop")
-      remove_item(opts.ensure_installed, "ruby-lsp") -- not working with nvim-lint
     end,
   },
 }
