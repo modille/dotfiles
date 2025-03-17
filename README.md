@@ -34,6 +34,8 @@ After this, `chezmoi` will be available without needing the local binary.
 
 A restart will be required for macOS defaults changes to take effect.
 
+In iTerm2 settings, go to **Profiles** then choose **Import JSON Profiles** and browse to the `~/.local/share/chezmoi/Profiles.json` file.
+
 ## Daily operations
 
 ```sh
