@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [ ! -d "$HOME/.config/kitty" ]; then
+  mkdir -p "$HOME/.config/kitty"
+fi
+
+# Make kitty's theme.conf be a symlink so we can switch between light/dark
+# themes by changing the symlink target and sending a reload signal
+# (see ../dot_config/fish/functions/change_background.fish)
+ln -s "$HOME/.config/kitty/dark-theme.conf" "$HOME/.config/kitty/theme.conf"
