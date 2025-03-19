@@ -1,4 +1,6 @@
 README.md
 com.googlecode.iterm2.plist
 fish_prompt.fish
+pre-push.sh
+setup_git_hooks.sh
 templates/*

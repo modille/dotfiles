@@ -38,6 +38,17 @@ In iTerm2 settings, go to **Profiles** then choose **Import JSON Profiles** and 
 
 ## Daily operations
 
+Set up pre-push hook to check for secrets:
+
+```sh
+./setup_git_hooks.sh
+
+# Test it out once
+./.git/hooks/pre-push
+```
+
+Review what changes `chezmoi apply` would make:
+
 ```sh
 chezmoi diff
 ```
