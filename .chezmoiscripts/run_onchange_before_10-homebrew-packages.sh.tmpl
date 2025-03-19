@@ -6,8 +6,7 @@ set -o nounset
 set -o pipefail
 
 # {{- if eq .chezmoi.os "darwin" }}
-HOMEBREW_NO_INSTALL_UPGRADE=TRUE HOMEBREW_NO_INSTALL_CLEANUP=1 brew bundle --file=- <<EOF
-tap "bufbuild/buf"
+HOMEBREW_NO_INSTALL_UPGRADE=TRUE HOMEBREW_NO_INSTALL_CLEANUP=1 /opt/homebrew/bin/brew bundle --file=- <<EOF
 tap "frost/tap"
 tap "homebrew/bundle"
 tap "homebrew/services"
@@ -53,6 +52,7 @@ brew "libffi"
 brew "litecli"
 brew "logrotate", restart_service: :changed
 brew "lua-language-server"
+brew "luarocks"
 brew "lychee"
 brew "maven"
 brew "mycli"
@@ -87,8 +87,6 @@ brew "wget"
 brew "wireguard-tools"
 brew "yq"
 brew "zoxide"
-brew "bufbuild/buf/buf"
-brew "frost/tap/git-mob"
 cask "1password-cli"
 cask "alfred"
 cask "bruno"
@@ -113,5 +111,6 @@ cask "session-manager-plugin"
 cask "slack"
 cask "spotify"
 cask "sqlcl"
+cask "vivaldi"
 EOF
 # {{ end -}}

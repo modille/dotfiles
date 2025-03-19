@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# vim: set filetype=bash:
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+asdf plugin add buf
+asdf plugin add golang
+asdf plugin add ktlint
+asdf plugin add ruby
+
+asdf install golang latest
+asdf install ruby latest
+
+# The following didn't work:
+#   asdf set golang latest --home
+# So just do the `--home` part manually
+cd ~
+asdf set golang latest
+asdf set ruby latest

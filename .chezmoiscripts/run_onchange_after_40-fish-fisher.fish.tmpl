@@ -1,0 +1,27 @@
+#!/usr/bin/env fish
+# vim: set filetype=fish:
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if not contains /opt/homebrew/bin $fish_user_paths
+    fish_add_path /opt/homebrew/bin
+end
+
+if not contains /opt/homebrew/sbin $fish_user_paths
+    fish_add_path /opt/homebrew/sbin
+end
+
+fish_update_completions
+
+if not functions -q fisher
+    # https://github.com/jorgebucaran/fisher?tab=readme-ov-file#installation
+    curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+end
+
+fisher update
+
+# fisher update will fail if fish_prompt.fish already exists,
+# so manually copy over our customized version afterwards
+cp ~/.local/share/chezmoi/fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
