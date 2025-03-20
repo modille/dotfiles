@@ -9,7 +9,6 @@ Setup and sign in to [1Password](https://1password.com/downloads), and install t
 Verify it works:
 
 ```sh
-op signin
 op vault list
 ```
 
@@ -53,7 +52,53 @@ After this, `chezmoi` will be available without needing the local binary.
 
 A restart will be required for macOS defaults changes to take effect.
 
-In iTerm2 settings, go to **Profiles** then choose **Import JSON Profiles** and browse to the `~/.local/share/chezmoi/Profiles.json` file.
+## Manual configuration
+
+### iTerm2
+
+1. Sync settings from `~/.local/share/chezmoi/` and save changes automatically. Don't copy current settings.
+1. Import profiles from `~/.local/share/chezmoi/Profiles.json` then change the default profile.
+1. Verify **Scripts** > **AutoLaunch** has `dark_mode_notify.py`.
+
+### JetBrains
+
+Change the following settings:
+
+- Use the same language for all tools
+- Region
+- Update all tools automatically
+- Keep previous versions of tools to enable instant rollback
+- Generate shell scripts
+- Display build numbers for installed tools
+
+Then install plugins:
+
+```sh
+idea installPlugins "Key Promoter X"
+idea installPlugins aws.toolkit
+idea installPlugins aws.toolkit.core
+idea installPlugins com.chylex.intellij.inspectionlens
+idea installPlugins com.github.bufbuild.intellij
+idea installPlugins com.github.catppuccin.jetbrains
+idea installPlugins com.intellij.exposed
+idea installPlugins com.nbadal.ktlint
+idea installPlugins eu.theblob42.idea.whichkey
+idea installPlugins net.ashald.envfile
+idea installPlugins org.sonarlint.idea
+
+# Nyan Progress Bar
+idea installPlugins some.awesome
+
+# Terraform and HCL
+idea installPlugins org.intellij.plugins.hcl
+
+# Last, but not least <3
+idea installPlugins IdeaVIM
+```
+
+### Rectangle
+
+Import settings from `~/.local/share/chezmoi/RectangleConfig.json`
 
 ## Daily operations
 
