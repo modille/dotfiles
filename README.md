@@ -74,15 +74,25 @@ Sometimes we just can't have nice things...
 
 ### iTerm2
 
+Install Rosetta (seems to be a requirement for Python API scripts):
+
+```sh
+/usr/sbin/softwareupdate --install-rosetta
+```
+
+Then open iTerm2 and:
+
 1. Sync settings from `~/.local/share/chezmoi` and save changes automatically. Don't copy current settings.
 1. Import profiles from `~/.local/share/chezmoi/Profiles.json` then change the default profile.
-1. Verify **Scripts** > **AutoLaunch** has `dark_mode_notify.py`.
+1. Verify **Scripts** > **AutoLaunch** has `dark_mode_notify.py` and click on it once to enable the Python API.
 
 ### Rectangle
 
 Import settings from `~/.local/share/chezmoi/RectangleConfig.json`
 
 ### Alfred
+
+Disable the Spotlight keyboard shortcut under `System Settings > Keyboard > Keyboard shortcuts > Spotlight`.
 
 Sign in to Dropbox and wait for it to sync.
 The Alfred preferences file is large, so it's nicer to be synced from there instead.
