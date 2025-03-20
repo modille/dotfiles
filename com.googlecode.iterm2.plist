@@ -3112,7 +3112,7 @@
 				<real>0.0</real>
 			</dict>
 			<key>Log Directory</key>
-			<string>/Users/modille/tmp/iTerm2</string>
+			<string>~/tmp/iTerm2</string>
 			<key>Log Filename Format</key>
 			<string>\(creationTimeString).\(profileName).\(termid).\(iterm2.pid).\(autoLogId).log.cast</string>
 			<key>Minimum Contrast (Dark)</key>
@@ -6725,7 +6725,7 @@
 				<real>0.2196078431372549</real>
 			</dict>
 			<key>Log Directory</key>
-			<string>/Users/modille/tmp/iTerm2</string>
+			<string>~/tmp/iTerm2</string>
 			<key>Log Filename Format</key>
 			<string>\(creationTimeString).\(profileName).\(termid).\(iterm2.pid).\(autoLogId).log.cast</string>
 			<key>Minimum Contrast (Dark)</key>
