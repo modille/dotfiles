@@ -2,7 +2,26 @@
 
 ## Requirements
 
-Setup and sign in to 1Password, and install the 1Password CLI.
+### 1Password
+
+Setup and sign in to [1Password](https://1password.com/downloads), and install the [1Password CLI](https://developer.1password.com/docs/cli/get-started).
+
+Verify it works:
+
+```sh
+op signin
+op vault list
+```
+
+### Xcode Command Line Tools
+
+Request install with:
+
+```sh
+xcode-select –-install
+```
+
+Then click **Install** on the pop-up.
 
 ## Install
 
