@@ -29,15 +29,20 @@ function change_background --argument mode_setting
         case dark
             osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$HOME/Pictures/dark.png\""
         case light
-            osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$HOME/Pictures/light\""
+            osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$HOME/Pictures/light.png\""
     end
 
     # Tracks the current mode in a file, and only proceed if the new mode is different than the current mode
-    set -l previous_mode (cat /Users/modille/.local/state/modille/current_background_mode.txt) >/dev/null
+    mkdir -p "$HOME/.local/state/modille"
+    set state_file "$HOME/.local/state/modille/current_background_mode.txt"
+    if not test -e "$state_file"
+        echo "$mode" >"$state_file"
+    end
+    set -l previous_mode (cat "$state_file") >/dev/null
     if test $mode = $previous_mode
         return
     end
-    echo "$mode" >/Users/modille/.local/state/modille/current_background_mode.txt
+    echo "$mode" >"$state_file"
 
     # Neovim
     # Use Signal SIGWINCH autocmd via https://github.com/will/bgwinch.nvim (seen at https://gitlab.com/gnachman/iterm2/-/issues/7943)

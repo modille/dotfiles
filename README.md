@@ -168,3 +168,21 @@ Review what changes `chezmoi apply` would make:
 ```sh
 chezmoi diff
 ```
+
+Merge current state with chezmoi state:
+
+```sh
+# Use nvim for 3-way diff
+echo "" >> "$HOME/.config/chezmoi/chezmoi.toml" && \
+echo "[merge]" >> "$HOME/.config/chezmoi/chezmoi.toml" && \
+echo "    command = \"nvim\"" >> "$HOME/.config/chezmoi/chezmoi.toml" && \
+echo "    args = [\"-d\", \"{{ .Destination }}\", \"{{ .Source }}\", \"{{ .Target }}\"]" >> "$HOME/.config/chezmoi/chezmoi.toml"
+
+chezmoi merge
+```
+
+Quickly switch to chezmoi directory:
+
+```sh
+chezmoi cd
+```
