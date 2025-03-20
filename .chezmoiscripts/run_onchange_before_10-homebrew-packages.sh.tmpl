@@ -7,8 +7,6 @@ set -o pipefail
 
 # {{- if eq .chezmoi.os "darwin" }}
 HOMEBREW_NO_INSTALL_UPGRADE=TRUE HOMEBREW_NO_INSTALL_CLEANUP=1 /opt/homebrew/bin/brew bundle --file=- <<EOF
-tap "homebrew/bundle"
-tap "homebrew/services"
 tap "neovim/neovim"
 tap "osx-cross/avr"
 tap "qmk/qmk"
@@ -101,8 +99,8 @@ cask "font-monaspace"
 cask "gimp"
 cask "google-chrome"
 cask "inkscape"
-cask "intellij-idea"
 cask "iterm2"
+cask "jetbrains-toolbox"
 cask "keepassxc"
 cask "kitty"
 cask "qmk-toolbox"
