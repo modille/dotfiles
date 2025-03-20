@@ -102,7 +102,10 @@ sed -i '' 's#/Users/modille#/Users/odillem#g' new_fish_history
 
 ### Dash
 
-Set sync folder to `~/.local/share/chezmoi/Dash`
+Sign in to Dropbox and wait for it to sync.
+The Dash preferences file changes timestamps all the time, so it's nicer to be synced from there instead.
+
+Afterwards, set sync folder to `~/Dropbox/dotfiles/Dash`
 
 You can automate installing new docsets (based on project dependencies, for example) with something like <https://gist.github.com/modille/e406e3de928730529e298cfee6b3c772>.
 
