@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# vim: set filetype=bash:
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# Update the binary cache
+bat cache --build
