@@ -119,6 +119,30 @@ Afterwards, set sync folder to `~/Dropbox/dotfiles/Dash`
 
 You can automate installing new docsets (based on project dependencies, for example) with something like <https://gist.github.com/modille/e406e3de928730529e298cfee6b3c772>.
 
+### Tuple
+
+#### Hang up Tuple call when joining a non-Tuple call
+
+In Tuple, set hotkey `Command-Option-T` to hang up the call.
+
+Then create a "Tuple Hang Up" macOS Shortcut to Run AppleScript that presses the hotkey:
+
+```scpt
+on run {input, parameters}
+	tell application "System Events"
+		key down option
+		key down command
+		keystroke "t"
+		key up option
+		key up command
+	end tell
+
+	return input
+end run
+```
+
+Then in Dato, run the Tuple Hang Up shortcut when joining a video call.
+
 ### JetBrains
 
 Change the following settings:
