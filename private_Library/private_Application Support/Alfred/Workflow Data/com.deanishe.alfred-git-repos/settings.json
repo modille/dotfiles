@@ -1,0 +1,12 @@
+{
+  "__workflow_last_version": "3.1.2",
+  "app_cmd": "iTerm",
+  "app_default": "Browser",
+  "global_exclude_patterns": [],
+  "search_dirs": [
+    {
+      "path": "~/git",
+      "depth": 4
+    }
+  ]
+}
