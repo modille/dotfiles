@@ -21,30 +21,30 @@ defaults write "com.apple.finder" "FXPreferredViewStyle" -string "Nlsv"
 # -----------
 # #BigMouseGang
 # https://x.com/shanselman/status/1351315661880872962
-defaults write com.apple.universalaccess mouseDriverCursorSize -float 2.75
+defaults write "com.apple.universalaccess" "mouseDriverCursorSize" -float 2.75
 
 # Appearance
 # -----------
-defaults write "Apple Global Domain" "AppleInterfaceStyleSwitchesAutomatically" '1'
+defaults write "Apple Global Domain" "AppleInterfaceStyleSwitchesAutomatically" -bool "true"
 defaults write "Apple Global Domain" "AppleShowScrollBars" -string "Always"
 
 # Control Center
 # --------------
-defaults write "com.apple.controlcenter" "NSStatusItem Visible WiFi" '1'
-defaults write "com.apple.controlcenter" "NSStatusItem Visible Bluetooth" '1'
+defaults write "com.apple.controlcenter" "NSStatusItem Visible WiFi" -bool "true"
+defaults write "com.apple.controlcenter" "NSStatusItem Visible Bluetooth" -bool "true"
 # Clock format = Mon Feb 17 9:45 AM
-defaults write "com.apple.menuextra.clock" "ShowDate" '0'
-defaults write "com.apple.menuextra.clock" "IsAnalog" '0'
-defaults write "com.apple.menuextra.clock" "ShowAMPM" '1'
-defaults write "com.apple.menuextra.clock" "FlashDateSeparators" '0'
-defaults write "com.apple.menuextra.clock" "ShowSeconds" '0'
+defaults write "com.apple.menuextra.clock" "ShowDate" -bool "true"
+defaults write "com.apple.menuextra.clock" "IsAnalog" -bool "false"
+defaults write "com.apple.menuextra.clock" "ShowAMPM" -bool "true"
+defaults write "com.apple.menuextra.clock" "FlashDateSeparators" -bool "false"
+defaults write "com.apple.menuextra.clock" "ShowSeconds" -bool "false"
 
 # Desktop & Dock
 # --------------
 # Use Rectangle instead of the built-in tiling
-defaults write "com.apple.WindowManager" "EnableTilingByEdgeDrag" '0'
-defaults write "com.apple.WindowManager" "EnableTopTilingByEdgeDrag" '0'
-defaults write "com.apple.WindowManager" "EnableTilingOptionAccelerator" '0'
+defaults write "com.apple.WindowManager" "EnableTilingByEdgeDrag" -bool "false"
+defaults write "com.apple.WindowManager" "EnableTopTilingByEdgeDrag" -bool "false"
+defaults write "com.apple.WindowManager" "EnableTilingOptionAccelerator" -bool "false"
 defaults write "com.apple.dock" "tilesize" -int "64"
 defaults write "com.apple.dock" "autohide" -bool "true"
 defaults write "com.apple.dock" "show-recents" -bool "false"
