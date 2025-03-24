@@ -91,7 +91,6 @@
   untracked = red
 
 [commit]
-  template = ~/.gitmessage
   verbose = true
 
 [core]
