@@ -87,6 +87,11 @@ Then open iTerm2 and:
 1. Verify **Scripts** > **AutoLaunch** has `dark_mode_notify.py` and click on it once to enable the Python API.
 1. Go to **Scripts** > **Manage** > **Manage dependencies** and click the **Update** button
 
+### Dropbox
+
+Sign in to Dropbox and then go to **Preferences** > **Sync** and choose **Dropbox for File Provider**.
+Wait for the updated sync to finish.
+
 ### Rectangle
 
 Import settings from `~/.local/share/chezmoi/RectangleConfig.json`
