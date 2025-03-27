@@ -85,6 +85,7 @@ Then open iTerm2 and:
 1. Sync settings from `~/.local/share/chezmoi` and save changes automatically. Don't copy current settings.
 1. Import profiles from `~/.local/share/chezmoi/Profiles.json` then change the default profile.
 1. Verify **Scripts** > **AutoLaunch** has `dark_mode_notify.py` and click on it once to enable the Python API.
+1. Go to **Scripts** > **Manage** > **Manage dependencies** and click the **Update** button
 
 ### Rectangle
 
