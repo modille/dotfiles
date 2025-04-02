@@ -25,6 +25,7 @@ if status is-interactive
     abbr --add gfp "git fetch --prune"
     abbr --add gpf "git push --force-with-lease"
     abbr --add gprp "git pull --rebase --prune"
+    abbr --add grt "cd \"$(git rev-parse --show-toplevel || echo .)\""
     abbr --add gs "git status"
     abbr --add gsc "git switch --create"
     # scmpuff init --shell=fish --aliases=false | source
