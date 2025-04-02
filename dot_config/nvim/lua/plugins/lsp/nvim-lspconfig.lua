@@ -66,28 +66,9 @@ return {
         --   end,
         -- },
         ruby_lsp = {
-          init_options = {
-            enabledFeatures = {
-              codeActions = true,
-              codeLens = true,
-              completion = true,
-              definition = true,
-              diagnostics = true,
-              documentHighlights = true,
-              documentLink = true,
-              documentSymbols = true,
-              foldingRanges = true,
-              formatting = true,
-              hover = true,
-              inlayHint = true,
-              onTypeFormatting = true,
-              selectionRanges = true,
-              semanticHighlighting = true,
-              signatureHelp = true,
-              typeHierarchy = true,
-              workspaceSymbol = true,
-            },
-          },
+          -- https://shopify.github.io/ruby-lsp/editors#lazyvim-lsp
+          mason = false,
+          cmd = { vim.fn.expand("~/.asdf/shims/ruby-lsp") },
         },
         tailwindcss = {},
         ts_ls = {
