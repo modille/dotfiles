@@ -5,6 +5,9 @@ return {
       inlay_hints = {
         enabled = true,
       },
+      codelens = {
+        enabled = true,
+      },
       servers = {
         basedpyright = {
           cmd = { "poetry", "run", "basedpyright-langserver", "--stdio" },
@@ -69,6 +72,24 @@ return {
           -- https://shopify.github.io/ruby-lsp/editors#lazyvim-lsp
           mason = false,
           cmd = { vim.fn.expand("~/.asdf/shims/ruby-lsp") },
+          -- https://epona.me/blog/implementing-vs-code-like-ruby-lsp-features-in-neovim/#adding-ruby-lsp-configuration
+          on_attach = function(client, bufnr)
+            client.commands = client.commands or {}
+
+            client.commands["rubyLsp.openFile"] = function(command)
+              local file_path = command.arguments[1][1]
+
+              local path, line = string.match(file_path, "(.+)#L(%d+)")
+              path = path or file_path -- if no line number, use the whole path
+
+              path = string.gsub(path, "file://", "")
+              vim.cmd("edit " .. path)
+
+              if line then
+                vim.cmd(line)
+              end
+            end
+          end,
         },
         tailwindcss = {},
         ts_ls = {
