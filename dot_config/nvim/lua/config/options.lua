@@ -9,6 +9,7 @@
 
 -- 4 displaying text
 vim.opt.relativenumber = false
+vim.opt.wrap = true
 
 -- 5 syntax, highlighting and spelling
 -- vim.opt.colorcolumn = "80"
