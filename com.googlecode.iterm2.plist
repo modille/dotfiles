@@ -6443,6 +6443,8 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Text</key>
+			<string>\(user.badge)</string>
 			<key>Blinking Cursor</key>
 			<false/>
 			<key>Blur</key>
@@ -6961,6 +6963,14 @@
 					<string>{#00f900,#000000}</string>
 					<key>regex</key>
 					<string>chaotix</string>
+				</dict>
+				<dict>
+					<key>action</key>
+					<string>iTermHyperlinkTrigger</string>
+					<key>parameter</key>
+					<string>https://www.pivotaltracker.com/story/show/\1</string>
+					<key>regex</key>
+					<string>\[#(\d+)\]</string>
 				</dict>
 			</array>
 			<key>Unlimited Scrollback</key>
