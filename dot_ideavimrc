@@ -110,6 +110,9 @@ nmap [d <Action>(GotoPreviousError)
 nmap ]h :action Diff.NextChange<CR>
 nmap [h :action Diff.PrevChange<CR>
 
+nmap ]q :action NextOccurence<CR>
+nmap [q :action PreviousOccurence<CR>
+
 nnoremap <Leader>gt :action Gradle.ExecuteTask<CR>
 
 " TODO how to move cursor from Terminal/Structure back to editor?

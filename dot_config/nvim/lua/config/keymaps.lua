@@ -75,3 +75,47 @@ vim.keymap.set("n", "<leader>tid", function()
     end
   end
 end, { noremap = true })
+
+vim.keymap.set("n", "<leader>sid", function()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+
+  -- Patterns to match the branch line in the commit message buffer
+  local branch_patterns = {
+    "^# On branch (.+)$",
+    "^# You are currently rebasing branch '(.+)' on '.*'.$",
+    "^# You are currently editing a commit while rebasing branch '(.+)' on '.*'.$",
+  }
+
+  -- Patterns to extract the story ID from the branch name
+  local shortcut_id_patterns = {
+    "sc%-(%d+)", -- e.g., feature/sc-12345/yadda-yadda
+    "(%d+)$", -- e.g., yadda-yadda-12345
+  }
+
+  local function extract_shortcut_id(branch_name)
+    for _, pat in ipairs(shortcut_id_patterns) do
+      local id = branch_name:match(pat)
+      if id then
+        return id
+      end
+    end
+    return nil
+  end
+
+  for _, line in ipairs(lines) do
+    for _, pat in ipairs(branch_patterns) do
+      local branch_name = line:match(pat)
+      if branch_name then
+        local shortcut_id = extract_shortcut_id(branch_name)
+        if shortcut_id then
+          local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+          vim.api.nvim_buf_set_text(bufnr, row - 1, col, row - 1, col, { "[sc-" .. shortcut_id .. "]" })
+          return
+        end
+      end
+    end
+  end
+
+  vim.notify("Failed to determine Shortcut story ID", vim.log.levels.WARN)
+end, { noremap = true })

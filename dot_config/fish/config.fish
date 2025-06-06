@@ -46,51 +46,63 @@ if status is-interactive
     # abbr --add handoff "git add --all && git commit --amend --no-edit && git push --force-with-lease"
 
     test -e {$HOME}/.iterm2_shell_integration.fish; and source {$HOME}/.iterm2_shell_integration.fish
-end
+    function iterm2_print_user_vars
+        iterm2_set_user_var badge (dir_badges)
+    end
+    function dir_badges
+        while read directory badge
+            # Safely expand $HOME in the directory string
+            set expanded_directory (string replace -r '\$HOME' "$HOME" "$directory")
+            if string match -q -- "$expanded_directory*" "$PWD"
+                echo $badge
+                break
+            end
+        end <~/.badges
+    end
 
-# From homebrew caveats
-if test -d /opt/homebrew/opt/mysql@8.0
-    # If you need to have mysql@8.0 first in your PATH, run:
-    fish_add_path /opt/homebrew/opt/mysql@8.0/bin
-    # For compilers to find mysql@8.0 you may need to set:
-    set -gx LDFLAGS "-L/opt/homebrew/opt/mysql@8.0/lib"
-    set -gx CPPFLAGS "-I/opt/homebrew/opt/mysql@8.0/include"
-    # For pkg-config to find mysql@8.0 you may need to set:
-    set -gx PKG_CONFIG_PATH "/opt/homebrew/opt/mysql@8.0/lib/pkgconfig"
-end
-if test -d /opt/homebrew/opt/sqlite
-    # If you need to have sqlite first in your PATH, run:
-    fish_add_path /opt/homebrew/opt/sqlite/bin
+    # From homebrew caveats
+    if test -d /opt/homebrew/opt/mysql@8.0
+        # If you need to have mysql@8.0 first in your PATH, run:
+        fish_add_path /opt/homebrew/opt/mysql@8.0/bin
+        # For compilers to find mysql@8.0 you may need to set:
+        set -gx LDFLAGS "-L/opt/homebrew/opt/mysql@8.0/lib"
+        set -gx CPPFLAGS "-I/opt/homebrew/opt/mysql@8.0/include"
+        # For pkg-config to find mysql@8.0 you may need to set:
+        set -gx PKG_CONFIG_PATH "/opt/homebrew/opt/mysql@8.0/lib/pkgconfig"
+    end
+    if test -d /opt/homebrew/opt/sqlite
+        # If you need to have sqlite first in your PATH, run:
+        fish_add_path /opt/homebrew/opt/sqlite/bin
 
-    # For compilers to find sqlite you may need to set:
-    set -gx LDFLAGS -L/opt/homebrew/opt/sqlite/lib
-    set -gx CPPFLAGS -I/opt/homebrew/opt/sqlite/include
+        # For compilers to find sqlite you may need to set:
+        set -gx LDFLAGS -L/opt/homebrew/opt/sqlite/lib
+        set -gx CPPFLAGS -I/opt/homebrew/opt/sqlite/include
 
-    # For pkg-config to find sqlite you may need to set:
-    set -gx PKG_CONFIG_PATH /opt/homebrew/opt/sqlite/lib/pkgconfig
-end
-if test -d /opt/homebrew/opt/libpq
-    # If you need to have libpq first in your PATH, run:
-    fish_add_path /opt/homebrew/opt/libpq/bin
+        # For pkg-config to find sqlite you may need to set:
+        set -gx PKG_CONFIG_PATH /opt/homebrew/opt/sqlite/lib/pkgconfig
+    end
+    if test -d /opt/homebrew/opt/libpq
+        # If you need to have libpq first in your PATH, run:
+        fish_add_path /opt/homebrew/opt/libpq/bin
 
-    # For compilers to find libpq you may need to set:
-    set -gx LDFLAGS -L/opt/homebrew/opt/libpq/lib
-    set -gx CPPFLAGS -I/opt/homebrew/opt/libpq/include
+        # For compilers to find libpq you may need to set:
+        set -gx LDFLAGS -L/opt/homebrew/opt/libpq/lib
+        set -gx CPPFLAGS -I/opt/homebrew/opt/libpq/include
 
-    # For pkg-config to find libpq you may need to set:
-    set -gx PKG_CONFIG_PATH /opt/homebrew/opt/libpq/lib/pkgconfig
-end
+        # For pkg-config to find libpq you may need to set:
+        set -gx PKG_CONFIG_PATH /opt/homebrew/opt/libpq/lib/pkgconfig
+    end
 
-# ASDF configuration code
-if test -z $ASDF_DATA_DIR
-    set _asdf_shims "$HOME/.asdf/shims"
-else
-    set _asdf_shims "$ASDF_DATA_DIR/shims"
-end
+    # ASDF configuration code
+    if test -z $ASDF_DATA_DIR
+        set _asdf_shims "$HOME/.asdf/shims"
+    else
+        set _asdf_shims "$ASDF_DATA_DIR/shims"
+    end
 
-# Do not use fish_add_path (added in Fish 3.2) because it
-# potentially changes the order of items in PATH
-if not contains $_asdf_shims $PATH
-    set -gx --prepend PATH $_asdf_shims
-end
-set --erase _asdf_shims
+    # Do not use fish_add_path (added in Fish 3.2) because it
+    # potentially changes the order of items in PATH
+    if not contains $_asdf_shims $PATH
+        set -gx --prepend PATH $_asdf_shims
+    end
+    set --erase _asdf_shims

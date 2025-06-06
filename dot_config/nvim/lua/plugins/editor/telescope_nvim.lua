@@ -25,9 +25,9 @@ return {
 
           if current_file:match("_spec") or current_file:match("_test") or current_file:match("Test") then
             default_text = basename
-                :gsub("_spec$", "") -- Remove any test suffix
-                :gsub("_test$", "")
-                :gsub("Test$", "")
+              :gsub("_spec$", "") -- Remove any test suffix
+              :gsub("_test$", "")
+              :gsub("Test$", "")
           else
             default_text = basename .. " test | spec"
           end
@@ -113,7 +113,7 @@ return {
         function()
           require("telescope.builtin").find_files({
             prompt_title = "dotfiles >",
-            cwd = os.getenv("HOME") .. "/git/github.com/modille/dotfiles",
+            cwd = os.getenv("HOME") .. "/.config",
             hidden = false,
           })
         end,
@@ -124,7 +124,7 @@ return {
         function()
           require("telescope.builtin").grep_string({
             search = vim.fn.input("dotfiles 🔍 "),
-            cwd = os.getenv("HOME") .. "/git/github.com/modille/dotfiles",
+            cwd = os.getenv("HOME") .. "/.config",
             hidden = false,
           })
         end,

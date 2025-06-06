@@ -44,7 +44,7 @@ return {
           ["alt-q"] = require("fzf-lua").actions.file_sel_to_qf,
           ["alt-Q"] = require("fzf-lua").actions.file_sel_to_ll,
           ["ctrl-i"] = require("fzf-lua").actions.toggle_ignore,
-          ["ctrl-h"] = require("fzf-lua").actions.toggle_hidden,
+          -- ["ctrl-h"] = require("fzf-lua").actions.toggle_hidden, -- TODO: ctrl-h interferes with Backspace
           ["alt-f"] = require("fzf-lua").actions.toggle_follow,
         },
       },

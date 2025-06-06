@@ -72,3 +72,17 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.bo[ev.buf].commentstring = "-- %s"
   end,
 })
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  group = augroup("kotlin"),
+  pattern = "kotlin",
+  callback = function()
+    vim.lsp.start({
+      name = "kotlin-tcp",
+      cmd = vim.lsp.rpc.connect("127.0.0.1", 9999),
+      root_markers = { "build.gradle", "build.gradle.kts", "pom.xml" },
+      single_file_support = true,
+      filetypes = { "kotlin" },
+    })
+  end,
+})
