@@ -1,8 +1,10 @@
 return {
   {
-    "epwalsh/obsidian.nvim",
-    version = "*", -- recommended, use latest release instead of latest commit
+    "obsidian-nvim/obsidian.nvim",
+    -- version = "*", -- recommended, use latest release instead of latest commit
+    version = "v3.11.0", -- checkbox was broken in v3.12.0
     lazy = true,
+    ft = "markdown",
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
@@ -14,11 +16,14 @@ return {
           path = "~/Dropbox/obsidian/work",
         },
       },
+      -- Optional, for templates (see https://github.com/obsidian-nvim/obsidian.nvim/wiki/Using-templates)
       templates = {
-        subdir = "templates",
+        folder = "templates",
         date_format = "%Y-%m-%d",
         time_format = "%H:%M",
-        -- A map for custom variables, the key should be the variable and the value a function
+        -- A map for custom variables, the key should be the variable and the value a function.
+        -- Functions are called with obsidian.TemplateContext objects as their sole parameter.
+        -- See: https://github.com/obsidian-nvim/obsidian.nvim/wiki/Template#substitutions
         substitutions = {},
       },
       daily_notes = {
@@ -66,10 +71,12 @@ return {
         end
         return tostring(os.time()) .. "-" .. suffix
       end,
+      -- Either 'wiki' or 'markdown'.
+      preferred_link_style = "markdown",
     },
     keys = {
-      { "<leader>w<leader>w", "<cmd>ObsidianToday<cr>" },
-      { "<leader>w<leader>y", "<cmd>ObsidianYesterday<cr>" },
+      { "<leader>w<leader>w", "<cmd>Obsidian today<cr>" },
+      { "<leader>w<leader>y", "<cmd>Obsidian yesterday<cr>" },
     },
   },
 }

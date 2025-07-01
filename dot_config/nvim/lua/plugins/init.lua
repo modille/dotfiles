@@ -49,6 +49,9 @@ return {
 
   require("plugins.lsp.nvim-lspconfig"),
 
+  require("plugins.markdown.image_nvim"),
+  require("plugins.markdown.img-clip_nvim"),
+
   require("plugins.test.neotest"),
   require("plugins.test.vim-test"),
 
