@@ -115,7 +115,7 @@ return {
     opts = {
       indent = {
         scope = {
-          underline = true, -- underline the start of the scope
+          underline = false, -- underline the start of the scope
         },
       },
     },

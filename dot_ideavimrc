@@ -18,7 +18,7 @@ sethandler <c-r> a:vim
 sethandler <c-u> a:vim
 sethandler <c-w> a:vim
 
-nnoremap <C-w>v :action MoveTabRight<CR>
+" nnoremap <C-w>v :action MoveTabRight<CR>
 
 " Plugins
 " https://github.com/JetBrains/ideavim/blob/master/doc/IdeaVim%20Plugins.md
