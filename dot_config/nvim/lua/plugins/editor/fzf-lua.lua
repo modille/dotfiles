@@ -4,50 +4,8 @@ return {
     enabled = true, -- this or telescope.nvim
 
     opts = {
-      winopts = {
-        height = 0.85,
-        width = 0.80,
-        preview = {
-          layout = "down",
-          height = 0.4, -- 40% of total height
-        },
-      },
-      keymap = {
-        -- fzf '--bind=' options
-        ["ctrl-z"] = "abort",
-        ["ctrl-u"] = "unix-line-discard",
-        ["ctrl-f"] = "half-page-down",
-        ["ctrl-b"] = "half-page-up",
-        ["ctrl-a"] = "beginning-of-line",
-        ["ctrl-e"] = "end-of-line",
-        ["alt-a"] = "toggle-all",
-        ["alt-g"] = "first",
-        ["alt-G"] = "last",
-        -- Only valid with fzf previewers (bat/cat/git/etc)
-        ["f3"] = "toggle-preview-wrap",
-        ["f4"] = "toggle-preview",
-        ["shift-down"] = "preview-page-down",
-        ["shift-up"] = "preview-page-up",
-      },
-      actions = {
-        files = {
-          -- Pickers inheriting these actions:
-          --   files, git_files, git_status, grep, lsp, oldfiles, quickfix, loclist,
-          --   tags, btags, args, buffers, tabs, lines, blines
-          -- `file_edit_or_qf` opens a single selection or sends multiple selection to quickfix
-          -- replace `enter` with `file_edit` to open all files/bufs whether single or multiple
-          -- replace `enter` with `file_switch_or_edit` to attempt a switch in current tab first
-          ["enter"] = require("fzf-lua").actions.file_edit_or_qf,
-          ["ctrl-s"] = require("fzf-lua").actions.file_split,
-          ["ctrl-v"] = require("fzf-lua").actions.file_vsplit,
-          ["ctrl-t"] = require("fzf-lua").actions.file_tabedit,
-          ["alt-q"] = require("fzf-lua").actions.file_sel_to_qf,
-          ["alt-Q"] = require("fzf-lua").actions.file_sel_to_ll,
-          ["ctrl-i"] = require("fzf-lua").actions.toggle_ignore,
-          -- ["ctrl-h"] = require("fzf-lua").actions.toggle_hidden, -- TODO: ctrl-h interferes with Backspace
-          ["alt-f"] = require("fzf-lua").actions.toggle_follow,
-        },
-      },
+      "telescope",
+      fzf_colors = { true },
     },
 
     keys = {
@@ -81,7 +39,7 @@ return {
       {
         "<leader>fg",
         function()
-          require("fzf-lua").live_grep()
+          require("fzf-lua").live_grep() -- type search term, then ctrl-G to filter
         end,
         mode = { "n" },
         desc = "file grep",
@@ -157,7 +115,7 @@ return {
         function()
           require("fzf-lua").files({
             prompt = "dotfiles> ",
-            cwd = os.getenv("HOME") .. "/.local/share/chezmoi",
+            cwd = os.getenv("HOME") .. "/.config",
             no_hidden = true,
           })
         end,
@@ -169,7 +127,7 @@ return {
           local search = vim.fn.input("dotfiles 🔍 ")
           require("fzf-lua").grep({
             search = search,
-            cwd = os.getenv("HOME") .. "/.local/share/chezmoi",
+            cwd = os.getenv("HOME") .. "/.config",
             rg_opts = "--column --line-number --no-heading --color=always --smart-case --max-columns=4096 -e",
           })
         end,
@@ -180,8 +138,7 @@ return {
         function()
           require("fzf-lua").files({
             prompt = "wiki> ",
-            cwd = os.getenv("HOME") .. "/Dropbox",
-            search_dirs = { "vimwiki", "obsidian" },
+            cwd = os.getenv("HOME") .. "/Dropbox/obsidian", -- TODO: and Dropbox/vimwiki
             no_hidden = true,
           })
         end,
