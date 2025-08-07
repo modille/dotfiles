@@ -14,21 +14,23 @@ return {
         function()
           local current_file = vim.fn.expand("%:t")
           local basename = current_file:gsub("%..*$", "")
-          local default_text
+          local query
 
           if current_file:match("_spec") or current_file:match("_test") or current_file:match("Test") then
-            default_text = basename
+            query = basename
               :gsub("_spec$", "") -- Remove any test suffix
               :gsub("_test$", "")
               :gsub("Test$", "")
           else
-            default_text = basename .. " test | spec"
+            query = basename .. " test | spec"
           end
 
           require("fzf-lua").git_files({
             prompt = "Alternative files> ",
             cmd = "git ls-files --exclude-standard --cached --others",
-            default_text = default_text .. " ",
+            fzf_opts = {
+              ["--query"] = query .. " ",
+            },
           })
         end,
         mode = { "n" },
