@@ -25,7 +25,6 @@ if status is-interactive
     abbr --add gfp "git fetch --prune"
     abbr --add gpf "git push --force-with-lease"
     abbr --add gprp "git pull --rebase --prune"
-    abbr --add grt "cd \"$(git rev-parse --show-toplevel || echo .)\""
     abbr --add gs "git status"
     abbr --add gsc "git switch --create"
     # scmpuff init --shell=fish --aliases=false | source
@@ -60,49 +59,77 @@ if status is-interactive
         end <~/.badges
     end
 
-    # From homebrew caveats
-    if test -d /opt/homebrew/opt/mysql@8.0
-        # If you need to have mysql@8.0 first in your PATH, run:
-        fish_add_path /opt/homebrew/opt/mysql@8.0/bin
-        # For compilers to find mysql@8.0 you may need to set:
-        set -gx LDFLAGS "-L/opt/homebrew/opt/mysql@8.0/lib"
-        set -gx CPPFLAGS "-I/opt/homebrew/opt/mysql@8.0/include"
-        # For pkg-config to find mysql@8.0 you may need to set:
-        set -gx PKG_CONFIG_PATH "/opt/homebrew/opt/mysql@8.0/lib/pkgconfig"
+    # cd to "git root"
+    function grt
+        set root (git rev-parse --show-toplevel 2>/dev/null)
+        if test -n "$root"
+            cd $root
+        end
     end
-    if test -d /opt/homebrew/opt/sqlite
-        # If you need to have sqlite first in your PATH, run:
-        fish_add_path /opt/homebrew/opt/sqlite/bin
+end
 
-        # For compilers to find sqlite you may need to set:
-        set -gx LDFLAGS -L/opt/homebrew/opt/sqlite/lib
-        set -gx CPPFLAGS -I/opt/homebrew/opt/sqlite/include
+# From homebrew caveats
+if test -d /opt/homebrew/opt/mysql@8.0
+    # If you need to have mysql@8.0 first in your PATH, run:
+    fish_add_path /opt/homebrew/opt/mysql@8.0/bin
+    # For compilers to find mysql@8.0 you may need to set:
+    set -gx LDFLAGS "-L/opt/homebrew/opt/mysql@8.0/lib"
+    set -gx CPPFLAGS "-I/opt/homebrew/opt/mysql@8.0/include"
+    # For pkg-config to find mysql@8.0 you may need to set:
+    set -gx PKG_CONFIG_PATH "/opt/homebrew/opt/mysql@8.0/lib/pkgconfig"
+end
+if test -d /opt/homebrew/opt/sqlite
+    # If you need to have sqlite first in your PATH, run:
+    fish_add_path /opt/homebrew/opt/sqlite/bin
 
-        # For pkg-config to find sqlite you may need to set:
-        set -gx PKG_CONFIG_PATH /opt/homebrew/opt/sqlite/lib/pkgconfig
-    end
-    if test -d /opt/homebrew/opt/libpq
-        # If you need to have libpq first in your PATH, run:
-        fish_add_path /opt/homebrew/opt/libpq/bin
+    # For compilers to find sqlite you may need to set:
+    set -gx LDFLAGS -L/opt/homebrew/opt/sqlite/lib
+    set -gx CPPFLAGS -I/opt/homebrew/opt/sqlite/include
 
-        # For compilers to find libpq you may need to set:
-        set -gx LDFLAGS -L/opt/homebrew/opt/libpq/lib
-        set -gx CPPFLAGS -I/opt/homebrew/opt/libpq/include
+    # For pkg-config to find sqlite you may need to set:
+    set -gx PKG_CONFIG_PATH /opt/homebrew/opt/sqlite/lib/pkgconfig
+end
+if test -d /opt/homebrew/opt/libpq
+    # If you need to have libpq first in your PATH, run:
+    fish_add_path /opt/homebrew/opt/libpq/bin
 
-        # For pkg-config to find libpq you may need to set:
-        set -gx PKG_CONFIG_PATH /opt/homebrew/opt/libpq/lib/pkgconfig
-    end
+    # For compilers to find libpq you may need to set:
+    set -gx LDFLAGS -L/opt/homebrew/opt/libpq/lib
+    set -gx CPPFLAGS -I/opt/homebrew/opt/libpq/include
 
-    # ASDF configuration code
-    if test -z $ASDF_DATA_DIR
-        set _asdf_shims "$HOME/.asdf/shims"
-    else
-        set _asdf_shims "$ASDF_DATA_DIR/shims"
-    end
+    # For pkg-config to find libpq you may need to set:
+    set -gx PKG_CONFIG_PATH /opt/homebrew/opt/libpq/lib/pkgconfig
+end
+if test -d /opt/homebrew/opt/curl
+    # If you need to have curl first in your PATH, run:
+    fish_add_path /opt/homebrew/opt/curl/bin
 
-    # Do not use fish_add_path (added in Fish 3.2) because it
-    # potentially changes the order of items in PATH
-    if not contains $_asdf_shims $PATH
-        set -gx --prepend PATH $_asdf_shims
-    end
-    set --erase _asdf_shims
+    # For compilers to find curl you may need to set:
+    set -gx LDFLAGS -L/opt/homebrew/opt/curl/lib
+    set -gx CPPFLAGS -I/opt/homebrew/opt/curl/include
+
+    # For pkg-config to find curl you may need to set:
+    set -gx PKG_CONFIG_PATH /opt/homebrew/opt/curl/lib/pkgconfig
+end
+if test -d /opt/homebrew/opt/libffi
+    # For compilers to find libffi you may need to set:
+    set -gx LDFLAGS -L/opt/homebrew/opt/libffi/lib
+    set -gx CPPFLAGS -I/opt/homebrew/opt/libffi/include
+
+    # For pkg-config to find libffi you may need to set:
+    set -gx PKG_CONFIG_PATH /opt/homebrew/opt/libffi/lib/pkgconfig
+end
+
+# ASDF configuration code
+if test -z $ASDF_DATA_DIR
+    set _asdf_shims "$HOME/.asdf/shims"
+else
+    set _asdf_shims "$ASDF_DATA_DIR/shims"
+end
+
+# Do not use fish_add_path (added in Fish 3.2) because it
+# potentially changes the order of items in PATH
+if not contains $_asdf_shims $PATH
+    set -gx --prepend PATH $_asdf_shims
+end
+set --erase _asdf_shims
