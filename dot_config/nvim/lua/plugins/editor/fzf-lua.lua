@@ -6,6 +6,16 @@ return {
     opts = {
       "telescope",
       fzf_colors = { true },
+      fzf_opts = {
+        ["--history"] = vim.fn.stdpath("data") .. "/fzf-lua-history",
+      },
+      winopts = {
+        fullscreen = true, -- start fullscreen?
+      },
+      actions = {
+        -- Use <c-s> instead of <a-i>
+        ["ctrl-s"] = { require("fzf-lua").actions.toggle_ignore },
+      },
     },
 
     keys = {
