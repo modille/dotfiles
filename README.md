@@ -17,7 +17,7 @@ op vault list
 Request install with:
 
 ```sh
-xcode-select –-install
+xcode-select --install
 ```
 
 Then click **Install** on the pop-up and restart after it finishes installing.
