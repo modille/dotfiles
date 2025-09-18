@@ -24,13 +24,13 @@ function change_background --argument mode_setting
     end
 
     # Wallpaper
-    # TODO: This doesn't work for desktops that have a full-screened app in-focus
-    switch $mode
-        case dark
-            osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$HOME/Pictures/dark.png\""
-        case light
-            osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$HOME/Pictures/light.png\""
-    end
+    # Using macOS dynamic wallpapers instead
+    # switch $mode
+    #     case dark
+    #         osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$HOME/Pictures/dark.png\""
+    #     case light
+    #         osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$HOME/Pictures/light.png\""
+    # end
 
     # Tracks the current mode in a file, and only proceed if the new mode is different than the current mode
     mkdir -p "$HOME/.local/state/modille"
