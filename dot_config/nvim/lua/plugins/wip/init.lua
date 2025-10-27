@@ -130,4 +130,13 @@ return {
       -- add other options here if needed.
     end,
   },
+
+  {
+    "folke/sidekick.nvim",
+    opts = {
+      nes = {
+        enabled = false,
+      },
+    },
+  },
 }

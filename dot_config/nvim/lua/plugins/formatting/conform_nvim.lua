@@ -4,7 +4,7 @@ return {
     opts = {
       formatters_by_ft = {
         fish = { "fish_indent" },
-        javascript = { "eslint_d" },
+        javascript = { "eslint_d", "prettier" },
         kotlin = { "ktlint" },
         lua = { "stylua" },
         markdown = { "prettier" },

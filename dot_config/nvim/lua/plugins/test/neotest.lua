@@ -5,7 +5,7 @@ return {
       "haydenmeade/neotest-jest",
       "olimorris/neotest-rspec",
       "vim-test/vim-test",
-      "nvim-neotest/neotest-vim-test",
+      -- "nvim-neotest/neotest-vim-test",
       "weilbith/neotest-gradle",
       "zidhuss/neotest-minitest",
     },
@@ -17,9 +17,9 @@ return {
           require("neotest-minitest"),
           require("neotest-rspec"),
           require("neotest-gradle"),
-          require("neotest-vim-test")({
-            allow_file_types = { "cucumber" },
-          }),
+          -- require("neotest-vim-test")({
+          --   allow_file_types = { "cucumber" },
+          -- }),
           ["neotest-python"] = {
             -- Here you can specify the settings for the adapter, i.e.
             runner = "pytest",

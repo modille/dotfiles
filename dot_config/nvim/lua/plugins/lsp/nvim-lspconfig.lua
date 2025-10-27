@@ -24,6 +24,9 @@ return {
           },
         },
         bashls = {},
+        fish_lsp = {
+          cmd = { "/opt/homebrew/bin/fish-lsp", "start" },
+        },
         dockerls = {},
         docker_compose_language_service = {},
         html = {
@@ -71,7 +74,7 @@ return {
         ruby_lsp = {
           -- https://shopify.github.io/ruby-lsp/editors#lazyvim-lsp
           mason = false,
-          cmd = { vim.fn.expand("~/.asdf/shims/ruby-lsp") },
+          cmd = { "ruby-lsp" },
           -- https://epona.me/blog/implementing-vs-code-like-ruby-lsp-features-in-neovim/#adding-ruby-lsp-configuration
           on_attach = function(client, bufnr)
             client.commands = client.commands or {}

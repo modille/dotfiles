@@ -1,19 +1,20 @@
 return {
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, {
         "docker-compose-language-service",
         "dockerfile-language-server",
         "eslint-lsp",
+        "fish-lsp",
         "html-lsp",
         "java-debug-adapter",
         "java-test",
         "jdtls",
         "js-debug-adapter",
         "json-lsp",
-        -- "kotlin-debug-adapter",
-        -- "kotlin-language-server",
+        "kotlin-debug-adapter",
+        "kotlin-language-server",
         "lemminx",
         "lua-language-server",
         "markdownlint",

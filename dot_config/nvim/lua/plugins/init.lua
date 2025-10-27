@@ -2,9 +2,14 @@
 return {
   -- TODO: fix :intro
   -- https://github.com/folke/lazy.nvim/issues/1038#issuecomment-1733035996
+  -- TODO: Try sidekick instead...
+  -- require("plugins.ai.avante_nvim"),
+  require("plugins.ai.copilot_lua"),
+
   require("plugins.coding.blink_cmp"),
   require("plugins.coding.diffview_nvim"),
   require("plugins.coding.gen_nvim"),
+  require("plugins.coding.LuaSnip"),
   require("plugins.coding.leetcode_nvim"),
   require("plugins.coding.mason_nvim"),
   require("plugins.coding.mini_pairs"),
