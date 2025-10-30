@@ -27,120 +27,253 @@ else
   echo '  "claude_md_exists": false,'
 fi
 
-# Detect package manager and commands
-echo '  "detected_package_manager": {'
+# Detect package managers (supports multiple)
+echo '  "detected_package_managers": ['
 
+PACKAGE_MANAGERS=()
+
+# Check for npm/node
 if [ -f "package.json" ]; then
-  echo '    "type": "npm",'
-  echo '    "has_package_json": true,'
+  PM_ENTRY='    {'
+  PM_ENTRY="$PM_ENTRY"$'\n''      "type": "npm",'
+  PM_ENTRY="$PM_ENTRY"$'\n''      "has_package_json": true'
 
   # Extract scripts
-  if command -v jq &>/dev/null && [ -f "package.json" ]; then
+  if command -v jq &>/dev/null; then
     SCRIPTS=$(jq -r '.scripts | keys[]' package.json 2>/dev/null | head -20)
     if [ -n "$SCRIPTS" ]; then
-      echo '    "scripts": ['
+      PM_ENTRY="$PM_ENTRY"','$'\n''      "scripts": ['
+      SCRIPT_LIST=""
       echo "$SCRIPTS" | while IFS= read -r script; do
-        echo "      \"$script\","
-      done | sed '$ s/,$//'
-      echo '    ],'
+        echo "        \"$script\","
+      done | sed '$ s/,$//' >/tmp/scripts_list_$$
+      SCRIPT_LIST=$(cat /tmp/scripts_list_$$)
+      rm -f /tmp/scripts_list_$$
+      PM_ENTRY="$PM_ENTRY"$'\n'"$SCRIPT_LIST"$'\n''      ]'
     fi
   fi
 
+  # Detect lockfile
   if [ -f "pnpm-lock.yaml" ]; then
-    echo '    "lockfile": "pnpm"'
+    PM_ENTRY="$PM_ENTRY"','$'\n''      "lockfile": "pnpm"'
   elif [ -f "yarn.lock" ]; then
-    echo '    "lockfile": "yarn"'
+    PM_ENTRY="$PM_ENTRY"','$'\n''      "lockfile": "yarn"'
   elif [ -f "package-lock.json" ]; then
-    echo '    "lockfile": "npm"'
+    PM_ENTRY="$PM_ENTRY"','$'\n''      "lockfile": "npm"'
   else
-    echo '    "lockfile": "none"'
+    PM_ENTRY="$PM_ENTRY"','$'\n''      "lockfile": "none"'
   fi
-elif [ -f "Cargo.toml" ]; then
-  echo '    "type": "cargo",'
-  echo '    "has_cargo_toml": true'
-elif [ -f "requirements.txt" ] || [ -f "pyproject.toml" ]; then
-  echo '    "type": "python",'
+
+  PM_ENTRY="$PM_ENTRY"$'\n''    }'
+  PACKAGE_MANAGERS+=("$PM_ENTRY")
+fi
+
+# Check for Cargo/Rust
+if [ -f "Cargo.toml" ]; then
+  PM_ENTRY='    {'$'\n''      "type": "cargo",'$'\n''      "has_cargo_toml": true'$'\n''    }'
+  PACKAGE_MANAGERS+=("$PM_ENTRY")
+fi
+
+# Check for Python
+if [ -f "requirements.txt" ] || [ -f "pyproject.toml" ]; then
+  PM_ENTRY='    {'$'\n''      "type": "python"'
   if [ -f "pyproject.toml" ]; then
-    echo '    "has_pyproject": true'
-  else
-    echo '    "has_requirements": true'
+    PM_ENTRY="$PM_ENTRY"','$'\n''      "has_pyproject": true'
   fi
-elif [ -f "go.mod" ]; then
-  echo '    "type": "go",'
-  echo '    "has_go_mod": true'
-else
-  echo '    "type": "unknown"'
+  if [ -f "requirements.txt" ]; then
+    PM_ENTRY="$PM_ENTRY"','$'\n''      "has_requirements": true'
+  fi
+  PM_ENTRY="$PM_ENTRY"$'\n''    }'
+  PACKAGE_MANAGERS+=("$PM_ENTRY")
 fi
 
-echo '  },'
+# Check for Go
+if [ -f "go.mod" ]; then
+  PM_ENTRY='    {'$'\n''      "type": "go",'$'\n''      "has_go_mod": true'$'\n''    }'
+  PACKAGE_MANAGERS+=("$PM_ENTRY")
+fi
 
-# Detect testing framework
-echo '  "testing": {'
+# Check for Ruby/Bundler
+if [ -f "Gemfile" ]; then
+  PM_ENTRY='    {'$'\n''      "type": "bundler",'$'\n''      "has_gemfile": true'
+  if [ -f "Gemfile.lock" ]; then
+    PM_ENTRY="$PM_ENTRY"','$'\n''      "has_lockfile": true'
+  fi
+  PM_ENTRY="$PM_ENTRY"$'\n''    }'
+  PACKAGE_MANAGERS+=("$PM_ENTRY")
+fi
 
+# Print package managers
+if [ ${#PACKAGE_MANAGERS[@]} -eq 0 ]; then
+  echo '  ],'
+else
+  for i in "${!PACKAGE_MANAGERS[@]}"; do
+    if [ $i -eq $((${#PACKAGE_MANAGERS[@]} - 1)) ]; then
+      echo "${PACKAGE_MANAGERS[$i]}"
+    else
+      echo "${PACKAGE_MANAGERS[$i]},"
+    fi
+  done
+  echo '  ],'
+fi
+
+# Detect testing frameworks (supports multiple)
+echo '  "testing_frameworks": ['
+
+TEST_FRAMEWORKS=()
+
+# Check JavaScript/TypeScript testing frameworks
 if [ -f "package.json" ]; then
-  if grep -q '"vitest"' package.json 2>/dev/null; then
-    echo '    "framework": "vitest"'
-  elif grep -q '"jest"' package.json 2>/dev/null; then
-    echo '    "framework": "jest"'
-  elif grep -q '"mocha"' package.json 2>/dev/null; then
-    echo '    "framework": "mocha"'
-  else
-    echo '    "framework": "unknown"'
+  if rg -q '"vitest"' package.json 2>/dev/null; then
+    TEST_FRAMEWORKS+=('    {"framework": "vitest", "language": "javascript"}')
   fi
-elif [ -f "pytest.ini" ] || grep -r "pytest" . 2>/dev/null | head -1 &>/dev/null; then
-  echo '    "framework": "pytest"'
-elif [ -f "Cargo.toml" ]; then
-  echo '    "framework": "cargo test"'
-elif [ -f "go.mod" ]; then
-  echo '    "framework": "go test"'
-else
-  echo '    "framework": "unknown"'
+  if rg -q '"jest"' package.json 2>/dev/null; then
+    TEST_FRAMEWORKS+=('    {"framework": "jest", "language": "javascript"}')
+  fi
+  if rg -q '"mocha"' package.json 2>/dev/null; then
+    TEST_FRAMEWORKS+=('    {"framework": "mocha", "language": "javascript"}')
+  fi
+  if rg -q '"cypress"' package.json 2>/dev/null; then
+    TEST_FRAMEWORKS+=('    {"framework": "cypress", "language": "javascript", "type": "e2e"}')
+  fi
+  if rg -q '"playwright"' package.json 2>/dev/null; then
+    TEST_FRAMEWORKS+=('    {"framework": "playwright", "language": "javascript", "type": "e2e"}')
+  fi
 fi
 
-echo '  },'
+# Check Python testing frameworks
+if [ -f "pytest.ini" ] || rg -q "pytest" . 2>/dev/null; then
+  TEST_FRAMEWORKS+=('    {"framework": "pytest", "language": "python"}')
+fi
 
-# Detect framework
-echo '  "framework": {'
+# Check Rust testing
+if [ -f "Cargo.toml" ]; then
+  TEST_FRAMEWORKS+=('    {"framework": "cargo test", "language": "rust"}')
+fi
 
+# Check Go testing
+if [ -f "go.mod" ]; then
+  TEST_FRAMEWORKS+=('    {"framework": "go test", "language": "go"}')
+fi
+
+# Check Ruby testing frameworks
+if [ -f "Gemfile" ]; then
+  if [ -d "spec" ] || rg -q "rspec" Gemfile 2>/dev/null; then
+    TEST_FRAMEWORKS+=('    {"framework": "rspec", "language": "ruby"}')
+  else
+    TEST_FRAMEWORKS+=('    {"framework": "minitest", "language": "ruby"}')
+  fi
+fi
+
+# Print testing frameworks
+if [ ${#TEST_FRAMEWORKS[@]} -eq 0 ]; then
+  echo '  ],'
+else
+  for i in "${!TEST_FRAMEWORKS[@]}"; do
+    if [ $i -eq $((${#TEST_FRAMEWORKS[@]} - 1)) ]; then
+      echo "${TEST_FRAMEWORKS[$i]}"
+    else
+      echo "${TEST_FRAMEWORKS[$i]},"
+    fi
+  done
+  echo '  ],'
+fi
+
+# Detect frameworks (supports multiple)
+echo '  "frameworks": ['
+
+FRAMEWORKS=()
+
+# Check JavaScript/TypeScript frameworks
 if [ -f "package.json" ]; then
-  if grep -q '"next"' package.json 2>/dev/null; then
-    echo '    "type": "nextjs"'
-  elif grep -q '"react"' package.json 2>/dev/null; then
-    echo '    "type": "react"'
-  elif grep -q '"vue"' package.json 2>/dev/null; then
-    echo '    "type": "vue"'
-  elif grep -q '"@angular/core"' package.json 2>/dev/null; then
-    echo '    "type": "angular"'
-  elif grep -q '"express"' package.json 2>/dev/null; then
-    echo '    "type": "express"'
-  elif grep -q '"fastify"' package.json 2>/dev/null; then
-    echo '    "type": "fastify"'
-  else
-    echo '    "type": "unknown"'
+  # Frontend frameworks
+  if rg -q '"next"' package.json 2>/dev/null; then
+    FRAMEWORKS+=('    {"type": "nextjs", "language": "javascript", "category": "fullstack"}')
   fi
-elif [ -f "Cargo.toml" ]; then
-  if grep -q "actix-web" Cargo.toml 2>/dev/null; then
-    echo '    "type": "actix-web"'
-  elif grep -q "rocket" Cargo.toml 2>/dev/null; then
-    echo '    "type": "rocket"'
-  else
-    echo '    "type": "rust"'
+  if rg -q '"react"' package.json 2>/dev/null && ! rg -q '"next"' package.json 2>/dev/null; then
+    FRAMEWORKS+=('    {"type": "react", "language": "javascript", "category": "frontend"}')
   fi
-elif [ -f "requirements.txt" ] || [ -f "pyproject.toml" ]; then
-  if grep -r "django" . 2>/dev/null | head -1 &>/dev/null; then
-    echo '    "type": "django"'
-  elif grep -r "flask" . 2>/dev/null | head -1 &>/dev/null; then
-    echo '    "type": "flask"'
-  elif grep -r "fastapi" . 2>/dev/null | head -1 &>/dev/null; then
-    echo '    "type": "fastapi"'
-  else
-    echo '    "type": "python"'
+  if rg -q '"vue"' package.json 2>/dev/null; then
+    FRAMEWORKS+=('    {"type": "vue", "language": "javascript", "category": "frontend"}')
   fi
-else
-  echo '    "type": "unknown"'
+  if rg -q '"@angular/core"' package.json 2>/dev/null; then
+    FRAMEWORKS+=('    {"type": "angular", "language": "javascript", "category": "frontend"}')
+  fi
+  if rg -q '"svelte"' package.json 2>/dev/null; then
+    FRAMEWORKS+=('    {"type": "svelte", "language": "javascript", "category": "frontend"}')
+  fi
+
+  # Backend frameworks
+  if rg -q '"express"' package.json 2>/dev/null; then
+    FRAMEWORKS+=('    {"type": "express", "language": "javascript", "category": "backend"}')
+  fi
+  if rg -q '"fastify"' package.json 2>/dev/null; then
+    FRAMEWORKS+=('    {"type": "fastify", "language": "javascript", "category": "backend"}')
+  fi
+  if rg -q '"nestjs"' package.json 2>/dev/null || rg -q '"@nestjs/core"' package.json 2>/dev/null; then
+    FRAMEWORKS+=('    {"type": "nestjs", "language": "javascript", "category": "backend"}')
+  fi
 fi
 
-echo '  },'
+# Check Rust frameworks
+if [ -f "Cargo.toml" ]; then
+  if rg -q "actix-web" Cargo.toml 2>/dev/null; then
+    FRAMEWORKS+=('    {"type": "actix-web", "language": "rust", "category": "backend"}')
+  fi
+  if rg -q "rocket" Cargo.toml 2>/dev/null; then
+    FRAMEWORKS+=('    {"type": "rocket", "language": "rust", "category": "backend"}')
+  fi
+  if rg -q "axum" Cargo.toml 2>/dev/null; then
+    FRAMEWORKS+=('    {"type": "axum", "language": "rust", "category": "backend"}')
+  fi
+fi
+
+# Check Python frameworks
+if [ -f "requirements.txt" ] || [ -f "pyproject.toml" ]; then
+  if rg -q "django" . 2>/dev/null; then
+    FRAMEWORKS+=('    {"type": "django", "language": "python", "category": "fullstack"}')
+  fi
+  if rg -q "flask" . 2>/dev/null; then
+    FRAMEWORKS+=('    {"type": "flask", "language": "python", "category": "backend"}')
+  fi
+  if rg -q "fastapi" . 2>/dev/null; then
+    FRAMEWORKS+=('    {"type": "fastapi", "language": "python", "category": "backend"}')
+  fi
+fi
+
+# Check Ruby frameworks
+if [ -f "Gemfile" ]; then
+  if [ -f "config/application.rb" ] || rg -q "rails" Gemfile 2>/dev/null; then
+    FRAMEWORKS+=('    {"type": "rails", "language": "ruby", "category": "fullstack"}')
+  fi
+  if rg -q "sinatra" Gemfile 2>/dev/null; then
+    FRAMEWORKS+=('    {"type": "sinatra", "language": "ruby", "category": "backend"}')
+  fi
+fi
+
+# Check Go frameworks
+if [ -f "go.mod" ]; then
+  if rg -q "gin-gonic/gin" go.mod 2>/dev/null; then
+    FRAMEWORKS+=('    {"type": "gin", "language": "go", "category": "backend"}')
+  fi
+  if rg -q "labstack/echo" go.mod 2>/dev/null; then
+    FRAMEWORKS+=('    {"type": "echo", "language": "go", "category": "backend"}')
+  fi
+fi
+
+# Print frameworks
+if [ ${#FRAMEWORKS[@]} -eq 0 ]; then
+  echo '  ],'
+else
+  for i in "${!FRAMEWORKS[@]}"; do
+    if [ $i -eq $((${#FRAMEWORKS[@]} - 1)) ]; then
+      echo "${FRAMEWORKS[$i]}"
+    else
+      echo "${FRAMEWORKS[$i]},"
+    fi
+  done
+  echo '  ],'
+fi
 
 # Check for common files
 echo '  "project_files": {'
@@ -154,7 +287,7 @@ echo '  },'
 # Directory structure
 echo '  "directory_structure": {'
 
-DIRS_TO_CHECK=("src" "lib" "app" "pages" "components" "api" "tests" "test" "__tests__" "scripts" "docs")
+DIRS_TO_CHECK=("src" "lib" "app" "pages" "components" "api" "tests" "test" "__tests__" "scripts" "docs" "spec")
 FOUND_DIRS=""
 
 for dir in "${DIRS_TO_CHECK[@]}"; do
@@ -186,7 +319,7 @@ fi
 
 # Check for testing
 if [ -f "package.json" ]; then
-  if grep -q '"vitest"' package.json 2>/dev/null || grep -q '"jest"' package.json 2>/dev/null; then
+  if rg -q '"vitest"' package.json 2>/dev/null || rg -q '"jest"' package.json 2>/dev/null; then
     SUGGESTIONS+=('    "Document testing approach and test commands"')
   fi
 fi
@@ -222,8 +355,16 @@ if [ -d ".github/workflows" ]; then
 fi
 
 # Check for database
-if grep -r "prisma" . 2>/dev/null | head -1 &>/dev/null || [ -f "prisma/schema.prisma" ]; then
-  SUGGESTIONS+=('    "Document database schema and migration commands"')
+if [ -f "prisma/schema.prisma" ] || rg -q "prisma" . 2>/dev/null; then
+  SUGGESTIONS+=('    "Document database schema and migration commands (Prisma)"')
+elif [ -d "db/migrate" ] && [ -f "Gemfile" ]; then
+  SUGGESTIONS+=('    "Document database schema and migration commands (Rails/ActiveRecord)"')
+elif [ -f "alembic.ini" ] || [ -d "alembic" ]; then
+  SUGGESTIONS+=('    "Document database schema and migration commands (Alembic)"')
+elif rg -q "sequelize" . 2>/dev/null; then
+  SUGGESTIONS+=('    "Document database schema and migration commands (Sequelize)"')
+elif rg -q "typeorm" . 2>/dev/null; then
+  SUGGESTIONS+=('    "Document database schema and migration commands (TypeORM)"')
 fi
 
 # Print suggestions
