@@ -66,6 +66,8 @@ if status is-interactive
             cd $root
         end
     end
+
+    starship init fish | source
 end
 
 # From homebrew caveats
