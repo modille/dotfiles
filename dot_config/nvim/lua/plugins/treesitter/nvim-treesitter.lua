@@ -22,6 +22,7 @@ return {
     ---@param opts lazyvim.TSConfig
     config = function(_, opts)
       -- From me:
+      -- (more from me after, as well)
       require("nvim-dap-repl-highlights").setup() -- must be setup before nvim-treesitter
 
       -- From LazyVim:
@@ -100,6 +101,9 @@ return {
           end
         end,
       })
+
+      -- From me:
+      vim.treesitter.language.register("sql", { "mysql" })
     end,
   },
 }
