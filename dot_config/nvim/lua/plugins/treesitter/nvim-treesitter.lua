@@ -8,6 +8,7 @@ return {
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, {
         "dap_repl",
+        "embedded_template",
         "kotlin",
         "sql",
       })
