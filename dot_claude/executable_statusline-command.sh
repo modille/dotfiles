@@ -17,6 +17,7 @@ input=$(cat)
 model=$(echo "$input" | jq -r '.model.display_name // "Unknown Model"')
 output_style=$(echo "$input" | jq -r '.output_style.name // "default"')
 current_dir=$(echo "$input" | jq -r '.workspace.current_dir // "."')
+cost=$(echo "$input" | jq -r '.cost.total_cost_usd')
 
 # Get project name (current directory name)
 project=$(basename "$current_dir")
@@ -33,5 +34,7 @@ statusline+=" ${WHITE}|${RESET} "
 statusline+="${MAGENTA}🧠 ${model}${RESET}"
 statusline+=" ${WHITE}|${RESET} "
 statusline+="${YELLOW}🎨 ${output_style}${RESET}"
+statusline+=" ${WHITE}|${RESET} "
+statusline+="${YELLOW}💵 ${cost}${RESET}"
 
 echo -e "$statusline"

@@ -1,8 +1,29 @@
 {
   "includeCoAuthoredBy": false,
-  "alwaysThinkingEnabled": true,
+  "permissions": {
+    "allow": [
+      "Bash(bin/rspec:*)",
+      "Bash(bin/rubocop:*)",
+      "Bash(cat:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git status:*)",
+      "Bash(head:*)",
+      "Bash(ls:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+      "Glob",
+      "Grep",
+      "Read",
+      "mcp__notion__notion-fetch",
+      "mcp__notion__notion-search"
+    ]
+  },
   "statusLine": {
     "type": "command",
     "command": "bash ~/.claude/statusline-command.sh"
-  }
+  },
+  "alwaysThinkingEnabled": false,
+  "model": "opus"
 }
