@@ -86,3 +86,11 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     })
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("spell"),
+  pattern = { "ruby", "eruby", "javascript", "typescript" },
+  callback = function()
+    vim.opt_local.spell = true
+  end,
+})
