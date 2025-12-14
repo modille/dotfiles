@@ -17,7 +17,7 @@ require("lazy").setup({
     -- import any extras modules here
     -- { import = "lazyvim.plugins.extras.ai.copilot" },
     -- { import = "lazyvim.plugins.extras.ai.copilot-chat" },
-    { import = "lazyvim.plugins.extras.ai.sidekick" },
+    -- { import = "lazyvim.plugins.extras.ai.sidekick" },
     { import = "lazyvim.plugins.extras.coding.luasnip" },
     { import = "lazyvim.plugins.extras.coding.mini-surround" },
     { import = "lazyvim.plugins.extras.coding.neogen" },

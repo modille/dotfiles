@@ -131,12 +131,77 @@ return {
     end,
   },
 
+  -- {
+  --   "folke/sidekick.nvim",
+  --   opts = {
+  --     nes = {
+  --       enabled = false,
+  --     },
+  --   },
+  -- },
+  --
+  -- lazy.nvim
   {
-    "folke/sidekick.nvim",
+    "folke/snacks.nvim",
+    ---@type snacks.Config
     opts = {
-      nes = {
+      dashboard = {
         enabled = false,
+        -- your dashboard configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
       },
     },
+  },
+
+  {
+    "3rd/diagram.nvim",
+    dependencies = {
+      "3rd/image.nvim",
+    },
+    opts = {
+      -- Disable automatic rendering for manual-only workflow
+      events = {
+        render_buffer = {}, -- Empty = no automatic rendering
+        clear_buffer = { "BufLeave" },
+      },
+      renderer_options = {
+        mermaid = {
+          theme = "dark",
+          scale = 2,
+        },
+      },
+    },
+    keys = {
+      {
+        "<leader>rd", -- "render diagram"
+        function()
+          require("diagram").show_diagram_hover()
+        end,
+        mode = "n",
+        ft = { "markdown", "norg" }, -- Only in these filetypes
+        desc = "Show diagram in new tab",
+      },
+    },
+  },
+
+  {
+    "zhisme/copy_with_context.nvim",
+    config = function()
+      require("copy_with_context").setup({
+        -- Customize mappings
+        mappings = {
+          relative = "<leader>cy",
+          absolute = "<leader>cY",
+          remote = "<leader>ce",
+        },
+        formats = {
+          default = "# {filepath}:{line}", -- Used by relative and absolute mappings
+          remote = "# {remote_url}",
+        },
+        -- whether to trim lines or not
+        trim_lines = false,
+      })
+    end,
   },
 }
