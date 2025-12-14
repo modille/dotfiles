@@ -21,6 +21,7 @@ if status is-interactive
     abbr --add gco "git checkout"
     abbr --add gd "git diff"
     abbr --add gdc "git diff --cached"
+    abbr --add gds "git diff --staged"
     abbr --add gf "git fetch"
     abbr --add gfp "git fetch --prune"
     abbr --add gpf "git push --force-with-lease"
@@ -44,7 +45,9 @@ if status is-interactive
     abbr --add wip "git commit --no-verify -m 'WIP [skip ci]'"
     # abbr --add handoff "git add --all && git commit --amend --no-edit && git push --force-with-lease"
 
-    test -e {$HOME}/.iterm2_shell_integration.fish; and source {$HOME}/.iterm2_shell_integration.fish
+    if test -e $HOME/.iterm2_shell_integration.fish
+        source $HOME/.iterm2_shell_integration.fish
+    end
     function iterm2_print_user_vars
         iterm2_set_user_var badge (dir_badges)
     end
@@ -74,11 +77,24 @@ end
 if test -d /opt/homebrew/opt/mysql@8.0
     # If you need to have mysql@8.0 first in your PATH, run:
     fish_add_path /opt/homebrew/opt/mysql@8.0/bin
+
     # For compilers to find mysql@8.0 you may need to set:
     set -gx LDFLAGS "-L/opt/homebrew/opt/mysql@8.0/lib"
     set -gx CPPFLAGS "-I/opt/homebrew/opt/mysql@8.0/include"
+
     # For pkg-config to find mysql@8.0 you may need to set:
     set -gx PKG_CONFIG_PATH "/opt/homebrew/opt/mysql@8.0/lib/pkgconfig"
+end
+if test -d /opt/homebrew/opt/mysql@8.4
+    # If you need to have mysql@8.4 first in your PATH, run:
+    fish_add_path /opt/homebrew/opt/mysql@8.4/bin
+
+    # For compilers to find mysql@8.4 you may need to set:
+    set -gx LDFLAGS "-L/opt/homebrew/opt/mysql@8.4/lib"
+    set -gx CPPFLAGS "-I/opt/homebrew/opt/mysql@8.4/include"
+
+    # For pkgconf to find mysql@8.4 you may need to set:
+    set -gx PKG_CONFIG_PATH "/opt/homebrew/opt/mysql@8.4/lib/pkgconfig"
 end
 if test -d /opt/homebrew/opt/sqlite
     # If you need to have sqlite first in your PATH, run:
@@ -122,8 +138,16 @@ if test -d /opt/homebrew/opt/libffi
     set -gx PKG_CONFIG_PATH /opt/homebrew/opt/libffi/lib/pkgconfig
 end
 
+if test -d /opt/homebrew/opt/libiconv
+    # If you need to have libiconv first in your PATH, run:
+    fish_add_path /opt/homebrew/opt/libiconv/bin
+
+    # For compilers to find libiconv you may need to set:
+    set -gx LDFLAGS -L/opt/homebrew/opt/libiconv/lib
+    set -gx CPPFLAGS -I/opt/homebrew/opt/libiconv/include
+end
 # ASDF configuration code
-if test -z $ASDF_DATA_DIR
+if test -z "$ASDF_DATA_DIR"
     set _asdf_shims "$HOME/.asdf/shims"
 else
     set _asdf_shims "$ASDF_DATA_DIR/shims"
