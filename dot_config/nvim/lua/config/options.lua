@@ -36,3 +36,13 @@ vim.opt.exrc = true
 
 -- other
 vim.opt.pumblend = 0 -- Fully opaque popup-menu (completion)
+vim.opt.shada = {
+  "!", -- Save and restore global variables (default enabled)
+  "'1000", -- Save marks for the last 1000 files (default 100)
+  "<5000", -- Save up to 5000 lines for each register (default 50)
+  "s100", -- Max size of an item in megabytes (100MB) (default 10)
+  "%", -- Save and restore the buffer list (default disabled)
+  ":10000", -- Save the last 10000 commands in history (default disabled)
+  "/10000", -- Save the last 10000 search patterns in history (default disabled)
+  "@10000", -- Save and restore the input-line history (default disabled)
+}
