@@ -1,5 +1,7 @@
 ---@type LazySpec
 return {
+  require("plugins.ai.copy_with_context_nvim"),
+
   require("plugins.coding.LuaSnip"),
   require("plugins.coding.blink_cmp"),
   require("plugins.coding.diffview_nvim"),
@@ -9,9 +11,11 @@ return {
   require("plugins.coding.mason_nvim"),
   require("plugins.coding.mini_pairs"),
   require("plugins.coding.nvim-cmp"),
+  require("plugins.coding.nvim-coverage"),
   require("plugins.coding.nvim-ts-context-commentstring"),
   require("plugins.coding.octo_nvim"),
   require("plugins.coding.supermaven-nvim"),
+  require("plugins.coding.treesj"),
   require("plugins.coding.vim-dispatch"),
   require("plugins.coding.vim-fugitive"),
   require("plugins.coding.vim-rhubarb"),
@@ -49,6 +53,7 @@ return {
 
   require("plugins.lsp.nvim-lspconfig"),
 
+  require("plugins.markdown.diagram_nvim"),
   require("plugins.markdown.image_nvim"),
   require("plugins.markdown.img-clip_nvim"),
 
@@ -61,6 +66,9 @@ return {
   require("plugins.ui.dashboard-nvim"),
   require("plugins.ui.lualine_nvim"),
   require("plugins.ui.noice_nvim"),
+  require("plugins.ui.snacks_nvim"),
+
+  require("plugins.util.chezmoi_vim"),
 
   require("plugins.wiki.obsidian_nvim"),
   require("plugins.wiki.vimwiki"),

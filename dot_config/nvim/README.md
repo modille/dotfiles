@@ -1,21 +1,27 @@
 # 💤 LazyVim
 
-A starter template for [LazyVim](https://github.com/LazyVim/LazyVim).
-Refer to the [documentation](https://lazyvim.github.io/installation) to get started.
+Refer to the LazyVim documentation: <https://www.lazyvim.org/>
 
 ## Things to test after updating
 
+- [ ] netrw-like directory browsing
+- [ ] colorscheme switching based on system
+- [ ] completion
+- [ ] snippets
 - [ ] jest test
 - [ ] jest debug
-- [ ] jest snippets describe, beforeach, async beforeeach
+- [ ] jest snippets: describe, beforeach, async beforeeach
 - [ ] cucumber-js test
 - [ ] cucumber-js debug
 - [ ] cucumber test
-- [ ] cucumber debug (pry)
+- [ ] cucumber debug
 - [ ] rspec test
-- [ ] rspec debug (pry)
-- [ ] tsserver LSP
-- [ ] solargraph LSP gem completion
-- [ ] netrw-like directory browsing
-- [ ] completion, snippets
-- [ ] colorscheme switching based on system
+- [ ] rspec debug
+- [ ] vtsls LSP
+- [ ] ruby LSP gem completion
+- [ ] javascript linting
+- [ ] javascript formatting
+- [ ] ruby linting
+- [ ] ruby formatting
+- [ ] eruby HTML linting
+- [ ] eruby HTML formatting
