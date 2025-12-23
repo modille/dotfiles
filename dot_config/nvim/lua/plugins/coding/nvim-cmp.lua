@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   {
     "nvim-cmp",
@@ -86,6 +87,10 @@ return {
         { name = "dotenv" },
         { name = "omni" }, -- for cucumber_language_server
         { name = "calc" },
+      })
+      table.insert(opts.sources, {
+        name = "lazydev",
+        group_index = 0, -- set group index to 0 to skip loading LuaLS completions
       })
 
       opts.formatting = {

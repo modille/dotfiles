@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   {
     "godlygeek/tabular", -- For aligning text

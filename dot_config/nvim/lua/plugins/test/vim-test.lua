@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   {
     "vim-test/vim-test",

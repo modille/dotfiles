@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   -- WIP: sonar for Dockerfile
   -- LspInfo showed it running, but never got any diagnostics

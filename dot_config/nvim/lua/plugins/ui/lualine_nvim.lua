@@ -91,6 +91,7 @@ function M.pretty_path(opts)
   end
 end
 
+---@type LazySpec
 return {
   {
     "nvim-lualine/lualine.nvim",

@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   {
     "quarto-dev/quarto-nvim",

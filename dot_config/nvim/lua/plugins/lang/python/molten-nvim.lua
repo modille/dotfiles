@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   {
     "benlubas/molten-nvim",
