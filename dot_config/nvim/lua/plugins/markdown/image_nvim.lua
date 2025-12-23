@@ -1,20 +1,14 @@
 ---@type LazySpec
 return {
   {
-    "vhyrro/luarocks.nvim",
-    priority = 1001, -- this plugin needs to run before anything else
-    opts = {
-      rocks = { "magick" },
-    },
-  },
-  {
     "3rd/image.nvim",
     dependencies = { "vhyrro/luarocks.nvim" },
+    build = false, -- so that it doesn't build the rock https://github.com/3rd/image.nvim/issues/91#issuecomment-2453430239
     config = function()
       require("image").setup({
         backend = "kitty",
         kitty_method = "normal",
-        processor = "magick_rock",
+        processor = "magick_cli",
         integrations = {
           markdown = {
             enabled = true,
