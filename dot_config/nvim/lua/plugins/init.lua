@@ -1,7 +1,5 @@
 ---@type LazySpec
 return {
-  -- TODO: fix :intro
-  -- https://github.com/folke/lazy.nvim/issues/1038#issuecomment-1733035996
   -- TODO: Try sidekick instead...
   -- require("plugins.ai.avante_nvim"),
   -- require("plugins.ai.copilot_lua"),
