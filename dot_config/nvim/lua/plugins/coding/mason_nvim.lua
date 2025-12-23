@@ -7,6 +7,7 @@ return {
         "dockerfile-language-server",
         "eslint-lsp",
         "fish-lsp",
+        "herb-language-server",
         "html-lsp",
         "java-debug-adapter",
         "java-test",

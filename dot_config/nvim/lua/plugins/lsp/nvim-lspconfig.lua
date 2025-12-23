@@ -29,6 +29,13 @@ return {
         },
         dockerls = {},
         docker_compose_language_service = {},
+        herb_ls = {
+          settings = {
+            languageServerHerb = {
+              formatter = { enabled = true },
+            },
+          },
+        },
         html = {
           init_options = {
             configurationSection = { "html", "css", "javascript" },
@@ -75,6 +82,7 @@ return {
           -- https://shopify.github.io/ruby-lsp/editors#lazyvim-lsp
           mason = false,
           cmd = { "ruby-lsp" },
+          filetypes = { "ruby" }, -- exclude "eruby", use herb for that instead
           -- https://epona.me/blog/implementing-vs-code-like-ruby-lsp-features-in-neovim/#adding-ruby-lsp-configuration
           on_attach = function(client, bufnr)
             client.commands = client.commands or {}
