@@ -19,6 +19,9 @@ output_style=$(echo "$input" | jq -r '.output_style.name // "default"')
 current_dir=$(echo "$input" | jq -r '.workspace.current_dir // "."')
 cost=$(echo "$input" | jq -r '.cost.total_cost_usd')
 
+# Get context usage percentage
+used_pct=$(echo "$input" | jq -r '.context_window.used_percentage // 0 | floor')
+
 # Get project name (current directory name)
 project=$(basename "$current_dir")
 
@@ -34,6 +37,12 @@ statusline+=" ${WHITE}|${RESET} "
 statusline+="${MAGENTA}🧠 ${model}${RESET}"
 statusline+=" ${WHITE}|${RESET} "
 statusline+="${YELLOW}🎨 ${output_style}${RESET}"
+statusline+=" ${WHITE}|${RESET} "
+if [ "$used_pct" -gt 40 ]; then
+    statusline+="${RED}📊 ${used_pct}%${RESET}"
+else
+    statusline+="${CYAN}📊 ${used_pct}%${RESET}"
+fi
 statusline+=" ${WHITE}|${RESET} "
 statusline+="${YELLOW}💵 ${cost}${RESET}"
 
