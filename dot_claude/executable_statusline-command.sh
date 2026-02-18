@@ -17,7 +17,7 @@ input=$(cat)
 model=$(echo "$input" | jq -r '.model.display_name // "Unknown Model"')
 output_style=$(echo "$input" | jq -r '.output_style.name // "default"')
 current_dir=$(echo "$input" | jq -r '.workspace.current_dir // "."')
-cost=$(echo "$input" | jq -r '.cost.total_cost_usd')
+cost=$(printf '%.2f' "$(echo "$input" | jq -r '.cost.total_cost_usd // 0')")
 
 # Get context usage percentage
 used_pct=$(echo "$input" | jq -r '.context_window.used_percentage // 0 | floor')
