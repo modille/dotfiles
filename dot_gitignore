@@ -2,6 +2,9 @@
 modille_*
 .idea/icon.svg
 
+.claude/plans/
+.claude/worktrees/
+
 # LazyVim project-specific plugin specs
 .lazy.lua
 
