@@ -51,6 +51,78 @@ vim.keymap.set("n", "]e", "<Plug>(unimpaired-move-down)")
 vim.keymap.set("x", "[e", "<Plug>(unimpaired-move-selection-up)")
 vim.keymap.set("x", "]e", "<Plug>(unimpaired-move-selection-down)")
 
+-- Yank path
+vim.keymap.set("n", "<leader>yp", function()
+  local buf = vim.api.nvim_get_current_buf()
+  local file = vim.api.nvim_buf_get_name(buf)
+
+  if file == "" then
+    vim.notify("No file path", vim.log.levels.WARN)
+    return
+  end
+
+  local function git_root(path)
+    local root = vim.fn.systemlist({
+      "git",
+      "-C",
+      vim.fn.fnamemodify(path, ":h"),
+      "rev-parse",
+      "--show-toplevel",
+    })[1]
+
+    if vim.v.shell_error ~= 0 or not root or root == "" then
+      return nil
+    end
+
+    return root
+  end
+
+  local choices = {
+    {
+      label = "Relative to git root",
+      value = function()
+        local root = git_root(file)
+        if not root then
+          return vim.fn.fnamemodify(file, ":.")
+        end
+        return vim.fn.fnamemodify(file, ":." .. root)
+      end,
+    },
+    {
+      label = "Absolute path",
+      value = function()
+        return vim.fn.fnamemodify(file, ":p")
+      end,
+    },
+    {
+      label = "File name only",
+      value = function()
+        return vim.fn.fnamemodify(file, ":t")
+      end,
+    },
+  }
+
+  vim.ui.select(choices, {
+    prompt = "Yank path as…",
+    format_item = function(item)
+      return item.label
+    end,
+  }, function(choice)
+    if not choice then
+      return
+    end
+
+    local path = choice.value()
+
+    -- unnamed register (local)
+    vim.fn.setreg('"', path)
+    -- system clipboard
+    vim.fn.setreg("+", path)
+
+    vim.notify("Copied: " .. path)
+  end)
+end, { desc = "Copy path" })
+
 vim.keymap.set("n", "<leader>tid", function()
   -- Get the current buffer and all lines in the buffer
   local bufnr = vim.api.nvim_get_current_buf()
