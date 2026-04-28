@@ -97,6 +97,9 @@
     "hideMenubarIcon" : {
       "bool" : false
     },
+    "horizontalSplitRatio" : {
+      "float" : 50
+    },
     "ignoreDragSnapToo" : {
       "int" : 0
     },
@@ -163,11 +166,17 @@
     "screenEdgeGapsOnMainScreenOnly" : {
       "bool" : false
     },
+    "screensOrderedByX" : {
+      "int" : 0
+    },
     "selectedCycleSizes" : {
       "int" : 0
     },
     "shortEdgeSnapAreaSize" : {
       "float" : 145
+    },
+    "showAdditionalSizesInMenu" : {
+      "int" : 0
     },
     "showAllActionsInMenu" : {
       "int" : 0
@@ -232,6 +241,12 @@
     "unsnapRestore" : {
       "int" : 0
     },
+    "verticalSplitRatio" : {
+      "float" : 50
+    },
+    "widthStepSize" : {
+      "float" : 30
+    },
     "windowSnapping" : {
       "int" : 0
     }
@@ -239,18 +254,26 @@
   "shortcuts" : {
     "bottomHalf" : {
       "keyCode" : 38,
-      "modifierFlags" : 786432
+      "modifierFlags" : 1310720
     },
     "bottomLeft" : {
       "keyCode" : 45,
-      "modifierFlags" : 786432
+      "modifierFlags" : 1310720
     },
     "bottomRight" : {
       "keyCode" : 46,
+      "modifierFlags" : 1310720
+    },
+    "center" : {
+      "keyCode" : 8,
       "modifierFlags" : 786432
     },
     "centerThird" : {
       "keyCode" : 3,
+      "modifierFlags" : 786432
+    },
+    "centerTwoThirds" : {
+      "keyCode" : 15,
       "modifierFlags" : 786432
     },
     "firstThird" : {
@@ -271,19 +294,27 @@
     },
     "lastTwoThirds" : {
       "keyCode" : 17,
-      "modifierFlags" : 786432
+      "modifierFlags" : 1310720
     },
     "leftHalf" : {
       "keyCode" : 4,
-      "modifierFlags" : 786432
+      "modifierFlags" : 1310720
     },
     "maximize" : {
       "keyCode" : 36,
-      "modifierFlags" : 786432
+      "modifierFlags" : 1310720
     },
     "maximizeHeight" : {
       "keyCode" : 126,
       "modifierFlags" : 917504
+    },
+    "nextDisplay" : {
+      "keyCode" : 124,
+      "modifierFlags" : 1835008
+    },
+    "previousDisplay" : {
+      "keyCode" : 123,
+      "modifierFlags" : 1835008
     },
     "reflowTodo" : {
       "keyCode" : 45,
@@ -295,7 +326,7 @@
     },
     "rightHalf" : {
       "keyCode" : 37,
-      "modifierFlags" : 786432
+      "modifierFlags" : 1310720
     },
     "smaller" : {
       "keyCode" : 27,
@@ -307,16 +338,16 @@
     },
     "topHalf" : {
       "keyCode" : 40,
-      "modifierFlags" : 786432
+      "modifierFlags" : 1310720
     },
     "topLeft" : {
       "keyCode" : 32,
-      "modifierFlags" : 786432
+      "modifierFlags" : 1310720
     },
     "topRight" : {
       "keyCode" : 34,
-      "modifierFlags" : 786432
+      "modifierFlags" : 1310720
     }
   },
-  "version" : "92"
+  "version" : "101"
 }
