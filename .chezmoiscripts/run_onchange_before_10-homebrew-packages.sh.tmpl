@@ -7,7 +7,6 @@ set -o pipefail
 
 # {{- if eq .chezmoi.os "darwin" }}
 HOMEBREW_NO_INSTALL_UPGRADE=TRUE HOMEBREW_NO_INSTALL_CLEANUP=1 /opt/homebrew/bin/brew bundle --file=- <<EOF
-tap "neovim/neovim"
 tap "osx-cross/avr"
 tap "qmk/qmk"
 brew "readline"
@@ -58,7 +57,6 @@ brew "maven"
 brew "mycli"
 brew "mysql"
 brew "tree-sitter"
-brew "neovim"
 brew "newman"
 brew "nginx"
 brew "ollama"
