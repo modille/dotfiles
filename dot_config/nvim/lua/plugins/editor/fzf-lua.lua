@@ -163,7 +163,7 @@ return {
           local search = vim.fn.input("wiki 🔍 ")
           require("fzf-lua").grep({
             search = search,
-            cwd = os.getenv("HOME") .. "/Dropbox/vimwiki",
+            cwd = os.getenv("HOME") .. "/Dropbox/obsidian",
             rg_opts = "--column --line-number --no-heading --color=always --smart-case --max-columns=4096 -e",
           })
         end,

@@ -28,6 +28,7 @@ return {
         substitutions = {},
       },
       daily_notes = {
+        folder = "daily",
         template = "daily.md",
       },
       mappings = {
@@ -75,6 +76,40 @@ return {
       -- Either 'wiki' or 'markdown'.
       preferred_link_style = "markdown",
     },
+    -- Vault structure (PARA method):
+    --   0-inbox/                    quick capture, triage later
+    --   1-projects/{project}/       active stories with end dates
+    --   2-areas/                    ongoing responsibilities (brag, 1on1, peer-reviews)
+    --   3-resources/learnings/      reference material
+    --   4-archive/                  completed/inactive items
+    --   daily/                      daily notes
+    --
+    -- Custom commands for creating notes with templates in specific directories:
+    --   :ObsidianInbox random-thought               → 0-inbox/random-thought.md
+    --   :ObsidianStory core CORE-123 feature name   → 1-projects/core/CORE-123-feature-name.md
+    --   :ObsidianStory alpha ALPHA-45 thing         → 1-projects/alpha/ALPHA-45-thing.md
+    --   :ObsidianLearning circuit-breaker           → 3-resources/learnings/circuit-breaker.md
+    config = function(_, opts)
+      require("obsidian").setup(opts)
+
+      vim.api.nvim_create_user_command("ObsidianInbox", function(cmd)
+        vim.cmd("ObsidianNew 0-inbox/" .. cmd.args)
+        vim.cmd("ObsidianTemplate inbox")
+      end, { nargs = 1 })
+
+      vim.api.nvim_create_user_command("ObsidianStory", function(cmd)
+        local args = vim.split(cmd.args, " ", { trimempty = true })
+        local project = args[1]
+        local name = table.concat(args, "-", 2)
+        vim.cmd("ObsidianNew 1-projects/" .. project .. "/" .. name)
+        vim.cmd("ObsidianTemplate story")
+      end, { nargs = "+" })
+
+      vim.api.nvim_create_user_command("ObsidianLearning", function(cmd)
+        vim.cmd("ObsidianNew 3-resources/learnings/" .. cmd.args)
+        vim.cmd("ObsidianTemplate learning")
+      end, { nargs = 1 })
+    end,
     keys = {
       { "<leader>w<leader>w", "<cmd>Obsidian today<cr>" },
       { "<leader>w<leader>y", "<cmd>Obsidian yesterday<cr>" },
