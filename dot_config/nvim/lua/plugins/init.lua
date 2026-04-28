@@ -56,6 +56,8 @@ return {
   require("plugins.markdown.diagram_nvim"),
   require("plugins.markdown.image_nvim"),
   require("plugins.markdown.img-clip_nvim"),
+  require("plugins.markdown.render-markdown_nvim"),
+  require("plugins.markdown.vivify_vim"),
 
   require("plugins.test.neotest"),
   require("plugins.test.vim-test"),
