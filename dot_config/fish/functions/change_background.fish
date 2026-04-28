@@ -80,6 +80,12 @@ function change_background --argument mode_setting
             set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/light_config.yml,$HOME/.config/lazygit/tokyonight_day.yml"
     end
 
+    # Claude Code
+    # (only takes effect on new sessions. https://github.com/anthropics/claude-code/issues/12767 "not planned")
+    if test -e ~/.claude.json
+        sed -i "s/\"theme\": \".*\"/\"theme\": \"$mode\"/" ~/.claude.json
+    end
+
     # Firefox
     # The Zen Fox extension README mentioned a fork that used native messaging
     # I applied those changes on top of the latest Zen Fox and it worked

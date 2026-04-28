@@ -1,29 +1,39 @@
 {
-  "includeCoAuthoredBy": false,
+  "respectGitignore": false,
   "permissions": {
     "allow": [
       "Bash(bin/rspec:*)",
       "Bash(bin/rubocop:*)",
+      "Bash(bundle exec rspec:*)",
       "Bash(cat:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr view:*)",
       "Bash(git diff:*)",
+      "Bash(git fetch:*)",
       "Bash(git log:*)",
+      "Bash(git remote get-url:*)",
       "Bash(git show:*)",
       "Bash(git status:*)",
       "Bash(head:*)",
       "Bash(ls:*)",
       "Bash(tail:*)",
       "Bash(wc:*)",
+      "Bash(yarn test:*)",
       "Glob",
       "Grep",
       "Read",
+      "WebSearch",
       "mcp__notion__notion-fetch",
       "mcp__notion__notion-search"
     ]
   },
+  "model": "sonnet[1m]",
+  "effortLevel": "medium",
   "statusLine": {
     "type": "command",
     "command": "bash ~/.claude/statusline-command.sh"
   },
-  "alwaysThinkingEnabled": false,
-  "model": "opus"
+  "editorMode": "vim",
+  "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
 }
