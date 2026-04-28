@@ -1,9 +1,15 @@
 # vim: set filetype=toml:
 # {{- $enableSupermaven := promptBoolOnce . "enableSupermaven" "Enable Supermaven? (y/n)" false }}
+# {{- $enablePco := promptBoolOnce . "enablePco" "Enable PCO? (y/n)" false }}
 
 [data]
 # {{- if $enableSupermaven }}
 enableSupermaven = true
 # {{- else }}
 enableSupermaven = false
+# {{- end }}
+# {{- if $enablePco }}
+enablePco = true
+# {{- else }}
+enablePco = false
 # {{- end }}
