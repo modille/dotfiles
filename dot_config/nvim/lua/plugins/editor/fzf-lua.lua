@@ -175,7 +175,7 @@ return {
           require("fzf-lua").files({
             prompt = "dotfiles> ",
             cwd = os.getenv("HOME") .. "/.local/share/chezmoi",
-            no_hidden = true,
+            no_hidden = false,
           })
         end,
         desc = "file dotfiles select",
