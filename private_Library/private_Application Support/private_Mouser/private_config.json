@@ -1,0 +1,43 @@
+{
+  "version": 9,
+  "active_profile": "default",
+  "profiles": {
+    "default": {
+      "label": "Default (All Apps)",
+      "apps": [],
+      "mappings": {
+        "middle": "mouse_middle_click",
+        "gesture": "custom:super+ctrl+space",
+        "gesture_left": "none",
+        "gesture_right": "none",
+        "gesture_up": "mission_control",
+        "gesture_down": "none",
+        "xbutton1": "browser_back",
+        "xbutton2": "browser_forward",
+        "hscroll_left": "none",
+        "hscroll_right": "none",
+        "mode_shift": "switch_scroll_mode"
+      }
+    }
+  },
+  "settings": {
+    "start_minimized": true,
+    "start_at_login": true,
+    "hscroll_threshold": 1,
+    "invert_hscroll": false,
+    "invert_vscroll": false,
+    "dpi": 1000,
+    "smart_shift_mode": "ratchet",
+    "smart_shift_enabled": false,
+    "smart_shift_threshold": 25,
+    "gesture_threshold": 50,
+    "gesture_deadzone": 40,
+    "gesture_timeout_ms": 3000,
+    "gesture_cooldown_ms": 500,
+    "appearance_mode": "system",
+    "debug_mode": false,
+    "device_layout_overrides": {},
+    "language": "en",
+    "ignore_trackpad": true
+  }
+}
