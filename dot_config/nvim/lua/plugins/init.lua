@@ -22,6 +22,7 @@ return {
   require("plugins.coding.yanky_nvim"),
 
   require("plugins.colorscheme.bgwinch_nvim"),
+  require("plugins.colorscheme.catppuccin"),
   require("plugins.colorscheme.solarized-osaka_nvim"),
   require("plugins.colorscheme.tokyonight_nvim"),
 
