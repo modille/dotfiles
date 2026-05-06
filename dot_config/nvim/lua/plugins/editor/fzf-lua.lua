@@ -6,7 +6,7 @@ return {
 
     opts = {
       "telescope",
-      fzf_colors = { true },
+      -- fzf_colors = { true },
       fzf_opts = {
         ["--history"] = vim.fn.stdpath("data") .. "/fzf-lua-history",
       },

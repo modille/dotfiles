@@ -71,13 +71,15 @@ function change_background --argument mode_setting
     # bat, delta, lazygit
     switch $mode
         case dark
-            # set -Ux BAT_THEME 'Solarized (dark)'
-            set -Ux BAT_THEME tokyonight_moon
-            set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/dark_config.yml,$HOME/.config/lazygit/tokyonight_moon.yml"
+            set -Ux BAT_THEME 'Solarized (dark)'
+            set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/dark_config.yml"
+            # set -Ux BAT_THEME tokyonight_moon
+            # set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/dark_config.yml,$HOME/.config/lazygit/tokyonight_moon.yml"
         case light
-            # set -Ux BAT_THEME 'Solarized (light)'
-            set -Ux BAT_THEME tokyonight_day
-            set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/light_config.yml,$HOME/.config/lazygit/tokyonight_day.yml"
+            set -Ux BAT_THEME 'Solarized (light)'
+            set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/light_config.yml"
+            # set -Ux BAT_THEME tokyonight_day
+            # set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/light_config.yml,$HOME/.config/lazygit/tokyonight_day.yml"
     end
 
     # Claude Code

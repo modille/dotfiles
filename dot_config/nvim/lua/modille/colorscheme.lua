@@ -4,12 +4,14 @@ local M = {}
 
 function M.dark()
   vim.o.background = "dark"
-  vim.cmd.colorscheme("tokyonight-moon")
+  -- vim.cmd.colorscheme("tokyonight-moon")
+  vim.cmd.colorscheme("solarized-osaka")
 end
 
 function M.light()
   vim.o.background = "light"
-  vim.cmd.colorscheme("tokyonight-day")
+  -- vim.cmd.colorscheme("tokyonight-day")
+  vim.cmd.colorscheme("solarized-osaka")
 end
 
 function M.setup()
