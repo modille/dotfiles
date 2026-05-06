@@ -3,6 +3,8 @@ if status is-interactive
     set fish_cursor_default block
     set fish_cursor_insert line
     set fish_cursor_replace_one underscore
+    fish_config theme choose catppuccin-macchiato
+    # fish_config theme choose solarized
 
     # https://github.com/wez/wezterm/issues/2781#issuecomment-1324143452
     set fish_vi_force_cursor 1
