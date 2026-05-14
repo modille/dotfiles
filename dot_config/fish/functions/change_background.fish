@@ -68,12 +68,13 @@ function change_background --argument mode_setting
     # Supported in 3.5.0
     # https://gitlab.com/gnachman/iterm2/-/issues/7943
 
-    # bat, delta, lazygit
+    # bat, delta, lazygit, starship
     switch $mode
         case dark
             # Catppuccin
             set -Ux BAT_THEME 'Catppuccin Macchiato'
             set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/dark_config.yml"
+            starship config palette catppuccin_macchiato
             # Solarized
             # set -Ux BAT_THEME 'Solarized (dark)'
             # set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/dark_config.yml"
@@ -84,6 +85,7 @@ function change_background --argument mode_setting
             # Catppuccin
             set -Ux BAT_THEME 'Catppuccin Latte'
             set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/light_config.yml"
+            starship config palette catppuccin_latte
             # Solarized
             # set -Ux BAT_THEME 'Solarized (light)'
             # set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/light_config.yml"
