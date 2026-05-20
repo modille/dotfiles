@@ -1,7 +1,7 @@
 --- @type LazySpec
 return {
   {
-    "alker0/chezmoi.vim",
+    "alker0/chezmoi.vim", -- set ft for chezmoi-managed files
     lazy = false,
     init = function()
       -- This option is required.

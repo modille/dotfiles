@@ -72,6 +72,7 @@ return {
   require("plugins.ui.noice_nvim"),
   require("plugins.ui.snacks_nvim"),
 
+  require("plugins.util.chezmoi_nvim"),
   require("plugins.util.chezmoi_vim"),
 
   require("plugins.wiki.obsidian_nvim"),

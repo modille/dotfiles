@@ -72,32 +72,26 @@ function change_background --argument mode_setting
     switch $mode
         case dark
             # Catppuccin
-            set -Ux BAT_THEME 'Catppuccin Macchiato'
-            set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/dark_config.yml"
-            starship config palette catppuccin_macchiato
-            # Solarized
-            # set -Ux BAT_THEME 'Solarized (dark)'
+            # set -Ux BAT_THEME 'Catppuccin Macchiato'
             # set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/dark_config.yml"
+            # starship config palette catppuccin_macchiato
+            # Solarized
+            set -Ux BAT_THEME 'Solarized (dark)'
+            set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/dark_config.yml"
             # TokyoNight
             # set -Ux BAT_THEME tokyonight_moon
             # set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/dark_config.yml,$HOME/.config/lazygit/tokyonight_moon.yml"
         case light
             # Catppuccin
-            set -Ux BAT_THEME 'Catppuccin Latte'
-            set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/light_config.yml"
-            starship config palette catppuccin_latte
-            # Solarized
-            # set -Ux BAT_THEME 'Solarized (light)'
+            # set -Ux BAT_THEME 'Catppuccin Latte'
             # set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/light_config.yml"
+            # starship config palette catppuccin_latte
+            # Solarized
+            set -Ux BAT_THEME 'Solarized (light)'
+            set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/light_config.yml"
             # TokyoNight
             # set -Ux BAT_THEME tokyonight_day
             # set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/light_config.yml,$HOME/.config/lazygit/tokyonight_day.yml"
-    end
-
-    # Claude Code
-    # (only takes effect on new sessions. https://github.com/anthropics/claude-code/issues/12767 "not planned")
-    if test -e ~/.claude.json
-        sed -i "s/\"theme\": \".*\"/\"theme\": \"$mode\"/" ~/.claude.json
     end
 
     # Firefox
