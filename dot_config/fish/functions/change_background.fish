@@ -50,24 +50,6 @@ function change_background --argument mode_setting
     # 2023-04-04: iTerm2 was sending SIGWINCH to all running processes, but it seemed to have broken, so send it manually to nvim for now:
     pkill -WINCH nvim
 
-    # Kitty
-    switch $mode
-        case dark
-            rm -f ~/.config/kitty/theme.conf
-            ln -s ~/.config/kitty/dark-theme.conf ~/.config/kitty/theme.conf
-        case light
-            rm -f ~/.config/kitty/theme.conf
-            ln -s ~/.config/kitty/light-theme.conf ~/.config/kitty/theme.conf
-    end
-    for pid in "$(ps -x | grep '/Applications/kitty.app/Contents/MacOS/kitty' | grep -v grep | awk '{ print $1 }')"
-        # reload via SIGUSR1
-        kill -SIGUSR1 $pid
-    end
-
-    # iTerm2
-    # Supported in 3.5.0
-    # https://gitlab.com/gnachman/iterm2/-/issues/7943
-
     # bat, delta, lazygit, starship
     switch $mode
         case dark
@@ -108,7 +90,4 @@ function change_background --argument mode_setting
     #   case light
     #     open -a 'Google Chrome' 'https://chrome.google.com/webstore/detail/solarized-light/kkaomacmcjmeajgdkgbemiigiphgcabj'
     # end
-
-    # Slack
-    # TODO: Built-in sidebar themes can do this, but custom ones can't yet
 end
