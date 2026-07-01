@@ -7,6 +7,7 @@
 add_newline = false
 
 # palette = "catppuccin_macchiato"
+palette = "solarized"
 
 # Replace the '❯' symbol in the prompt with '$'
 [character]
@@ -385,3 +386,7 @@ disabled = true
 # base = "#1e1e2e"
 # mantle = "#181825"
 # crust = "#11111b"
+
+[palettes.solarized]
+cyan = "#2aa198"
+green = "#859900"
