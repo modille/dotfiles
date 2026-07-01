@@ -15,6 +15,7 @@ input=$(cat)
 
 # Extract information from JSON input
 model=$(echo "$input" | jq -r '.model.display_name // "Unknown Model"')
+effort=$(echo "$input" | jq -r '.effort.level // empty')
 output_style=$(echo "$input" | jq -r '.output_style.name // "default"')
 current_dir=$(echo "$input" | jq -r '.workspace.current_dir // "."')
 cost=$(printf '%.2f' "$(echo "$input" | jq -r '.cost.total_cost_usd // 0')")
@@ -34,7 +35,16 @@ statusline+="${BLUE}📁 ${project}${RESET}"
 statusline+=" ${WHITE}|${RESET} "
 statusline+="${GREEN}🌿 ${git_branch}${RESET}"
 statusline+=" ${WHITE}|${RESET} "
-statusline+="${MAGENTA}🧠 ${model}${RESET}"
+if [ -n "$effort" ]; then
+  case "$effort" in
+    high|xhigh|max) effort_color="$RED" ;;
+    *) effort_color="$MAGENTA" ;;
+  esac
+  effort_suffix=" ${effort_color}[${effort}]"
+else
+  effort_suffix=""
+fi
+statusline+="${MAGENTA}🧠 ${model}${effort_suffix}${RESET}"
 statusline+=" ${WHITE}|${RESET} "
 statusline+="${YELLOW}🎨 ${output_style}${RESET}"
 statusline+=" ${WHITE}|${RESET} "
