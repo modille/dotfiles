@@ -20,8 +20,9 @@ output_style=$(echo "$input" | jq -r '.output_style.name // "default"')
 current_dir=$(echo "$input" | jq -r '.workspace.current_dir // "."')
 cost=$(printf '%.2f' "$(echo "$input" | jq -r '.cost.total_cost_usd // 0')")
 
-# Get context usage percentage
-used_pct=$(echo "$input" | jq -r '.context_window.used_percentage // 0 | floor')
+# Get total context tokens used
+total_tokens=$(echo "$input" | jq -r '.context_window.total_input_tokens // 0 | floor')
+total_tokens_fmt=$(printf '%d' "$total_tokens" | rev | sed 's/\(...\)/\1,/g' | rev | sed 's/^,//')
 
 # Get project name (current directory name)
 project=$(basename "$current_dir")
@@ -48,10 +49,10 @@ statusline+="${MAGENTA}🧠 ${model}${effort_suffix}${RESET}"
 statusline+=" ${WHITE}|${RESET} "
 statusline+="${YELLOW}🎨 ${output_style}${RESET}"
 statusline+=" ${WHITE}|${RESET} "
-if [ "$used_pct" -gt 40 ]; then
-    statusline+="${RED}📊 ${used_pct}%${RESET}"
+if [ "$total_tokens" -ge 120000 ]; then
+    statusline+="${RED}🌡️ ${total_tokens_fmt}${RESET}"
 else
-    statusline+="${CYAN}📊 ${used_pct}%${RESET}"
+    statusline+="${CYAN}🌡️ ${total_tokens_fmt}${RESET}"
 fi
 statusline+=" ${WHITE}|${RESET} "
 statusline+="${YELLOW}💵 ${cost}${RESET}"
