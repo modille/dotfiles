@@ -38,8 +38,8 @@ statusline+="${GREEN}🌿 ${git_branch}${RESET}"
 statusline+=" ${WHITE}|${RESET} "
 if [ -n "$effort" ]; then
   case "$effort" in
-    high|xhigh|max) effort_color="$RED" ;;
-    *) effort_color="$MAGENTA" ;;
+  high | xhigh | max) effort_color="$RED" ;;
+  *) effort_color="$MAGENTA" ;;
   esac
   effort_suffix=" ${effort_color}[${effort}]"
 else
@@ -49,10 +49,10 @@ statusline+="${MAGENTA}🧠 ${model}${effort_suffix}${RESET}"
 statusline+=" ${WHITE}|${RESET} "
 statusline+="${YELLOW}🎨 ${output_style}${RESET}"
 statusline+=" ${WHITE}|${RESET} "
-if [ "$total_tokens" -ge 120000 ]; then
-    statusline+="${RED}🌡️ ${total_tokens_fmt}${RESET}"
+if [ "$total_tokens" -ge 150000 ]; then
+  statusline+="${RED}🌡️ ${total_tokens_fmt}${RESET}"
 else
-    statusline+="${CYAN}🌡️ ${total_tokens_fmt}${RESET}"
+  statusline+="${CYAN}🌡️ ${total_tokens_fmt}${RESET}"
 fi
 statusline+=" ${WHITE}|${RESET} "
 statusline+="${YELLOW}💵 ${cost}${RESET}"
