@@ -23,13 +23,3 @@ Avoid simply agreeing with my points or taking my conclusions at face value. I w
 
 - When considering code, assume extreme proficiency in Ruby.
 - Think carefully and only action the specific task I have given you with the most concise and elegant solution that changes as little code as possible.
-
-## Tooling for shell interactions
-
-- Is it about finding FILES? use `fd`
-- Is it about finding TEXT/strings? use `rg`
-- Is it about finding CODE STRUCTURE? use `ast-grep`
-- Is it about interacting with JSON? use `jq`
-- Is it about interacting with YAML or XML? use `yq`
-
-Avoid using `find` combined with `-exec grep`.
