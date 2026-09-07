@@ -91,4 +91,23 @@ defaults write "Apple Global Domain" "NSAutomaticDashSubstitutionEnabled" -bool 
 # defaults write "com.apple.AppleMultitouchTrackpad" "Clicking" '0'
 # defaults write "com.apple.driver.AppleBluetoothMultitouch.trackpad" "TrackpadTwoFingerDoubleTapGesture" '1'
 # defaults write "com.apple.AppleMultitouchTrackpad" "TrackpadTwoFingerDoubleTapGesture" '1'
+
+# "Disable all latency-inducing animations. Pros don’t have time to wait."
+# from https://github.com/nateberkopec/dotfiles/blob/d346c83ef2c717599ea0eedd72d23fffec2f1258/config/config.yml#L128-L148
+defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -int 0
+defaults write NSGlobalDomain NSBrowserColumnAnimationSpeedMultiplier -float 0
+defaults write NSGlobalDomain NSDocumentRevisionsWindowTransformAnimation -int 0
+defaults write NSGlobalDomain NSScrollAnimationEnabled -int 0
+defaults write NSGlobalDomain NSToolbarFullScreenAnimationDuration -float 0
+defaults write NSGlobalDomain QLPanelAnimationDuration -float 0
+defaults write com.apple.Accessibility ReduceMotionEnabled -int 1
+defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock autohide-time-modifier -float 0
+defaults write com.apple.dock launchanim -bool false
+defaults write com.apple.dock mineffect -string "scale"
+defaults write com.apple.dock springboard-hide-duration -float 0
+defaults write com.apple.dock springboard-page-duration -float 0
+defaults write com.apple.dock springboard-show-duration -float 0
+defaults write com.apple.finder DisableAllAnimations -bool true
+
 # {{ end -}}
