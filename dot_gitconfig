@@ -147,3 +147,5 @@
 	prompt = false
 [mergetool "nbdime"]
 	cmd = "git-nbmergetool merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\""
+[blame]
+	ignoreRevsFile = .git-blame-ignore-revs
