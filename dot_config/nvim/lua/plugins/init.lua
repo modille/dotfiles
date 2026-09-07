@@ -7,13 +7,13 @@ return {
   require("plugins.coding.diffview_nvim"),
   require("plugins.coding.gen_nvim"),
   require("plugins.coding.lazydev_nvim"),
-  require("plugins.coding.leetcode_nvim"),
+  -- require("plugins.coding.leetcode_nvim"),
   require("plugins.coding.mason_nvim"),
   require("plugins.coding.mini_pairs"),
   require("plugins.coding.nvim-cmp"),
   require("plugins.coding.nvim-coverage"),
   require("plugins.coding.nvim-ts-context-commentstring"),
-  require("plugins.coding.octo_nvim"),
+  -- require("plugins.coding.octo_nvim"),
   require("plugins.coding.supermaven-nvim"),
   require("plugins.coding.treesj"),
   require("plugins.coding.vim-dispatch"),
@@ -54,6 +54,7 @@ return {
   require("plugins.linting.nvim-lint"),
 
   require("plugins.lsp.nvim-lspconfig"),
+  require("plugins.lsp.rails-fixture-ls_nvim"),
 
   require("plugins.markdown.diagram_nvim"),
   require("plugins.markdown.image_nvim"),

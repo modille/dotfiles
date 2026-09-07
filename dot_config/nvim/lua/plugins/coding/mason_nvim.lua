@@ -43,4 +43,16 @@ return {
       remove_item(opts.ensure_installed, "hadolint") -- not working with nvim-lint
     end,
   },
+  {
+    "mason-org/mason-lspconfig.nvim",
+    opts = {
+      automatic_enable = false,
+
+      -- automatic_enable = {
+      --   exclude = {
+      --     "ruby_lsp",
+      --   },
+      -- },
+    },
+  },
 }

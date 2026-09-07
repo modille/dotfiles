@@ -11,6 +11,7 @@ return {
         "dap_repl",
         "embedded_template",
         "kotlin",
+        "ruby",
         "sql",
       })
 

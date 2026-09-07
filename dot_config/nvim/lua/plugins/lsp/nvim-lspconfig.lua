@@ -84,6 +84,16 @@ return {
           mason = false,
           cmd = { "ruby-lsp" },
           filetypes = { "ruby" }, -- exclude "eruby", use herb for that instead
+          -- nvim-lspconfig's built-in reuse_client checks cmd_cwd, which is never
+          -- set on the first client, causing a duplicate instance every time any
+          -- other LSP server calls vim.lsp.enable() and triggers doautoall.
+          reuse_client = function(client, config)
+            return client.root_dir == config.root_dir
+          end,
+          init_options = {
+            formatter = "syntax_tree",
+            linters = { "rubocop" },
+          },
           -- https://epona.me/blog/implementing-vs-code-like-ruby-lsp-features-in-neovim/#adding-ruby-lsp-configuration
           on_attach = function(client, bufnr)
             client.commands = client.commands or {}
@@ -102,6 +112,12 @@ return {
               end
             end
           end,
+        },
+        rubocop = {
+          enabled = false,
+        },
+        standardrb = {
+          enabled = false,
         },
         tailwindcss = {},
         ts_ls = {

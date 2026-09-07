@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(nvim -V1 --headless +qa)",
+      "Bash(nvim:*)",
+      "Read(//Users/matt.odille/.local/state/nvim/**)",
+      "Read(//Users/matt.odille/.local/share/nvim/lazy/**)"
+    ]
+  }
+}

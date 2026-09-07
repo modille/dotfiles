@@ -8,8 +8,9 @@ vim.g.loaded_perl_provider = 0
 vim.g.loaded_python2_provider = 0
 
 vim.g.lazyvim_python_lsp = "basedpyright" -- try basedpyright for using with poetry
-vim.g.lazyvim_ruby_lsp = "ruby_lsp"
-vim.g.lazyvim_ruby_formatter = "rubocop"
+-- vim.g.lazyvim_ruby_lsp = "ruby_lsp
+vim.g.lazyvim_ruby_lsp = false
+vim.g.lazyvim_ruby_formatter = "syntax_tree"
 
 -- https://github.com/vim/vim/issues/4738
 vim.g.netrw_browsex_viewer = "open"

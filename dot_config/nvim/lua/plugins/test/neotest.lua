@@ -9,6 +9,7 @@ return {
       -- "nvim-neotest/neotest-vim-test",
       "weilbith/neotest-gradle",
       "zidhuss/neotest-minitest",
+      "marilari88/neotest-vitest",
     },
     opts = function()
       return {
@@ -17,6 +18,7 @@ return {
           require("neotest-jest"),
           require("neotest-minitest"),
           require("neotest-rspec"),
+          -- require("ruby-lsp.neotest"), -- https://github.com/wassimk/ruby-lsp.nvim
           require("neotest-gradle"),
           -- require("neotest-vim-test")({
           --   allow_file_types = { "cucumber" },
@@ -26,6 +28,7 @@ return {
             runner = "pytest",
             -- python = ".venv/bin/python",
           },
+          require("neotest-vitest"),
         },
         status = {
           enabled = true,

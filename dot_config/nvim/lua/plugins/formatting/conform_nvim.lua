@@ -9,6 +9,7 @@ return {
         kotlin = { "ktlint" },
         lua = { "stylua" },
         markdown = { "prettier" },
+        ruby = {},
         sh = { "shfmt" },
         xml = { "xmllint" },
         yaml = {},

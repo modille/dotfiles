@@ -16,7 +16,7 @@ return {
             download_remote_images = true,
             only_render_image_at_cursor = false,
             only_render_image_at_cursor_mode = "popup",
-            floating_windows = true, -- if true, images will be rendered in floating markdown windows
+            floating_windows = false, -- if true, images will be rendered in floating markdown windows
             filetypes = { "markdown", "vimwiki" }, -- markdown extensions (ie. quarto) can go here
           },
           -- Detect and render images referenced in HTML files
@@ -30,6 +30,12 @@ return {
             enabled = true,
           },
         },
+
+        max_width = nil,
+        max_height = nil,
+        max_width_window_percentage = nil,
+        max_height_window_percentage = nil,
+        scale_factor = 1.0,
 
         -- auto show/hide images when the editor gains/loses focus
         editor_only_render_when_focused = true,

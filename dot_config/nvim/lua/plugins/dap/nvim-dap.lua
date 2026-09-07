@@ -1,5 +1,4 @@
 ---@type LazySpec
--- return {}
 return {
   {
     "mfussenegger/nvim-dap",
@@ -141,5 +140,12 @@ return {
         },
       },
     },
+  },
+
+  {
+    "suketa/nvim-dap-ruby",
+    config = function()
+      require("dap-ruby").setup()
+    end,
   },
 }
