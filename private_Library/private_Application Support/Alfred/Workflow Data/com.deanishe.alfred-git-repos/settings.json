@@ -7,6 +7,10 @@
     {
       "path": "~/git",
       "depth": 4
+    },
+    {
+      "path": "~/Code",
+      "depth": 2
     }
   ]
 }
