@@ -1,0 +1,30 @@
+# Port of ~/.config/fish/functions/change_background.fish. iTerm2's
+# dark_mode_notify.py still calls the fish version; new zsh shells pick up the
+# mode it records in the state file.
+# https://arslan.io/2021/02/15/automatic-dark-mode-for-terminal-applications/
+local mode=light
+case $1 in
+  '')
+    defaults read -g AppleInterfaceStyle &>/dev/null && mode=dark
+    ;;
+  light|dark)
+    local dark=false
+    [[ $1 == dark ]] && dark=true
+    osascript -l JavaScript -e "Application('System Events').appearancePreferences.darkMode = $dark" >/dev/null
+    mode=$1
+    ;;
+esac
+
+# bat, lazygit (exported per-shell, unlike fish's universal vars, so set them
+# before the early return below)
+export BAT_THEME="Solarized ($mode)" LG_CONFIG_FILE=$HOME/.config/lazygit/${mode}_config.yml
+
+# Tracks the current mode in a file, and only proceed if the new mode is different than the current mode
+local state_file=$HOME/.local/state/modille/current_background_mode.txt
+mkdir -p ${state_file:h}
+[[ -e $state_file ]] || print $mode >$state_file
+[[ $mode == $(<$state_file) ]] && return
+print $mode >$state_file
+
+# Neovim (bgwinch.nvim)
+pkill -WINCH nvim

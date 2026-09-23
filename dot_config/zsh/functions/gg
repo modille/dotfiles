@@ -1,0 +1,20 @@
+# git get a repo and cd into it
+if (( ! $# )); then
+  print "[gg] usage: gg <github-url-or-path>"
+  return 1
+fi
+
+# Strip protocol if present
+local input=${1#http(s|)://}
+
+# Take only host/owner/repo (first 3 path segments)
+local -a parts=(${(s:/:)input})
+if (( $#parts < 3 )); then
+  print "[gg] expected at least host/owner/repo, got: $input"
+  return 1
+fi
+local repo_path=${(j:/:)parts[1,3]}
+
+git get $repo_path || return 1
+
+cd ~/git/$repo_path

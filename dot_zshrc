@@ -1,0 +1,120 @@
+# Mirrors ~/.config/fish. Plugins are managed by zinit and loaded in turbo mode.
+
+ZINIT_HOME=${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git
+[[ -d $ZINIT_HOME ]] || git clone --depth=1 https://github.com/zdharma-continuum/zinit.git $ZINIT_HOME
+source $ZINIT_HOME/zinit.zsh
+# Record compdef calls until turbo-mode compinit defines the real one and zicdreplay replays them
+compdef() { zicompdef "$@" }
+
+# Source the output of `<cmd> init`-style commands from a cache, regenerating
+# it whenever the binary changes (a Homebrew upgrade changes the resolved path).
+_cached_eval() {
+  local bin=${commands[$1]:-$1}
+  [[ -x $bin ]] || return
+  local cache=${XDG_CACHE_HOME:-$HOME/.cache}/zsh-eval/${${bin:A}//\//_}_${(j:_:)@[2,-1]}.zsh
+  if [[ ! -s $cache || $bin -nt $cache ]]; then
+    mkdir -p ${cache:h} && "$@" >| $cache
+  fi
+  source $cache
+}
+
+# PATH (fish_user_paths)
+typeset -U path
+path=(
+  $HOME/.bun/bin
+  $HOME/.cargo/bin
+  $HOME/.local/bin
+  /nix/var/nix/profiles/default/bin
+  /opt/homebrew/bin
+  /opt/homebrew/sbin
+  $path
+)
+export BUN_INSTALL=$HOME/.bun
+[[ -f $HOME/.vite-plus/env ]] && source $HOME/.vite-plus/env
+
+# From homebrew caveats
+for keg in curl libffi libiconv libpq mysql@8.0 mysql@8.4 sqlite; do
+  keg=/opt/homebrew/opt/$keg
+  [[ -d $keg ]] || continue
+  [[ -d $keg/bin ]] && path=($keg/bin $path)
+  export LDFLAGS="${LDFLAGS:+$LDFLAGS }-L$keg/lib"
+  export CPPFLAGS="${CPPFLAGS:+$CPPFLAGS }-I$keg/include"
+  [[ -d $keg/lib/pkgconfig ]] && export PKG_CONFIG_PATH="${PKG_CONFIG_PATH:+$PKG_CONFIG_PATH:}$keg/lib/pkgconfig"
+done
+unset keg
+
+export DIRENV_LOG_FORMAT=""
+export EDITOR=nvim
+export LESS=" -R"
+export MANPAGER='nvim +Man!'
+
+# BAT_THEME/LG_CONFIG_FILE are fish universal vars set by change_background;
+# derive them from the mode it records.
+_bg_state=$HOME/.local/state/modille/current_background_mode.txt
+[[ -r $_bg_state ]] && _bg_mode=$(<$_bg_state)
+export BAT_THEME="Solarized (${_bg_mode:=light})" LG_CONFIG_FILE=$HOME/.config/lazygit/${_bg_mode}_config.yml
+unset _bg_state _bg_mode
+
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+setopt extended_history hist_ignore_all_dups hist_ignore_space hist_reduce_blanks share_history
+setopt auto_cd interactive_comments
+
+# Vi mode with block cursor in normal mode and line cursor in insert mode
+bindkey -v
+KEYTIMEOUT=1
+_vi_cursor() { [[ $KEYMAP == vicmd ]] && print -n '\e[2 q' || print -n '\e[6 q' }
+zle -N zle-keymap-select _vi_cursor
+zle -N zle-line-init _vi_cursor
+
+# Fish-like prefix history search and insert-mode editing
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey '^[[A' up-line-or-beginning-search '^[OA' up-line-or-beginning-search
+bindkey '^[[B' down-line-or-beginning-search '^[OB' down-line-or-beginning-search
+bindkey -M vicmd k up-line-or-beginning-search j down-line-or-beginning-search
+bindkey '^?' backward-delete-char '^H' backward-delete-char '^W' backward-kill-word
+bindkey '^R' history-incremental-search-backward
+
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+fpath=($HOME/.config/zsh/functions $fpath)
+autoload -Uz $HOME/.config/zsh/functions/[^_]*(N:t)
+
+# Fish's built-in ls/ll/la: color, plus type indicators when writing to a terminal
+ls() {
+  if [[ -t 1 ]]; then command ls --color=auto -F "$@"; else command ls --color=auto "$@"; fi
+}
+alias ll="ls -lh" la="ls -lAh"
+
+alias brew_refill="brew update && brew outdated && brew upgrade && brew cleanup && brew doctor"
+# cat with syntax highlighting
+alias cats="highlight --out-format xterm256 --quiet --force --style solarized-light --"
+# common typo
+alias gits="git s"
+alias xit=exit
+
+# cd to "git root"
+grt() {
+  local root=$(git rev-parse --show-toplevel 2>/dev/null)
+  [[ -n $root ]] && cd $root
+}
+
+_cached_eval mise activate zsh
+_cached_eval zoxide init zsh
+_cached_eval wt config shell init zsh
+_cached_eval starship init zsh --print-full-init
+
+zinit wait lucid for \
+  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    zdharma-continuum/fast-syntax-highlighting \
+  blockf atpull"zinit creinstall -q ." \
+    zsh-users/zsh-completions \
+  atload"!_zsh_autosuggest_start; bindkey '^F' autosuggest-accept" \
+    zsh-users/zsh-autosuggestions \
+  olets/zsh-abbr
+
+_cached_eval direnv hook zsh
