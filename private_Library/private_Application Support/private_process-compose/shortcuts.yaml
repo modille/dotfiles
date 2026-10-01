@@ -1,0 +1,28 @@
+shortcuts:
+
+  log_follow:
+    shortcut: f
+
+  log_wrap:
+    shortcut: w
+
+  process_restart:
+    shortcut: r
+
+  process_start:
+    shortcut: s
+
+  process_stop:
+    shortcut: x
+
+  quit:
+    shortcut: q
+
+  dependency_graph:
+    shortcut: g
+
+  log_screen:
+    shortcut: m
+
+  process_screen:
+    shortcut: p
