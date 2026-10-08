@@ -46,7 +46,7 @@ unset keg
 export DIRENV_LOG_FORMAT=""
 export EDITOR=nvim
 export LESS=" -R"
-export MANPAGER='nvim +Man!'
+export MANPAGER='env NVIM_PROFILE=man nvim +Man!'
 
 # BAT_THEME/LG_CONFIG_FILE are fish universal vars set by change_background;
 # derive them from the mode it records.

@@ -3,7 +3,7 @@ layout tall
 # Set the working directory for windows in the current tab
 cd ~/Dropbox/obsidian
 ## Create the "main" window and run an editor in it
-launch fish -c nvim
+launch --env NVIM_PROFILE=notes fish -c nvim
 
 # Create a new tab
 new_tab

@@ -7,6 +7,51 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
+-- NVIM_PROFILE=git|notes|man loads only the plugins listed here; unset loads everything.
+-- Uses `cond` rather than `enabled` so :Lazy sync/clean in a profile never uninstalls
+-- the rest or prunes lazy-lock.json.
+local profile_base = {
+  "LazyVim",
+  "lazy.nvim",
+  "snacks.nvim",
+  "plenary.nvim",
+  "catppuccin",
+  "bgwinch.nvim",
+  "solarized-osaka.nvim", -- LazyVim's configured colorscheme, overridden by modille.colorscheme
+}
+local profile_editing = vim.list_extend(vim.deepcopy(profile_base), {
+  "nvim-treesitter",
+  "nvim-dap-repl-highlights", -- required by plugins/treesitter config
+  "mini.ai",
+  "mini.pairs",
+  "mini.surround",
+  "ts-comments.nvim",
+  "vim-repeat",
+  "nvim-cmp",
+  "cmp-nvim-lsp", -- required by LazyVim's nvim-cmp config
+  "cmp-buffer",
+  "cmp-path",
+  "LuaSnip",
+  "cmp_luasnip",
+  "supermaven-nvim",
+})
+local profiles = {
+  git = profile_editing,
+  man = vim.list_extend(vim.deepcopy(profile_base), { "flash.nvim" }),
+  notes = vim.list_extend(vim.deepcopy(profile_editing), {
+    "obsidian.nvim",
+    "render-markdown.nvim",
+    "img-clip.nvim",
+    "image.nvim",
+    "luarocks.nvim",
+    "fzf-lua",
+    "which-key.nvim",
+    "flash.nvim",
+    "lualine.nvim",
+  }),
+}
+local profile_plugins = profiles[vim.env.NVIM_PROFILE]
+
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
@@ -58,6 +103,9 @@ require("lazy").setup({
     -- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
     -- have outdated releases, which may break your Neovim install.
     version = false, -- always use the latest git commit
+    cond = profile_plugins and function(plugin)
+      return vim.tbl_contains(profile_plugins, plugin.name)
+    end,
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
   install = { colorscheme = { "tokyonight" } },

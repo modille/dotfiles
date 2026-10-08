@@ -95,7 +95,7 @@
 
 [core]
   autocrlf = input
-  editor = nvim
+  editor = NVIM_PROFILE=git nvim
   excludesfile = ~/.gitignore
   pager = delta
 
