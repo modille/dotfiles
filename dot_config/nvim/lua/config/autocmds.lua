@@ -99,6 +99,10 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = { os.getenv("HOME") .. "/.local/share/chezmoi/*" },
   callback = function(ev)
+    -- COMMIT_EDITMSG etc. aren't chezmoi source files (and chezmoi.nvim isn't loaded in the git profile)
+    if ev.match:find("/.git/", 1, true) then
+      return
+    end
     local bufnr = ev.buf
     local edit_watch = function()
       require("chezmoi.commands.__edit").watch(bufnr)

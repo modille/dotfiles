@@ -27,6 +27,7 @@ local profile_editing = vim.list_extend(vim.deepcopy(profile_base), {
   "mini.surround",
   "ts-comments.nvim",
   "vim-repeat",
+  "vim-unimpaired",
   "nvim-cmp",
   "cmp-nvim-lsp", -- required by LazyVim's nvim-cmp config
   "cmp-buffer",
@@ -48,6 +49,7 @@ local profiles = {
     "which-key.nvim",
     "flash.nvim",
     "lualine.nvim",
+    "oil.nvim",
   }),
 }
 local profile_plugins = profiles[vim.env.NVIM_PROFILE]
