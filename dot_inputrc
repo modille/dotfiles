@@ -1,0 +1,31 @@
+# Mirrors the line editing in ~/.zshrc (readline has no autosuggestions or syntax highlighting)
+
+# Vi mode with block cursor in normal mode and line cursor in insert mode
+set editing-mode vi
+set keyseq-timeout 10
+set show-mode-in-prompt on
+set vi-cmd-mode-string "\1\e[2 q\2"
+set vi-ins-mode-string "\1\e[6 q\2"
+
+# zsh's case-insensitive `menu select` completion
+set completion-ignore-case on
+set show-all-if-ambiguous on
+set menu-complete-display-prefix on
+set colored-stats on
+set colored-completion-prefix on
+set mark-symlinked-directories on
+
+set keymap vi-insert
+# Fish-like substring history search and insert-mode editing
+"\e[A": history-substring-search-backward
+"\eOA": history-substring-search-backward
+"\e[B": history-substring-search-forward
+"\eOB": history-substring-search-forward
+"\C-w": backward-kill-word
+"\C-r": reverse-search-history
+"\t": menu-complete
+"\e[Z": menu-complete-backward
+
+set keymap vi-command
+"k": history-substring-search-backward
+"j": history-substring-search-forward

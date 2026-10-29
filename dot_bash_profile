@@ -1,0 +1,2 @@
+# macOS bash login shells read only this file, so defer to ~/.bashrc like every other bash shell
+[[ -f $HOME/.bashrc ]] && source $HOME/.bashrc
