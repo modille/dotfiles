@@ -32,14 +32,9 @@ path=(
 export BUN_INSTALL=$HOME/.bun
 [[ -f $HOME/.vite-plus/env ]] && source $HOME/.vite-plus/env
 
-# From homebrew caveats
+# From homebrew caveats (their build flags are in ~/.zshenv)
 for keg in curl libffi libiconv libpq mysql@8.0 mysql@8.4 sqlite; do
-  keg=/opt/homebrew/opt/$keg
-  [[ -d $keg ]] || continue
-  [[ -d $keg/bin ]] && path=($keg/bin $path)
-  export LDFLAGS="${LDFLAGS:+$LDFLAGS }-L$keg/lib"
-  export CPPFLAGS="${CPPFLAGS:+$CPPFLAGS }-I$keg/include"
-  [[ -d $keg/lib/pkgconfig ]] && export PKG_CONFIG_PATH="${PKG_CONFIG_PATH:+$PKG_CONFIG_PATH:}$keg/lib/pkgconfig"
+  [[ -d /opt/homebrew/opt/$keg/bin ]] && path=(/opt/homebrew/opt/$keg/bin $path)
 done
 unset keg
 
@@ -68,13 +63,7 @@ _vi_cursor() { [[ $KEYMAP == vicmd ]] && print -n '\e[2 q' || print -n '\e[6 q' 
 zle -N zle-keymap-select _vi_cursor
 zle -N zle-line-init _vi_cursor
 
-# Fish-like prefix history search and insert-mode editing
-autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-bindkey '^[[A' up-line-or-beginning-search '^[OA' up-line-or-beginning-search
-bindkey '^[[B' down-line-or-beginning-search '^[OB' down-line-or-beginning-search
-bindkey -M vicmd k up-line-or-beginning-search j down-line-or-beginning-search
+# Fish-like insert-mode editing (substring history search is bound when its plugin loads below)
 bindkey '^?' backward-delete-char '^H' backward-delete-char '^W' backward-kill-word
 bindkey '^R' history-incremental-search-backward
 
@@ -111,6 +100,11 @@ _cached_eval starship init zsh --print-full-init
 zinit wait lucid for \
   atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
     zdharma-continuum/fast-syntax-highlighting \
+  atload"HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+    bindkey '^[[A' history-substring-search-up '^[OA' history-substring-search-up
+    bindkey '^[[B' history-substring-search-down '^[OB' history-substring-search-down
+    bindkey -M vicmd k history-substring-search-up j history-substring-search-down" \
+    zsh-users/zsh-history-substring-search \
   blockf atpull"zinit creinstall -q ." \
     zsh-users/zsh-completions \
   atload"!_zsh_autosuggest_start; bindkey '^F' autosuggest-accept" \

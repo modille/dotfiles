@@ -1,5 +1,5 @@
 abbr "be"="bundle exec"
-abbr "claude"="claude --model=claude-opus-5-5 --effort=medium"
+abbr "claude"="claude --model=claude-opus-5-5 --effort=medium --permission-mode=auto"
 abbr "dc"="docker compose"
 abbr "dcd"="docker compose down"
 abbr "dcp"="docker compose ps"

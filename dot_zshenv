@@ -1,1 +1,14 @@
 . "$HOME/.cargo/env"
+
+# Build flags from homebrew caveats, here so non-interactive builds of native gems find the kegs.
+# Their bin directories go on PATH in ~/.zshrc, after path_helper would reorder them.
+for keg in curl libffi libiconv libpq mysql@8.0 mysql@8.4 sqlite; do
+  keg=/opt/homebrew/opt/$keg
+  [[ -d $keg ]] || continue
+  # Every subshell reads this file and inherits the parent's flags, so append only once
+  [[ " $LDFLAGS " == *" -L$keg/lib "* ]] || export LDFLAGS="${LDFLAGS:+$LDFLAGS }-L$keg/lib"
+  [[ " $CPPFLAGS " == *" -I$keg/include "* ]] || export CPPFLAGS="${CPPFLAGS:+$CPPFLAGS }-I$keg/include"
+  [[ ! -d $keg/lib/pkgconfig || ":$PKG_CONFIG_PATH:" == *":$keg/lib/pkgconfig:"* ]] ||
+    export PKG_CONFIG_PATH="${PKG_CONFIG_PATH:+$PKG_CONFIG_PATH:}$keg/lib/pkgconfig"
+done
+unset keg
