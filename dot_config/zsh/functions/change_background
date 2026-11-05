@@ -1,6 +1,6 @@
-# Port of ~/.config/fish/functions/change_background.fish. iTerm2's
-# dark_mode_notify.py still calls the fish version; new zsh shells pick up the
-# mode it records in the state file.
+# Port of ~/.config/fish/functions/change_background.fish, invoked by iTerm2's
+# dark_mode_notify.py on theme changes; new shells pick up the mode it records
+# in the state file.
 # https://arslan.io/2021/02/15/automatic-dark-mode-for-terminal-applications/
 local mode=light
 case $1 in

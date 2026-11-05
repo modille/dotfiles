@@ -1,12 +1,14 @@
 #!/usr/bin/env python3.10
 
 import asyncio
+import os
+
 import iterm2
 
 # Any time the macOS system theme changes between Dark and Light, then the
 # iTerm2 theme changes. And any time the iTerm2 theme changes, this script will
-# invoke a fish script to change the macOS wallpaper, Neovim colorscheme, and
-# various TUI themes.
+# invoke the zsh change_background function to change the macOS wallpaper,
+# Neovim colorscheme, and various TUI themes.
 #
 # An alternative I used in the past was to compile my own Swift app
 # (https://github.com/bouk/dark-mode-notify) and use a macOS daemon to keep it
@@ -19,8 +21,10 @@ import iterm2
 # https://iterm2.com/python-api/tutorial/running.html?highlight=run#auto-run-scripts
 
 async def update(connection, theme):
+    # -f skips rc files; autoloading by path is all change_background needs
     process = await asyncio.create_subprocess_exec(
-        "/opt/homebrew/bin/fish", "-c", "change_background"
+        "/bin/zsh", "-fc", 'autoload -Uz "$1" && change_background', "zsh",
+        os.path.expanduser("~/.config/zsh/functions/change_background"),
     )
     await process.wait()
 
