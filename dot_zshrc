@@ -43,13 +43,6 @@ export EDITOR=nvim
 export LESS=" -R"
 export MANPAGER='env NVIM_PROFILE=man nvim +Man!'
 
-# BAT_THEME/LG_CONFIG_FILE are fish universal vars set by change_background;
-# derive them from the mode it records.
-_bg_state=$HOME/.local/state/modille/current_background_mode.txt
-[[ -r $_bg_state ]] && _bg_mode=$(<$_bg_state)
-export BAT_THEME="Solarized (${_bg_mode:=light})" LG_CONFIG_FILE=$HOME/.config/lazygit/${_bg_mode}_config.yml
-unset _bg_state _bg_mode
-
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000

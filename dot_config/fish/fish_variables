@@ -1,7 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR --export ASDF_RUBY_VERSION:3\x2e3\x2e10
-SETUVAR --export BAT_THEME:Solarized\x20\x28light\x29
 SETUVAR --export LG_CONFIG_FILE:/Users/matt\x2eodille/\x2econfig/lazygit/light_config\x2eyml
 SETUVAR __fish_initialized:4300
 SETUVAR _fisher_edc_2F_bass_files:\x7e/\x2econfig/fish/functions/__bass\x2epy\x1e\x7e/\x2econfig/fish/functions/bass\x2efish

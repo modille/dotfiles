@@ -1,0 +1,5 @@
+# Picks the lazygit config (delta --dark/--light) from the mode change_background
+# records, read at launch so already-open shells stay current
+local state_file=$HOME/.local/state/modille/current_background_mode.txt mode=light
+[[ -r $state_file ]] && mode=$(<$state_file)
+LG_CONFIG_FILE=$HOME/.config/lazygit/${mode}_config.yml command lazygit "$@"

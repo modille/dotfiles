@@ -50,29 +50,23 @@ function change_background --argument mode_setting
     # 2023-04-04: iTerm2 was sending SIGWINCH to all running processes, but it seemed to have broken, so send it manually to nvim for now:
     pkill -WINCH nvim
 
-    # bat, delta, lazygit, starship
+    # delta, lazygit, starship
     switch $mode
         case dark
             # Catppuccin
-            # set -Ux BAT_THEME 'Catppuccin Macchiato'
             # set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/dark_config.yml"
             # starship config palette catppuccin_macchiato
             # Solarized
-            set -Ux BAT_THEME 'Solarized (dark)'
             set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/dark_config.yml"
             # TokyoNight
-            # set -Ux BAT_THEME tokyonight_moon
             # set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/dark_config.yml,$HOME/.config/lazygit/tokyonight_moon.yml"
         case light
             # Catppuccin
-            # set -Ux BAT_THEME 'Catppuccin Latte'
             # set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/light_config.yml"
             # starship config palette catppuccin_latte
             # Solarized
-            set -Ux BAT_THEME 'Solarized (light)'
             set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/light_config.yml"
             # TokyoNight
-            # set -Ux BAT_THEME tokyonight_day
             # set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/light_config.yml,$HOME/.config/lazygit/tokyonight_day.yml"
     end
 
