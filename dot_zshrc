@@ -89,6 +89,8 @@ _cached_eval mise activate zsh
 _cached_eval zoxide init zsh
 _cached_eval wt config shell init zsh
 _cached_eval starship init zsh --print-full-init
+# After starship so iTerm2's precmd hook runs after starship rewrites the prompt.
+[[ -e $HOME/.iterm2_shell_integration.zsh ]] && source $HOME/.iterm2_shell_integration.zsh
 
 zinit wait lucid for \
   atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
